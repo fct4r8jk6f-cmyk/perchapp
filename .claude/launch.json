@@ -1,0 +1,6 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    { "name": "perch", "runtimeExecutable": "npx", "runtimeArgs": ["--yes", "http-server", "-p", "8129", "-c-1"], "port": 8129 }
+  ]
+}
