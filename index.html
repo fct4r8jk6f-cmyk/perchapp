@@ -39,6 +39,21 @@
     /* radius tokens */
     --r-sm:12px; --r-md:16px; --r-lg:20px; --r-xl:24px; --r-pill:100px;
   }
+  /* LIGHT THEME — overrides the same tokens; accents/gradients kept */
+  [data-theme="light"]{
+    --ink:#F4F1F8;
+    --phone-bg:#F4F1F8;
+    --surface:#FFFFFF;
+    --surface-2:#F1ECF6;
+    --surface-3:#E7E0F0;
+    --chat-bg:#F6F3FA;
+    --line:rgba(20,12,32,.12);
+    --line-2:#DCD2E8;
+    --text:#191225;
+    --muted:rgba(25,18,37,.74);
+    --faint:rgba(25,18,37,.48);
+    --shadow:0 24px 60px rgba(60,40,100,.18);
+  }
   /* 4px spacing grid utilities */
   .mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:20px}.mt-6{margin-top:24px}.mt-8{margin-top:32px}.mt-9{margin-top:36px}
   .mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-5{margin-bottom:20px}.mb-6{margin-bottom:24px}.mb-8{margin-bottom:32px}.mb-9{margin-bottom:36px}
@@ -156,8 +171,8 @@
 
   /* header back row */
   .nav-row{display:flex;align-items:center;gap:6px;margin-bottom:14px;min-height:30px;}
-  .iconbtn{width:38px;height:38px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;flex-shrink:0;transition:all .16s;}
-  .iconbtn:hover{background:rgba(255,255,255,.08);}
+  .iconbtn{width:40px;height:40px;border-radius:50%;border:none;background:transparent;color:var(--text);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;flex-shrink:0;transition:background .16s,transform .16s;}
+  .iconbtn:hover{background:var(--surface-2);}
   .iconbtn:active{transform:scale(.94);}
   .nav-title{font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:-.3px;}
   .nav-spacer{flex:1;}
@@ -312,6 +327,8 @@
   .search{flex:1;display:flex;align-items:center;gap:9px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-md);padding:11px 14px;}
   .search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'Hanken Grotesk',sans-serif;}
   .search input::placeholder{color:var(--faint);}
+  .search.search-slim{padding:7px 12px;border-radius:var(--r-sm);}
+  .search.search-slim input{font-size:13px;}
   .search:focus-within{border-color:var(--c2);box-shadow:0 0 0 3px rgba(255,119,160,.12) inset;}
   .cat-rail{display:flex;flex-wrap:nowrap;white-space:nowrap;flex-shrink:0;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding:8px 22px 14px;margin:0 -22px;scroll-padding-left:22px;width:auto;max-width:100vw;}
   .cat-rail::-webkit-scrollbar{height:0;display:none;}
@@ -375,7 +392,7 @@
   .gd-mname{font-size:15px;font-weight:600;}
   .gd-msub{font-size:13px;color:var(--faint);}
   .gd-private{margin-left:auto;font-size:11px;color:var(--faint);}
-  .info-tile{display:flex;align-items:center;gap:13px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);margin-bottom:10px;}
+  .info-tile{display:flex;align-items:center;gap:11px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);margin-bottom:10px;}
   .info-tile .it-ic{width:40px;height:40px;border-radius:var(--r-sm);background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
   .info-tile .it-lab{font-size:11px;color:var(--faint);}
   .info-tile .it-val{font-size:15px;font-weight:600;margin-top:1px;color:var(--text);}
@@ -635,6 +652,18 @@
   .g-navigator::after{content:"";position:absolute;inset:0;background-image:repeating-conic-gradient(from 0deg at 75% 30%,rgba(255,255,255,.07) 0deg 14deg,transparent 14deg 28deg);opacity:.6;}
   .g-wavelength{background:linear-gradient(150deg,#7FD8E0,#B9A6F0);}
   .g-wavelength::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,transparent 0 16px,rgba(255,255,255,.08) 16px 18px);}
+  /* ===== ACTIVITY CATEGORY GRADIENTS (explore cards) — deep 3-stop, unified texture ===== */
+  .g-cat-food{background:linear-gradient(150deg,#FFC24B 0%,#FF7E5B 52%,#FF5E8A 100%);}
+  .g-cat-outdoors{background:linear-gradient(150deg,#7CD08F 0%,#36A86A 52%,#1C6B4A 100%);}
+  .g-cat-arts{background:linear-gradient(150deg,#8E7BFF 0%,#7A4FD6 52%,#C054C8 100%);}
+  .g-cat-games{background:linear-gradient(150deg,#5AD0FF 0%,#3E8BE6 52%,#4B5BD0 100%);}
+  .g-cat-chill{background:linear-gradient(150deg,#8FE0C8 0%,#4FC2B0 52%,#2E9E9E 100%);}
+  .g-cat-active{background:linear-gradient(150deg,#FFB347 0%,#FF7A3D 52%,#FF5A2E 100%);}
+  .g-cat-evening{background:linear-gradient(150deg,#A24BE0 0%,#7B2FC0 52%,#E0418F 100%);}
+  .g-cat-food::after,.g-cat-outdoors::after,.g-cat-arts::after,.g-cat-games::after,.g-cat-chill::after,.g-cat-active::after,.g-cat-evening::after{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle at 24% 16%,rgba(255,255,255,.20),transparent 46%),radial-gradient(rgba(255,255,255,.11) .8px,transparent 1.2px);
+    background-size:auto,18px 18px;opacity:.7;}
   [class*="g-"]{position:relative;}
   [class*="g-"] > *{position:relative;z-index:2;}
 
@@ -878,9 +907,15 @@
       </section>
 
       <!-- GROUP CHAT -->
+      <!-- COMBINED INBOX -->
+      <section class="screen pad-nav fade" id="s-chats">
+        <div class="nav-row"><div class="nav-title" data-i18n="chat_list_title">Chats</div></div>
+        <div id="chatsBody"></div>
+      </section>
+
       <section class="screen fade" id="s-chat">
         <div class="chat-top">
-          <button class="iconbtn" id="chatBack" aria-label="Back to chats" style="width:34px;height:34px;display:none">←</button>
+          <button class="iconbtn" id="chatBack" aria-label="Back to chats" style="width:34px;height:34px">←</button>
           <div class="ct-ic" id="chatIc" style="background:var(--grad-warm)">🌿</div>
           <div><div class="ct-name" id="chatName">Group</div><div class="ct-meta" id="chatMeta">5 people · first names only</div></div>
           <div class="chat-shield" id="chatShield" title="Safety options" aria-label="Safety options">🛡️</div>
@@ -909,7 +944,7 @@
           <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative">✉️<span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
         <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends">Friends</div><div class="sopt" data-tab="dms">Messages</div><div class="sopt" data-tab="met">Met</div></div>
-        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search" aria-label="Search friends"></div>
+        <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" aria-label="Search"></div>
         <div id="friendsBody"></div>
       </section>
 
@@ -1016,7 +1051,7 @@
     <nav class="bottomnav" id="bottomnav" aria-label="Primary">
       <div class="nav-item" data-go="explore"><span class="ni-ic">🧭</span><span data-i18n="nav_explore">Explore</span></div>
       <div class="nav-item" data-go="groups"><span class="ni-ic">🫧</span><span data-i18n="nav_groups">Groups</span></div>
-      <div class="nav-item" data-go="chat"><span class="ni-ic">💬</span><span data-i18n="nav_chat">Chat</span><span class="nav-badge" id="navChatBadge" style="display:none">1</span></div>
+      <div class="nav-item" data-go="chats"><span class="ni-ic">💬</span><span data-i18n="nav_chat">Chat</span><span class="nav-badge" id="navChatBadge" style="display:none">1</span></div>
       <div class="nav-item" data-go="friends"><span class="ni-ic">👥</span><span data-i18n="nav_friends">Friends</span><span class="nav-badge" id="navFriendsBadge" style="display:none">1</span></div>
       <div class="nav-item" data-go="profile"><span class="ni-ic">🙂</span><span data-i18n="nav_profile">Profile</span></div>
     </nav>
@@ -1130,26 +1165,26 @@
   /* ============ ACTIVITIES ============ */
   const CATS=["For you","Food & Drink","Outdoors","Arts & Culture","Games","Chill","Active","Evening Out"];
   const ACTIVITIES=[
-    {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-spark",venue:"The Crown Pub · Midtown",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
-    {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-wildcard",venue:"Meeple & Co · East Side",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
-    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-curator",venue:"Saffron Kitchen · Downtown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
-    {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-explorer",venue:"Old Town meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Riverside route if wet",social:"6 joined this week"},
-    {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-storyteller",venue:"Eastgate Market",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
-    {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-wildcard",venue:"The Basement Club",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
-    {id:"bookclub",icon:"📚",name:"Book Club",cat:"Chill",g:"g-connector",venue:"Pages Café · West Side",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
-    {id:"cinema",icon:"🎬",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-observer",venue:"Rooftop at Hale St",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, low pressure",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
-    {id:"pottery",icon:"🏺",name:"Pottery",cat:"Arts & Culture",g:"g-easygoer",venue:"Clay Studio · Downtown",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
-    {id:"escape",icon:"🔐",name:"Escape Room",cat:"Games",g:"g-navigator",venue:"Locked In · Midtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
-    {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-grounding",venue:"Beacon Hill trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
-    {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-anchor",venue:"Blue Note · Downtown",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
-    {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-easygoer",venue:"Greenhouse Collective",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
-    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-curator",venue:"Canvas & Cork · East Side",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week"},
-    {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-spark",venue:"Sing City · Midtown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
-    {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-wavelength",venue:"Skyline Terrace",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
-    {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-curator",venue:"Studio Blue · West Side",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
-    {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-spark",venue:"The Stage Door · Midtown",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
-    {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-storyteller",venue:"Sunday Market · East Side",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
-    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-wildcard",venue:"Bullseye · Midtown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular"}
+    {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"The Crown Pub · Midtown",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
+    {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Meeple & Co · East Side",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
+    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Saffron Kitchen · Downtown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
+    {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Old Town meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Riverside route if wet",social:"6 joined this week"},
+    {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Eastgate Market",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
+    {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
+    {id:"bookclub",icon:"📚",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Pages Café · West Side",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
+    {id:"cinema",icon:"🎬",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop at Hale St",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, low pressure",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
+    {id:"pottery",icon:"🏺",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Clay Studio · Downtown",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
+    {id:"escape",icon:"🔐",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Midtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
+    {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Beacon Hill trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
+    {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"Blue Note · Downtown",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
+    {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
+    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Canvas & Cork · East Side",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week"},
+    {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Midtown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
+    {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Skyline Terrace",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
+    {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Blue · West Side",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
+    {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Midtown",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
+    {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Sunday Market · East Side",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
+    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Midtown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular"}
   ];
 
   const ARCH_DOTCOLORS={spark:"#FF7A5C",connector:"#FF6F91",explorer:"#8E6BFF",easygoer:"#6FE0C6",anchor:"#8EA2FF",observer:"#A98FE0",curator:"#F2B33D",grounding:"#A6794E",wildcard:"#FF4D9D",storyteller:"#FF8FA3",navigator:"#2A9D8F",wavelength:"#B9A6F0"};
@@ -1304,10 +1339,20 @@
     root.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph"))); });
   }
   function setLang(l){ if(l!==state.lang){ state.lang=l; saveLang(l); applyI18n(document); const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-","")); } }
+  /* THEME — System / Light / Dark, in-session only (no localStorage) */
+  function prefersLight(){ try{ return window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches; }catch(e){ return false; } }
+  function applyTheme(){
+    const mode=state.theme||"system";
+    const dark = mode==="dark" || (mode==="system" && !prefersLight());
+    document.documentElement.dataset.theme = dark?"dark":"light";
+    const mc=document.querySelector('meta[name="theme-color"]'); if(mc) mc.setAttribute("content", dark?"#0F0A15":"#F4F1F8");
+  }
+  function setTheme(m){ state.theme=m; applyTheme(); }
+  (function watchScheme(){ try{ const mq=window.matchMedia("(prefers-color-scheme: light)"); const cb=()=>{ if((state.theme||"system")==="system") applyTheme(); }; mq.addEventListener?mq.addEventListener("change",cb):mq.addListener(cb); }catch(e){} })();
 
   /* ============ STATE ============ */
   const state={
-    lang:detectLang(),
+    lang:detectLang(), theme:"system",
     age:24, signedIn:false, agreed:false,
     currentQ:0, answers:new Array(7).fill(null),
     profileKey:null,
@@ -1351,9 +1396,9 @@
   }
 
   /* ============ NAVIGATION ============ */
-  const NAV_SCREENS=["explore","groups","groupdetail","joined","chat","friends","dm","feedback","profile","met","requests","friendprofile","notifications","settings","help","invite","archetype"];
-  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chat:"chat",friends:"friends",dm:"friends",met:"friends",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
-  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chat:11,friends:12,dm:12,met:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12,archetype:3};
+  const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","met","requests","friendprofile","notifications","settings","help","invite","archetype"];
+  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chat",chat:"chat",friends:"friends",dm:"chat",met:"friends",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
+  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chats:11,chat:11,friends:12,dm:12,met:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12,archetype:3};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
   let history=[], chatStarted=false, chatTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
@@ -1391,6 +1436,7 @@
     if(id==="groupdetail")    renderGroupDetail();
     if(id==="host")           renderHost();
     if(id==="joined")         {syncJoined();sparkle();}
+    if(id==="chats")          enterChats();
     if(id==="chat")           enterChat();
     if(id==="friends")        renderFriends();
     if(id==="dm")             renderDM();
@@ -1920,55 +1966,51 @@
     const shield=$("#chatShield"); if(shield) shield.style.display=d;
     const guide=$("#guideBar"); if(guide) guide.style.display=show?(state.guideDismissed?"none":""):"none";
   }
-  // Chat enter-hook: dispatch to empty state / single chat / list
+  // #s-chat is now purely a single open thread; the inbox (#s-chats) owns the list
   function enterChat(){
     const items=chatList();
-    if(items.length===0){ renderChatEmpty(); return; }
-    if(items.length===1){ state.chatFromList=false; openGroupChat(items[0]); return; }
-    const target=state.chatViewGroup && items.find(i=>i.id===state.chatViewGroup);
-    if(target){ openGroupChat(target); }
-    else { state.chatViewGroup=null; renderChatList(items); }
+    if(!items.length){ goTo("chats"); return; }
+    const it=(state.chatViewGroup && items.find(i=>i.id===state.chatViewGroup)) || items[0];
+    openGroupChat(it);
   }
-  function chatListHeader(){
-    const back=$("#chatBack"); if(back) back.style.display="none";
-    $("#chatIc").className="ct-ic"; $("#chatIc").style.background="var(--surface-3)"; $("#chatIc").textContent="💬";
-    $("#chatName").textContent=t("chat_list_title"); $("#chatMeta").textContent="";
+  // DM threads — friends with an active conversation
+  function dmList(){
+    return state.friends.filter(f=>state.dms[f.name]&&state.dms[f.name].length).map(f=>{
+      const th=state.dms[f.name]; const last=th[th.length-1];
+      return {name:f.name, emoji:f.emoji, key:f.key, last:last?last.text:t("chat_sayhi")};
+    });
   }
-  function renderChatEmpty(){
-    state.chatViewGroup=null; state.chatFromList=false;
-    showChatChrome(false); chatListHeader();
-    $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
-  }
-  function renderChatList(items){
-    state.chatFromList=false;
-    showChatChrome(false); chatListHeader();
-    const sc=$("#chatScroll");
-    sc.innerHTML=items.map(it=>{
+  // Combined inbox: group chats + DM threads in one list
+  function enterChats(){
+    const groups=chatList(), dms=dmList(), body=$("#chatsBody");
+    if(!groups.length && !dms.length){
+      body.innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
+      return;
+    }
+    const mePfx=state.lang==="fr"?"Toi : ":"You: ";
+    const trunc=s=>s.length>42?s.slice(0,42)+"…":s;
+    let html="";
+    groups.forEach(it=>{
       let preview;
       if(it.forming) preview=t("chat_forming_sub");
-      else {
-        const th=state.chatThreads[it.id];
-        const last=th&&th.filter(m=>!m.sys).slice(-1)[0];
-        const mePfx=state.lang==="fr"?"Toi : ":"You: ";
-        preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi");
-      }
-      if(preview.length>42) preview=preview.slice(0,42)+"…";
+      else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi"); }
       const when=it.when?it.when.split(" · ")[0]:"";
-      return `<div class="friend-row" data-chatgroup="${it.id}">
-        <div class="avatar av-sm ${it.grad}">${it.emoji}</div>
-        <div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${preview}</div></div>
-        <span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
-    }).join("");
-    $$("#chatScroll [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
-      const it=chatList().find(i=>i.id===el.getAttribute("data-chatgroup"));
-      if(!it) return;
-      state.chatViewGroup=it.id; state.chatFromList=true; openGroupChat(it);
+      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div><span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
+    });
+    dms.forEach(d=>{
+      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span style="width:9px;height:9px;border-radius:50%;background:var(--mint);flex-shrink:0" title="online"></span></div>`;
+    });
+    body.innerHTML=html;
+    $$("#chatsBody [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
+      const it=chatList().find(i=>i.id===el.getAttribute("data-chatgroup")); if(!it) return;
+      state.chatViewGroup=it.id; state.chatFromList=true; goTo("chat");
     }));
+    $$("#chatsBody [data-chatdm]").forEach(el=>el.addEventListener("click",()=>{ state.currentDM=el.getAttribute("data-chatdm"); goTo("dm"); }));
   }
   function openGroupChat(item){
     state.chatViewGroup=item.id;
     state.chosenGroup=item.group; if(item.activity) state.chosenActivity=item.activity;
-    const back=$("#chatBack"); if(back) back.style.display=state.chatFromList?"flex":"none";
+    const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").textContent=item.emoji||a.icon;
     $("#chatName").textContent=(g&&g.name)||t("chat_yourgroup");
@@ -2070,8 +2112,8 @@
     $("#guideHead").addEventListener("click",e=>{ if(e.target.id==="guideX"){ state.guideDismissed=true; $("#guideBar").style.display="none"; return; } openDoc("guidelines"); });
     // shield → safety
     $("#chatShield").addEventListener("click",openChatSafety);
-    // back to chat list (U4)
-    $("#chatBack").addEventListener("click",()=>{ state.chatViewGroup=null; state.chatFromList=false; enterChat(); });
+    // back chevron → return to the combined inbox
+    $("#chatBack").addEventListener("click",()=>{ state.chatFromList=false; goBack(); });
   }
 
   /* ============ FRIENDS ============ */
@@ -2088,7 +2130,11 @@
   function renderFriends(){
     const tab=state.friendsTab||"friends";
     $$("#friendsSeg .sopt").forEach(s=>s.classList.toggle("on",s.getAttribute("data-tab")===tab));
-    const q=($("#friendSearch").value||"").toLowerCase().trim();
+    const inp=$("#friendSearch"); const q=(inp.value||"").toLowerCase().trim();
+    // contextual placeholder + hide the slim search on short/empty lists
+    inp.setAttribute("placeholder",{friends:"Search friends",dms:"Search messages",met:"Search people you've met"}[tab]||"Search");
+    const fullCount=tab==="met"?metPool.length:state.friends.length;
+    const bar=$("#friendSearchBar"); if(bar) bar.style.display=(fullCount>=5||q)?"flex":"none";
     const body=$("#friendsBody");
     // brief skeleton on first tab load
     if(!body._loaded){ body.innerHTML=skeletonFriends(4); body._loaded=true; setTimeout(()=>{ if($("#s-friends").classList.contains("active")) _populateFriends(tab,q,body); },200); return; }
@@ -2347,6 +2393,7 @@
       <div class="sec-title">Preferences</div>
       <div class="set-list">
         <div class="set-item" id="setLang"><span class="si-ic">🌐</span>${t("set_lang_label")}<span class="si-val">${state.lang==="fr"?t("lang_fr"):t("lang_en")}</span></div>
+        <div class="set-item" id="setTheme"><span class="si-ic">🌗</span>Appearance<span class="si-val">${({system:"System",light:"Light",dark:"Dark"})[state.theme||"system"]}</span></div>
       </div>
       <div class="sec-title">Privacy</div>
       <div class="set-list">
@@ -2403,6 +2450,17 @@
     $("#setContact").addEventListener("click",openSupport);
     $("#setDelete").addEventListener("click",openDeleteAccount);
     $("#setLang").addEventListener("click",openLangSheet);
+    $("#setTheme").addEventListener("click",openThemeSheet);
+  }
+  function openThemeSheet(){
+    const opts=[["system","System"],["light","Light"],["dark","Dark"]];
+    const cur=state.theme||"system";
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-title">Appearance</div>
+      <div class="set-list" style="margin-top:12px">${opts.map(o=>`<div class="set-item" data-themeopt="${o[0]}"><span class="si-ic">${cur===o[0]?'🔘':'⚪'}</span>${o[1]}</div>`).join("")}</div>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_close")}</button>`;
+    $$("#sheetBody [data-themeopt]").forEach(el=>el.addEventListener("click",()=>{ closeSheet(); setTheme(el.getAttribute("data-themeopt")); if($("#s-settings").classList.contains("active")) renderSettings(); }));
+    sheetClose(); openSheet();
   }
   function openLangSheet(){
     const opts=[["en","lang_en"],["fr","lang_fr"]];
@@ -2889,6 +2947,7 @@
   wireChat(); wireDM();
 
   /* ============ INIT ============ */
+  applyTheme();
   applyI18n(document);
   goTo("landing");
 
