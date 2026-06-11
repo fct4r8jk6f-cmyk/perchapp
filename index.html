@@ -1157,6 +1157,7 @@
   /* ============ ACTIVITIES ============ */
   const CATS=["For you","Food & Drink","Outdoors","Arts & Culture","Games","Chill","Active","Evening Out"];
   const ACTIVITIES=[
+    {id:"thursdays",icon:"🪶",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week"},
     {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
     {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
     {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
@@ -1249,7 +1250,7 @@
       gd_hosting:"You're hosting",gd_forming_status:"● Forming · matching people",gd_host:"you're the host",
       grp_your:"Your groups",grp_forming_for:"groups forming",grp_later:"Later this week",grp_past:"Past",
       gd_when:"When",gd_where:"Where",gd_planb:"Plan B",gd_whos:"Who's going",gd_mixed:"A mixed group",gd_open_spot:"open",
-      gd_leave_note:"You can leave anytime, no questions asked.",gd_join:"Join this group",gd_openchat:"Open group chat",gd_leave:"Leave this group",
+      gd_leave_note:"You can leave anytime — the earlier you do, the easier it is for someone else to take your spot.",gd_join:"Join this group",gd_openchat:"Open group chat",gd_leave:"Leave this group",
       gd_your:"Your group",gd_group:"Group",gd_full_t:"This group just filled up",gd_full_s:"Here's a similar one with a spot open.",
       gd_ff:"▶ Fast-forward to event time",gd_happening:"● Happening now ·",gd_there:"There? Let the group know",gd_tapcheck:"Tap to check in",gd_imhere:"I'm here",gd_checkedin:"Checked in",gd_groupknows:"The group knows you're here",gd_here_tag:" · here",
       toast_checkin:"You're checked in — the group knows 👋",sys_here_you:"You're here 👋",
@@ -1297,7 +1298,7 @@
       gd_hosting:"Tu organises",gd_forming_status:"● En formation · jumelage en cours",gd_host:"tu es l'hôte",
       grp_your:"Tes groupes",grp_forming_for:"groupes en formation",grp_later:"Plus tard cette semaine",grp_past:"Passé",
       gd_when:"Quand",gd_where:"Où",gd_planb:"Plan B",gd_whos:"Qui y va",gd_mixed:"Un groupe varié",gd_open_spot:"libre",
-      gd_leave_note:"Tu peux partir quand tu veux, sans avoir à te justifier.",gd_join:"Rejoindre ce groupe",gd_openchat:"Ouvrir la discussion",gd_leave:"Quitter ce groupe",
+      gd_leave_note:"Tu peux partir quand tu veux — plus tu le fais tôt, plus c'est facile pour quelqu'un d'autre de prendre ta place.",gd_join:"Rejoindre ce groupe",gd_openchat:"Ouvrir la discussion",gd_leave:"Quitter ce groupe",
       gd_your:"Ton groupe",gd_group:"Groupe",gd_full_t:"Ce groupe vient de se remplir",gd_full_s:"En voici un semblable avec une place libre.",
       gd_ff:"▶ Avancer à l'heure de l'activité",gd_happening:"● En cours ·",gd_there:"Sur place? Avise le groupe",gd_tapcheck:"Touche pour t'enregistrer",gd_imhere:"Je suis là",gd_checkedin:"Enregistré",gd_groupknows:"Le groupe sait que t'es là",gd_here_tag:" · sur place",
       toast_checkin:"Tu es enregistré — le groupe le sait 👋",sys_here_you:"Tu es là 👋",
@@ -2325,6 +2326,7 @@
       <div class="stats">
         <div class="stat"><div class="sn">${state.joinedGroups.length||1}</div><div class="sl">Events</div></div>
         <div class="stat"><div class="sn">${state.friends.length}</div><div class="sl">Friends</div></div>
+        <div class="stat"><div class="sn">100%</div><div class="sl">Show-up</div></div>
         <div class="stat"><div class="sn">'26</div><div class="sl">Since</div></div>
       </div>
       <div id="ppCard" style="border-radius:var(--r-lg);padding:15px 16px;margin-bottom:18px;cursor:pointer;display:flex;align-items:center;gap:13px;border:1.5px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad-warm) border-box">
