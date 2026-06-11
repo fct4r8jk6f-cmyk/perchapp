@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perch</title>
+<meta name="description" content="Perch — small-group meetups around real activities in Montreal. The low-pressure way to make friends as an adult.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%B6%3C/text%3E%3C/svg%3E">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -24,13 +26,17 @@
     --line-2:#382C4B;
     --text:#FFFFFF;
     --muted:rgba(255,255,255,.8);
-    --faint:rgba(255,255,255,.5);
+    --faint:rgba(255,255,255,.62);
     --c1:#FF8A6B;
     --c2:#FF77A0;
     --c3:#A57BFF;
     --calm:#8EA2FF;         /* periwinkle */
     --mint:#6FE0C6;
     --amber:#FFB661;        /* warm warning, never red */
+    --accent-text:#b4c0ff;  /* readable periwinkle text */
+    --accent-text-2:#cbb6ff;
+    --danger-text:#ffb3c2;
+    --nav-bg:rgba(20,13,29,.92);
     --grad-warm:linear-gradient(135deg,#FF8A6B 0%,#FF77A0 50%,#A57BFF 100%);
     --grad-calm:linear-gradient(135deg,#8EA2FF 0%,#6FE0C6 100%);
     --shadow:0 36px 80px rgba(0,0,0,.5);
@@ -51,8 +57,12 @@
     --line-2:#DCD2E8;
     --text:#191225;
     --muted:rgba(25,18,37,.74);
-    --faint:rgba(25,18,37,.48);
+    --faint:rgba(25,18,37,.58);
     --shadow:0 24px 60px rgba(60,40,100,.18);
+    --accent-text:#4d5fd6;
+    --accent-text-2:#7a4fd6;
+    --danger-text:#b3264f;
+    --nav-bg:rgba(255,255,255,.92);
   }
   /* 4px spacing grid utilities */
   .mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:20px}.mt-6{margin-top:24px}.mt-8{margin-top:32px}.mt-9{margin-top:36px}
@@ -116,7 +126,7 @@
   .pad-nav{padding-bottom:96px;}
 
   .fx{position:absolute;inset:0;pointer-events:none;z-index:70;overflow:hidden;}
-  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(18px);background:rgba(20,13,29,.94);border:1px solid var(--line);backdrop-filter:blur(8px);color:var(--text);padding:12px 18px;border-radius:var(--r-md);font-size:13px;font-weight:500;opacity:0;transition:all .32s;z-index:88;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:300px;text-align:center;line-height:1.45;}
+  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(18px);background:rgba(20,13,29,.94);border:1px solid var(--line);backdrop-filter:blur(8px);color:#fff;padding:12px 18px;border-radius:var(--r-md);font-size:13px;font-weight:500;opacity:0;transition:all .32s;z-index:88;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:300px;text-align:center;line-height:1.45;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   /* TYPE */
@@ -127,8 +137,8 @@
   .eyebrow{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--c2);}
   .sub{font-size:15px;color:var(--muted);line-height:1.6;}
   .tiny{font-size:13px;color:var(--faint);line-height:1.55;}
-  .link-inline{color:#b4c0ff;text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-weight:600;}
-  .link-inline:hover{color:#cdd5ff;}
+  .link-inline{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-weight:600;}
+  .link-inline:hover{opacity:.8;}
   .sec-title{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin:6px 0 12px;}
 
   /* BUTTONS */
@@ -139,7 +149,7 @@
   .btn-primary:not(:disabled):hover{transform:translateY(-2px);}
   .btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border:1.5px solid var(--line);}
   .btn-ghost:hover{border-color:var(--muted);background:rgba(255,255,255,.06);}
-  .btn-soft{background:rgba(142,162,255,.12);color:#b4c0ff;border:1.5px solid rgba(142,162,255,.3);}
+  .btn-soft{background:rgba(142,162,255,.12);color:var(--accent-text);border:1.5px solid rgba(142,162,255,.3);}
   .btn-soft:hover{background:rgba(142,162,255,.18);}
   .btn-calm{background:var(--grad-calm);color:#06231d;font-weight:700;box-shadow:0 12px 28px rgba(111,224,198,.26);}
   .btn-calm:hover{transform:translateY(-2px);}
@@ -182,11 +192,11 @@
   .chips{display:flex;flex-wrap:wrap;gap:9px;}
   .chip{padding:8px 14px;border-radius:var(--r-pill);border:1.5px solid var(--line);font-size:13px;color:var(--muted);cursor:pointer;background:var(--surface);transition:all .16s;font-weight:500;}
   .chip:hover{border-color:var(--c3);}
-  .chip.sel{border-color:transparent;background:rgba(165,123,255,.18);color:#cbb6ff;box-shadow:inset 0 0 0 1.5px rgba(165,123,255,.5);}
+  .chip.sel{border-color:transparent;background:rgba(165,123,255,.18);color:var(--accent-text-2);box-shadow:inset 0 0 0 1.5px rgba(165,123,255,.5);}
   .pill-static{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:var(--r-pill);font-size:11px;font-weight:700;}
   .pill-mint{background:rgba(111,224,198,.12);color:var(--mint);border:1px solid rgba(111,224,198,.28);}
   .pill-amber{background:rgba(255,182,97,.12);color:var(--amber);border:1px solid rgba(255,182,97,.3);}
-  .pill-cal{background:rgba(142,162,255,.12);color:#b4c0ff;border:1px solid rgba(142,162,255,.3);}
+  .pill-cal{background:rgba(142,162,255,.12);color:var(--accent-text);border:1px solid rgba(142,162,255,.3);}
   .trait{padding:7px 13px;border-radius:var(--r-pill);font-size:13px;font-weight:600;background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--text);}
 
   /* skeleton loaders */
@@ -195,23 +205,16 @@
 
   /* empty states */
   .empty-state{display:flex;flex-direction:column;align-items:center;text-align:center;padding:46px 20px;gap:12px;}
-  .empty-ic{width:72px;height:72px;border-radius:var(--r-xl);background:var(--grad-calm);opacity:.85;display:flex;align-items:center;justify-content:center;font-size:32px;filter:saturate(.7);}
-  .empty-line{font-size:15px;color:var(--muted);font-weight:500;}
-  .empty-act{color:#b4c0ff;font-size:13px;font-weight:700;cursor:pointer;text-decoration:underline;text-underline-offset:3px;}
   .es-em{width:72px;height:72px;border-radius:var(--r-xl);background:var(--grad-calm);opacity:.85;display:flex;align-items:center;justify-content:center;font-size:32px;filter:saturate(.7);}
   .es-t{font-size:15px;color:var(--text);font-weight:700;}
   .es-s{font-size:13px;color:var(--muted);line-height:1.5;max-width:240px;}
   .map-stub{height:120px;border-radius:var(--r-md);border:1px solid var(--line);background:linear-gradient(135deg,rgba(142,162,255,.12),rgba(165,123,255,.08));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;margin:6px 0 16px;}
   .sparkle{position:absolute;font-size:15px;pointer-events:none;animation:sparkRise 1.5s ease-out forwards;}
   @keyframes sparkRise{0%{opacity:0;transform:translateY(0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
-  .skel{background:linear-gradient(90deg,var(--surface-2) 25%,rgba(255,255,255,.04) 50%,var(--surface-2) 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;}
   .skel-card{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);margin-bottom:14px;}
   .skel-hero{height:96px;}
   .skel-line{border-radius:6px;}
-</style>
-</head>
-<body>
-<style>
+
   /* ===== LANDING ===== */
   #s-landing{padding:0;overflow:hidden;}
   .land-track{display:flex;height:100%;transition:transform .4s cubic-bezier(.4,0,.2,1);}
@@ -219,7 +222,7 @@
   .land-1{background:linear-gradient(160deg,#FF8A6B 0%,#FF77A0 45%,#A57BFF 100%);}
   .land-wordmark{font-family:'Fraunces',serif;font-weight:700;font-size:64px;letter-spacing:-2px;color:#fff;}
   .land-dots{display:flex;gap:8px;justify-content:center;margin-top:auto;}
-  .land-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .25s;}
+  .land-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .25s;cursor:pointer;padding:0;border:none;}
   .land-dot.on{width:22px;border-radius:4px;background:#fff;}
   .land-row{display:flex;align-items:center;gap:16px;padding:16px 0;}
   .land-row .lr-ic{width:48px;height:48px;border-radius:var(--r-md);background:rgba(255,255,255,.06);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
@@ -244,7 +247,7 @@
   .signin-logo{font-family:'Fraunces',serif;font-weight:700;font-size:40px;letter-spacing:-1px;margin-bottom:6px;}
   .auth-stack{display:flex;flex-direction:column;gap:11px;}
   .auth-or{display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px;margin:4px 0;}
-  .auth-or .lk{color:#b4c0ff;text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-weight:600;}
+  .auth-or .lk{color:var(--accent-text);text-decoration:underline;text-underline-offset:2px;cursor:pointer;font-weight:600;}
   .legal-foot{font-size:11px;color:var(--faint);line-height:1.6;text-align:center;margin-top:20px;}
 
   /* ===== TERMS ===== */
@@ -252,8 +255,8 @@
   .terms-ic{width:60px;height:60px;border-radius:var(--r-lg);background:var(--grad-calm);display:flex;align-items:center;justify-content:center;font-size:26px;margin:6px 0 16px;box-shadow:0 12px 30px rgba(111,224,198,.25);}
   .promise{display:flex;gap:13px;align-items:flex-start;padding:14px 15px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);margin-bottom:10px;}
   .promise .pi{font-size:20px;flex-shrink:0;line-height:1.3;}
-  .promise .pt{font-size:15px;font-weight:600;color:#c4ceff;}
-  .terms-toggle{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;color:#b4c0ff;font-weight:600;margin:6px 0;}
+  .promise .pt{font-size:15px;font-weight:600;color:var(--accent-text);}
+  .terms-toggle{display:flex;align-items:center;justify-content:space-between;padding:13px 15px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--surface);cursor:pointer;font-size:13px;color:var(--accent-text);font-weight:600;margin:6px 0;}
   .terms-full{max-height:0;overflow:hidden;transition:max-height .35s ease;}
   .terms-full.open{max-height:340px;overflow-y:auto;}
   .agree-box{display:flex;gap:12px;align-items:flex-start;padding:14px 15px;border-radius:var(--r-md);border:1.5px solid var(--line);background:var(--surface);cursor:pointer;transition:all .18s;margin:10px 0 6px;}
@@ -396,18 +399,12 @@
   .info-tile .it-ic{width:40px;height:40px;border-radius:var(--r-sm);background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
   .info-tile .it-lab{font-size:11px;color:var(--faint);}
   .info-tile .it-val{font-size:15px;font-weight:600;margin-top:1px;color:var(--text);}
-  .leave-note{display:flex;gap:10px;align-items:flex-start;background:rgba(111,224,198,.07);border:1px solid rgba(111,224,198,.2);border-radius:var(--r-md);padding:13px 15px;font-size:13px;color:#a9e8d8;line-height:1.5;margin:4px 0 16px;}
-  .map-card{height:140px;border-radius:var(--r-lg);overflow:hidden;position:relative;border:1px solid var(--line);margin:4px 0 12px;background:linear-gradient(120deg,#1a2138,#241640);}
-  .map-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:26px 26px;}
-  .map-pin{position:absolute;width:30px;height:30px;border-radius:50% 50% 50% 0;background:var(--grad-warm);transform:rotate(-45deg);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 18px rgba(255,119,160,.45);right:26%;top:30%;}
-  .map-pin span{transform:rotate(45deg);font-size:13px;}
 
   /* joined */
   #s-joined{justify-content:center;text-align:center;}
   .joined-orb{width:96px;height:96px;border-radius:50%;background:var(--grad-calm);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 20px;box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 0 rgba(111,224,198,.4);animation:softIn .6s cubic-bezier(.2,.7,.3,1),glowPulse 3s ease-in-out infinite;}
   @keyframes glowPulse{0%,100%{box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 0 rgba(111,224,198,.0)}50%{box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 14px rgba(111,224,198,.06)}}
-</style>
-<style>
+
   /* ===== CHAT ===== */
   #s-chat,#s-dm{padding:14px 0 0;background:var(--chat-bg);overflow:hidden !important;padding-bottom:78px !important;}
   .chat-scroll{min-height:0;}
@@ -426,7 +423,7 @@
   .pinned.open .pinned-detail{max-height:160px;border-top-color:var(--line);}
   .pinned-detail .pd-in{padding:12px 13px;font-size:13px;color:var(--muted);line-height:1.55;}
   .guide-bar{margin:10px 16px 0;}
-  .guide-head{display:flex;align-items:center;gap:8px;font-size:13px;color:#b4c0ff;background:rgba(142,162,255,.08);border:1px solid rgba(142,162,255,.2);border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;}
+  .guide-head{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--accent-text);background:rgba(142,162,255,.08);border:1px solid rgba(142,162,255,.2);border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;}
   .guide-x{margin-left:auto;color:var(--faint);}
   .chat-scroll{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:3px;}
   .chat-scroll::-webkit-scrollbar{width:0;}
@@ -442,7 +439,7 @@
   .msg.me + .msg-time{align-self:flex-end;}
   .react-row{display:flex;gap:3px;margin-top:3px;}
   .react{font-size:11px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-pill);padding:1px 7px;}
-  .msg.sys{align-self:center;background:rgba(165,123,255,.1);border:1px solid rgba(165,123,255,.22);color:#cbb6ff;font-size:13px;text-align:center;border-radius:var(--r-sm);padding:8px 14px;max-width:90%;margin-top:8px;}
+  .msg.sys{align-self:center;background:rgba(165,123,255,.1);border:1px solid rgba(165,123,255,.22);color:var(--accent-text-2);font-size:13px;text-align:center;border-radius:var(--r-sm);padding:8px 14px;max-width:90%;margin-top:8px;}
   .typing{align-self:flex-start;background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-lg);border-bottom-left-radius:5px;padding:13px 16px;display:flex;gap:4px;margin-top:8px;}
   .typing i{width:7px;height:7px;border-radius:50%;background:var(--faint);animation:td 1.2s infinite;}
   .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
@@ -456,7 +453,7 @@
   .send.off{opacity:.4;pointer-events:none;}
   .ff{display:block;width:100%;text-align:center;font-size:11px;color:var(--faint);padding:8px;background:none;border:none;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;}
   .ff:hover{color:var(--muted);}
-  .chat-shield{margin-left:auto;width:38px;height:38px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:rgba(142,162,255,.08);color:#b4c0ff;display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0;}
+  .chat-shield{margin-left:auto;width:38px;height:38px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:rgba(142,162,255,.08);color:var(--accent-text);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;flex-shrink:0;}
   .dm-seen{align-self:flex-end;font-size:11px;color:var(--faint);margin:2px 4px 0 0;}
 
   /* ===== FRIENDS ===== */
@@ -471,19 +468,11 @@
   .msg-pill{padding:8px 15px;border-radius:var(--r-pill);font-size:13px;font-weight:700;font-family:'Hanken Grotesk',sans-serif;border:none;cursor:pointer;background:var(--grad-warm);color:#fff;white-space:nowrap;flex-shrink:0;}
   .add-pill{padding:8px 15px;border-radius:var(--r-pill);font-size:13px;font-weight:700;font-family:'Hanken Grotesk',sans-serif;border:1.5px solid rgba(111,224,198,.4);cursor:pointer;background:rgba(111,224,198,.12);color:var(--mint);white-space:nowrap;flex-shrink:0;}
   .add-pill:active{transform:scale(.95);}
-  .x-pill{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:none;color:var(--faint);font-size:15px;cursor:pointer;flex-shrink:0;}
   .unread-dot{width:9px;height:9px;border-radius:50%;background:var(--c2);flex-shrink:0;}
   .req-actions{display:flex;gap:8px;flex-shrink:0;}
   .req-yes{padding:8px 14px;border-radius:var(--r-pill);background:var(--grad-calm);color:#06231d;border:none;font-weight:700;font-size:13px;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;}
   .req-no{padding:8px 14px;border-radius:var(--r-pill);background:none;border:1.5px solid var(--line);color:var(--faint);font-weight:700;font-size:13px;cursor:pointer;font-family:'Hanken Grotesk',sans-serif;}
 
-  /* friend profile */
-  .fp-hero{display:flex;flex-direction:column;align-items:center;text-align:center;margin:6px 0 18px;}
-  .fp-av{width:96px;height:96px;border-radius:var(--r-xl);display:flex;align-items:center;justify-content:center;font-size:44px;margin-bottom:13px;box-shadow:0 14px 34px rgba(0,0,0,.35);background-size:cover;background-position:center;}
-  .fp-name{font-family:'Fraunces',serif;font-weight:700;font-size:26px;letter-spacing:-.4px;}
-  .fp-arch{font-size:13px;font-weight:700;margin-top:4px;}
-  .avstack{display:flex;}
-  .avstack .avatar{margin-right:-10px;border:2px solid var(--surface);}
 
   /* ===== FEEDBACK ===== */
   .star-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);}
@@ -499,13 +488,6 @@
   .yn.on{border-color:transparent;box-shadow:inset 0 0 0 1.5px var(--c2);background:rgba(255,119,160,.12);color:var(--text);}
 
   /* ===== PROFILE / SETTINGS ===== */
-  .prof-head{display:flex;flex-direction:column;align-items:center;text-align:center;margin:6px 0 18px;}
-  .prof-av{width:90px;height:90px;border-radius:var(--r-xl);display:flex;align-items:center;justify-content:center;font-size:42px;margin-bottom:13px;box-shadow:0 14px 34px rgba(0,0,0,.35);position:relative;background-size:cover;background-position:center;cursor:pointer;}
-  .edit-cam{position:absolute;right:-3px;bottom:-3px;width:30px;height:30px;border-radius:50%;background:var(--surface-3);border:2px solid var(--phone-bg);display:flex;align-items:center;justify-content:center;font-size:13px;}
-  .prof-name{font-family:'Fraunces',serif;font-weight:700;font-size:26px;letter-spacing:-.4px;}
-  .prof-arch{font-size:13px;color:var(--c2);font-weight:700;margin-top:4px;}
-  .prof-bio{font-size:13px;color:var(--muted);line-height:1.5;max-width:280px;margin:8px auto 0;}
-  .prof-tags{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:12px;}
   .stats{display:flex;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);margin-bottom:18px;}
   .stat{flex:1;text-align:center;padding:15px 6px;}
   .stat + .stat{border-left:1px solid var(--line);}
@@ -526,8 +508,8 @@
   .set-item .si-ic{width:28px;text-align:center;font-size:17px;}
   .set-item .chev{margin-left:auto;color:var(--faint);}
   .set-item .si-val{margin-left:auto;color:var(--muted);font-size:13px;}
-  .set-item.danger{color:#ffb3c2;}
-  .set-badge{margin-left:auto;font-size:11px;font-weight:700;background:rgba(142,162,255,.16);color:#b4c0ff;padding:3px 9px;border-radius:var(--r-pill);}
+  .set-item.danger{color:var(--danger-text);}
+  .set-badge{margin-left:auto;font-size:11px;font-weight:700;background:rgba(142,162,255,.16);color:var(--accent-text);padding:3px 9px;border-radius:var(--r-pill);}
   .switch{width:46px;height:27px;border-radius:var(--r-pill);background:var(--surface-3);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0;margin-left:auto;}
   .switch i{position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#fff;transition:left .2s;}
   .switch.on{background:var(--grad-calm);}
@@ -596,7 +578,7 @@
   .sheet-ic.warn{background:rgba(255,182,97,.14);}
   .sheet-title{font-family:'Fraunces',serif;font-weight:700;font-size:20px;letter-spacing:-.4px;margin-bottom:8px;}
   .sheet-sub{font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:18px;}
-  .rep-member,.rep-target{display:flex;align-items:center;gap:12px;padding:13px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--surface-2);margin-bottom:10px;}
+  .rep-member{display:flex;align-items:center;gap:12px;padding:13px;border-radius:var(--r-md);border:1px solid var(--line);background:var(--surface-2);margin-bottom:10px;}
   .rep-member{cursor:pointer;}
   .rep-member:hover{border-color:var(--c3);}
   .rep-mname{font-size:15px;font-weight:600;}
@@ -614,11 +596,9 @@
   .doc-body ul{margin:0 0 9px 18px;}
   .doc-body li{margin-bottom:5px;}
   .doc-body b{color:var(--text);}
-  .doc-draft{display:flex;gap:9px;align-items:flex-start;background:rgba(255,182,97,.08);border:1px solid rgba(255,182,97,.3);border-radius:var(--r-sm);padding:11px 13px;font-size:11px;color:#ffd29a;line-height:1.5;margin-bottom:16px;}
-  .placeholder{color:var(--amber);background:rgba(255,182,97,.1);padding:0 4px;border-radius:4px;font-style:italic;}
 
   /* ===== BOTTOM NAV ===== */
-  .bottomnav{position:absolute;left:0;right:0;bottom:0;height:78px;background:rgba(20,13,29,.92);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:none;align-items:center;padding:0 6px 16px;z-index:45;}
+  .bottomnav{position:absolute;left:0;right:0;bottom:0;height:78px;background:var(--nav-bg);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:none;align-items:center;padding:0 6px 16px;z-index:45;}
   .bottomnav.show{display:flex;}
   .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--faint);cursor:pointer;transition:color .16s;font-weight:600;padding-top:9px;position:relative;}
   .nav-item .ni-ic{font-size:20px;transition:transform .16s;}
@@ -626,6 +606,24 @@
   .nav-item.on{color:transparent;background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;}
   .nav-item.on .ni-ic{transform:scale(1.06);}
   .nav-badge{position:absolute;top:5px;right:50%;margin-right:-22px;min-width:16px;height:16px;border-radius:var(--r-pill);background:var(--c2);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:1.5px solid var(--phone-bg);}
+
+  /* ===== PERCH+ COMPARE ===== */
+  .pp-row{display:grid;grid-template-columns:1fr 62px 62px;align-items:center;padding:11px 14px;font-size:13px;border-bottom:1px solid var(--line);}
+  .pp-row:last-child{border-bottom:none;}
+  .pp-row span:nth-child(2),.pp-row span:nth-child(3){text-align:center;}
+  .pp-head{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--faint);background:var(--surface-2);}
+
+  /* ===== A11Y & UTILITIES ===== */
+  :focus-visible{outline:2px solid var(--calm);outline-offset:2px;}
+  .guide-x{padding:8px;margin:-8px -8px -8px auto;}
+  .picked-x{width:32px;height:32px;}
+  .req-yes,.req-no{min-height:38px;}
+  .link-sm{width:auto;font-size:13px;}
+  .dot-online{width:9px;height:9px;border-radius:50%;background:var(--mint);flex-shrink:0;}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
+  }
+  html[data-reduce-motion] *,html[data-reduce-motion] *::before,html[data-reduce-motion] *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;}
 
   /* ===== ARCHETYPE GRADIENTS + TEXTURES ===== */
   .g-spark{background:linear-gradient(150deg,#FFB347,#FF7A5C);}
@@ -679,6 +677,8 @@
   }
   @media (max-width:400px){.nav-item{font-size:11px;}.nav-item .ni-ic{font-size:20px;}}
 </style>
+</head>
+<body>
 <div class="bg-blobs"><div class="blob a"></div><div class="blob b"></div><div class="blob c"></div></div>
 <div class="grain"></div>
 
@@ -733,7 +733,7 @@
           <div class="land-panel">
             <div style="margin-top:32px"></div>
             <div class="eyebrow" style="margin-bottom:8px" data-i18n="land_join">Join in</div>
-            <h2 class="display h2" style="margin-bottom:6px"><span id="landCount">2,400+</span> <span data-i18n-html="land_count">people<br>already going out</span></h2>
+            <h2 class="display h2" style="margin-bottom:6px"><span id="landCount">2,400+</span> <span data-i18n-html="land_count">Montrealers<br>already going out</span></h2>
             <p class="sub" style="margin-bottom:18px" data-i18n="land_find">Find your people. Show up.</p>
             <div class="preview-card" id="landPreview"></div>
             <div style="margin-top:auto"></div>
@@ -801,8 +801,8 @@
           <p class="sub" style="max-width:240px;margin:0 auto" data-i18n="signin_tag">Meet people. Do things.</p>
         </div>
         <div class="auth-stack">
-          <button class="btn btn-dark" data-auth="apple"><span class="bi"></span><span data-i18n="signin_apple">Sign in with Apple</span></button>
-          <button class="btn btn-white" data-auth="google"><span class="bi">🟢</span><span data-i18n="signin_google">Sign in with Google</span></button>
+          <button class="btn btn-dark" data-auth="apple"><svg width="17" height="17" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span data-i18n="signin_apple">Sign in with Apple</span></button>
+          <button class="btn btn-white" data-auth="google"><svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span data-i18n="signin_google">Sign in with Google</span></button>
           <div class="auth-or"><span class="lk" data-auth="email" data-i18n="signin_email">or continue with email</span></div>
         </div>
         <p class="legal-foot" data-i18n-html="signin_legal">By continuing you'll agree to our
@@ -863,7 +863,7 @@
           <div class="search"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="exSearch" placeholder="Search activities" data-i18n-ph="ex_search" aria-label="Search activities"></div>
           <button class="iconbtn" id="exHost" aria-label="Host a hang" title="Host a hang">＋</button>
           <button class="iconbtn" id="exFilter" aria-label="Filters">⚙︎</button>
-          <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot"></span></button>
+          <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="exBellDot"></span></button>
         </div>
         <div class="cat-rail" id="catRail"></div>
         <div id="pickedRow"></div>
@@ -895,7 +895,7 @@
         </div>
         <div id="joinedSoftAsk"></div>
         <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab" data-i18n="joined_when">When</div><div class="it-val" id="joinedWhen">Saturday · 7:00 PM</div></div></div>
-        <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab" data-i18n="joined_where">Where</div><div class="it-val" id="joinedWhere">The Crown Pub · 14 Midtown Ave</div></div></div>
+        <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab" data-i18n="joined_where">Where</div><div class="it-val" id="joinedWhere">Pub Saint-Laurent · 4080 boul. St-Laurent</div></div></div>
         <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab" data-i18n="joined_who">Who</div><div class="it-val" id="joinedWho">You + 4 others</div></div></div>
         <div class="btn-row" style="margin-top:8px">
           <button class="btn btn-soft" id="joinedCal" data-i18n="joined_cal">🗓️ Add to Calendar</button>
@@ -915,7 +915,7 @@
 
       <section class="screen fade" id="s-chat">
         <div class="chat-top">
-          <button class="iconbtn" id="chatBack" aria-label="Back to chats" style="width:34px;height:34px">←</button>
+          <button class="iconbtn" id="chatBack" aria-label="Back to chats">←</button>
           <div class="ct-ic" id="chatIc" style="background:var(--grad-warm)">🌿</div>
           <div><div class="ct-name" id="chatName">Group</div><div class="ct-meta" id="chatMeta">5 people · first names only</div></div>
           <div class="chat-shield" id="chatShield" title="Safety options" aria-label="Safety options">🛡️</div>
@@ -943,7 +943,7 @@
           <div class="nav-title">Friends</div><div class="nav-spacer"></div>
           <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative">✉️<span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
-        <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends">Friends</div><div class="sopt" data-tab="dms">Messages</div><div class="sopt" data-tab="met">Met</div></div>
+        <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends">Friends</div><div class="sopt" data-tab="met">Met</div></div>
         <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" aria-label="Search"></div>
         <div id="friendsBody"></div>
       </section>
@@ -955,20 +955,13 @@
         <div id="reqBody"></div>
       </section>
 
-      <!-- PEOPLE MET -->
-      <section class="screen pad-nav fade" id="s-met">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">People you've met</div></div>
-        <div class="sec-title">From your events</div>
-        <div id="metBody"></div>
-      </section>
-
       <!-- FRIEND PROFILE -->
       <section class="screen pad-nav fade" id="s-friendprofile"></section>
 
       <!-- DM THREAD -->
       <section class="screen fade" id="s-dm">
         <div class="chat-top">
-          <button class="iconbtn" data-back aria-label="Back" style="width:34px;height:34px">←</button>
+          <button class="iconbtn" data-back aria-label="Back">←</button>
           <div class="ct-ic" id="dmAv" style="background:var(--grad-warm)">🙂</div>
           <div><div class="ct-name" id="dmName">Friend</div><div class="ct-meta" id="dmMeta">Friends · private</div></div>
           <div class="chat-shield" id="dmShield" aria-label="Safety options">🛡️</div>
@@ -983,7 +976,7 @@
 
       <!-- FEEDBACK -->
       <section class="screen pad-nav fade" id="s-feedback">
-        <div class="nav-row"><div class="nav-title">Reflection</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Reflection</div></div>
         <p class="sub" style="margin-bottom:16px">Your feedback shapes future groups.</p>
         <div class="step-dots" id="fbDots"><i class="on"></i><i></i><i></i></div>
         <div id="fbBody"></div>
@@ -991,7 +984,7 @@
 
       <!-- NOTIFICATIONS -->
       <section class="screen pad-nav fade" id="s-notifications">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:#b4c0ff">Clear all</span></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)">Clear all</span></div>
         <div class="seg" id="notifSeg"><div class="sopt on" data-tab="activity">Activity</div><div class="sopt" data-tab="ann">Announcements</div></div>
         <div id="notifBody"></div>
       </section>
@@ -1002,11 +995,10 @@
       <!-- HELP -->
       <section class="screen pad-nav fade" id="s-help">
         <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Help &amp; FAQ</div></div>
-        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input placeholder="Search help" aria-label="Search help"></div>
+        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="helpSearch" placeholder="Search help" aria-label="Search help"></div>
         <div id="helpBody"></div>
         <div style="text-align:center;margin-top:20px">
           <button class="btn btn-soft" id="helpContact">Still need help? Contact us</button>
-          <p class="tiny" style="margin-top:12px">We usually respond within 24 hours</p>
         </div>
       </section>
 
@@ -1040,7 +1032,7 @@
       <section class="screen pad-nav fade" id="s-profile">
         <div class="hdr-wash wash-default" id="washProfile"></div>
         <div class="nav-row"><div class="nav-title">Profile</div><div class="nav-spacer"></div>
-          <button class="iconbtn" id="profBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot"></span></button>
+          <button class="iconbtn" id="profBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="profBellDot"></span></button>
           <button class="iconbtn" id="profGear" aria-label="Settings">⚙︎</button>
         </div>
         <div id="profileBody"></div>
@@ -1100,7 +1092,7 @@
       traits:["Creative","Tasteful","Intentional"], compat:["storyteller","navigator"], pct:"6%",
       bring:["You always know the good spot","You set a tone people remember","You bring fresh ideas to the table"],
       loves:["Paint & sip","Vintage market","Cooking class"], desc:["Creative","Tasteful","Inspiring"]},
-    grounding:{e:"🌲",n:"The Grounding",g:"g-grounding",tag:"Reliable, steady — always shows up",
+    grounding:{e:"🌲",n:"The Evergreen",g:"g-grounding",tag:"Reliable, steady — always shows up",
       traits:["Reliable","Warm","Grounded"], compat:["anchor","easygoer"], pct:"9%",
       bring:["You're the one who actually shows up","You make plans feel dependable","People feel safe around you"],
       loves:["Sunrise hike","Plant swap","Cooking class"], desc:["Reliable","Warm","Solid"]},
@@ -1165,26 +1157,26 @@
   /* ============ ACTIVITIES ============ */
   const CATS=["For you","Food & Drink","Outdoors","Arts & Culture","Games","Chill","Active","Evening Out"];
   const ACTIVITIES=[
-    {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"The Crown Pub · Midtown",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
-    {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Meeple & Co · East Side",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
-    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Saffron Kitchen · Downtown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
-    {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Old Town meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Riverside route if wet",social:"6 joined this week"},
-    {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Eastgate Market",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
-    {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
-    {id:"bookclub",icon:"📚",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Pages Café · West Side",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
-    {id:"cinema",icon:"🎬",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop at Hale St",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, low pressure",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
-    {id:"pottery",icon:"🏺",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Clay Studio · Downtown",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
-    {id:"escape",icon:"🔐",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Midtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
-    {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Beacon Hill trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
-    {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"Blue Note · Downtown",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
-    {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
-    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Canvas & Cork · East Side",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week"},
-    {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Midtown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
-    {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Skyline Terrace",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
-    {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Blue · West Side",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
-    {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Midtown",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
-    {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Sunday Market · East Side",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
-    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Midtown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular"}
+    {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
+    {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
+    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
+    {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week"},
+    {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
+    {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
+    {id:"bookclub",icon:"📚",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Café Pages · Verdun",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
+    {id:"cinema",icon:"🎬",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop on Saint-Laurent",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, easy evening",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
+    {id:"pottery",icon:"🏺",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Argile · Rosemont",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
+    {id:"escape",icon:"🔐",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Downtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
+    {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
+    {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
+    {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
+    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week"},
+    {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
+    {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
+    {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
+    {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
+    {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
+    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular"}
   ];
 
   const ARCH_DOTCOLORS={spark:"#FF7A5C",connector:"#FF6F91",explorer:"#8E6BFF",easygoer:"#6FE0C6",anchor:"#8EA2FF",observer:"#A98FE0",curator:"#F2B33D",grounding:"#A6794E",wildcard:"#FF4D9D",storyteller:"#FF8FA3",navigator:"#2A9D8F",wavelength:"#B9A6F0"};
@@ -1194,7 +1186,8 @@
     return [
       {id:"a",emoji:"🌗",g:"g-wavelength",name:"The Easy Mix",when:"Today · 7:00 PM",status:"today",vibetags:["Laid-back","Chatty","Mixed ages"],mix:["wavelength","easygoer","connector","spark"],personality:"A mix of explorers and steady types — expect good conversation",filled:4,size:6,compat:"2 people with your vibe are in this group",rec:true,members:[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]]},
       {id:"b",emoji:"🕯️",g:"g-anchor",name:"Quiet Company",when:"Friday · 6:30 PM",status:"week",vibetags:["Low-key","Calm","Small"],mix:["anchor","observer","grounding"],personality:"Steady, easy company — no pressure to perform",filled:3,size:5,compat:"1 person with your vibe is in this group",members:[["Nina","😊","anchor"],["Ray","🙂","grounding"]]},
-      {id:"c",emoji:"🔥",g:"g-spark",name:"The Lively Bunch",when:"Friday · 9:00 PM",status:"week",vibetags:["High-energy","Social","Fun"],mix:["spark","wildcard","explorer","storyteller","connector"],personality:"Chatty and upbeat — a fun, sociable crowd",filled:5,size:6,compat:"1 person with your vibe is in this group",members:[["Jules","🤩","spark"],["Ben","😁","wildcard"],["Ria","😄","explorer"],["Max","😎","storyteller"]],fillingUp:true}
+      {id:"c",emoji:"🔥",g:"g-spark",name:"The Lively Bunch",when:"Friday · 9:00 PM",status:"week",vibetags:["High-energy","Social","Fun"],mix:["spark","wildcard","explorer","storyteller","connector"],personality:"Chatty and upbeat — a fun, sociable crowd",filled:5,size:6,compat:"1 person with your vibe is in this group",members:[["Jules","🤩","spark"],["Ben","😁","wildcard"],["Ria","😄","explorer"],["Max","😎","storyteller"]],fillingUp:true},
+      {id:"d",emoji:"🎯",g:"g-curator",name:"The Regulars",when:"Saturday · 7:00 PM",status:"week",vibetags:["Friendly","Weekly crew"],mix:["curator","storyteller","connector","anchor","easygoer"],personality:"A weekly crew that clicked — this one's at capacity",filled:5,size:5,members:[["Ana","😊","curator"],["Marc","🙂","storyteller"],["Lia","😄","connector"],["Omar","😌","anchor"],["Pat","🙂","easygoer"]]}
     ];
   }
 
@@ -1229,7 +1222,7 @@
       land_sub:"Small groups around real activities — the low-pressure way to make friends as an adult.",
       land_how:"How it works",land_steps:"Three steps, that's it",
       land_step1:"Take a quick quiz — find your social type",land_step2:"Pick something to do — we match you with a group",land_step3:"Show up and meet people in real life",
-      land_join:"Join in",land_count:"people<br>already going out",land_find:"Find your people. Show up.",
+      land_join:"Join in",land_count:"Montrealers<br>already going out",land_find:"Find your people. Show up.",
       pill_ai:"🤖 AI-moderated",pill_names:"👤 First names only",pill_photos:"🔒 Friends-only photos",
       btn_find_type:"Find your type",land_signin:"Already have an account? Sign in",
       ti_title:"Find your<br><span class=\"grad-text\">social type</span>",ti_sub:"7 quick questions. We use it to match you with groups that fit.",
@@ -1269,7 +1262,7 @@
       pp_perk1_t:"Priority matching",pp_perk1_s:"Groups form around you first.",pp_perk2_t:"More groups per week",pp_perk2_s:"Join up to 5 hangs a week.",
       pp_perk3_t:"Compatibility insights",pp_perk3_s:"See why a group fits you.",pp_perk4_t:"Host perks",pp_perk4_s:"Pick the spot, set the size, go bigger.",
       pp_perk5_t:"Travel mode",pp_perk5_s:"Find your people in other cities.",pp_perk6_t:"Seasonal re-match",pp_perk6_s:"Retake the quiz anytime, fresh matches every season.",
-      pp_price:"$4.99/month",pp_soon:"Coming soon",pp_maybe:"Maybe later",toast_pp:"Perch+ is coming soon 💛",
+      pp_price:"$4.99/month",pp_price_yr:"$39/year · two months free",pp_mo:"Monthly · $4.99",pp_yr:"Annual · $39",pp_cta:"Try Perch+ free",pp_active:"You're on Perch+",pp_member:"You're a member — thanks for the early support.",pp_why:"See why · Perch+",toast_plus:"Welcome to Perch+ 🪶",pp_maybe:"Maybe later",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     },
     fr:{
@@ -1277,7 +1270,7 @@
       land_sub:"Des petits groupes autour de vraies activités — une façon simple de se faire des amis à l'âge adulte.",
       land_how:"Comment ça marche",land_steps:"Trois étapes, c'est tout",
       land_step1:"Fais un court quiz — trouve ton type social",land_step2:"Choisis une activité — on te jumelle à un groupe",land_step3:"Présente-toi et rencontre du monde en vrai",
-      land_join:"Embarque",land_count:"personnes<br>qui sortent déjà",land_find:"Trouve ton monde. Présente-toi.",
+      land_join:"Embarque",land_count:"Montréalais·es<br>qui sortent déjà",land_find:"Trouve ton monde. Présente-toi.",
       pill_ai:"🤖 Modéré par IA",pill_names:"👤 Prénoms seulement",pill_photos:"🔒 Photos entre amis",
       btn_find_type:"Trouve ton type",land_signin:"Tu as déjà un compte? Connecte-toi",
       ti_title:"Trouve ton<br><span class=\"grad-text\">type social</span>",ti_sub:"7 courtes questions. Ça nous aide à te jumeler à des groupes qui te conviennent.",
@@ -1317,7 +1310,7 @@
       pp_perk1_t:"Jumelage prioritaire",pp_perk1_s:"Les groupes se forment autour de toi en premier.",pp_perk2_t:"Plus de groupes par semaine",pp_perk2_s:"Participe jusqu'à 5 sorties par semaine.",
       pp_perk3_t:"Aperçus de compatibilité",pp_perk3_s:"Vois pourquoi un groupe te convient.",pp_perk4_t:"Avantages d'hôte",pp_perk4_s:"Choisis l'endroit, la taille, vois plus grand.",
       pp_perk5_t:"Mode voyage",pp_perk5_s:"Trouve ton monde dans d'autres villes.",pp_perk6_t:"Rejumelage saisonnier",pp_perk6_s:"Refais le quiz quand tu veux, de nouveaux matchs à chaque saison.",
-      pp_price:"4,99 $/mois",pp_soon:"Bientôt disponible",pp_maybe:"Plus tard",toast_pp:"Perch+ s'en vient 💛",
+      pp_price:"4,99 $/mois",pp_price_yr:"39 $/année · deux mois gratuits",pp_mo:"Mensuel · 4,99 $",pp_yr:"Annuel · 39 $",pp_cta:"Essayer Perch+ gratuitement",pp_active:"T'es sur Perch+",pp_member:"T'es membre — merci du soutien!",pp_why:"Voir pourquoi · Perch+",toast_plus:"Bienvenue sur Perch+ 🪶",pp_maybe:"Plus tard",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     }
   };
@@ -1358,22 +1351,23 @@
     profileKey:null,
     picked:new Set(), dismissedPicks:new Set(), activeCat:"For you",
     chosenActivity:null, chosenGroup:null,
-    joinedGroups:[], leftGroup:null, hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false,
-    chatThreads:{}, chatIntro:{}, chatViewGroup:null, chatFromList:false, guideDismissed:false,
-    rating:{activity:0,venue:0,vibe:0}, fbStep:0, fbReturn:false,
+    joinedGroups:[], hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false,
+    chatThreads:{}, chatViewGroup:null, chatRead:false, guideDismissed:false,
+    plus:false, ppBill:"mo",
+    rating:{activity:0,venue:0,vibe:0}, fbStep:0,
     blocked:new Set(), friends:[], dms:{}, currentDM:null, currentFriendView:null,
     requests:{recv:[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}],sent:[]},
     photo:null, name:"You", emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     notifsCleared:false,
-    settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,
+    settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       notif:{reminders:true,messages:true,friendReq:true,matches:true,updates:false}}
   };
   const MET_SEED=[
-    {name:"Maya",emoji:"😄",key:"connector",met:"Trivia Night · The Crown Pub"},
-    {name:"Theo",emoji:"🙂",key:"easygoer",met:"Trivia Night · The Crown Pub"},
-    {name:"Iris",emoji:"😊",key:"observer",met:"Coffee Meetup · Pages Café"},
-    {name:"Cole",emoji:"🙂",key:"navigator",met:"Walking Tour · Old Town"},
-    {name:"Dee",emoji:"😄",key:"storyteller",met:"Food Market · Eastgate"}
+    {name:"Maya",emoji:"😄",key:"connector",met:"Trivia Night · Pub Saint-Laurent"},
+    {name:"Theo",emoji:"🙂",key:"easygoer",met:"Trivia Night · Pub Saint-Laurent"},
+    {name:"Iris",emoji:"😊",key:"observer",met:"Coffee Meetup · Café Pages"},
+    {name:"Cole",emoji:"🙂",key:"navigator",met:"Walking Tour · Vieux-Port"},
+    {name:"Dee",emoji:"😄",key:"storyteller",met:"Food Market · Marché Jean-Talon"}
   ];
   let metPool=MET_SEED.map(p=>({...p}));
 
@@ -1396,11 +1390,11 @@
   }
 
   /* ============ NAVIGATION ============ */
-  const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","met","requests","friendprofile","notifications","settings","help","invite","archetype"];
-  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chat",chat:"chat",friends:"friends",dm:"chat",met:"friends",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
-  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chats:11,chat:11,friends:12,dm:12,met:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12,archetype:3};
+  const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","requests","friendprofile","notifications","settings","help","invite","archetype"];
+  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chat",chat:"chat",friends:"friends",dm:"chat",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
+  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
-  let history=[], chatStarted=false, chatTimers=[], reachedExplore=false, navPopping=false;
+  let history=[], chatTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
 
   function goTo(id,opts={}){
@@ -1411,7 +1405,6 @@
     // U2: mirror non-silent forward navigation into the browser history stack
     if(!opts.silent && !navPopping){ try{ window.history.pushState({screen:id},""); }catch(e){} }
     $$(".screen").forEach(s=>{s.classList.remove("active","back");});
-    const tabSwitch=NAV_SCREENS.includes(id)&&cur&&NAV_SCREENS.includes(cur.id.replace("s-",""))&&NAV_MAP[id]!==NAV_MAP[cur.id.replace("s-","")];
     if(opts.back){ next.classList.add("back"); requestAnimationFrame(()=>{next.classList.remove("back");next.classList.add("active");}); }
     else { next.classList.add("active"); }
     next.scrollTop=0;
@@ -1420,7 +1413,8 @@
     // U1: onboarding firewall — drop the onboarding trail the first time the app proper is reached
     if(id==="explore" && !reachedExplore){ reachedExplore=true; history=[]; }
     const nav=$("#bottomnav");
-    if(NAV_SCREENS.includes(id)){ nav.classList.add("show"); const k=NAV_MAP[id]; $$(".nav-item").forEach(n=>n.classList.toggle("on",n.getAttribute("data-go")===k)); }
+    // nav only appears once onboarding is complete — keeps legal gates un-skippable
+    if(NAV_SCREENS.includes(id)&&reachedExplore){ nav.classList.add("show"); const k=NAV_MAP[id]; $$(".nav-item").forEach(n=>n.classList.toggle("on",n.getAttribute("data-go")===k)); }
     else nav.classList.remove("show");
     const fi=FLOW_INDEX[id];
     $$("#flowmap li").forEach((li,i)=>{li.classList.toggle("on",i===fi);li.classList.toggle("done",i<fi);});
@@ -1440,7 +1434,6 @@
     if(id==="chat")           enterChat();
     if(id==="friends")        renderFriends();
     if(id==="dm")             renderDM();
-    if(id==="met")            renderMet();
     if(id==="requests")       renderRequests();
     if(id==="friendprofile")  renderFriendProfile();
     if(id==="feedback")       renderFeedback();
@@ -1452,21 +1445,23 @@
     syncBadges();
   }
   function goBack(){
-    // U1: skip any onboarding screens left in the stack
+    // U1: once onboarding is done, skip any onboarding screens left in the stack;
+    // during onboarding, back returns to them normally (e.g. archetype → result)
     let prev=null;
-    while(history.length){ const p=history.pop(); if(!ONBOARDING.includes(p)){ prev=p; break; } }
+    while(history.length){ const p=history.pop(); if(reachedExplore&&ONBOARDING.includes(p)) continue; prev=p; break; }
     if(prev){ goTo(prev,{back:true,silent:true}); return true; }
-    // empty or onboarding-only → fall back to the current tab's root, default Explore
+    if(!reachedExplore){ goTo("landing",{back:true,silent:true}); return false; }
+    // empty stack → fall back to the current tab's root, default Explore
     const cur=$(".screen.active"); const curId=cur?cur.id.replace("s-",""):null;
     const root=(curId&&NAV_MAP[curId])||"explore";
     goTo(root,{back:true,silent:true});
     return false;
   }
   function resetDemo(){
-    chatStarted=false; clearChatTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
+    clearChatTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
     Object.assign(state,{age:24,signedIn:false,agreed:false,currentQ:0,profileKey:null,
-      chosenActivity:null,chosenGroup:null,joinedGroups:[],leftGroup:null,hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,fbStep:0,fbReturn:false,
-      chatThreads:{},chatIntro:{},chatViewGroup:null,chatFromList:false,guideDismissed:false,
+      chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,fbStep:0,
+      chatThreads:{},chatViewGroup:null,chatRead:false,guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",
       photo:null,name:"You",emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
@@ -1479,11 +1474,13 @@
     closeSheet();
   }
   function syncBadges(){
-    const cb=$("#navChatBadge"); const showChat=state.joinedGroups.length>0;
+    const cb=$("#navChatBadge"); const showChat=state.joinedGroups.length>0&&!state.chatRead;
     if(cb) cb.style.display=showChat?"flex":"none";
     const fb=$("#navFriendsBadge"); const rc=state.requests.recv.length;
     if(fb){ fb.style.display=rc>0?"flex":"none"; fb.textContent=rc; }
     const rbd=$("#reqBadge"); if(rbd) rbd.style.display=rc>0?"block":"none";
+    const bell=state.notifsCleared?"none":"block";
+    ["exBellDot","profBellDot"].forEach(i=>{ const e=document.getElementById(i); if(e) e.style.display=bell; });
   }
 
   document.addEventListener("click",e=>{
@@ -1494,8 +1491,8 @@
       const isNav=t.classList.contains("nav-item");
       // U4: decide which chat view to show before navigating
       if(id==="chat"){
-        if(isNav){ state.chatViewGroup=null; state.chatFromList=false; }
-        else if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; state.chatFromList=false; }
+        if(isNav){ state.chatViewGroup=null; }
+        else if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; }
       }
       // U1: bottom-nav tab switches (and any cross-tab jump) must not push history
       const cur=$(".screen.active"); const curId=cur?cur.id.replace("s-",""):null;
@@ -1508,8 +1505,13 @@
   let landIdx=0, landTimer, landPrevTimer;
   function renderLanding(){
     landIdx=0; updateLand();
-    clearTimeout(landTimer); landTimer=setTimeout(()=>{ if($("#s-landing").classList.contains("active")&&landIdx===0){ landIdx=1; updateLand(); } },3000);
+    armLandAuto();
     cycleLandPreview();
+  }
+  // auto-advance through all three panels so the CTA is always reached (incl. desktop)
+  function armLandAuto(){
+    clearTimeout(landTimer);
+    landTimer=setTimeout(()=>{ if($("#s-landing").classList.contains("active")&&landIdx<2){ landIdx++; updateLand(); armLandAuto(); } },3400);
   }
   function updateLand(){
     const track=$("#landTrack"); if(track) track.style.transform=`translateX(-${landIdx*100}%)`;
@@ -1521,13 +1523,17 @@
       el.className="preview-card "+a.g; el.innerHTML=`<div class="pc-emoji">${a.e}</div><div class="pc-name">${archName(k)}</div><div class="pc-line">${archTag(k)}</div>`; landPrevI++; };
     paint(); clearInterval(landPrevTimer); landPrevTimer=setInterval(()=>{ if($("#s-landing").classList.contains("active")){ const el=$("#landPreview"); if(el){el.style.opacity="0"; setTimeout(()=>{paint();el.style.opacity="1";},250);} } },2600);
   }
-  // swipe landing
-  (function(){ let x0=null; const t=$("#s-landing");
+  // swipe landing — touch and mouse
+  (function(){ let x0=null, mx0=null; const t=$("#s-landing");
+    const step=dx=>{ if(dx<-40&&landIdx<2){landIdx++;updateLand();armLandAuto();} else if(dx>40&&landIdx>0){landIdx--;updateLand();armLandAuto();} };
     t.addEventListener("touchstart",e=>x0=e.touches[0].clientX,{passive:true});
-    t.addEventListener("touchend",e=>{ if(x0===null) return; const dx=e.changedTouches[0].clientX-x0;
-      if(dx<-40&&landIdx<2){landIdx++;updateLand();} else if(dx>40&&landIdx>0){landIdx--;updateLand();} x0=null; });
+    t.addEventListener("touchend",e=>{ if(x0===null) return; step(e.changedTouches[0].clientX-x0); x0=null; });
+    t.addEventListener("mousedown",e=>mx0=e.clientX);
+    t.addEventListener("mouseup",e=>{ if(mx0===null) return; step(e.clientX-mx0); mx0=null; });
   })();
-  $("#landSignin").addEventListener("click",()=>goTo("agegate"));
+  // clickable progress dots (index within each panel's dot row = target panel)
+  $$("#s-landing .land-dots").forEach(row=>{ $$(".land-dot",row).forEach((d,i)=>d.addEventListener("click",()=>{ landIdx=i; updateLand(); armLandAuto(); })); });
+  $("#landSignin").addEventListener("click",()=>goTo("signin"));
 
   /* ============ AGE GATE ============ */
   const ageVal=$("#ageVal");
@@ -1617,7 +1623,7 @@
       </div>
       <div class="reveal-actions">
         <button class="btn glass-btn" id="shareType" style="margin-bottom:10px">${t("res_share")}</button>
-        <button class="btn btn-white" data-go="agegate">${t("btn_continue")}</button>
+        <button class="btn btn-white" data-go="${reachedExplore?'explore':'agegate'}">${t("btn_continue")}</button>
       </div>`;
     requestAnimationFrame(()=>{ const bg=$("#revealBg"); if(bg) bg.classList.add("on"); });
     $("#seeAll").addEventListener("click",openAllTypes);
@@ -1649,11 +1655,11 @@
   /* ============ ARCHETYPE DETAIL ============ */
   function renderArchetype(k){
     k=k||state.profileKey||"easygoer"; const a=ARCH[k];
-    const c1=ARCH[a.compat[0]].n, c2=ARCH[a.compat[1]].n;
+    const c1=archName(a.compat[0]), c2=archName(a.compat[1]);
     const isMine=k===state.profileKey;
     $("#s-archetype").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?"Your type":a.n}</div></div>
-      <div class="arch-hero ${a.g}"><div class="ah-em">${a.e}</div><div class="ah-n">${a.n}</div><div class="ah-l">${a.tag}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?"Your type":archName(k)}</div></div>
+      <div class="arch-hero ${a.g}"><div class="ah-em">${a.e}</div><div class="ah-n">${archName(k)}</div><div class="ah-l">${archTag(k)}</div></div>
       <div class="info-block"><div class="sec-title">What you bring to a group</div>${a.bring.map(b=>`<div class="ib-row"><span class="star">✦</span><span>${b}</span></div>`).join("")}</div>
       <div class="info-block"><div class="sec-title">Activities you tend to love</div><div class="chips">${a.loves.map(l=>`<span class="trait">${l}</span>`).join("")}</div></div>
       <div class="info-block"><div class="sec-title">People often describe you as…</div><div class="chips">${a.desc.map(d=>`<span class="trait">${d}</span>`).join("")}</div></div>
@@ -1674,7 +1680,7 @@
         <div class="act-venue">📍 ${a.venue}</div>
         <div class="act-vibe">${a.vibe}</div>
         <div class="act-planb">Plan B if needed · ${a.planb}</div>
-        <div class="act-foot"><span class="act-social">${a.social}</span><span class="btn-link" style="width:auto;font-size:13px">View groups →</span></div>
+        <div class="act-foot"><span class="act-social">${a.social}</span><span class="btn-link link-sm">View groups →</span></div>
       </div></div>`;
   }
   function skeletonCards(n){
@@ -1746,7 +1752,7 @@
       <div class="gc-vibetags">${g.vibetags.map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
       <div class="gc-personality">${g.personality}</div>
-      <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} ${t("gc_spots")}</span><span class="btn-link" style="width:auto;font-size:13px">${joined?t("gc_open"):t("gc_see")}</span></div>
+      <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} ${t("gc_spots")}</span><span class="btn-link link-sm">${joined?t("gc_open"):t("gc_see")}</span></div>
       ${g.compat?`<div class="gc-compat">✦ ${g.compat}</div>`:""}</div>`;
   }
   function renderGroups(){
@@ -1785,9 +1791,9 @@
       body.innerHTML=`<div class="day-div">${t("grp_past")}</div>
         <div class="group-card muted-card" data-past="trivia">
           <div class="gc-statusrow"><span class="gc-vibetag">Completed · last week</span></div>
-          <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">Trivia Night</div><div class="gc-when">The Crown Pub · Midtown</div></div></div>
+          <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">Trivia Night</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
           <div class="gc-personality">You met Maya, Theo and 2 others.</div>
-          <div class="gc-foot"><span class="gc-spots">5 went</span><span class="btn-link" style="width:auto;font-size:13px">Leave a reflection →</span></div>
+          <div class="gc-foot"><span class="gc-spots">5 went</span><span class="btn-link link-sm">Leave a reflection →</span></div>
         </div>
         <div class="empty-state" style="margin-top:12px"><div class="es-em">🫧</div><div class="es-t">That's your history so far</div><div class="es-s">Groups you attend will show up here.</div></div>`;
       const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
@@ -1822,7 +1828,7 @@
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${g.personality}.</p>
-        ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${g.compat}</div>`:""}
+        ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${g.compat}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
       <div class="map-stub"><span>🗺️ ${a.venue.split(" · ")[1]||"Map"}</span></div>
       ${joined?`
@@ -1848,11 +1854,14 @@
         state.chosenGroup=ag; renderGroupDetail();
       }));
     }
+    const gp=$("#gdPlus");
+    if(gp) gp.addEventListener("click",openPerchPlus);
     const j=$("#gdJoin");
     if(j) j.addEventListener("click",()=>{
-      if(!state.joinedGroups.some(x=>x.group.id===g.id)) state.joinedGroups.push({group:g,activity:a});
+      if(!state.joinedGroups.some(x=>x.group.id===g.id)){ state.joinedGroups.push({group:g,activity:a}); g.filled=Math.min(g.size,g.filled+1); }
       // fresh intro for this group next time its chat opens
-      delete state.chatThreads[g.id]; delete state.chatIntro[g.id];
+      delete state.chatThreads[g.id];
+      state.chatRead=false;
       goTo("joined");
     });
     const lv=$("#gdLeave");
@@ -1860,7 +1869,7 @@
     const mt=$("#gdMute");
     if(mt) mt.addEventListener("click",()=>openMuteOptions(g));
     const ff=$("#gdFastForward");
-    if(ff) ff.addEventListener("click",()=>{ state.dayOf=g.id; state.checkedIn=false; renderGroupDetail(); });
+    if(ff) ff.addEventListener("click",()=>{ state.dayOf=g.id; state.checkedIn=false; goTo("moodcheck"); });
     const ci=$("#gdCheckin");
     if(ci) ci.addEventListener("click",()=>{
       state.checkedIn=true;
@@ -1881,20 +1890,22 @@
     const cats=CATS.filter(c=>c!=="For you");
     const whens=["Tonight","This weekend","Flexible"];
     const areas=["Plateau","Mile End","Vieux-Port","Griffintown","Anywhere"];
-    const sizes=["4","5","6"];
+    const sizes=state.plus?["4","5","6","8"]:["4","5","6"];
     const sel={cat:cats[0],when:whens[0],area:areas[0],size:"5"};
     const chipRow=(items,grp,cur)=>`<div class="chips" data-grp="${grp}">${items.map(i=>`<span class="chip ${i===cur?'sel':''}" data-val="${i}">${i}</span>`).join("")}</div>`;
     $("#s-host").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Host a hang</div></div>
-      <p class="sub" style="margin-bottom:18px">Pick a vibe and a rough plan — we'll gather the right people. No pressure, no head-counting; you just show up first.</p>
+      <p class="sub" style="margin-bottom:18px">Pick a vibe and a rough plan — we'll gather the right people. You just show up first.</p>
       <div class="sec-title">What kind of hang?</div>${chipRow(cats,"cat",sel.cat)}
       <div class="sec-title" style="margin-top:16px">When?</div>${chipRow(whens,"when",sel.when)}
       <div class="sec-title" style="margin-top:16px">Around where?</div>${chipRow(areas,"area",sel.area)}
       <div class="sec-title" style="margin-top:16px">Group size</div>${chipRow(sizes,"size",sel.size)}
+      ${state.plus?"":`<p class="tiny" style="margin-top:10px">Want a bigger hang (7–10)? <span class="link-inline" id="hostPlusLink">Perch+</span></p>`}
       <button class="btn btn-primary" id="hostGo" style="margin-top:24px">Start forming my group</button>`;
     $$("#s-host [data-grp]").forEach(row=>{ const grp=row.getAttribute("data-grp");
       $$(".chip",row).forEach(c=>c.addEventListener("click",()=>{ $$(".chip",row).forEach(x=>x.classList.remove("sel")); c.classList.add("sel"); sel[grp]=c.getAttribute("data-val"); }));
     });
+    const hp=$("#hostPlusLink"); if(hp) hp.addEventListener("click",openPerchPlus);
     $("#hostGo").addEventListener("click",()=>{
       const actMatch=ACTIVITIES.find(a=>a.cat===sel.cat)||ACTIVITIES[0];
       state.hostedGroups.push({ id:"host"+(state.hostedGroups.length+1), emoji:actMatch.icon, g:actMatch.g,
@@ -1914,7 +1925,7 @@
     $("#joinedSub").textContent=state.lang==="fr"?"On se voit là-bas 🌿":("See you "+(g?g.when.split(" · ")[0].toLowerCase():"there")+".");
     $("#joinedWhen").textContent=g?g.when:a.when;
     $("#joinedWhere").textContent=a.venue;
-    $("#joinedWho").textContent=`${t("you_plus")} ${g?g.filled:4} ${t("others")}`;
+    $("#joinedWho").textContent=`${t("you_plus")} ${g?Math.max(1,g.filled-1):4} ${t("others")}`;
     const soft=$("#joinedSoftAsk");
     if(soft){
       if(!state.firstJoinAsked){
@@ -1982,6 +1993,7 @@
   }
   // Combined inbox: group chats + DM threads in one list
   function enterChats(){
+    state.chatRead=true; syncBadges();
     const groups=chatList(), dms=dmList(), body=$("#chatsBody");
     if(!groups.length && !dms.length){
       body.innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
@@ -1998,17 +2010,17 @@
       html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div><span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
     dms.forEach(d=>{
-      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span style="width:9px;height:9px;border-radius:50%;background:var(--mint);flex-shrink:0" title="online"></span></div>`;
+      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="online"></span></div>`;
     });
     body.innerHTML=html;
     $$("#chatsBody [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
       const it=chatList().find(i=>i.id===el.getAttribute("data-chatgroup")); if(!it) return;
-      state.chatViewGroup=it.id; state.chatFromList=true; goTo("chat");
+      state.chatViewGroup=it.id; goTo("chat");
     }));
     $$("#chatsBody [data-chatdm]").forEach(el=>el.addEventListener("click",()=>{ state.currentDM=el.getAttribute("data-chatdm"); goTo("dm"); }));
   }
   function openGroupChat(item){
-    state.chatViewGroup=item.id;
+    state.chatViewGroup=item.id; state.chatRead=true; syncBadges();
     state.chosenGroup=item.group; if(item.activity) state.chosenActivity=item.activity;
     const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
@@ -2018,7 +2030,7 @@
       $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${g.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
       return; }
     showChatChrome(true);
-    $("#chatMeta").textContent=`${(g&&g.size)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
+    $("#chatMeta").textContent=`${(g&&g.filled)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
     $("#pinEm").textContent=a.icon; $("#pinT").textContent=a.name;
     $("#pinS").textContent=(g&&g.when)||a.when;
     $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${a.venue}<br>🗓️ ${(g&&g.when)||a.when}<br>🌦️ Plan B · ${a.planb}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
@@ -2035,7 +2047,6 @@
   function runChatIntro(item){
     const gid=item.id, g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     const mem=(g&&g.members)||[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]];
-    state.chatIntro[gid]=true;
     pushMsg({sys:true,text:`This is a private chat for the people going to ${a.name}. Be kind — a real meetup is on the other side. 💛`},gid);
     const m0=mem[0], m1=mem[1]||mem[0];
     chatTimers.push(setTimeout(()=>{ showTyping(gid); },700));
@@ -2050,12 +2061,12 @@
   }
 
   // long-press reactions
-  let lpTimer=null, lpTarget=null;
+  let lpTimer=null;
   function wireReactTargets(){
     $$("#chatScroll .msg[data-react]").forEach(el=>{
       if(el._wired) return; el._wired=true;
       // long-press → react popup
-      const start=e=>{ lpTarget=el; lpTimer=setTimeout(()=>showReactPop(el),420); };
+      const start=()=>{ lpTimer=setTimeout(()=>showReactPop(el),420); };
       const cancel=()=>{ clearTimeout(lpTimer); };
       el.addEventListener("mousedown",start); el.addEventListener("touchstart",start,{passive:true});
       el.addEventListener("mouseup",cancel); el.addEventListener("mouseleave",cancel);
@@ -2073,9 +2084,9 @@
           inp.setAttribute("data-reply",preview);
           // show quote above input
           let rq=$("#replyQuote");
-          if(!rq){ rq=document.createElement("div"); rq.id="replyQuote"; rq.style.cssText="font-size:13px;color:#b4c0ff;border-left:3px solid var(--c2);padding:6px 10px;margin:6px 16px 0;border-radius:0 8px 8px 0;background:rgba(142,162,255,.08);display:flex;align-items:center;justify-content:space-between;"; 
+          if(!rq){ rq=document.createElement("div"); rq.id="replyQuote"; rq.style.cssText="font-size:13px;color:var(--accent-text);border-left:3px solid var(--c2);padding:6px 10px;margin:6px 16px 0;border-radius:0 8px 8px 0;background:rgba(142,162,255,.08);display:flex;align-items:center;justify-content:space-between;"; 
             const closeQ=document.createElement("span"); closeQ.textContent="✕"; closeQ.style.cssText="cursor:pointer;color:var(--faint);margin-left:8px;";
-            closeQ.addEventListener("click",()=>{ rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder="Say something…"; });
+            closeQ.addEventListener("click",()=>{ rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say"); });
             rq.appendChild(closeQ); $("#s-chat .chat-input").before(rq); }
           rq.firstChild.textContent="↩ "+who+": "+preview; inp.placeholder="Reply to "+who+"…"; inp.focus();
         }
@@ -2095,17 +2106,21 @@
       const row=el.parentElement.querySelector(".react-row");
       if(row){ row.innerHTML=`<span class="react">${s.getAttribute("data-r")} 1</span>`; }
       pop.style.display="none";
-    }),{once:true});
+    },{once:true}));
   }
   document.addEventListener("click",e=>{ const pop=$("#reactPop"); if(pop&&pop.style.display!=="none"&&!e.target.closest("#reactPop")&&!e.target.closest(".msg[data-react]")) pop.style.display="none"; });
 
   function wireChat(){
     const inp=$("#chatInput"), send=$("#chatSend");
     inp.addEventListener("input",()=>send.classList.toggle("off",!inp.value.trim()));
-    const doSend=()=>{ const v=inp.value.trim(); if(!v) return; pushMsg({who:"me",text:v,time:"now"}); inp.value=""; send.classList.add("off"); };
+    const doSend=()=>{ const v=inp.value.trim(); if(!v) return;
+      const quote=inp.getAttribute("data-reply");
+      pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${quote}</span>`:"")+v,time:"now"});
+      const rq=$("#replyQuote"); if(rq) rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say");
+      inp.value=""; send.classList.add("off"); };
     send.addEventListener("click",doSend);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") doSend(); });
-    $("#chatPlus").addEventListener("click",()=>showToast("Photo sharing opens here"));
+    $("#chatPlus").addEventListener("click",()=>showToast("Photos unlock after the group has met 📷"));
     // pinned collapse
     $("#pinnedBar").addEventListener("click",()=>$("#pinned").classList.toggle("open"));
     // guidelines
@@ -2113,7 +2128,7 @@
     // shield → safety
     $("#chatShield").addEventListener("click",openChatSafety);
     // back chevron → return to the combined inbox
-    $("#chatBack").addEventListener("click",()=>{ state.chatFromList=false; goBack(); });
+    $("#chatBack").addEventListener("click",goBack);
   }
 
   /* ============ FRIENDS ============ */
@@ -2132,7 +2147,7 @@
     $$("#friendsSeg .sopt").forEach(s=>s.classList.toggle("on",s.getAttribute("data-tab")===tab));
     const inp=$("#friendSearch"); const q=(inp.value||"").toLowerCase().trim();
     // contextual placeholder + hide the slim search on short/empty lists
-    inp.setAttribute("placeholder",{friends:"Search friends",dms:"Search messages",met:"Search people you've met"}[tab]||"Search");
+    inp.setAttribute("placeholder",{friends:"Search friends",met:"Search people you've met"}[tab]||"Search");
     const fullCount=tab==="met"?metPool.length:state.friends.length;
     const bar=$("#friendSearchBar"); if(bar) bar.style.display=(fullCount>=5||q)?"flex":"none";
     const body=$("#friendsBody");
@@ -2147,17 +2162,6 @@
         body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">Your people are out there</div><div class="es-s">47 people in your area went out last week. Add the ones you clicked with from the Met tab.</div><button class="btn btn-soft" id="goMet">See people you've met</button></div>`;
         const gm=$("#goMet"); if(gm) gm.addEventListener("click",()=>{ state.friendsTab="met"; renderFriends(); });
       } else body.innerHTML=list.map(p=>friendRowHTML(p,`Met at ${p.met||"a meetup"}`)).join("");
-    } else if(tab==="dms"){
-      const fr=state.friends.slice();
-      if(!fr.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">💬</div><div class="es-t">Nothing here yet</div><div class="es-s">You can message people once you're friends.</div><button class="btn btn-soft" id="goFriends">Go to Friends</button></div>`;
-        const gf=$("#goFriends"); if(gf) gf.addEventListener("click",()=>{state.friendsTab="friends";renderFriends();}); }
-      else {
-        let list=fr; if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
-        body.innerHTML=list.map(p=>{
-          const thread=state.dms[p.name]; const last=thread&&thread.length?thread[thread.length-1].text:"Say hi 👋";
-          return `<div class="friend-row" data-dm="${p.name}">${avatarHTML(p,"av-sm")}<div class="friend-meta"><div class="friend-name">${p.name}</div><div class="friend-last">${last}</div></div><span style="width:9px;height:9px;border-radius:50%;background:var(--mint)" title="online"></span></div>`;
-        }).join("");
-      }
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">No one new right now</div><div class="es-s">People from your groups will show up here after you meet.</div></div>`; }
@@ -2172,7 +2176,6 @@
       if(e.target.closest("button")) return;
       openFriendProfile(el.getAttribute("data-friend"));
     }));
-    $$("#friendsBody [data-dm]").forEach(el=>el.addEventListener("click",()=>{ state.currentDM=el.getAttribute("data-dm"); goTo("dm"); }));
     $$("#friendsBody [data-add]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); addFriend(el.getAttribute("data-add")); }));
     $$("#friendsBody [data-skip]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); metPool=metPool.filter(p=>p.name!==el.getAttribute("data-skip")); renderFriends(); }));
   }
@@ -2208,20 +2211,6 @@
     $$("#reqBody [data-cancel]").forEach(el=>el.addEventListener("click",()=>{
       const n=el.getAttribute("data-cancel"); state.requests.sent=state.requests.sent.filter(x=>x.name!==n); renderRequests();
     }));
-  }
-
-  /* ============ MET (standalone screen) ============ */
-  function renderMet(){
-    const body=$("#metBody");
-    if(!metPool.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">No one new right now</div><div class="es-s">People from your groups appear here after you meet.</div></div>`; return; }
-    body.innerHTML=metPool.map(p=>{
-      const isFriend=state.friends.some(f=>f.name===p.name);
-      const action=isFriend?'<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">Friends</span>':`<div class="req-actions"><button class="req-yes" data-add="${p.name}">＋ Add</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
-      return friendRowHTML(p,`Met at ${p.met}`,action);
-    }).join("");
-    $$("#metBody [data-add]").forEach(el=>el.addEventListener("click",e=>{e.stopPropagation();addFriend(el.getAttribute("data-add"));renderMet();}));
-    $$("#metBody [data-skip]").forEach(el=>el.addEventListener("click",e=>{e.stopPropagation();metPool=metPool.filter(p=>p.name!==el.getAttribute("data-skip"));renderMet();}));
-    $$("#metBody [data-friend]").forEach(el=>el.addEventListener("click",e=>{if(e.target.closest("button"))return;openFriendProfile(el.getAttribute("data-friend"));}));
   }
 
   /* ============ FRIEND PROFILE ============ */
@@ -2295,9 +2284,9 @@
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">Would you go back to the venue?</h2>
         <p class="sub" style="margin-bottom:6px">This helps us pick better spots.</p>
         <div class="yn-row">
-          <button class="btn btn-soft ${v==='yes'?'sel':''}" data-v="yes" style="${v==='yes'?'border-color:var(--mint);color:var(--mint)':''}">Yes</button>
-          <button class="btn btn-soft ${v==='maybe'?'sel':''}" data-v="maybe" style="${v==='maybe'?'border-color:var(--amber);color:var(--amber)':''}">Maybe</button>
-          <button class="btn btn-soft ${v==='no'?'sel':''}" data-v="no" style="${v==='no'?'border-color:#ffb3c2;color:#ffb3c2':''}">No</button>
+          <button class="yn ${v==='yes'?'on':''}" data-v="yes">Yes</button>
+          <button class="yn ${v==='maybe'?'on':''}" data-v="maybe">Maybe</button>
+          <button class="yn ${v==='no'?'on':''}" data-v="no">No</button>
         </div>
         <div class="field" style="margin-top:8px"><label>Anything you'd want us to know? (optional)</label><textarea rows="3" placeholder="The lighting, the noise, the staff…"></textarea></div>
         <button class="btn btn-primary" id="fbNext" style="margin-top:16px">Next</button>`;
@@ -2306,7 +2295,7 @@
     } else {
       const ppl=metPool.slice(0,3);
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">Add anyone as a friend?</h2>
-        <p class="sub" style="margin-bottom:14px">Totally optional — only if you'd like to stay in touch.</p>
+        <p class="sub" style="margin-bottom:14px">Only if you'd like to stay in touch.</p>
         ${ppl.map(p=>{ const added=state.friends.some(f=>f.name===p.name);
           return `<div class="friend-row" style="cursor:default">${avatarHTML(p,"av-sm")}<div class="friend-meta"><div class="friend-name">${p.name} ${archBadge(p.key)}</div></div><button class="req-yes" data-fbadd="${p.name}" ${added?'disabled style="opacity:.5"':''}>${added?'Added ✓':'＋ Add'}</button></div>`;
         }).join("")}
@@ -2326,7 +2315,7 @@
     $("#profileBody").innerHTML=`
       <div style="text-align:center;margin:4px 0 18px">
         <div style="position:relative;width:104px;margin:0 auto">${photo}
-          <button id="pfCam" aria-label="Edit photo" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
+          <button id="pfCam" aria-label="Edit photo" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--phone-bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
         <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:16px">${state.name}</div>
         <div style="margin-top:8px">${archBadge(state.profileKey||'easygoer')}</div>
         <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${state.bio}</p>
@@ -2340,22 +2329,22 @@
       </div>
       <div id="ppCard" style="border-radius:var(--r-lg);padding:15px 16px;margin-bottom:18px;cursor:pointer;display:flex;align-items:center;gap:13px;border:1.5px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad-warm) border-box">
         <div style="font-size:26px">🪶</div>
-        <div style="flex:1"><div style="font-size:15px;font-weight:700">Perch+</div><div class="tiny" style="margin-top:1px">${t("pp_card_sub")}</div></div>
+        <div style="flex:1"><div style="font-size:15px;font-weight:700">Perch+${state.plus?' <span class="pill-static pill-mint" style="font-size:10px;padding:2px 8px;vertical-align:2px">✓ Active</span>':''}</div><div class="tiny" style="margin-top:1px">${state.plus?t("pp_member"):t("pp_card_sub")}</div></div>
         <span style="color:var(--faint)">›</span>
       </div>
       <div class="sec-title">Your social type</div>
       <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${a.e}</div><div><div class="tm-n">${a.n}</div><div class="tm-d">${a.tag}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
       <div class="sec-title" style="margin-top:8px">Your activity</div>
       <div class="hist-rail">
-        <div class="hist-card"><div class="hc-n">🧠 Trivia Night</div><div class="hc-v">The Crown Pub · last week</div></div>
-        <div class="hist-card"><div class="hc-n">🚶 Walking Tour</div><div class="hc-v">Old Town · 2 weeks ago</div></div>
+        <div class="hist-card"><div class="hc-n">🧠 Trivia Night</div><div class="hc-v">Pub Saint-Laurent · last week</div></div>
+        <div class="hist-card"><div class="hc-n">🚶 Walking Tour</div><div class="hc-v">Vieux-Port · 2 weeks ago</div></div>
         <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">More to come</div>
       </div>
       <div class="set-list" style="margin-top:12px">
         <div class="set-item" data-go="invite"><span class="si-ic">💌</span>Invite a friend<span class="chev">›</span></div>
         <div class="set-item" data-go="settings"><span class="si-ic">⚙️</span>Settings<span class="chev">›</span></div>
         <div class="set-item" data-go="help"><span class="si-ic">❓</span>Help &amp; FAQ<span class="chev">›</span></div>
-        <div class="set-item" id="pfRestart"><span class="si-ic">↩️</span>Restart demo<span class="chev">›</span></div>
+        <div class="set-item" id="pfRestart"><span class="si-ic">↩️</span>Start over<span class="chev">›</span></div>
       </div>`;
     $("#pfType").addEventListener("click",()=>{ state.archetypeView=state.profileKey; goTo("archetype"); });
     $("#pfCam").addEventListener("click",()=>$("#photoInput").click());
@@ -2366,15 +2355,29 @@
 
   /* ============ PERCH+ (premium stub) ============ */
   function openPerchPlus(){
-    const perks=[["⚡","pp_perk1_t","pp_perk1_s"],["🫧","pp_perk2_t","pp_perk2_s"],["💫","pp_perk3_t","pp_perk3_s"],["🪺","pp_perk4_t","pp_perk4_s"],["✈️","pp_perk5_t","pp_perk5_s"],["🍂","pp_perk6_t","pp_perk6_s"]];
+    const bill=state.ppBill||"mo";
+    const rows=[
+      [t("pp_perk2_t"),"2 / wk","5 / wk"],
+      [t("pp_perk1_t"),"—","✓"],
+      [t("pp_perk3_t"),"—","✓"],
+      [t("pp_perk4_t"),"—","✓"],
+      [t("pp_perk5_t"),"—","✓"],
+      [t("pp_perk6_t"),"—","✓"]
+    ];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span style="font-size:26px">🪶</span><span class="sheet-title" style="margin-bottom:0">Perch+</span></div>
       <div class="sheet-sub">${t("pp_sub")}</div>
-      <div class="set-list">${perks.map(p=>`<div class="info-tile" style="margin-bottom:10px"><div class="it-ic">${p[0]}</div><div><div class="it-val">${t(p[1])}</div><div class="it-lab" style="margin-top:2px">${t(p[2])}</div></div></div>`).join("")}</div>
-      <div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin:6px 0 12px">${t("pp_price")}</div>
-      <button class="btn btn-primary" id="ppSoon" style="opacity:.7;cursor:default">${t("pp_soon")}</button>
+      ${state.plus?`<div class="pill-static pill-mint" style="margin-bottom:14px">✓ ${t("pp_active")}</div>`:`<div class="chips" style="margin-bottom:14px"><span class="chip ${bill==='mo'?'sel':''}" data-bill="mo">${t("pp_mo")}</span><span class="chip ${bill==='yr'?'sel':''}" data-bill="yr">${t("pp_yr")}</span></div>`}
+      <div class="info-block" style="padding:0;overflow:hidden;margin-bottom:14px">
+        <div class="pp-row pp-head"><span></span><span>Free</span><span>Perch+</span></div>
+        ${rows.map(r=>`<div class="pp-row"><span>${r[0]}</span><span style="color:var(--faint)">${r[1]}</span><span style="color:var(--mint);font-weight:700">${r[2]}</span></div>`).join("")}
+      </div>
+      ${state.plus?"":`<div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin:0 0 12px">${bill==='mo'?t("pp_price"):t("pp_price_yr")}</div>
+      <button class="btn btn-primary" id="ppGo">${t("pp_cta")}</button>`}
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("pp_maybe")}</button>`;
-    $("#ppSoon").addEventListener("click",()=>showToast(t("toast_pp")));
+    $$("#sheetBody [data-bill]").forEach(c=>c.addEventListener("click",()=>{ state.ppBill=c.getAttribute("data-bill"); openPerchPlus(); }));
+    const go=$("#ppGo");
+    if(go) go.addEventListener("click",()=>{ state.plus=true; closeSheet(); showToast(t("toast_plus")); const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-","")); });
     sheetClose(); openSheet();
   }
 
@@ -2397,8 +2400,8 @@
       </div>
       <div class="sec-title">Privacy</div>
       <div class="set-list">
-        <div class="set-item" data-sheet="whoMessage"><span class="si-ic">💬</span>Who can message me<span class="si-val">${s.whoMessage==='friends'?'Friends only':'Everyone'}</span></div>
-        <div class="set-item" data-sheet="whoAdd"><span class="si-ic">➕</span>Who can add me<span class="si-val">${s.whoAdd==='everyone'?'Everyone':'Friends of friends'}</span></div>
+        <div class="set-item" data-sheet="whoMessage"><span class="si-ic">💬</span>Who can message me<span class="si-val">${({everyone:"Everyone",friends:"Friends only",none:"No one"})[s.whoMessage]||"Friends only"}</span></div>
+        <div class="set-item" data-sheet="whoAdd"><span class="si-ic">➕</span>Who can add me<span class="si-val">${({everyone:"Everyone",fof:"Friends of friends",none:"No one"})[s.whoAdd]||"Everyone"}</span></div>
         <div class="set-item"><span class="si-ic">🖼️</span>Profile photo<span class="set-badge">Friends only · locked</span></div>
         <div class="set-item"><span class="si-ic">🟢</span>Show active status${swHTML("activeStatus",s.activeStatus)}</div>
       </div>
@@ -2430,7 +2433,7 @@
         <div class="set-item"><span class="si-ic">🔤</span>Text size<span class="si-val">Default</span></div>
         <div class="set-item"><span class="si-ic">𝐁</span>Bold text${swHTML("boldText",false)}</div>
         <div class="set-item"><span class="si-ic">◑</span>High contrast${swHTML("highContrast",false)}</div>
-        <div class="set-item"><span class="si-ic">✋</span>Reduce motion${swHTML("reduceMotion",false)}</div>
+        <div class="set-item"><span class="si-ic">✋</span>Reduce motion${swHTML("reduceMotion",s.reduceMotion)}</div>
         <div class="set-item"><span class="si-ic">⊕</span>Larger touch targets${swHTML("largerTargets",false)}</div>
       </div>
       <div class="set-list">
@@ -2439,7 +2442,9 @@
       <p class="tiny" style="text-align:center;margin-top:16px">Perch · v1.0 · Made with care</p>`;
     $$("#s-settings [data-sw]").forEach(el=>el.addEventListener("click",()=>{
       const k=el.getAttribute("data-sw");
-      if(k==="activeStatus") s.activeStatus=!s.activeStatus; else s.notif[k]=!s.notif[k];
+      if(k==="activeStatus") s.activeStatus=!s.activeStatus;
+      else if(k==="reduceMotion"){ s.reduceMotion=!s.reduceMotion; document.documentElement.toggleAttribute("data-reduce-motion",s.reduceMotion); }
+      else if(k in s.notif) s.notif[k]=!s.notif[k];
       el.classList.toggle("on"); el.setAttribute("aria-checked",el.classList.contains("on"));
     }));
     $$("#s-settings [data-sheet]").forEach(el=>el.addEventListener("click",()=>openPrivacySheet(el.getAttribute("data-sheet"))));
@@ -2481,14 +2486,14 @@
     const noti=(ic,bg,t,time,unread)=>`<div class="notif ${unread?'unread':''}"><div class="nf-ic" style="background:${bg}">${ic}</div><div><div class="nf-t">${t}</div><div class="nf-time">${time}</div></div></div>`;
     if(tab==="activity"){
       const rc=state.requests.recv.length;
+      const joined=state.joinedGroups[0];
       body.innerHTML=`<div class="day-div">Today</div>
         ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> sent you a friend request`,"2h ago",true):""}
-        ${noti("💬","rgba(255,119,160,.18)","New messages in <b>your group chat</b>","4h ago",true)}
+        ${joined?noti("💬","rgba(255,119,160,.18)",`New messages in <b>${joined.group.name}</b>`,"Just now",true):""}
+        ${joined?noti("🌿","rgba(165,123,255,.18)",`You joined <b>${joined.group.name}</b>`,"Today",false):""}
         <div class="day-div">This week</div>
         ${noti("⏰","rgba(255,182,97,.18)","Reminder · <b>Trivia Night</b> is tomorrow at 7:30 PM","Yesterday",false)}
-        ${noti("✨","rgba(142,162,255,.18)","A new group formed that matches your vibe","2 days ago",false)}
-        <div class="day-div">Earlier</div>
-        ${noti("🌿","rgba(165,123,255,.18)","You joined <b>The Easy Mix</b>","Last week",false)}`;
+        ${noti("✨","rgba(142,162,255,.18)","A new group formed that matches your vibe","2 days ago",false)}`;
       if(rc){ $$("#notifBody .notif")[0].style.cursor="pointer"; $$("#notifBody .notif")[0].addEventListener("click",()=>goTo("requests")); }
     } else {
       body.innerHTML=`<div class="day-div">From Perch</div>
@@ -2502,7 +2507,7 @@
   const FAQ=[
     ["🧭","How do groups get matched?","We use your quiz answers to build small groups with a balanced mix of social styles — so there's always someone to talk to and never too much pressure."],
     ["👥","Why only first names before we meet?","Group browsing shows first names and an emoji only. Photos and fuller profiles unlock once you become friends — it keeps things low-stakes."],
-    ["🚪","Can I leave a group?","Yes, anytime, no questions asked. Leaving a group is private — it isn't the same as blocking someone, and no one is told."],
+    ["🚪","Can I leave a group?","Yes — anytime. Leaving a group is private; it isn't the same as blocking someone, and no one is told."],
     ["🛡️","How does moderation work?","Reports are reviewed by our team, with AI helping flag issues quickly. There's no public voting or kicking — your safety isn't a popularity contest."],
     ["🔞","Who can use Perch?","Perch is for adults 18 and over. Everyone agrees to our community guidelines before joining their first group."],
     ["💬","Is this a dating app?","No. Perch is for platonic, group-based meetups — making friends, not dates."]
@@ -2522,7 +2527,7 @@
     const fx=$("#fxLayer"); if(!fx) return; const ems=["✦","✧","·","✦","✧"];
     for(let i=0;i<16;i++){ const s=document.createElement("div"); s.className="sparkle"; s.textContent=ems[i%ems.length];
       s.style.left=(20+Math.random()*60)+"%"; s.style.top=(34+Math.random()*22)+"%";
-      s.style.color=Math.random()>.5?"var(--mint)":"#cbb6ff"; s.style.animationDelay=(Math.random()*.5)+"s";
+      s.style.color=Math.random()>.5?"var(--mint)":"var(--accent-text-2)"; s.style.animationDelay=(Math.random()*.5)+"s";
       fx.appendChild(s); setTimeout(()=>s.remove(),2100); }
   }
   const sheetClose=()=>{ const b=$("#sheetClose"); if(b) b.addEventListener("click",closeSheet); };
@@ -2557,12 +2562,12 @@
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic warn">🚩</div>
       <div class="sheet-title">Report ${p.name}</div>
-      <div class="sheet-sub">Pick what happened. Our team reviews every report, with AI helping us respond within 24 hours. ${p.name} won't know who reported them.</div>
+      <div class="sheet-sub">Pick what happened. Our team reviews every report. ${p.name} won't know who reported them.</div>
       <div class="set-list">${REASONS.map(r=>`<div class="set-item" data-reason="${r}"><span class="si-ic">›</span>${r}</div>`).join("")}</div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">Cancel</button>`;
     $$("#sheetBody [data-reason]").forEach(el=>el.addEventListener("click",()=>{
       closeSheet();
-      if($("#s-chat").classList.contains("active")) pushMsg({sys:true,text:"Thanks for reporting. Our team is reviewing this now — you'll hear from us within 24 hours. You can also block this person anytime."});
+      if($("#s-chat").classList.contains("active")) pushMsg({sys:true,text:"Thanks for reporting. Our team is reviewing this now. You can also block this person anytime."});
       showToast("Report received — thank you");
     }));
     sheetClose(); openSheet();
@@ -2592,114 +2597,11 @@
       <button class="btn btn-amber" id="leaveGo">Leave quietly</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Actually, stay</button>`;
     $("#leaveGo").addEventListener("click",()=>{
-      state.joinedGroups=state.joinedGroups.filter(j=>j.group.id!==g.id); state.leftGroup=g.id;
-      delete state.chatThreads[g.id]; delete state.chatIntro[g.id]; if(state.chatViewGroup===g.id) state.chatViewGroup=null;
+      state.joinedGroups=state.joinedGroups.filter(j=>j.group.id!==g.id);
+      delete state.chatThreads[g.id]; if(state.chatViewGroup===g.id) state.chatViewGroup=null;
       closeSheet(); showToast("You've left the group"); goTo("groups");
     });
     sheetClose(); openSheet();
-  }
-  function openChatSafety(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🛡️</div>
-      <div class="sheet-title">Safety &amp; options</div>
-      <div class="sheet-sub">You're in control here.</div>
-      <div class="set-list">
-        <div class="set-item" data-doc="guidelines"><span class="si-ic">💛</span>Community guidelines<span class="chev">›</span></div>
-        <div class="set-item" data-cs="report"><span class="si-ic">🚩</span>Report someone<span class="chev">›</span></div>
-        <div class="set-item" data-cs="mute"><span class="si-ic">🔕</span>Mute this group<span class="chev">›</span></div>
-        <div class="set-item danger" data-cs="leave"><span class="si-ic">🚪</span>Leave group<span class="chev">›</span></div>
-      </div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Close</button>`;
-    $$("#sheetBody [data-cs]").forEach(el=>el.addEventListener("click",()=>{
-      const a=el.getAttribute("data-cs"); closeSheet();
-      if(a==="report"){ const m=(state.chosenGroup&&state.chosenGroup.members&&state.chosenGroup.members[0])||["Someone","🙂","easygoer"]; openReport({name:m[0],emoji:m[1],key:m[2]}); }
-      else if(a==="mute") showToast("Group muted");
-      else if(a==="leave"&&state.chosenGroup) openLeaveSheet(state.chosenGroup);
-    }));
-    sheetClose(); openSheet();
-  }
-  function openPrivacySheet(key){
-    const opts=key==="whoMessage"?[["friends","Friends only"],["everyone","Everyone in my groups"]]:[["everyone","Everyone"],["fof","Friends of friends"]];
-    const cur=state.settings[key];
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">${key==="whoMessage"?"Who can message me":"Who can add me"}</div>
-      <div class="set-list" style="margin-top:16px">${opts.map(o=>`<div class="set-item" data-opt="${o[0]}"><span class="si-ic">${cur===o[0]?'🔘':'⚪'}</span>${o[1]}</div>`).join("")}</div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Done</button>`;
-    $$("#sheetBody [data-opt]").forEach(el=>el.addEventListener("click",()=>{ state.settings[key]=el.getAttribute("data-opt"); closeSheet(); renderSettings(); }));
-    sheetClose(); openSheet();
-  }
-  function openBlockedList(){
-    const list=Array.from(state.blocked);
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Blocked accounts</div>
-      ${list.length?`<div class="set-list" style="margin-top:16px">${list.map(n=>`<div class="set-item"><span class="si-ic">🚫</span>${n}<button class="req-no" data-unblock="${n}" style="margin-left:auto">Unblock</button></div>`).join("")}</div>`:'<div class="sheet-sub" style="margin-top:16px">You haven\'t blocked anyone.</div>'}
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Close</button>`;
-    $$("#sheetBody [data-unblock]").forEach(el=>el.addEventListener("click",()=>{ state.blocked.delete(el.getAttribute("data-unblock")); openBlockedList(); renderSettings(); }));
-    sheetClose(); openSheet();
-  }
-  function openTakeBreak(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🌙</div>
-      <div class="sheet-title">Take a break</div>
-      <div class="sheet-sub">Pause new group matches and notifications. Your account and friends stay exactly as they are — come back whenever you like.</div>
-      <button class="btn btn-soft" data-break="week">Pause for a week</button>
-      <button class="btn btn-soft" data-break="month" style="margin-top:8px">Pause for a month</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
-    $$("#sheetBody [data-break]").forEach(el=>el.addEventListener("click",()=>{ closeSheet(); showToast("You're on a break — welcome back anytime"); }));
-    sheetClose(); openSheet();
-  }
-  function openSupport(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">📧</div>
-      <div class="sheet-title">Contact us</div>
-      <div class="sheet-sub">Tell us what's going on and we'll get back to you, usually within 24 hours.</div>
-      <div class="field"><textarea rows="4" placeholder="How can we help?"></textarea></div>
-      <button class="btn btn-primary" id="supSend">Send</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
-    $("#supSend").addEventListener("click",()=>{ closeSheet(); showToast("Message sent — we'll be in touch"); });
-    sheetClose(); openSheet();
-  }
-  function openDeleteAccount(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">🗑️</div>
-      <div class="sheet-title">Delete your account</div>
-      <div class="sheet-sub">This permanently removes your profile, groups, messages and friends. This can't be undone.</div>
-      <button class="btn btn-amber" id="delGo">Delete account</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Keep my account</button>`;
-    $("#delGo").addEventListener("click",()=>{ closeSheet(); showToast("Account deleted"); setTimeout(()=>goTo("landing"),700); });
-    sheetClose(); openSheet();
-  }
-  function openEditProfile(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Edit profile</div>
-      <div class="field" style="margin-top:16px"><label>Name</label><input id="epName" value="${state.name}"></div>
-      <div class="field"><label>Bio</label><textarea id="epBio" rows="3">${state.bio}</textarea></div>
-      <div class="field"><label>Interests (comma separated)</label><input id="epInt" value="${state.interests.join(", ")}"></div>
-      <button class="btn btn-soft" id="epPhoto">📷 Change photo</button>
-      <button class="btn btn-primary" id="epSave" style="margin-top:8px">Save</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
-    $("#epPhoto").addEventListener("click",()=>$("#photoInput").click());
-    $("#epSave").addEventListener("click",()=>{
-      state.name=$("#epName").value.trim()||state.name;
-      state.bio=$("#epBio").value.trim()||state.bio;
-      const ints=$("#epInt").value.split(",").map(s=>s.trim()).filter(Boolean); if(ints.length) state.interests=ints.slice(0,5);
-      closeSheet(); showToast("Profile updated"); if($("#s-profile").classList.contains("active")) renderProfile();
-    });
-    sheetClose(); openSheet();
-  }
-  function openFilter(){
-    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Filter activities</div>
-      <div class="sec-title" style="margin-top:16px">When</div>
-      <div class="chips">${["Any time","Weekdays","Weekends","Evenings"].map((c,i)=>`<span class="chip ${i===0?'sel':''}" data-f>${c}</span>`).join("")}</div>
-      <div class="sec-title" style="margin-top:16px">Group size</div>
-      <div class="chips">${["Any","Small (4–5)","Medium (6–8)"].map((c,i)=>`<span class="chip ${i===0?'sel':''}" data-f>${c}</span>`).join("")}</div>
-      <div class="sec-title" style="margin-top:16px">Vibe</div>
-      <div class="chips">${["Any","Low-key","Lively","Active"].map((c,i)=>`<span class="chip ${i===0?'sel':''}" data-f>${c}</span>`).join("")}</div>
-      <button class="btn btn-primary" id="fApply" style="margin-top:20px">Show activities</button>`;
-    $$("#sheetBody [data-f]").forEach(el=>el.addEventListener("click",()=>el.classList.toggle("sel")));
-    $("#fApply").addEventListener("click",()=>{ closeSheet(); showToast("Filters applied"); });
-    openSheet();
   }
   function openSuggest(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
@@ -2730,7 +2632,7 @@
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">💛</div>
       <div class="sheet-title">That's okay</div>
-      <div class="sheet-sub">No pressure at all. Want to step back from tonight?</div>
+      <div class="sheet-sub">Want to step back from tonight?</div>
       <button class="btn btn-soft" id="mnLeave">Leave this group</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Never mind</button>`;
     $("#mnLeave").addEventListener("click",()=>{ closeSheet(); if(state.chosenGroup) openLeaveSheet(state.chosenGroup); });
@@ -2754,7 +2656,7 @@
     sheetClose(); openSheet();
   }
 
-  /* ============ MISSING SHEET FUNCTIONS ============ */
+  /* ============ SHEET FUNCTIONS ============ */
   function openEditProfile(){
     const el=$("#sheetBody");
     el.innerHTML=`<div class="sheet-handle"></div>
@@ -2810,7 +2712,7 @@
       <div class="sheet-title">Blocked accounts</div>
       ${!blocked.length
         ? `<div class="sheet-sub" style="text-align:center;margin-top:8px">No one blocked.</div>`
-        : blocked.map(n=>`<div class="set-item" data-unb="${n}"><span class="si-ic">🚫</span>${n}<span class="chev" style="margin-left:auto;color:#b4c0ff;font-size:13px">Unblock</span></div>`).join("")}
+        : blocked.map(n=>`<div class="set-item" data-unb="${n}"><span class="si-ic">🚫</span>${n}<span class="chev" style="margin-left:auto;color:var(--accent-text);font-size:13px">Unblock</span></div>`).join("")}
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:16px">Close</button>`;
     $$("#sheetBody [data-unb]").forEach(el=>el.addEventListener("click",()=>{
       state.blocked.delete(el.getAttribute("data-unb")); closeSheet(); showToast("Unblocked");
@@ -2906,12 +2808,13 @@
   $("#exFilter").addEventListener("click",openFilter);
   $("#exBell").addEventListener("click",()=>goTo("notifications"));
   $("#exHost").addEventListener("click",()=>goTo("host"));
-  $("#suggestLink").addEventListener("click",()=>goTo("host"));
+  $("#suggestLink").addEventListener("click",openSuggest);
 
   // location onboarding
   $("#locEnable").addEventListener("click",()=>{ showToast(t("loc_toast")); setTimeout(()=>goTo("explore"),700); });
   $("#locSkip").addEventListener("click",()=>goTo("explore"));
   $("#friendSearch").addEventListener("input",renderFriends);
+  $("#helpSearch").addEventListener("input",()=>{ const q=$("#helpSearch").value.toLowerCase().trim(); $$("#helpBody .acc").forEach(el=>{ el.style.display=!q||el.textContent.toLowerCase().includes(q)?"":"none"; }); });
   $("#friendsReqBtn").addEventListener("click",()=>goTo("requests"));
   $("#profBell").addEventListener("click",()=>goTo("notifications"));
   $("#profGear").addEventListener("click",()=>goTo("settings"));
@@ -2920,19 +2823,19 @@
 
   // joined screen
   $("#joinedCal").addEventListener("click",()=>showToast("Added to your calendar 🗓️"));
-  $("#joinedDir").addEventListener("click",()=>showToast("Opening directions 🧭"));
+  $("#joinedDir").addEventListener("click",()=>showToast("Directions sent to Maps 🧭"));
   $("#joinedInvite").addEventListener("click",()=>goTo("invite"));
 
   // invite
   $("#inviteCopy").addEventListener("click",()=>{ try{navigator.clipboard.writeText("https://perch.app/i/you");}catch(e){} showToast("Invite link copied"); });
-  $("#inviteShare").addEventListener("click",()=>showToast("Opening share options 📤"));
+  $("#inviteShare").addEventListener("click",()=>showToast("Invite ready to share 📤"));
 
   // moodcheck
   $$("#s-moodcheck [data-mood]").forEach(el=>el.addEventListener("click",()=>{
     const m=el.getAttribute("data-mood");
-    if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; state.chatFromList=false; }
-    if(m==="ready"){ showToast("See you there 🌿"); setTimeout(()=>goTo("chat"),700); }
-    else if(m==="nervous"){ showToast("That's completely normal. See you there."); setTimeout(()=>goTo("chat"),1200); }
+    if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; }
+    if(m==="ready"){ showToast("See you there 🌿"); setTimeout(()=>goTo("groupdetail",{silent:true}),700); }
+    else if(m==="nervous"){ showToast("Totally normal — the group will be glad you came."); setTimeout(()=>goTo("groupdetail",{silent:true}),1200); }
     else openMoodNo();
   }));
 
@@ -2949,6 +2852,11 @@
   /* ============ INIT ============ */
   applyTheme();
   applyI18n(document);
+  // a11y: keyboard access for the primary div-based controls
+  $$(".nav-item,.sopt").forEach(el=>{ el.setAttribute("role","button"); el.setAttribute("tabindex","0"); });
+  document.addEventListener("keydown",e=>{
+    if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".nav-item,.sopt,.chip,.cat,.set-item,[role='button']")){ e.preventDefault(); e.target.click(); }
+  });
   goTo("landing");
 
   // U2: bridge system back / iOS edge-swipe to internal navigation.
