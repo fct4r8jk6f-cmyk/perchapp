@@ -880,6 +880,7 @@
       <!-- GROUP CHAT -->
       <section class="screen fade" id="s-chat">
         <div class="chat-top">
+          <button class="iconbtn" id="chatBack" aria-label="Back to chats" style="width:34px;height:34px;display:none">←</button>
           <div class="ct-ic" id="chatIc" style="background:var(--grad-warm)">🌿</div>
           <div><div class="ct-name" id="chatName">Group</div><div class="ct-meta" id="chatMeta">5 people · first names only</div></div>
           <div class="chat-shield" id="chatShield" title="Safety options" aria-label="Safety options">🛡️</div>
@@ -1228,6 +1229,7 @@
       joined_cal:"🗓️ Add to Calendar",joined_dir:"🧭 Directions",joined_chatbtn:"View Group Chat",joined_invite:"Know someone who'd enjoy this? Invite them",
       soft_title:"Want a heads-up before it starts? 🔔",soft_sub:"We'll only ping you about this hang — nothing else.",soft_remind:"Remind me",soft_no:"Not now",toast_remind:"We'll nudge you 3 hours before.",
       chat_people:"people",chat_firstnames:"first names only",chat_yourgroup:"Your group",chat_say:"Say something…",chat_tapdetails:"Tap for details",chat_guide:"💛 Community guidelines · Tap to read",chat_ff:"▶ Fast-forward to after you meet",chat_viewdetails:"View full details",
+      chat_empty_t:"Your group chats live here",chat_empty_s:"Join a hang and the conversation starts before you even arrive.",chat_empty_btn:"Find a hang",chat_sayhi:"Say hi 👋",chat_forming_sub:"Your group is forming — we'll introduce everyone soon",chat_list_title:"Chats",
       pp_card_sub:"A little more Perch, when you want it.",pp_sub:"Everything in Perch stays free. This is just extra.",
       pp_perk1_t:"Priority matching",pp_perk1_s:"Groups form around you first.",pp_perk2_t:"More groups per week",pp_perk2_s:"Join up to 5 hangs a week.",
       pp_perk3_t:"Compatibility insights",pp_perk3_s:"See why a group fits you.",pp_perk4_t:"Host perks",pp_perk4_s:"Pick the spot, set the size, go bigger.",
@@ -1275,6 +1277,7 @@
       joined_cal:"🗓️ Ajouter au calendrier",joined_dir:"🧭 Itinéraire",joined_chatbtn:"Voir la discussion",joined_invite:"Tu connais quelqu'un que ça intéresserait? Invite-le",
       soft_title:"Tu veux un rappel avant que ça commence? 🔔",soft_sub:"On te pingue seulement pour cette sortie — rien d'autre.",soft_remind:"Rappelle-moi",soft_no:"Pas maintenant",toast_remind:"On te fera un rappel 3 heures avant.",
       chat_people:"personnes",chat_firstnames:"prénoms seulement",chat_yourgroup:"Ton groupe",chat_say:"Écris quelque chose…",chat_tapdetails:"Touche pour les détails",chat_guide:"💛 Règles de la communauté · Touche pour lire",chat_ff:"▶ Avancer après la rencontre",chat_viewdetails:"Voir tous les détails",
+      chat_empty_t:"Tes conversations de groupe vivent ici",chat_empty_s:"Rejoins une sortie et la conversation commence avant même ton arrivée.",chat_empty_btn:"Trouver une sortie",chat_sayhi:"Dis allô 👋",chat_forming_sub:"Ton groupe se forme — on présentera tout le monde bientôt",chat_list_title:"Discussions",
       pp_card_sub:"Un peu plus de Perch, quand ça te tente.",pp_sub:"Tout dans Perch reste gratuit. Ça, c'est juste un extra.",
       pp_perk1_t:"Jumelage prioritaire",pp_perk1_s:"Les groupes se forment autour de toi en premier.",pp_perk2_t:"Plus de groupes par semaine",pp_perk2_s:"Participe jusqu'à 5 sorties par semaine.",
       pp_perk3_t:"Aperçus de compatibilité",pp_perk3_s:"Vois pourquoi un groupe te convient.",pp_perk4_t:"Avantages d'hôte",pp_perk4_s:"Choisis l'endroit, la taille, vois plus grand.",
@@ -1311,6 +1314,7 @@
     picked:new Set(), dismissedPicks:new Set(), activeCat:"For you",
     chosenActivity:null, chosenGroup:null,
     joinedGroups:[], leftGroup:null, hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false,
+    chatThreads:{}, chatIntro:{}, chatViewGroup:null, chatFromList:false, guideDismissed:false,
     rating:{activity:0,venue:0,vibe:0}, fbStep:0, fbReturn:false,
     blocked:new Set(), friends:[], dms:{}, currentDM:null, currentFriendView:null,
     requests:{recv:[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}],sent:[]},
@@ -1350,7 +1354,8 @@
   const NAV_SCREENS=["explore","groups","groupdetail","joined","chat","friends","dm","feedback","profile","met","requests","friendprofile","notifications","settings","help","invite","archetype"];
   const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chat:"chat",friends:"friends",dm:"friends",met:"friends",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
   const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chat:11,friends:12,dm:12,met:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12,archetype:3};
-  let history=[], chatStarted=false, chatTimers=[];
+  const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
+  let history=[], chatStarted=false, chatTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
 
   function goTo(id,opts={}){
@@ -1358,6 +1363,8 @@
     const next=$("#s-"+id); if(!next) return;
     if(cur===next){ runEnter(id); return; }
     if(!opts.silent && cur){ history.push(cur.id.replace("s-","")); if(history.length>40) history.shift(); }
+    // U2: mirror non-silent forward navigation into the browser history stack
+    if(!opts.silent && !navPopping){ try{ window.history.pushState({screen:id},""); }catch(e){} }
     $$(".screen").forEach(s=>{s.classList.remove("active","back");});
     const tabSwitch=NAV_SCREENS.includes(id)&&cur&&NAV_SCREENS.includes(cur.id.replace("s-",""))&&NAV_MAP[id]!==NAV_MAP[cur.id.replace("s-","")];
     if(opts.back){ next.classList.add("back"); requestAnimationFrame(()=>{next.classList.remove("back");next.classList.add("active");}); }
@@ -1365,6 +1372,8 @@
     next.scrollTop=0;
 
     if(id==="landing") resetDemo();
+    // U1: onboarding firewall — drop the onboarding trail the first time the app proper is reached
+    if(id==="explore" && !reachedExplore){ reachedExplore=true; history=[]; }
     const nav=$("#bottomnav");
     if(NAV_SCREENS.includes(id)){ nav.classList.add("show"); const k=NAV_MAP[id]; $$(".nav-item").forEach(n=>n.classList.toggle("on",n.getAttribute("data-go")===k)); }
     else nav.classList.remove("show");
@@ -1382,7 +1391,7 @@
     if(id==="groupdetail")    renderGroupDetail();
     if(id==="host")           renderHost();
     if(id==="joined")         {syncJoined();sparkle();}
-    if(id==="chat")           startChat();
+    if(id==="chat")           enterChat();
     if(id==="friends")        renderFriends();
     if(id==="dm")             renderDM();
     if(id==="met")            renderMet();
@@ -1396,17 +1405,28 @@
     applyHeaderWash();
     syncBadges();
   }
-  function goBack(){ const prev=history.pop(); if(prev) goTo(prev,{back:true,silent:true}); else goTo("explore",{back:true,silent:true}); }
+  function goBack(){
+    // U1: skip any onboarding screens left in the stack
+    let prev=null;
+    while(history.length){ const p=history.pop(); if(!ONBOARDING.includes(p)){ prev=p; break; } }
+    if(prev){ goTo(prev,{back:true,silent:true}); return true; }
+    // empty or onboarding-only → fall back to the current tab's root, default Explore
+    const cur=$(".screen.active"); const curId=cur?cur.id.replace("s-",""):null;
+    const root=(curId&&NAV_MAP[curId])||"explore";
+    goTo(root,{back:true,silent:true});
+    return false;
+  }
   function resetDemo(){
     chatStarted=false; clearChatTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
     Object.assign(state,{age:24,signedIn:false,agreed:false,currentQ:0,profileKey:null,
       chosenActivity:null,chosenGroup:null,joinedGroups:[],leftGroup:null,hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,fbStep:0,fbReturn:false,
+      chatThreads:{},chatIntro:{},chatViewGroup:null,chatFromList:false,guideDismissed:false,
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",
       photo:null,name:"You",emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}],sent:[]};
-    metPool=MET_SEED.map(p=>({...p})); history=[];
+    metPool=MET_SEED.map(p=>({...p})); history=[]; reachedExplore=false;
     // reset skeleton flags
     const fb=$("#friendsBody"); if(fb) delete fb._loaded;
     const ab=$("#agreeBox"); if(ab) ab.classList.remove("on"); const ac=$("#agreeContinue"); if(ac) ac.disabled=true;
@@ -1423,7 +1443,19 @@
   document.addEventListener("click",e=>{
     const doc=e.target.closest("[data-doc]"); if(doc){ openDoc(doc.getAttribute("data-doc")); return; }
     const back=e.target.closest("[data-back]"); if(back){ goBack(); return; }
-    const t=e.target.closest("[data-go]"); if(t){ goTo(t.getAttribute("data-go")); }
+    const t=e.target.closest("[data-go]"); if(t){
+      const id=t.getAttribute("data-go");
+      const isNav=t.classList.contains("nav-item");
+      // U4: decide which chat view to show before navigating
+      if(id==="chat"){
+        if(isNav){ state.chatViewGroup=null; state.chatFromList=false; }
+        else if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; state.chatFromList=false; }
+      }
+      // U1: bottom-nav tab switches (and any cross-tab jump) must not push history
+      const cur=$(".screen.active"); const curId=cur?cur.id.replace("s-",""):null;
+      const tabSwitch=NAV_MAP[id] && curId && NAV_MAP[curId] && NAV_MAP[id]!==NAV_MAP[curId];
+      goTo(id, (isNav||tabSwitch)?{silent:true}:{});
+    }
   });
 
   /* ============ LANDING ============ */
@@ -1773,7 +1805,8 @@
     const j=$("#gdJoin");
     if(j) j.addEventListener("click",()=>{
       if(!state.joinedGroups.some(x=>x.group.id===g.id)) state.joinedGroups.push({group:g,activity:a});
-      state.chatStarted=false; chatStarted=false;
+      // fresh intro for this group next time its chat opens
+      delete state.chatThreads[g.id]; delete state.chatIntro[g.id];
       goTo("joined");
     });
     const lv=$("#gdLeave");
@@ -1787,7 +1820,7 @@
       state.checkedIn=true;
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
       const line=fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${fn} est là 👋`:`${fn} is here 👋`);
-      if(chatStarted){ pushMsg({sys:true,text:line}); }
+      if(state.chatThreads[g.id]){ pushMsg({sys:true,text:line},g.id); }
       showToast(t("toast_checkin"));
       renderGroupDetail();
     });
@@ -1858,33 +1891,119 @@
     if(m.who==="me") return `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${m.time||"now"}</div></div></div>`;
     return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div><div class="msg them" data-react>${m.text}</div><div class="react-row"></div><div class="msg-time">${m.time||""}</div></div></div>`;
   }
-  function pushMsg(m){ const sc=$("#chatScroll"); sc.insertAdjacentHTML("beforeend",msgRowHTML(m)); sc.scrollTop=sc.scrollHeight; wireReactTargets(); }
-  function showTyping(){ const sc=$("#chatScroll"); sc.insertAdjacentHTML("beforeend",`<div class="typing" id="typingBubble"><i></i><i></i><i></i></div>`); sc.scrollTop=sc.scrollHeight; }
+  function pushMsg(m,gid){
+    gid = gid || state.chatViewGroup;
+    if(gid && state.chatThreads[gid]) state.chatThreads[gid].push(m);
+    if(!gid || gid===state.chatViewGroup){ const sc=$("#chatScroll"); if(sc){ sc.insertAdjacentHTML("beforeend",msgRowHTML(m)); sc.scrollTop=sc.scrollHeight; wireReactTargets(); } }
+  }
+  function showTyping(gid){ if(gid && gid!==state.chatViewGroup) return; const sc=$("#chatScroll"); if(!sc) return; sc.insertAdjacentHTML("beforeend",`<div class="typing" id="typingBubble"><i></i><i></i><i></i></div>`); sc.scrollTop=sc.scrollHeight; }
   function hideTyping(){ const t=$("#typingBubble"); if(t) t.remove(); }
 
-  function startChat(){
-    const g=state.chosenGroup, a=state.chosenActivity||ACTIVITIES[0];
-    const mem=(g&&g.members)||[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]];
-    $("#chatIc").className="ct-ic "+(a.g); $("#chatIc").textContent=a.icon;
+  // Combined chat entries: live joined groups + hosted (forming) groups
+  function chatList(){
+    const out=[];
+    state.joinedGroups.forEach(j=>{
+      const a=j.activity||state.chosenActivity||ACTIVITIES[0];
+      out.push({id:j.group.id, emoji:a.icon, grad:a.g||j.group.g, name:j.group.name, when:j.group.when, forming:false, group:j.group, activity:a});
+    });
+    (state.hostedGroups||[]).forEach(g=>{
+      out.push({id:g.id, emoji:g.emoji, grad:g.g, name:g.name, when:g.when, forming:true, group:g, activity:null});
+    });
+    return out;
+  }
+  // Show/hide the per-group chat chrome (pinned plan, guidelines, fast-forward, input, shield)
+  function showChatChrome(show){
+    const d=show?"":"none";
+    const inp=$("#s-chat .chat-input"); if(inp) inp.style.display=d;
+    const pinned=$("#pinned"); if(pinned) pinned.style.display=d;
+    const ff=$("#s-chat .ff"); if(ff) ff.style.display=d;
+    const shield=$("#chatShield"); if(shield) shield.style.display=d;
+    const guide=$("#guideBar"); if(guide) guide.style.display=show?(state.guideDismissed?"none":""):"none";
+  }
+  // Chat enter-hook: dispatch to empty state / single chat / list
+  function enterChat(){
+    const items=chatList();
+    if(items.length===0){ renderChatEmpty(); return; }
+    if(items.length===1){ state.chatFromList=false; openGroupChat(items[0]); return; }
+    const target=state.chatViewGroup && items.find(i=>i.id===state.chatViewGroup);
+    if(target){ openGroupChat(target); }
+    else { state.chatViewGroup=null; renderChatList(items); }
+  }
+  function chatListHeader(){
+    const back=$("#chatBack"); if(back) back.style.display="none";
+    $("#chatIc").className="ct-ic"; $("#chatIc").style.background="var(--surface-3)"; $("#chatIc").textContent="💬";
+    $("#chatName").textContent=t("chat_list_title"); $("#chatMeta").textContent="";
+  }
+  function renderChatEmpty(){
+    state.chatViewGroup=null; state.chatFromList=false;
+    showChatChrome(false); chatListHeader();
+    $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
+  }
+  function renderChatList(items){
+    state.chatFromList=false;
+    showChatChrome(false); chatListHeader();
+    const sc=$("#chatScroll");
+    sc.innerHTML=items.map(it=>{
+      let preview;
+      if(it.forming) preview=t("chat_forming_sub");
+      else {
+        const th=state.chatThreads[it.id];
+        const last=th&&th.filter(m=>!m.sys).slice(-1)[0];
+        const mePfx=state.lang==="fr"?"Toi : ":"You: ";
+        preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi");
+      }
+      if(preview.length>42) preview=preview.slice(0,42)+"…";
+      const when=it.when?it.when.split(" · ")[0]:"";
+      return `<div class="friend-row" data-chatgroup="${it.id}">
+        <div class="avatar av-sm ${it.grad}">${it.emoji}</div>
+        <div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${preview}</div></div>
+        <span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
+    }).join("");
+    $$("#chatScroll [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
+      const it=chatList().find(i=>i.id===el.getAttribute("data-chatgroup"));
+      if(!it) return;
+      state.chatViewGroup=it.id; state.chatFromList=true; openGroupChat(it);
+    }));
+  }
+  function openGroupChat(item){
+    state.chatViewGroup=item.id;
+    state.chosenGroup=item.group; if(item.activity) state.chosenActivity=item.activity;
+    const back=$("#chatBack"); if(back) back.style.display=state.chatFromList?"flex":"none";
+    const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
+    $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").textContent=item.emoji||a.icon;
     $("#chatName").textContent=(g&&g.name)||t("chat_yourgroup");
+    if(item.forming){ showChatChrome(false); $("#chatMeta").textContent="";
+      $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${g.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
+      return; }
+    showChatChrome(true);
     $("#chatMeta").textContent=`${(g&&g.size)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
     $("#pinEm").textContent=a.icon; $("#pinT").textContent=a.name;
     $("#pinS").textContent=(g&&g.when)||a.when;
     $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${a.venue}<br>🗓️ ${(g&&g.when)||a.when}<br>🌦️ Plan B · ${a.planb}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
-    if(chatStarted){ return; }
-    chatStarted=true;
-    const sc=$("#chatScroll"); sc.innerHTML="";
-    pushMsg({sys:true,text:`This is a private chat for the people going to ${a.name}. Be kind — a real meetup is on the other side. 💛`});
+    const sc=$("#chatScroll");
+    if(state.chatThreads[item.id]){
+      sc.innerHTML=state.chatThreads[item.id].map(msgRowHTML).join("");
+      sc.scrollTop=sc.scrollHeight; wireReactTargets();
+    } else {
+      state.chatThreads[item.id]=[]; sc.innerHTML="";
+      runChatIntro(item);
+    }
+  }
+  // Simulated intro sequence — runs once per group (keyed by id)
+  function runChatIntro(item){
+    const gid=item.id, g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
+    const mem=(g&&g.members)||[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]];
+    state.chatIntro[gid]=true;
+    pushMsg({sys:true,text:`This is a private chat for the people going to ${a.name}. Be kind — a real meetup is on the other side. 💛`},gid);
     const m0=mem[0], m1=mem[1]||mem[0];
-    clearChatTimers();
-    chatTimers.push(setTimeout(()=>{ showTyping(); },700));
-    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`Hey everyone! So glad this came together 😊`,time:"7:02 PM"}); },1700));
-    chatTimers.push(setTimeout(()=>{ showTyping(); },2400));
-    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m1[0],emoji:m1[1],key:m1[2],text:`Same! First time doing one of these — see you all there`,time:"7:04 PM"}); },3400));
-    chatTimers.push(setTimeout(()=>{ pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`I'll grab a table near the back so we can find each other`,time:"7:05 PM"}); },4600));
+    chatTimers.push(setTimeout(()=>{ showTyping(gid); },700));
+    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`Hey everyone! So glad this came together 😊`,time:"7:02 PM"},gid); },1700));
+    chatTimers.push(setTimeout(()=>{ showTyping(gid); },2400));
+    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m1[0],emoji:m1[1],key:m1[2],text:`Same! First time doing one of these — see you all there`,time:"7:04 PM"},gid); },3400));
+    chatTimers.push(setTimeout(()=>{ pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`I'll grab a table near the back so we can find each other`,time:"7:05 PM"},gid); },4600));
     if(state.checkedIn){
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${fn} est là 👋`:`${fn} is here 👋`)}); },5200));
+      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${fn} est là 👋`:`${fn} is here 👋`)},gid); },5200));
     }
   }
 
@@ -1948,9 +2067,11 @@
     // pinned collapse
     $("#pinnedBar").addEventListener("click",()=>$("#pinned").classList.toggle("open"));
     // guidelines
-    $("#guideHead").addEventListener("click",e=>{ if(e.target.id==="guideX"){ $("#guideBar").style.display="none"; return; } openDoc("guidelines"); });
+    $("#guideHead").addEventListener("click",e=>{ if(e.target.id==="guideX"){ state.guideDismissed=true; $("#guideBar").style.display="none"; return; } openDoc("guidelines"); });
     // shield → safety
     $("#chatShield").addEventListener("click",openChatSafety);
+    // back to chat list (U4)
+    $("#chatBack").addEventListener("click",()=>{ state.chatViewGroup=null; state.chatFromList=false; enterChat(); });
   }
 
   /* ============ FRIENDS ============ */
@@ -2414,7 +2535,8 @@
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Actually, stay</button>`;
     $("#leaveGo").addEventListener("click",()=>{
       state.joinedGroups=state.joinedGroups.filter(j=>j.group.id!==g.id); state.leftGroup=g.id;
-      closeSheet(); showToast("You've left the group"); chatStarted=false; goTo("groups");
+      delete state.chatThreads[g.id]; delete state.chatIntro[g.id]; if(state.chatViewGroup===g.id) state.chatViewGroup=null;
+      closeSheet(); showToast("You've left the group"); goTo("groups");
     });
     sheetClose(); openSheet();
   }
@@ -2750,6 +2872,7 @@
   // moodcheck
   $$("#s-moodcheck [data-mood]").forEach(el=>el.addEventListener("click",()=>{
     const m=el.getAttribute("data-mood");
+    if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; state.chatFromList=false; }
     if(m==="ready"){ showToast("See you there 🌿"); setTimeout(()=>goTo("chat"),700); }
     else if(m==="nervous"){ showToast("That's completely normal. See you there."); setTimeout(()=>goTo("chat"),1200); }
     else openMoodNo();
@@ -2768,6 +2891,18 @@
   /* ============ INIT ============ */
   applyI18n(document);
   goTo("landing");
+
+  // U2: bridge system back / iOS edge-swipe to internal navigation.
+  // Seed one state so the first back stays in-app; on popstate run goBack(),
+  // and when we hit a tab root (nothing left to pop) re-arm a state so repeated
+  // backs keep the user inside the app instead of exiting.
+  try{ window.history.pushState({screen:"__seed__"},""); }catch(e){}
+  window.addEventListener("popstate",function(){
+    navPopping=true;
+    let wentBack=false;
+    try{ wentBack=goBack(); } finally { navPopping=false; }
+    if(!wentBack){ try{ window.history.pushState({screen:"__root__"},""); }catch(e){} }
+  });
 
 })();
 </script>
