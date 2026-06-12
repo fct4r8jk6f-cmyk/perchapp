@@ -22,7 +22,7 @@ When asked to test or screenshot the app in a browser (e.g. via Playwright), sta
 
 ## Architecture: everything lives in index.html
 
-One file (~3.2k lines), three blocks:
+One file (~3.4k lines), three blocks:
 
 - `<style>` (top): CSS custom properties define the **dark theme (default)**; a light theme overrides the same tokens under `body.light`. The app renders inside a fixed iPhone-proportioned frame.
 - Static markup: each screen is a `<section class="screen" id="s-NAME">` (28 screens: landing, q, result, explore, groupdetail, chat, settings, …).
@@ -36,7 +36,7 @@ Key conventions:
 
 ## i18n — non-negotiable
 
-Full en / fr-CA coverage, including legal docs. Every user-visible string must exist in both `I18N.en` and `I18N.fr` (plus the parallel tables `CAT_FR`, `ARFR`, `QFR` for data-driven content). Static markup is translated via `data-i18n` attributes; script-built strings via `t("key")`. Never hardcode visible English in markup or render functions without an fr counterpart.
+Full en / fr-CA coverage, including legal docs. Every user-visible string must exist in both `I18N.en` and `I18N.fr` (plus the parallel tables `CAT_FR`, `ARFR`, `QFR`, `ACTFR`, `BADGE_FR` for data-driven content). Static markup is translated via `data-i18n` attributes (`data-i18n-html` for strings with markup, `data-i18n-ph` for placeholders); script-built strings via `t("key")`. Data constants (`ACTIVITIES`, `ARCH`) stay canonical English — search and filters match on them — and are translated only at render time through helpers (`actVibe`, `actPlanb`, `actBadge`, `actSize`, `actSocial`, `frWhen`, `archBring`/`archLoves`/`archDesc`, `hostedName`/`hostedWhen`/`hostedTags`). Adding an activity means adding its `ACTFR` entry (and `BADGE_FR` if it introduces a new badge). Never hardcode visible English in markup or render functions without an fr counterpart.
 
 ## Other invariants
 

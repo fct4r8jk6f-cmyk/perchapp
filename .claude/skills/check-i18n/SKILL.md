@@ -10,9 +10,11 @@ Perch requires every user-visible string to ship in both English and Québec Fre
 2. **`data-i18n` references resolve.** Collect every `data-i18n`, `data-i18n-attr`, and `t("key")` / `t('key')` usage and confirm each key exists in `I18N.en`. A missing key silently falls back to displaying the raw key name.
 
 3. **Parallel data tables.** Data-driven content has separate fr tables — check that:
-   - every key of `ARCH` has an entry in `ARFR`
+   - every key of `ARCH` has an entry in `ARFR`, and each `ARFR` entry carries all of `n`, `tag`, `traits`, `bring`, `loves`, `desc`
    - every category in `CATS` has an entry in `CAT_FR`
    - `QFR` has the same length and option counts as `QUESTIONS`
+   - every activity `id` in `ACTIVITIES` has an entry in `ACTFR` (with `vibe` and `planb`)
+   - every distinct `badge` value in `ACTIVITIES` has an entry in `BADGE_FR`
 
 4. **No hardcoded visible English** in render functions: scan recently changed template literals for user-facing English text not wrapped in `t()` or sourced from a translated table. (Ignore emoji, names, CSS classes, and aria-hidden content.)
 
