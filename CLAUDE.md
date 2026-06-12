@@ -11,10 +11,14 @@ An interactive product demo for **Perch** — a small-group friend-making app. E
 No build step, no dependencies, no package manager — and keep it that way (single-file, no-build is a deliberate constraint).
 
 ```sh
+npx serve .                   # Node — prints the URL, usually http://localhost:3000
+# or, if Python is available:
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
 Or open `index.html` directly. There are no tests or linters.
+
+When asked to test or screenshot the app in a browser (e.g. via Playwright), start one of the servers above yourself and use its URL — don't ask the user for a URL.
 
 ## Architecture: everything lives in index.html
 
