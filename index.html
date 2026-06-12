@@ -40,8 +40,6 @@
     --grad-warm:linear-gradient(135deg,#FF8A6B 0%,#FF77A0 50%,#A57BFF 100%);
     --grad-calm:linear-gradient(135deg,#8EA2FF 0%,#6FE0C6 100%);
     --shadow:0 36px 80px rgba(0,0,0,.5);
-    /* type scale (7 steps) */
-    --fs-xs:11px; --fs-sm:13px; --fs-base:15px; --fs-lg:17px; --fs-xl:20px; --fs-2xl:26px; --fs-3xl:32px;
     /* radius tokens */
     --r-sm:12px; --r-md:16px; --r-lg:20px; --r-xl:24px; --r-pill:100px;
   }
@@ -57,13 +55,16 @@
     --line-2:#DCD2E8;
     --text:#191225;
     --muted:rgba(25,18,37,.74);
-    --faint:rgba(25,18,37,.58);
+    --faint:rgba(25,18,37,.66);
     --shadow:0 24px 60px rgba(60,40,100,.18);
     --accent-text:#4d5fd6;
     --accent-text-2:#7a4fd6;
     --danger-text:#b3264f;
     --nav-bg:rgba(255,255,255,.92);
   }
+  [data-theme="light"] .dot-prog i.past{background:rgba(20,12,32,.25);}
+  [data-theme="light"] .trait{background:rgba(20,12,32,.05);}
+  [data-theme="light"] .gc-vibetag{background:rgba(20,12,32,.05);}
   /* 4px spacing grid utilities */
   .mt-1{margin-top:4px}.mt-2{margin-top:8px}.mt-3{margin-top:12px}.mt-4{margin-top:16px}.mt-5{margin-top:20px}.mt-6{margin-top:24px}.mt-8{margin-top:32px}.mt-9{margin-top:36px}
   .mb-1{margin-bottom:4px}.mb-2{margin-bottom:8px}.mb-3{margin-bottom:12px}.mb-4{margin-bottom:16px}.mb-5{margin-bottom:20px}.mb-6{margin-bottom:24px}.mb-8{margin-bottom:32px}.mb-9{margin-bottom:36px}
@@ -144,7 +145,7 @@
   /* BUTTONS */
   .btn{width:100%;border:none;border-radius:var(--r-md);padding:15px 18px;font-size:15px;font-weight:700;font-family:'Hanken Grotesk',sans-serif;cursor:pointer;transition:transform .14s ease,opacity .14s,box-shadow .2s,background .2s,border-color .2s;display:flex;align-items:center;justify-content:center;gap:8px;}
   .btn:active{transform:scale(.97);opacity:.92;}
-  .btn:disabled{opacity:.4;cursor:not-allowed;}
+  .btn:disabled{opacity:.4;cursor:not-allowed;filter:grayscale(.6);box-shadow:none;}
   .btn-primary{background:var(--grad-warm);color:#fff;box-shadow:0 12px 28px rgba(255,119,160,.3);}
   .btn-primary:not(:disabled):hover{transform:translateY(-2px);}
   .btn-ghost{background:rgba(255,255,255,.04);color:var(--text);border:1.5px solid var(--line);}
@@ -284,7 +285,7 @@
 
   /* ===== RESULT ===== */
   #s-result{justify-content:center;align-items:center;text-align:center;padding:0;}
-  .reveal-bg{position:absolute;inset:0;z-index:0;opacity:0;transition:opacity .6s;}
+  .reveal-bg{position:absolute!important;inset:0;z-index:0;opacity:0;transition:opacity .6s;}
   .reveal-bg.on{opacity:1;}
   .reveal-inner{position:relative;z-index:2;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px 22px;overflow-y:auto;}
   .reveal-inner::-webkit-scrollbar{width:0;}
@@ -316,7 +317,7 @@
   .type-card .tc-l{font-size:11px;color:rgba(255,255,255,.82);margin-top:4px;line-height:1.4;}
 
   /* ===== ARCHETYPE DETAIL ===== */
-  .arch-hero{border-radius:var(--r-xl);padding:28px 22px;text-align:center;color:#fff;margin-bottom:18px;box-shadow:0 16px 40px rgba(0,0,0,.35);position:relative;overflow:hidden;}
+  .arch-hero{border-radius:var(--r-xl);padding:28px 22px;text-align:center;color:#fff;margin-bottom:18px;box-shadow:0 16px 40px rgba(0,0,0,.35);position:relative;overflow:hidden;flex-shrink:0;}
   .arch-hero .ah-em{font-size:58px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));}
   .arch-hero .ah-n{font-family:'Fraunces',serif;font-weight:700;font-size:32px;letter-spacing:-.6px;margin-top:8px;}
   .arch-hero .ah-l{font-size:15px;color:rgba(255,255,255,.9);margin-top:4px;}
@@ -327,8 +328,8 @@
 
   /* ===== EXPLORE ===== */
   .ex-top{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;padding:2px 0 12px;background:linear-gradient(180deg,var(--phone-bg) 70%,transparent);}
-  .search{flex:1;display:flex;align-items:center;gap:9px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-md);padding:11px 14px;}
-  .search input{flex:1;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'Hanken Grotesk',sans-serif;}
+  .search{flex:1;min-width:0;display:flex;align-items:center;gap:9px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-md);padding:11px 14px;}
+  .search input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'Hanken Grotesk',sans-serif;}
   .search input::placeholder{color:var(--faint);}
   .search.search-slim{padding:7px 12px;border-radius:var(--r-sm);}
   .search.search-slim input{font-size:13px;}
@@ -356,7 +357,7 @@
   .act-meta{font-size:13px;color:var(--muted);margin-top:3px;}
   .act-venue{font-size:13px;color:var(--text);font-weight:600;margin-top:8px;}
   .act-vibe{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.45;}
-  .act-planb{font-size:11px;color:var(--faint);margin-top:8px;}
+  .act-planb{font-size:13px;color:var(--faint);margin-top:8px;}
   .act-foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px;}
   .act-social{font-size:11px;color:var(--faint);}
   .picked-card{position:relative;}
@@ -384,7 +385,7 @@
   .gc-personality{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:11px;}
   .gc-foot{display:flex;align-items:center;justify-content:space-between;}
   .gc-spots{font-size:13px;color:var(--faint);}
-  .gc-compat{font-size:11px;color:var(--mint);margin-top:8px;}
+  .gc-compat{font-size:13px;color:var(--mint);margin-top:8px;}
 
   /* group detail */
   .gd-hero{display:flex;align-items:center;gap:14px;margin:4px 0 16px;}
@@ -401,13 +402,12 @@
   .info-tile .it-val{font-size:15px;font-weight:600;margin-top:1px;color:var(--text);}
 
   /* joined */
-  #s-joined{justify-content:center;text-align:center;}
+  #s-joined{text-align:center;}
   .joined-orb{width:96px;height:96px;border-radius:50%;background:var(--grad-calm);display:flex;align-items:center;justify-content:center;font-size:44px;margin:0 auto 20px;box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 0 rgba(111,224,198,.4);animation:softIn .6s cubic-bezier(.2,.7,.3,1),glowPulse 3s ease-in-out infinite;}
   @keyframes glowPulse{0%,100%{box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 0 rgba(111,224,198,.0)}50%{box-shadow:0 16px 40px rgba(111,224,198,.3),0 0 0 14px rgba(111,224,198,.06)}}
 
   /* ===== CHAT ===== */
   #s-chat,#s-dm{padding:14px 0 0;background:var(--chat-bg);overflow:hidden !important;padding-bottom:78px !important;}
-  .chat-scroll{min-height:0;}
   .chat-top{display:flex;align-items:center;gap:11px;padding:0 18px 12px;border-bottom:1px solid var(--line);}
   .chat-top .ct-ic{width:42px;height:42px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
   .chat-top .ct-name{font-size:15px;font-weight:700;}
@@ -425,7 +425,7 @@
   .guide-bar{margin:10px 16px 0;}
   .guide-head{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--accent-text);background:rgba(142,162,255,.08);border:1px solid rgba(142,162,255,.2);border-radius:var(--r-sm);padding:9px 12px;cursor:pointer;}
   .guide-x{margin-left:auto;color:var(--faint);}
-  .chat-scroll{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:3px;}
+  .chat-scroll{flex:1;min-height:0;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:3px;}
   .chat-scroll::-webkit-scrollbar{width:0;}
   .msg-row{display:flex;gap:8px;align-items:flex-end;margin-top:8px;}
   .msg-row .mr-av{width:30px;height:30px;flex-shrink:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;color:#fff;cursor:pointer;}
@@ -478,8 +478,8 @@
   .star-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--line);}
   .star-lab{font-size:15px;font-weight:600;}
   .stars{display:flex;gap:4px;}
-  .star{font-size:26px;cursor:pointer;filter:grayscale(1) opacity(.4);transition:all .12s;}
-  .star.on{filter:none;transform:scale(1.05);}
+  .star{font-size:26px;cursor:pointer;filter:grayscale(.85);opacity:.5;transition:all .12s;}
+  .star.on{filter:none;opacity:1;transform:scale(1.05);}
   .step-dots{display:flex;gap:7px;justify-content:center;margin-bottom:18px;}
   .step-dots i{width:7px;height:7px;border-radius:50%;background:var(--line-2);transition:all .3s;}
   .step-dots i.on{width:20px;border-radius:4px;background:var(--grad-warm);}
@@ -555,10 +555,8 @@
   .invite-method .im-ic{width:42px;height:42px;border-radius:var(--r-sm);background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
   .invite-method .im-t{font-size:15px;font-weight:600;}
   .invite-method .im-s{font-size:13px;color:var(--faint);margin-top:1px;}
-  .qr{width:160px;height:160px;border-radius:var(--r-lg);margin:6px auto 16px;background:
-    repeating-linear-gradient(0deg,#fff 0 8px,#0F0A15 8px 16px),
-    repeating-linear-gradient(90deg,#fff 0 8px,transparent 8px 16px);
-    background-blend-mode:difference;border:8px solid #fff;}
+  .qr{width:172px;height:172px;border-radius:var(--r-lg);margin:6px auto 16px;background:#fff;padding:12px;}
+  .qr svg{display:block;width:100%;height:100%;}
 
   /* ===== MOODCHECK ===== */
   #s-moodcheck{justify-content:center;align-items:center;text-align:center;}
@@ -603,7 +601,8 @@
   .nav-item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--faint);cursor:pointer;transition:color .16s;font-weight:600;padding-top:9px;position:relative;}
   .nav-item .ni-ic{font-size:20px;transition:transform .16s;}
   .nav-item:active .ni-ic{transform:scale(1.08);}
-  .nav-item.on{color:transparent;background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;}
+  .nav-item.on{color:var(--text);}
+  .nav-item.on > span[data-i18n]{color:transparent;background:var(--grad-warm);-webkit-background-clip:text;background-clip:text;}
   .nav-item.on .ni-ic{transform:scale(1.06);}
   .nav-badge{position:absolute;top:5px;right:50%;margin-right:-22px;min-width:16px;height:16px;border-radius:var(--r-pill);background:var(--c2);color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;padding:0 4px;border:1.5px solid var(--phone-bg);}
 
@@ -615,6 +614,20 @@
 
   /* ===== A11Y & UTILITIES ===== */
   :focus-visible{outline:2px solid var(--calm);outline-offset:2px;}
+  /* sticky primary CTA (group detail) — stays visible above the bottom nav */
+  .cta-bar{position:sticky;bottom:88px;z-index:10;margin:8px -22px 0;padding:18px 22px 6px;background:linear-gradient(180deg,transparent,var(--phone-bg) 36%);}
+  /* landing: persistent CTA on panels 1–2 */
+  .land-cta{position:absolute;left:30px;right:30px;bottom:60px;z-index:5;}
+  /* accessibility preferences (Settings) */
+  [data-bold] .sub,[data-bold] .tiny,[data-bold] p,[data-bold] .msg,[data-bold] .act-vibe,[data-bold] .gc-personality{font-weight:600;}
+  html[data-contrast]{--muted:rgba(255,255,255,.95);--faint:rgba(255,255,255,.85);--line:rgba(255,255,255,.26);}
+  html[data-contrast][data-theme="light"]{--muted:rgba(25,18,37,.95);--faint:rgba(25,18,37,.82);--line:rgba(20,12,32,.3);}
+  [data-bigtap] .iconbtn{width:48px;height:48px;}
+  [data-bigtap] .chip,[data-bigtap] .cat{padding:12px 18px;}
+  [data-bigtap] .set-item{padding:18px 4px;}
+  [data-textsize="large"] .screen{font-size:17px;}
+  [data-textsize="large"] .sub,[data-textsize="large"] .msg,[data-textsize="large"] .opt,[data-textsize="large"] .set-item{font-size:17px;}
+  [data-textsize="large"] .tiny,[data-textsize="large"] .act-meta,[data-textsize="large"] .friend-sub,[data-textsize="large"] .gc-when{font-size:15px;}
   .guide-x{padding:8px;margin:-8px -8px -8px auto;}
   .picked-x{width:32px;height:32px;}
   .req-yes,.req-no{min-height:38px;}
@@ -663,6 +676,7 @@
     background-image:radial-gradient(circle at 24% 16%,rgba(255,255,255,.20),transparent 46%),radial-gradient(rgba(255,255,255,.11) .8px,transparent 1.2px);
     background-size:auto,18px 18px;opacity:.7;}
   [class*="g-"]{position:relative;}
+  [class*="g-"]::after{border-radius:inherit;}
   [class*="g-"] > *{position:relative;z-index:2;}
 
   /* ===== RESPONSIVE — full-bleed mobile ===== */
@@ -733,12 +747,12 @@
           <div class="land-panel">
             <div style="margin-top:32px"></div>
             <div class="eyebrow" style="margin-bottom:8px" data-i18n="land_join">Join in</div>
-            <h2 class="display h2" style="margin-bottom:6px"><span id="landCount">2,400+</span> <span data-i18n-html="land_count">Montrealers<br>already going out</span></h2>
+            <h2 class="display h2" style="margin-bottom:6px" data-i18n-html="land_count">Montreal's new way<br>to meet people</h2>
             <p class="sub" style="margin-bottom:18px" data-i18n="land_find">Find your people. Show up.</p>
             <div class="preview-card" id="landPreview"></div>
             <div style="margin-top:auto"></div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px">
-              <span class="pill-static pill-cal" data-i18n="pill_ai">🤖 AI-moderated</span>
+              <span class="pill-static pill-cal" data-i18n="pill_ai">🛡️ Human-first moderation</span>
               <span class="pill-static pill-cal" data-i18n="pill_names">👤 First names only</span>
               <span class="pill-static pill-cal" data-i18n="pill_photos">🔒 Friends-only photos</span>
             </div>
@@ -747,6 +761,7 @@
             <div class="land-dots"><span class="land-dot"></span><span class="land-dot"></span><span class="land-dot on"></span></div>
           </div>
         </div>
+        <div class="land-cta" id="landCta"><button class="btn btn-primary" data-go="test-intro" data-i18n="btn_find_type">Find your type</button></div>
       </section>
 
       <!-- TEST INTRO -->
@@ -754,9 +769,10 @@
         <div class="center-col">
           <div style="font-size:54px;margin-bottom:20px">🧩</div>
           <h1 class="display h1" style="margin-bottom:14px" data-i18n-html="ti_title">Find your<br><span class="grad-text">social type</span></h1>
-          <p class="sub" style="max-width:280px;margin-bottom:28px" data-i18n="ti_sub">7 quick questions. We use it to match you with groups that fit.</p>
+          <p class="sub" style="max-width:280px;margin-bottom:10px" data-i18n="ti_sub">7 quick questions. We use it to match you with groups that fit.</p>
+          <p class="tiny" style="margin-bottom:24px" data-i18n="ti_age">Perch is for adults — 18 and over.</p>
           <button class="btn btn-primary" data-go="q" data-i18n="btn_start">Start</button>
-          <button class="btn btn-link" data-go="landing" data-i18n="btn_maybe">Maybe later</button>
+          <button class="btn btn-link" id="tiMaybe" data-i18n="btn_maybe">Maybe later</button>
         </div>
       </section>
 
@@ -861,15 +877,16 @@
         <div class="hdr-wash wash-default" id="washExplore"></div>
         <div class="ex-top">
           <div class="search"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="exSearch" placeholder="Search activities" data-i18n-ph="ex_search" aria-label="Search activities"></div>
-          <button class="iconbtn" id="exHost" aria-label="Host a hang" title="Host a hang">＋</button>
-          <button class="iconbtn" id="exFilter" aria-label="Filters">⚙︎</button>
+          <button class="msg-pill" id="exHost" aria-label="Host a hang" title="Host a hang">＋ Host</button>
+          <button class="iconbtn" id="exFilter" aria-label="Filters" style="position:relative">🎚️<span class="badge-dot" id="exFilterDot" style="display:none"></span></button>
           <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="exBellDot"></span></button>
         </div>
         <div class="cat-rail" id="catRail"></div>
+        <div id="thursBanner"></div>
         <div id="pickedRow"></div>
-        <div class="sec-title" data-i18n="ex_popular">Popular this week</div>
+        <div class="sec-title" id="popTitle" data-i18n="ex_popular">Popular this week</div>
         <div class="pop-rail" id="popRail"></div>
-        <div class="sec-title" id="feedTitle" data-i18n="ex_browse">Browse</div>
+        <div class="sec-title" id="feedTitle">Browse</div>
         <div id="actList"></div>
         <button class="btn-link" id="suggestLink" style="margin-top:8px" data-i18n="ex_suggest">Don't see what you're looking for?</button>
       </section>
@@ -878,7 +895,7 @@
       <section class="screen pad-nav fade" id="s-groups">
         <div class="hdr-wash wash-default" id="washGroups"></div>
         <div class="nav-row"><div class="nav-title">Groups</div></div>
-        <div class="seg" id="groupsSeg"><div class="sopt on" data-tab="up">Upcoming</div><div class="sopt" data-tab="past">Past</div></div>
+        <div class="seg" id="groupsSeg"><div class="sopt on" data-tab="up" data-i18n="grp_up">Upcoming</div><div class="sopt" data-tab="past" data-i18n="grp_past_t">Past</div></div>
         <div id="groupsBody"></div>
       </section>
 
@@ -943,7 +960,7 @@
           <div class="nav-title">Friends</div><div class="nav-spacer"></div>
           <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative">✉️<span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
-        <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends">Friends</div><div class="sopt" data-tab="met">Met</div></div>
+        <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends" data-i18n="fr_tab">Friends</div><div class="sopt" data-tab="met" data-i18n="fr_met">Met</div></div>
         <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" aria-label="Search"></div>
         <div id="friendsBody"></div>
       </section>
@@ -951,7 +968,7 @@
       <!-- FRIEND REQUESTS -->
       <section class="screen pad-nav fade" id="s-requests">
         <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Requests</div></div>
-        <div class="seg" id="reqSeg"><div class="sopt on" data-tab="recv">Received</div><div class="sopt" data-tab="sent">Sent</div></div>
+        <div class="seg" id="reqSeg"><div class="sopt on" data-tab="recv" data-i18n="rq_recv">Received</div><div class="sopt" data-tab="sent" data-i18n="rq_sent">Sent</div></div>
         <div id="reqBody"></div>
       </section>
 
@@ -976,8 +993,7 @@
 
       <!-- FEEDBACK -->
       <section class="screen pad-nav fade" id="s-feedback">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Reflection</div></div>
-        <p class="sub" style="margin-bottom:16px">Your feedback shapes future groups.</p>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="fb_title">Reflection</div></div>
         <div class="step-dots" id="fbDots"><i class="on"></i><i></i><i></i></div>
         <div id="fbBody"></div>
       </section>
@@ -985,7 +1001,7 @@
       <!-- NOTIFICATIONS -->
       <section class="screen pad-nav fade" id="s-notifications">
         <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)">Clear all</span></div>
-        <div class="seg" id="notifSeg"><div class="sopt on" data-tab="activity">Activity</div><div class="sopt" data-tab="ann">Announcements</div></div>
+        <div class="seg" id="notifSeg"><div class="sopt on" data-tab="activity" data-i18n="nt_act">Activity</div><div class="sopt" data-tab="ann" data-i18n="nt_ann">Announcements</div></div>
         <div id="notifBody"></div>
       </section>
 
@@ -1004,15 +1020,15 @@
 
       <!-- INVITE -->
       <section class="screen pad-nav fade" id="s-invite">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Invite</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="inv_nav">Invite</div></div>
         <div style="text-align:center;margin:10px 0 20px">
-          <h1 class="display h1" style="margin-bottom:8px">Bring someone<br>along</h1>
-          <p class="sub" style="max-width:260px;margin:0 auto">They take the quiz and find their own group.</p>
+          <h1 class="display h1" style="margin-bottom:8px" data-i18n-html="inv_title">Bring someone<br>along</h1>
+          <p class="sub" style="max-width:260px;margin:0 auto" data-i18n="inv_sub">They take the quiz and find their own group.</p>
         </div>
-        <div class="invite-method" id="inviteCopy"><div class="im-ic">🔗</div><div><div class="im-t">Copy link</div><div class="im-s">perch.app/i/you</div></div></div>
-        <div class="invite-method" id="inviteShare"><div class="im-ic">📤</div><div><div class="im-t">Share</div><div class="im-s">Messages · WhatsApp · Instagram</div></div></div>
-        <div class="sec-title" style="text-align:center;margin-top:20px">Or scan</div>
-        <div class="qr"></div>
+        <div class="invite-method" id="inviteCopy"><div class="im-ic">🔗</div><div><div class="im-t" data-i18n="inv_copy">Copy link</div><div class="im-s">perch.app/i/you</div></div></div>
+        <div class="invite-method" id="inviteShare"><div class="im-ic">📤</div><div><div class="im-t" data-i18n="inv_share">Share</div><div class="im-s">Messages · WhatsApp · Instagram</div></div></div>
+        <div class="sec-title" style="text-align:center;margin-top:20px" data-i18n="inv_scan">Or scan</div>
+        <div class="qr" id="qrBox" role="img" aria-label="QR code for perch.app/i/you"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h2m1 0h2m4 0h7M0 1.5h1m5 0h1m2 0h1m3 0h3m2 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h3m2 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h2m2 0h2M0 8.5h1m1 0h5m2 0h5m1 0h2m1 0h5M0 9.5h1m1 0h2m3 0h1m2 0h2m1 0h1m2 0h1m2 0h1m3 0h1M0 10.5h1m1 0h5m4 0h1m1 0h6m2 0h1m1 0h2M1 11.5h2m4 0h2m3 0h1m1 0h2m1 0h2m5 0h1M0 12.5h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h4m1 0h3M0 13.5h1m7 0h3m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1M0 14.5h1m2 0h2m1 0h7m2 0h1m2 0h4m1 0h2M0 15.5h1m8 0h3m2 0h1m1 0h1m2 0h2m3 0h1M0 16.5h1m1 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h5m1 0h1M8 17.5h3m1 0h2m1 0h2m3 0h2M0 18.5h7m2 0h2m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3M0 19.5h1m5 0h1m1 0h1m3 0h1m1 0h3m3 0h2m1 0h1M0 20.5h1m1 0h3m1 0h1m1 0h3m1 0h9m1 0h3M0 21.5h1m1 0h3m1 0h1m1 0h1m5 0h2m1 0h2m1 0h5M0 22.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h3m4 0h2m1 0h1M0 23.5h1m5 0h1m4 0h1m2 0h3m1 0h4m2 0h1M0 24.5h7m1 0h2m1 0h2m4 0h1m1 0h6"/></svg></div>
       </section>
 
       <!-- MOOD CHECK -->
@@ -1041,19 +1057,19 @@
     </div><!-- /viewport -->
 
     <nav class="bottomnav" id="bottomnav" aria-label="Primary">
-      <div class="nav-item" data-go="explore"><span class="ni-ic">🧭</span><span data-i18n="nav_explore">Explore</span></div>
-      <div class="nav-item" data-go="groups"><span class="ni-ic">🫧</span><span data-i18n="nav_groups">Groups</span></div>
-      <div class="nav-item" data-go="chats"><span class="ni-ic">💬</span><span data-i18n="nav_chat">Chat</span><span class="nav-badge" id="navChatBadge" style="display:none">1</span></div>
-      <div class="nav-item" data-go="friends"><span class="ni-ic">👥</span><span data-i18n="nav_friends">Friends</span><span class="nav-badge" id="navFriendsBadge" style="display:none">1</span></div>
-      <div class="nav-item" data-go="profile"><span class="ni-ic">🙂</span><span data-i18n="nav_profile">Profile</span></div>
+      <div class="nav-item" data-go="explore"><span class="ni-ic" aria-hidden="true">🧭</span><span data-i18n="nav_explore">Explore</span></div>
+      <div class="nav-item" data-go="groups"><span class="ni-ic" aria-hidden="true">🫧</span><span data-i18n="nav_groups">Groups</span></div>
+      <div class="nav-item" data-go="chats"><span class="ni-ic" aria-hidden="true">💬</span><span data-i18n="nav_chat">Chat</span><span class="nav-badge" id="navChatBadge" style="display:none">1</span></div>
+      <div class="nav-item" data-go="friends"><span class="ni-ic" aria-hidden="true">👥</span><span data-i18n="nav_friends">Friends</span><span class="nav-badge" id="navFriendsBadge" style="display:none">1</span></div>
+      <div class="nav-item" data-go="profile"><span class="ni-ic" aria-hidden="true">🙂</span><span data-i18n="nav_profile">Profile</span></div>
     </nav>
 
     <input type="file" id="photoInput" accept="image/*" style="display:none">
     <div class="fx" id="fxLayer"></div>
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <div class="react-pop" id="reactPop" style="display:none"></div>
     <div class="sheet-backdrop" id="sheetBackdrop"></div>
-    <div class="sheet" id="sheet"><div id="sheetBody"></div></div>
+    <div class="sheet" id="sheet" role="dialog" aria-modal="true"><div id="sheetBody"></div></div>
   </div>
 </div>
 <script>
@@ -1160,7 +1176,7 @@
     {id:"thursdays",icon:"🪶",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week"},
     {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
     {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
-    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend"},
+    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend",price:"$35"},
     {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week"},
     {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
     {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
@@ -1171,13 +1187,13 @@
     {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
     {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
     {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
-    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week"},
+    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week",price:"$30"},
     {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
     {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
     {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
     {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
     {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
-    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular"}
+    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular",price:"$28"}
   ];
 
   const ARCH_DOTCOLORS={spark:"#FF7A5C",connector:"#FF6F91",explorer:"#8E6BFF",easygoer:"#6FE0C6",anchor:"#8EA2FF",observer:"#A98FE0",curator:"#F2B33D",grounding:"#A6794E",wildcard:"#FF4D9D",storyteller:"#FF8FA3",navigator:"#2A9D8F",wavelength:"#B9A6F0"};
@@ -1223,8 +1239,8 @@
       land_sub:"Small groups around real activities — the low-pressure way to make friends as an adult.",
       land_how:"How it works",land_steps:"Three steps, that's it",
       land_step1:"Take a quick quiz — find your social type",land_step2:"Pick something to do — we match you with a group",land_step3:"Show up and meet people in real life",
-      land_join:"Join in",land_count:"Montrealers<br>already going out",land_find:"Find your people. Show up.",
-      pill_ai:"🤖 AI-moderated",pill_names:"👤 First names only",pill_photos:"🔒 Friends-only photos",
+      land_join:"Join in",land_count:"Montreal's new way<br>to meet people",land_find:"Find your people. Show up.",
+      pill_ai:"🛡️ Human-first moderation",pill_names:"👤 First names only",pill_photos:"🔒 Friends-only photos",
       btn_find_type:"Find your type",land_signin:"Already have an account? Sign in",
       ti_title:"Find your<br><span class=\"grad-text\">social type</span>",ti_sub:"7 quick questions. We use it to match you with groups that fit.",
       btn_start:"Start",btn_maybe:"Maybe later",q_skip:"Skip",q_back:"← Back",
@@ -1264,6 +1280,61 @@
       pp_perk3_t:"Compatibility insights",pp_perk3_s:"See why a group fits you.",pp_perk4_t:"Host perks",pp_perk4_s:"Pick the spot, set the size, go bigger.",
       pp_perk5_t:"Travel mode",pp_perk5_s:"Find your people in other cities.",pp_perk6_t:"Seasonal re-match",pp_perk6_s:"Retake the quiz anytime, fresh matches every season.",
       pp_price:"$4.99/month",pp_price_yr:"$39/year · two months free",pp_mo:"Monthly · $4.99",pp_yr:"Annual · $39",pp_cta:"Try Perch+ free",pp_active:"You're on Perch+",pp_member:"You're a member — thanks for the early support.",pp_why:"See why · Perch+",toast_plus:"Welcome to Perch+ 🪶",pp_maybe:"Maybe later",
+      pp_limit:"You're at the free limit · 2 hangs a week",pp_trial:"7 days free, then auto-renews · cancel anytime",
+      pp_manage:"Perch+ subscription",pp_cancel:"Cancel subscription",pp_cancel_sub:"You'll keep Perch+ until the end of the billing period, then move back to the free plan.",pp_cancelled:"Perch+ cancelled",pp_active_pill:"Active",
+      ti_age:"Perch is for adults — 18 and over.",
+      thu_s:"A group forms every Thursday. Guaranteed.",thu_meta:"26 joined this week · Thu · 7:00 PM",thu_cta:"See this week's groups →",
+      ex_results:"Results",ex_empty_t:"Try something broader",ex_empty_s:"No activities match that search or filter.",ex_clear:"Clear search & filters",
+      chat_auto1:"Love that — anyone want to split a ride from the metro?",
+      so_title:"Start over?",so_sub:"This resets the whole demo — your groups, friends and chats in this session will be cleared.",so_go:"Yes, start over",so_keep:"Keep my session",
+      joined_see_day:"See you {d}.",joined_see_there:"See you there.",
+      fb_title:"Reflection",fb_q1:"How was it?",fb_q1s:"This shapes future groups.",fb_act:"The activity",fb_venue:"The venue",fb_vibe:"The group vibe",fb_next:"Next",
+      fb_q2:"Would you go back to the venue?",fb_q2s:"This helps us pick better spots.",fb_yes:"Yes",fb_maybe:"Maybe",fb_no:"No",fb_note:"Anything you'd want us to know? (optional)",fb_note_ph:"The lighting, the noise, the staff…",
+      fb_q3:"Add anyone as a friend?",fb_q3s:"Only if you'd like to stay in touch.",fb_added:"Added ✓",fb_add:"＋ Add",fb_done:"Done",fb_skip:"Skip",fb_thanks:"Thanks — this helps us shape better groups 💛",
+      host_title:"Host a hang",host_sub:"Pick a vibe and a rough plan — we'll gather the right people. You just show up first.",host_kind:"What kind of hang?",host_when:"When?",host_where:"Around where?",host_size:"Group size",host_bigger:"Want a bigger hang (7–10)?",host_go:"Start forming my group",
+      host_tonight:"Tonight",host_weekend:"This weekend",host_flex:"Flexible",host_anywhere:"Anywhere",
+      inv_nav:"Invite",inv_title:"Bring someone<br>along",inv_sub:"They take the quiz and find their own group.",inv_copy:"Copy link",inv_share:"Share",inv_scan:"Or scan",
+      set_title:"Settings",set_account:"Account",set_prefs:"Preferences",set_privacy_sec:"Privacy",set_notifs:"Notifications",set_safety:"Safety",set_support_sec:"Support",set_a11y:"Accessibility",
+      set_edit:"Edit profile",set_email:"Email",set_apple:"Sign in with Apple",set_connected:"Connected",set_appearance:"Appearance",
+      set_whomsg:"Who can message me",set_whoadd:"Who can add me",set_photo:"Profile photo",set_photo_val:"Friends only · locked",set_active:"Show active status",
+      set_reminders:"Hang reminders",set_messages:"Messages",set_friendreq:"Friend requests",set_matches:"New group matches",set_updates:"Product updates",
+      set_blocked:"Blocked accounts",set_break:"Take a break",set_modn:"How moderation works",set_well:"Wellbeing resources",
+      set_help:"Help & FAQ",set_contact:"Contact us",set_terms:"Terms of Service",set_privacy_doc:"Privacy Policy",set_guidelines:"Community Guidelines",
+      set_textsize:"Text size",set_bold:"Bold text",set_contrast:"High contrast",set_motion:"Reduce motion",set_targets:"Larger touch targets",
+      set_delete:"Delete account",size_default:"Default",size_large:"Large",
+      opt_everyone:"Everyone",opt_friends:"Friends only",opt_noone:"No one",opt_fof:"Friends of friends",
+      th_system:"System",th_light:"Light",th_dark:"Dark",
+      ma_msg:"Send a message",ma_add:"Add as friend",ma_mute:"Mute",ma_report:"Report",ma_block:"Block",ma_unblock:"Unblock",ma_unfriend:"Remove friend",ma_friend:"Friend",ma_fromgroup:"From your group",
+      ma_foot:"Blocking is private — they're never told, and it doesn't remove anyone from a group.",btn_cancel:"Cancel",
+      rep_title:"Report",rep_sub:"Pick what happened. Our team reviews every report. {n} won't know who reported them.",rep_sys:"Thanks for reporting. Our team is reviewing this now. You can also block this person anytime.",rep_done:"Report received — thank you",
+      blk_sub_b:"You won't see each other's messages or profiles. They're never told. This doesn't remove anyone from a group you're both in.",blk_sub_u:"{n} will be able to see and message you again.",
+      lv_title:"Leaving {a}?",lv_sub:"Your spot will open up for someone else. Leaving is private — no one in the group is notified.",lv_go:"Leave quietly",lv_stay:"Actually, stay",lv_done:"You've left the group",
+      cz_title:"Cancel this hang?",cz_sub:"We'll stop matching people into it, and anyone already matched will be moved to another group.",cz_go:"Cancel the hang",cz_keep:"Keep it",cz_done:"Hang cancelled",
+      del_title:"Delete account?",del_sub:"This permanently removes your profile, messages, and connections. There's no undo.",del_go:"Yes, delete my account",del_keep:"Keep my account",del_done:"Account deleted — goodbye 👋",
+      sup_title:"Contact us",sup_sub:"We usually respond within 24 hours.",sup_label:"Your message",sup_ph:"Tell us what's going on…",sup_send:"Send message",sup_done:"Message sent — we'll get back to you soon",
+      brk_title:"Take a break",brk_sub:"Pause all activity — no notifications, no groups. You can come back anytime.",brk_7:"7 days",brk_14:"14 days",brk_30:"30 days",brk_done:"Break started — see you when you're ready 🌙",
+      sg_title:"Suggest an activity",sg_sub:"Got an idea for a group hang? Tell us — popular suggestions become real groups.",sg_what:"What's the activity?",sg_what_ph:"e.g. Sunset kayaking",sg_where:"Where?",sg_where_ph:"Neighbourhood or venue",sg_send:"Submit idea",sg_done:"Thanks — idea submitted 💡",
+      flt_title:"Filter activities",flt_day:"Day",flt_size:"Group size",flt_apply:"Apply",flt_reset:"Reset",
+      flt_anyday:"Any day",flt_today:"Today",flt_week:"This week",flt_weekend:"Weekend",flt_anysize:"Any size",flt_small:"Small (4–5)",flt_medium:"Medium (5–6)",flt_large:"Larger (6+)",
+      mu_title:"Mute notifications",mu_for:"For {g}",mu_1h:"1 hour",mu_8h:"8 hours",mu_tmrw:"Until tomorrow",mu_event:"Until event ends",mu_done:"Notifications muted",
+      mood_no_t:"That's okay",mood_no_s:"Want to step back from tonight?",mood_no_leave:"Leave this group",mood_no_nvm:"Never mind",
+      ep_title:"Edit profile",ep_change:"Change photo",ep_remove:"Remove",ep_name:"Name",ep_name_ph:"Your name",ep_bio:"Bio",ep_bio_ph:"A line about yourself…",ep_emoji:"Emoji",ep_save:"Save",ep_saved:"Profile updated",
+      ticket:"Ticket",ticket_note:"pay when you book",hosted_cancel:"Cancel this hang",
+      stat_event:"Hang",stat_events:"Hangs",stat_friend:"Friend",stat_friends:"Friends",stat_showup:"Show-up",stat_since:"Since",
+      prof_type:"Your social type",prof_activity:"Your activity",prof_first:"Your first hang awaits",prof_more:"More to come",prof_thisweek:"this week",
+      prof_invite:"Invite a friend",prof_settings:"Settings",prof_help:"Help & FAQ",prof_restart:"Start over",prof_edit:"Edit profile",
+      notif_today:"Today",notif_week:"This week",notif_from:"From Perch",notif_caught_t:"You're all caught up",notif_caught_s:"New activity will appear here.",
+      notif_none_t:"Nothing yet",notif_none_s:"Join a hang and activity will show up here.",
+      notif_req:"sent you a friend request",notif_msgs:"New messages in",notif_justnow:"Just now",notif_joined:"You joined",
+      notif_reminder:"Reminder · your hang is coming up",notif_yest:"Yesterday",notif_newgroup:"A new group formed that matches your vibe",
+      notif_ann1:"Welcome to Perch — here's how groups work",notif_ann2:"New activities added in your area this week",notif_ann3:"A note on how we keep groups respectful",notif_signup:"On sign-up",notif_lastweek:"Last week",
+      help_contact:"Still need help? Contact us",
+      toast_cal:"Added to your calendar 🗓️",toast_dir:"Directions sent to Maps 🧭",toast_invcopy:"Invite link copied",toast_invshare:"Invite ready to share 📤",toast_link:"Link copied",
+      toast_friends:"You and {n} are now friends",toast_reqsent:"Friend request sent to {n}",toast_muted:"{n} muted",toast_removed:"Removed {n}",toast_unblocked:"{n} unblocked",toast_blocked:"{n} blocked",
+      toast_photos:"Photos unlock after the group has met 📷",toast_cleared:"Notifications cleared",
+      grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",
+      grp_hist_t:"That's your history so far",grp_hist_t0:"No hangs yet",grp_hist_s:"Groups you attend will show up here.",
+      fr_tab:"Friends",fr_met:"Met",rq_recv:"Received",rq_sent:"Sent",nt_act:"Activity",nt_ann:"Announcements",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     },
     fr:{
@@ -1271,8 +1342,8 @@
       land_sub:"Des petits groupes autour de vraies activités — une façon simple de se faire des amis à l'âge adulte.",
       land_how:"Comment ça marche",land_steps:"Trois étapes, c'est tout",
       land_step1:"Fais un court quiz — trouve ton type social",land_step2:"Choisis une activité — on te jumelle à un groupe",land_step3:"Présente-toi et rencontre du monde en vrai",
-      land_join:"Embarque",land_count:"Montréalais·es<br>qui sortent déjà",land_find:"Trouve ton monde. Présente-toi.",
-      pill_ai:"🤖 Modéré par IA",pill_names:"👤 Prénoms seulement",pill_photos:"🔒 Photos entre amis",
+      land_join:"Embarque",land_count:"La nouvelle façon de se<br>rencontrer à Montréal",land_find:"Trouve ton monde. Présente-toi.",
+      pill_ai:"🛡️ Modération humaine d'abord",pill_names:"👤 Prénoms seulement",pill_photos:"🔒 Photos entre amis",
       btn_find_type:"Trouve ton type",land_signin:"Tu as déjà un compte? Connecte-toi",
       ti_title:"Trouve ton<br><span class=\"grad-text\">type social</span>",ti_sub:"7 courtes questions. Ça nous aide à te jumeler à des groupes qui te conviennent.",
       btn_start:"Commencer",btn_maybe:"Plus tard",q_skip:"Passer",q_back:"← Retour",
@@ -1312,6 +1383,61 @@
       pp_perk3_t:"Aperçus de compatibilité",pp_perk3_s:"Vois pourquoi un groupe te convient.",pp_perk4_t:"Avantages d'hôte",pp_perk4_s:"Choisis l'endroit, la taille, vois plus grand.",
       pp_perk5_t:"Mode voyage",pp_perk5_s:"Trouve ton monde dans d'autres villes.",pp_perk6_t:"Rejumelage saisonnier",pp_perk6_s:"Refais le quiz quand tu veux, de nouveaux matchs à chaque saison.",
       pp_price:"4,99 $/mois",pp_price_yr:"39 $/année · deux mois gratuits",pp_mo:"Mensuel · 4,99 $",pp_yr:"Annuel · 39 $",pp_cta:"Essayer Perch+ gratuitement",pp_active:"T'es sur Perch+",pp_member:"T'es membre — merci du soutien!",pp_why:"Voir pourquoi · Perch+",toast_plus:"Bienvenue sur Perch+ 🪶",pp_maybe:"Plus tard",
+      pp_limit:"T'es à la limite gratuite · 2 sorties par semaine",pp_trial:"7 jours gratuits, puis renouvellement automatique · annulable en tout temps",
+      pp_manage:"Abonnement Perch+",pp_cancel:"Annuler l'abonnement",pp_cancel_sub:"Tu gardes Perch+ jusqu'à la fin de la période, puis tu reviens au plan gratuit.",pp_cancelled:"Perch+ annulé",pp_active_pill:"Actif",
+      ti_age:"Perch, c'est pour les adultes — 18 ans et plus.",
+      thu_s:"Un groupe se forme chaque jeudi. Garanti.",thu_meta:"26 inscrits cette semaine · jeu · 19 h",thu_cta:"Voir les groupes de la semaine →",
+      ex_results:"Résultats",ex_empty_t:"Essaie quelque chose de plus large",ex_empty_s:"Aucune activité ne correspond à cette recherche ou ce filtre.",ex_clear:"Effacer recherche et filtres",
+      chat_auto1:"Parfait! Quelqu'un veut partager un taxi depuis le métro?",
+      so_title:"Recommencer?",so_sub:"Ça réinitialise toute la démo — tes groupes, amis et discussions de cette session seront effacés.",so_go:"Oui, recommencer",so_keep:"Garder ma session",
+      joined_see_day:"On se voit {d}.",joined_see_there:"On se voit là-bas.",
+      fb_title:"Réflexion",fb_q1:"C'était comment?",fb_q1s:"Ça façonne les prochains groupes.",fb_act:"L'activité",fb_venue:"L'endroit",fb_vibe:"L'ambiance du groupe",fb_next:"Suivant",
+      fb_q2:"Tu retournerais à cet endroit?",fb_q2s:"Ça nous aide à choisir de meilleurs endroits.",fb_yes:"Oui",fb_maybe:"Peut-être",fb_no:"Non",fb_note:"Quelque chose à nous dire? (optionnel)",fb_note_ph:"L'éclairage, le bruit, le personnel…",
+      fb_q3:"Ajouter quelqu'un comme ami?",fb_q3s:"Seulement si tu veux rester en contact.",fb_added:"Ajouté ✓",fb_add:"＋ Ajouter",fb_done:"Terminé",fb_skip:"Passer",fb_thanks:"Merci — ça nous aide à former de meilleurs groupes 💛",
+      host_title:"Organiser une sortie",host_sub:"Choisis une ambiance et un plan approximatif — on rassemble les bonnes personnes. Tu n'as qu'à arriver en premier.",host_kind:"Quel genre de sortie?",host_when:"Quand?",host_where:"Dans quel coin?",host_size:"Taille du groupe",host_bigger:"Envie d'une plus grosse sortie (7–10)?",host_go:"Former mon groupe",
+      host_tonight:"Ce soir",host_weekend:"Ce week-end",host_flex:"Flexible",host_anywhere:"N'importe où",
+      inv_nav:"Inviter",inv_title:"Amène quelqu'un<br>avec toi",inv_sub:"Il fait le quiz et trouve son propre groupe.",inv_copy:"Copier le lien",inv_share:"Partager",inv_scan:"Ou scanne",
+      set_title:"Réglages",set_account:"Compte",set_prefs:"Préférences",set_privacy_sec:"Confidentialité",set_notifs:"Notifications",set_safety:"Sécurité",set_support_sec:"Soutien",set_a11y:"Accessibilité",
+      set_edit:"Modifier le profil",set_email:"Courriel",set_apple:"Connexion avec Apple",set_connected:"Connecté",set_appearance:"Apparence",
+      set_whomsg:"Qui peut m'écrire",set_whoadd:"Qui peut m'ajouter",set_photo:"Photo de profil",set_photo_val:"Amis seulement · verrouillé",set_active:"Afficher mon statut actif",
+      set_reminders:"Rappels de sortie",set_messages:"Messages",set_friendreq:"Demandes d'amitié",set_matches:"Nouveaux groupes compatibles",set_updates:"Nouvelles du produit",
+      set_blocked:"Comptes bloqués",set_break:"Prendre une pause",set_modn:"Comment fonctionne la modération",set_well:"Ressources bien-être",
+      set_help:"Aide & FAQ",set_contact:"Nous écrire",set_terms:"Conditions d'utilisation",set_privacy_doc:"Politique de confidentialité",set_guidelines:"Règles de la communauté",
+      set_textsize:"Taille du texte",set_bold:"Texte en gras",set_contrast:"Contraste élevé",set_motion:"Réduire les animations",set_targets:"Zones tactiles plus grandes",
+      set_delete:"Supprimer le compte",size_default:"Par défaut",size_large:"Grande",
+      opt_everyone:"Tout le monde",opt_friends:"Amis seulement",opt_noone:"Personne",opt_fof:"Amis d'amis",
+      th_system:"Système",th_light:"Clair",th_dark:"Sombre",
+      ma_msg:"Envoyer un message",ma_add:"Ajouter comme ami",ma_mute:"Mettre en sourdine",ma_report:"Signaler",ma_block:"Bloquer",ma_unblock:"Débloquer",ma_unfriend:"Retirer l'ami",ma_friend:"Ami",ma_fromgroup:"De ton groupe",
+      ma_foot:"Le blocage est privé — la personne n'est jamais avertie, et ça ne retire personne d'un groupe.",btn_cancel:"Annuler",
+      rep_title:"Signaler",rep_sub:"Choisis ce qui s'est passé. Notre équipe examine chaque signalement. {n} ne saura pas qui l'a signalé.",rep_sys:"Merci pour le signalement. Notre équipe l'examine maintenant. Tu peux aussi bloquer cette personne en tout temps.",rep_done:"Signalement reçu — merci",
+      blk_sub_b:"Vous ne verrez plus vos messages ni vos profils. La personne n'est jamais avertie. Ça ne retire personne d'un groupe commun.",blk_sub_u:"{n} pourra de nouveau te voir et t'écrire.",
+      lv_title:"Quitter {a}?",lv_sub:"Ta place se libérera pour quelqu'un d'autre. Quitter est privé — personne dans le groupe n'est averti.",lv_go:"Quitter discrètement",lv_stay:"Finalement, je reste",lv_done:"Tu as quitté le groupe",
+      cz_title:"Annuler cette sortie?",cz_sub:"On arrête le jumelage, et les personnes déjà jumelées seront placées dans un autre groupe.",cz_go:"Annuler la sortie",cz_keep:"La garder",cz_done:"Sortie annulée",
+      del_title:"Supprimer le compte?",del_sub:"Ça supprime définitivement ton profil, tes messages et tes connexions. Aucun retour en arrière.",del_go:"Oui, supprimer mon compte",del_keep:"Garder mon compte",del_done:"Compte supprimé — au revoir 👋",
+      sup_title:"Nous écrire",sup_sub:"On répond habituellement en moins de 24 heures.",sup_label:"Ton message",sup_ph:"Dis-nous ce qui se passe…",sup_send:"Envoyer",sup_done:"Message envoyé — on te revient bientôt",
+      brk_title:"Prendre une pause",brk_sub:"Mets tout sur pause — pas de notifications, pas de groupes. Tu peux revenir quand tu veux.",brk_7:"7 jours",brk_14:"14 jours",brk_30:"30 jours",brk_done:"Pause commencée — à bientôt 🌙",
+      sg_title:"Suggérer une activité",sg_sub:"Une idée de sortie de groupe? Dis-nous — les suggestions populaires deviennent de vrais groupes.",sg_what:"C'est quoi l'activité?",sg_what_ph:"p. ex. Kayak au coucher du soleil",sg_where:"Où?",sg_where_ph:"Quartier ou endroit",sg_send:"Soumettre l'idée",sg_done:"Merci — idée soumise 💡",
+      flt_title:"Filtrer les activités",flt_day:"Jour",flt_size:"Taille du groupe",flt_apply:"Appliquer",flt_reset:"Réinitialiser",
+      flt_anyday:"Tous les jours",flt_today:"Aujourd'hui",flt_week:"Cette semaine",flt_weekend:"Week-end",flt_anysize:"Toutes",flt_small:"Petit (4–5)",flt_medium:"Moyen (5–6)",flt_large:"Grand (6+)",
+      mu_title:"Sourdine des notifications",mu_for:"Pour {g}",mu_1h:"1 heure",mu_8h:"8 heures",mu_tmrw:"Jusqu'à demain",mu_event:"Jusqu'à la fin de l'activité",mu_done:"Notifications en sourdine",
+      mood_no_t:"C'est correct",mood_no_s:"Tu veux te retirer pour ce soir?",mood_no_leave:"Quitter ce groupe",mood_no_nvm:"Finalement non",
+      ep_title:"Modifier le profil",ep_change:"Changer la photo",ep_remove:"Retirer",ep_name:"Nom",ep_name_ph:"Ton nom",ep_bio:"Bio",ep_bio_ph:"Une ligne sur toi…",ep_emoji:"Emoji",ep_save:"Enregistrer",ep_saved:"Profil mis à jour",
+      ticket:"Billet",ticket_note:"payable à la réservation",hosted_cancel:"Annuler cette sortie",
+      stat_event:"Sortie",stat_events:"Sorties",stat_friend:"Ami",stat_friends:"Amis",stat_showup:"Présence",stat_since:"Depuis",
+      prof_type:"Ton type social",prof_activity:"Ton activité",prof_first:"Ta première sortie t'attend",prof_more:"À suivre",prof_thisweek:"cette semaine",
+      prof_invite:"Inviter un ami",prof_settings:"Réglages",prof_help:"Aide & FAQ",prof_restart:"Recommencer",prof_edit:"Modifier le profil",
+      notif_today:"Aujourd'hui",notif_week:"Cette semaine",notif_from:"De Perch",notif_caught_t:"T'es à jour",notif_caught_s:"La nouvelle activité apparaîtra ici.",
+      notif_none_t:"Rien pour l'instant",notif_none_s:"Rejoins une sortie et l'activité apparaîtra ici.",
+      notif_req:"t'a envoyé une demande d'amitié",notif_msgs:"Nouveaux messages dans",notif_justnow:"À l'instant",notif_joined:"Tu as rejoint",
+      notif_reminder:"Rappel · ta sortie s'en vient",notif_yest:"Hier",notif_newgroup:"Un nouveau groupe correspond à ton vibe",
+      notif_ann1:"Bienvenue sur Perch — voici comment marchent les groupes",notif_ann2:"Nouvelles activités ajoutées dans ton coin cette semaine",notif_ann3:"Un mot sur le respect dans les groupes",notif_signup:"À l'inscription",notif_lastweek:"La semaine passée",
+      help_contact:"Encore besoin d'aide? Écris-nous",
+      toast_cal:"Ajouté à ton calendrier 🗓️",toast_dir:"Itinéraire envoyé à Plans 🧭",toast_invcopy:"Lien d'invitation copié",toast_invshare:"Invitation prête à partager 📤",toast_link:"Lien copié",
+      toast_friends:"Toi et {n} êtes maintenant amis",toast_reqsent:"Demande d'amitié envoyée à {n}",toast_muted:"{n} en sourdine",toast_removed:"{n} retiré",toast_unblocked:"{n} débloqué",toast_blocked:"{n} bloqué",
+      toast_photos:"Les photos se débloquent après la rencontre 📷",toast_cleared:"Notifications effacées",
+      grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",
+      grp_hist_t:"C'est ton historique jusqu'ici",grp_hist_t0:"Pas encore de sortie",grp_hist_s:"Les groupes auxquels tu participes apparaîtront ici.",
+      fr_tab:"Amis",fr_met:"Rencontres",rq_recv:"Reçues",rq_sent:"Envoyées",nt_act:"Activité",nt_ann:"Annonces",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     }
   };
@@ -1346,21 +1472,22 @@
 
   /* ============ STATE ============ */
   const state={
-    lang:detectLang(), theme:"system",
-    age:24, signedIn:false, agreed:false,
+    lang:detectLang(), theme:"dark",
+    age:24, signedIn:false, agreed:false, returning:false,
     currentQ:0, answers:new Array(7).fill(null),
     profileKey:null,
-    picked:new Set(), dismissedPicks:new Set(), activeCat:"For you",
+    picked:new Set(), dismissedPicks:new Set(), activeCat:"For you", filters:{day:null,size:null},
     chosenActivity:null, chosenGroup:null,
-    joinedGroups:[], hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false,
-    chatThreads:{}, chatViewGroup:null, chatRead:false, guideDismissed:false,
+    joinedGroups:[], hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false, seedSocial:false,
+    chatThreads:{}, chatViewGroup:null, unreadChats:new Set(), guideDismissed:false,
     plus:false, ppBill:"mo",
-    rating:{activity:0,venue:0,vibe:0}, fbStep:0,
+    rating:{activity:0,venue:0,vibe:0}, fbStep:0, venueNote:"",
     blocked:new Set(), friends:[], dms:{}, currentDM:null, currentFriendView:null,
-    requests:{recv:[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}],sent:[]},
+    requests:{recv:[],sent:[]},
     photo:null, name:"You", emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
+      boldText:false,highContrast:false,largerTargets:false,textSize:"default",
       notif:{reminders:true,messages:true,friendReq:true,matches:true,updates:false}}
   };
   const MET_SEED=[
@@ -1375,6 +1502,14 @@
   /* ============ HELPERS ============ */
   const $=(s,r=document)=>r.querySelector(s);
   const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+  const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  function makeFocusable(root){
+    $$(".chip,.cat,.set-item,.mood-opt,.friend-row,.group-card,.act-card,.pop-card,.land-dot,.age-step,.sopt,.star,.yn,.type-card,.invite-method,.acc-head,.terms-toggle,.agree-box,.switch",root||document).forEach(el=>{
+      if(el.tagName==="BUTTON") return;
+      if(!el.hasAttribute("role")) el.setAttribute("role",el.classList.contains("switch")?"switch":"button");
+      if(!el.hasAttribute("tabindex")) el.setAttribute("tabindex","0");
+    });
+  }
   const archGrad=k=>ARCH[k]?ARCH[k].g:"g-easygoer";
   function avatarHTML(o,cls="av-sm"){
     if(o&&o.photo) return `<div class="avatar photo ${cls}" style="background-image:url('${o.photo}')"></div>`;
@@ -1392,8 +1527,8 @@
 
   /* ============ NAVIGATION ============ */
   const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","requests","friendprofile","notifications","settings","help","invite","archetype"];
-  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chat",chat:"chat",friends:"friends",dm:"chat",requests:"friends",friendprofile:"friends",feedback:"chat",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
-  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,groups:8,groupdetail:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
+  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chats",chat:"chats",friends:"friends",dm:"chats",requests:"friends",friendprofile:"friends",feedback:"chats",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
+  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,host:7,hostdone:7,groups:8,groupdetail:9,moodcheck:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
   let history=[], chatTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
@@ -1402,6 +1537,8 @@
     const cur=$(".screen.active");
     const next=$("#s-"+id); if(!next) return;
     if(cur===next){ runEnter(id); return; }
+    hideToast();
+    if(cur && cur.id==="s-landing"){ clearInterval(landPrevTimer); clearTimeout(landTimer); }
     if(!opts.silent && cur){ history.push(cur.id.replace("s-","")); if(history.length>40) history.shift(); }
     // U2: mirror non-silent forward navigation into the browser history stack
     if(!opts.silent && !navPopping){ try{ window.history.pushState({screen:id},""); }catch(e){} }
@@ -1443,6 +1580,7 @@
     if(id==="help")           renderHelp();
     if(id==="profile")        renderProfile();
     applyHeaderWash();
+    makeFocusable();
     syncBadges();
   }
   function goBack(){
@@ -1460,14 +1598,15 @@
   }
   function resetDemo(){
     clearChatTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
-    Object.assign(state,{age:24,signedIn:false,agreed:false,currentQ:0,profileKey:null,
-      chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,fbStep:0,
-      chatThreads:{},chatViewGroup:null,chatRead:false,guideDismissed:false,plus:false,ppBill:"mo",
-      blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",
+    Object.assign(state,{age:24,signedIn:false,agreed:false,returning:false,currentQ:0,profileKey:null,
+      chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,seedSocial:false,fbStep:0,venueNote:"",
+      chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
+      blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null},
       photo:null,name:"You",emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
-    state.requests={recv:[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}],sent:[]};
+    state.requests={recv:[],sent:[]};
+    repliedThreads.clear();
     metPool=MET_SEED.map(p=>({...p})); history=[]; reachedExplore=false;
     // reset skeleton flags
     const fb=$("#friendsBody"); if(fb) delete fb._loaded;
@@ -1475,13 +1614,14 @@
     closeSheet();
   }
   function syncBadges(){
-    const cb=$("#navChatBadge"); const showChat=state.joinedGroups.length>0&&!state.chatRead;
-    if(cb) cb.style.display=showChat?"flex":"none";
+    const cb=$("#navChatBadge"); const un=state.unreadChats.size;
+    if(cb){ cb.style.display=un>0?"flex":"none"; cb.textContent=un; }
     const fb=$("#navFriendsBadge"); const rc=state.requests.recv.length;
     if(fb){ fb.style.display=rc>0?"flex":"none"; fb.textContent=rc; }
     const rbd=$("#reqBadge"); if(rbd) rbd.style.display=rc>0?"block":"none";
     const bell=state.notifsCleared?"none":"block";
     ["exBellDot","profBellDot"].forEach(i=>{ const e=document.getElementById(i); if(e) e.style.display=bell; });
+    const fd=$("#exFilterDot"); if(fd) fd.style.display=(state.filters.day||state.filters.size)?"block":"none";
   }
 
   document.addEventListener("click",e=>{
@@ -1516,6 +1656,7 @@
   }
   function updateLand(){
     const track=$("#landTrack"); if(track) track.style.transform=`translateX(-${landIdx*100}%)`;
+    const cta=$("#landCta"); if(cta) cta.style.display=landIdx===2?"none":"block";
   }
   let landPrevI=0;
   function cycleLandPreview(){
@@ -1534,21 +1675,25 @@
   })();
   // clickable progress dots (index within each panel's dot row = target panel)
   $$("#s-landing .land-dots").forEach(row=>{ $$(".land-dot",row).forEach((d,i)=>d.addEventListener("click",()=>{ landIdx=i; updateLand(); armLandAuto(); })); });
-  $("#landSignin").addEventListener("click",()=>goTo("signin"));
+  $("#landSignin").addEventListener("click",()=>{ state.returning=true; goTo("signin"); });
+  $("#tiMaybe").addEventListener("click",()=>goTo(reachedExplore?"explore":"landing"));
 
   /* ============ AGE GATE ============ */
   const ageVal=$("#ageVal");
   $("#ageUp").addEventListener("click",()=>{ state.age=Math.min(99,state.age+1); ageVal.textContent=state.age; });
-  $("#ageDown").addEventListener("click",()=>{ state.age=Math.max(13,state.age-1); ageVal.textContent=state.age; });
-  $("#ageContinue").addEventListener("click",()=>{
-    if(state.age<18){ showToast("You'll need to be 18+ to join Perch."); return; }
-    goTo("signin");
-  });
+  $("#ageDown").addEventListener("click",()=>{ state.age=Math.max(18,state.age-1); ageVal.textContent=state.age; });
+  $("#ageContinue").addEventListener("click",()=>{ goTo("signin"); });
 
   /* ============ SIGN IN ============ */
   $$("[data-auth]").forEach(b=>b.addEventListener("click",()=>{
     state.signedIn=true; const m=b.getAttribute("data-auth");
-    showToast(m==="apple"?"Signed in with Apple":"Signed in"); setTimeout(()=>goTo("terms"),360);
+    showToast(m==="apple"?"Signed in with Apple":"Signed in");
+    if(state.returning){
+      // returning user: saved type + already-accepted terms — straight to the app
+      state.profileKey=state.profileKey||"connector"; state.agreed=true;
+      setTimeout(()=>goTo("explore"),360); return;
+    }
+    setTimeout(()=>goTo("terms"),360);
   }));
 
   /* ============ TERMS ============ */
@@ -1610,7 +1755,7 @@
     const el=$("#s-result");
     el.innerHTML=`
       <div class="reveal-bg ${a.g}" id="revealBg"></div>
-      <div class="reveal-inner" style="justify-content:flex-start;padding-top:40px">
+      <div class="reveal-inner" style="justify-content:flex-start;padding-top:40px;padding-bottom:140px">
         <div style="margin-top:auto"></div>
         <div class="arch-emoji">${a.e}</div>
         <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">${t("res_yourtype")}</div>
@@ -1620,7 +1765,7 @@
         <div class="arch-compat">${t("res_vibe")} ${c1} ${t("and")} ${c2}</div>
         <div class="arch-pct">${a.pct} ${t("res_pct")}</div>
         <span class="seeall-link" id="seeAll">${t("res_seeall")}</span>
-        <div style="margin-bottom:120px"></div>
+        <div style="margin-bottom:auto"></div>
       </div>
       <div class="reveal-actions">
         <button class="btn glass-btn" id="shareType" style="margin-bottom:10px">${t("res_share")}</button>
@@ -1671,7 +1816,10 @@
 
   /* ============ EXPLORE ============ */
   function actCardHTML(a,picked){
-    const badges=(a.badge?`<div class="act-badges"><span class="trait" style="background:rgba(0,0,0,.32);border:none;color:#fff;backdrop-filter:blur(4px)">${a.badge}</span></div>`:"<div></div>");
+    const tags=[];
+    if(a.badge) tags.push(a.badge);
+    if(a.price) tags.push(`🎟️ ${a.price}`);
+    const badges=(tags.length?`<div class="act-badges">${tags.map(b=>`<span class="trait" style="background:rgba(0,0,0,.32);border:none;color:#fff;backdrop-filter:blur(4px)">${b}</span>`).join("")}</div>`:"<div></div>");
     return `<div class="act-card ${picked?'picked-card':''}" data-act="${a.id}">
       ${picked?`<button class="picked-x" data-dismiss="${a.id}" aria-label="Dismiss">✕</button>`:""}
       <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${a.icon}</div></div>
@@ -1692,40 +1840,70 @@
     cr.innerHTML=CATS.map(c=>`<div class="cat ${c===state.activeCat?'on':''}" data-cat="${c}">${catLabel(c)}</div>`).join("");
     $$("#catRail .cat").forEach(el=>el.addEventListener("click",()=>{ state.activeCat=el.getAttribute("data-cat"); renderExplore(); }));
 
+    const q=($("#exSearch").value||"").toLowerCase().trim();
+    const home=state.activeCat==="For you" && !q;
+
+    // Perch Thursdays — the weekly guaranteed group, pinned above the catalogue
+    const tb=$("#thursBanner");
+    if(tb){
+      tb.innerHTML=home?`<div class="act-card" data-act="thursdays" style="border:1.5px solid rgba(255,138,107,.45)">
+        <div class="act-hero g-cat-evening" style="height:auto;padding:16px 14px">
+          <div style="display:flex;align-items:center;gap:12px">
+            <span style="font-size:34px">🪶</span>
+            <div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:#fff">Perch Thursdays</div>
+            <div style="font-size:13px;color:rgba(255,255,255,.92)">${t("thu_s")}</div></div>
+          </div>
+        </div>
+        <div class="act-body" style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <span class="act-social">${t("thu_meta")}</span><span class="btn-link link-sm" style="white-space:nowrap">${t("thu_cta")}</span>
+        </div></div>`:"";
+    }
+
     // Picked for you
     const pr=$("#pickedRow");
     const mine=prof();
-    const picks=ACTIVITIES.filter(a=>mine.loves.some(l=>l.toLowerCase().split(" ")[0]===a.name.toLowerCase().split(" ")[0])).slice(0,2);
+    const picks=ACTIVITIES.filter(a=>a.id!=="thursdays"&&mine.loves.some(l=>l.toLowerCase().split(" ")[0]===a.name.toLowerCase().split(" ")[0])).slice(0,2);
     const visPicks=picks.filter(a=>!state.dismissedPicks.has(a.id));
-    if(state.activeCat==="For you" && !$("#exSearch").value && visPicks.length){
+    if(home && visPicks.length){
       pr.innerHTML=`<div class="sec-title">${t("ex_picked")} ${archName(state.profileKey||'easygoer')}.</div>${visPicks.map(a=>actCardHTML(a,true)).join("")}<div class="day-div" style="margin-top:4px">${t("ex_more")}</div>`;
     } else pr.innerHTML="";
 
-    // Popular this week (horizontal)
-    const pop=$("#popRail");
-    const popular=ACTIVITIES.filter(a=>a.badge).slice(0,5);
-    if(state.activeCat==="For you" && !$("#exSearch").value){
+    // Popular this week (horizontal) — section title hides with its rail
+    const pop=$("#popRail"), popTitle=$("#popTitle");
+    const popular=ACTIVITIES.filter(a=>a.badge&&a.id!=="thursdays").slice(0,5);
+    if(home){
       pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${a.name}</div><div class="pb-v">${a.when.split(" · ")[0]} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
-      pop.style.display="flex";
-    } else { pop.innerHTML=""; pop.style.display="none"; }
+      pop.style.display="flex"; if(popTitle) popTitle.style.display="";
+    } else { pop.innerHTML=""; pop.style.display="none"; if(popTitle) popTitle.style.display="none"; }
 
-    // Feed
-    const q=($("#exSearch").value||"").toLowerCase().trim();
-    let list=ACTIVITIES.slice();
+    // Feed — category, search, then user filters
+    let list=ACTIVITIES.filter(a=>a.id!=="thursdays");
     if(state.activeCat!=="For you") list=list.filter(a=>a.cat===state.activeCat);
     if(q) list=list.filter(a=>a.name.toLowerCase().includes(q)||a.cat.toLowerCase().includes(q)||a.venue.toLowerCase().includes(q));
+    const f=state.filters;
+    if(f.day==="today") list=list.filter(a=>a.when.startsWith("Thu"));
+    else if(f.day==="weekend") list=list.filter(a=>/^(Sat|Sun)/.test(a.when));
+    if(f.size) list=list.filter(a=>{ const ns=(a.size.match(/\d+/g)||[]).map(Number); const max=ns[ns.length-1]||0;
+      return f.size==="small"?max<=5:(f.size==="medium"?max===6:max>=7); });
+    const ft=$("#feedTitle");
+    if(ft) ft.textContent=q?`${t("ex_results")} · “${$("#exSearch").value.trim()}”`:(state.activeCat!=="For you"?catLabel(state.activeCat):t("ex_browse"));
     const feed=$("#actList");
     // skeleton flash on category change
     if(!q){ feed.innerHTML=skeletonCards(3); setTimeout(()=>{ if($("#s-explore").classList.contains("active")) populateFeed(list,feed); },260); }
     else populateFeed(list,feed);
   }
   function populateFeed(list,feed){
+    const sg=$("#suggestLink");
     if(!list.length){
-      feed.innerHTML=`<div class="empty-state"><div class="es-em">🔍</div><div class="es-t">Try something broader</div><div class="es-s">No activities match that search.</div><button class="btn btn-soft" id="esClear">Clear search</button></div>`;
-      const ec=$("#esClear"); if(ec) ec.addEventListener("click",()=>{ $("#exSearch").value=""; renderExplore(); });
+      feed.innerHTML=`<div class="empty-state"><div class="es-em">🔍</div><div class="es-t">${t("ex_empty_t")}</div><div class="es-s">${t("ex_empty_s")}</div><button class="btn btn-soft" id="esClear">${t("ex_clear")}</button><button class="btn-link" id="esSuggest">${t("ex_suggest")}</button></div>`;
+      const ec=$("#esClear"); if(ec) ec.addEventListener("click",()=>{ $("#exSearch").value=""; state.filters={day:null,size:null}; renderExplore(); syncBadges(); });
+      const sgl=$("#esSuggest"); if(sgl) sgl.addEventListener("click",openSuggest);
+      if(sg) sg.style.display="none";
     } else {
       feed.innerHTML=list.map(a=>actCardHTML(a,false)).join("");
+      if(sg) sg.style.display="";
     }
+    makeFocusable($("#s-explore"));
 
     // wire cards
     $$("#s-explore [data-act]").forEach(el=>el.addEventListener("click",e=>{
@@ -1768,16 +1946,16 @@
         html+=`<div class="day-div">${t("grp_your")}</div>`;
         html+=state.joinedGroups.map(j=>groupCardHTML(j.group,true)).join("");
       }
-      // hosted groups (forming)
+      // hosted groups (forming) — tappable, opens the hosted detail view
       if(state.hostedGroups.length){
         html+=`<div class="day-div">${t("gd_hosting")}</div>`;
         html+=state.hostedGroups.map(g=>`
-          <div class="group-card">
+          <div class="group-card" data-hosted="${g.id}">
             <div class="gc-statusrow"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.1)">${t("gd_forming_status")}</span></div>
             <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${g.name}</div><div class="gc-when">${g.when}</div></div></div>
             <div class="gc-vibetags">${g.vibetags.map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
             <div class="gc-personality">${g.personality}.</div>
-            <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</span></div>
+            <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</span><span class="btn-link link-sm">${t("gc_open")}</span></div>
           </div>`).join("");
       }
       const groups=makeGroups();
@@ -1789,14 +1967,16 @@
       if(week.length){ html+=`<div class="day-div">${t("grp_later")}</div>`+week.map(g=>groupCardHTML(g,false)).join(""); }
       body.innerHTML=html;
     } else {
-      body.innerHTML=`<div class="day-div">${t("grp_past")}</div>
+      // past history appears only once you've actually joined something — fresh accounts start empty
+      const past=state.seedSocial?`<div class="day-div">${t("grp_past")}</div>
         <div class="group-card muted-card" data-past="trivia">
-          <div class="gc-statusrow"><span class="gc-vibetag">Completed · last week</span></div>
+          <div class="gc-statusrow"><span class="gc-vibetag">${t("grp_completed")}</span></div>
           <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">Trivia Night</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
-          <div class="gc-personality">You met Maya, Theo and 2 others.</div>
-          <div class="gc-foot"><span class="gc-spots">5 went</span><span class="btn-link link-sm">Leave a reflection →</span></div>
-        </div>
-        <div class="empty-state" style="margin-top:12px"><div class="es-em">🫧</div><div class="es-t">That's your history so far</div><div class="es-s">Groups you attend will show up here.</div></div>`;
+          <div class="gc-personality">${t("grp_met_ppl")}</div>
+          <div class="gc-foot"><span class="gc-spots">${t("grp_went")}</span><span class="btn-link link-sm">${t("grp_reflect")}</span></div>
+        </div>`:"";
+      body.innerHTML=`${past}
+        <div class="empty-state" style="margin-top:12px"><div class="es-em">🫧</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
       const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
@@ -1804,12 +1984,17 @@
       const g=all.find(x=>x.id===el.getAttribute("data-group"));
       state.chosenGroup=g; goTo("groupdetail");
     }));
+    $$("#groupsBody [data-hosted]").forEach(el=>el.addEventListener("click",()=>{
+      const g=state.hostedGroups.find(x=>x.id===el.getAttribute("data-hosted"));
+      if(g){ state.chosenGroup=g; goTo("groupdetail"); }
+    }));
   }
 
   /* ============ GROUP DETAIL ============ */
   function renderGroupDetail(){
     const g=state.chosenGroup, a=state.chosenActivity||ACTIVITIES[0];
     if(!g){ goTo("groups"); return; }
+    if(g.hosted){ renderHostedDetail(g); return; }
     const joined=state.joinedGroups.some(j=>j.group.id===g.id);
     const dayOf=joined && state.dayOf===g.id;
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'};width:13px;height:13px"></span>`).join("");
@@ -1818,12 +2003,32 @@
       return `<div style="text-align:center;position:relative" data-member="${m[0]}"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div>${arrived?`<span style="position:absolute;top:-2px;right:6px;width:11px;height:11px;border-radius:50%;background:var(--mint);border:2px solid var(--surface)" title="arrived"></span>`:""}<div style="font-size:11px;color:${arrived?'var(--mint)':'var(--muted)'};margin-top:4px">${m[0]}${arrived?t("gd_here_tag"):''}</div></div>`;
     }).join("");
     const spotsLeft=g.size-g.filled;
+    // body content + a sticky bottom bar so the primary action never hides behind the nav
+    let flowExtra="", bar="";
+    if(joined){
+      if(dayOf && !state.checkedIn){
+        bar=`<div class="cta-bar">
+          <div class="info-tile" style="border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.08);margin-bottom:10px"><div class="it-ic">👋</div><div style="flex:1"><div class="it-lab" style="color:var(--amber)">${t("gd_there")}</div><div class="it-val">${t("gd_tapcheck")}</div></div><button class="btn btn-soft" id="gdCheckin" style="width:auto;padding:10px 16px">${t("gd_imhere")}</button></div>
+          <button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
+      } else {
+        flowExtra=dayOf?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.08)"><div class="it-ic">✅</div><div><div class="it-lab" style="color:var(--mint)">${t("gd_checkedin")}</div><div class="it-val">${t("gd_groupknows")}</div></div></div>`
+          :`<button class="ff" id="gdFastForward" style="margin:2px 0 10px">${t("gd_ff")}</button>`;
+        bar=`<div class="cta-bar"><button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
+      }
+      flowExtra+=`<button class="btn-link" id="gdLeave" style="margin-top:8px">${t("gd_leave")}</button>`;
+    } else if(spotsLeft===0){
+      flowExtra=`<div class="empty-state" style="padding:20px 0 10px"><div class="es-em">😔</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div><div id="altGroupSlot"></div>`;
+    } else {
+      flowExtra=`<p class="tiny" style="text-align:center;margin:4px 0 10px">${t("gd_leave_note")}</p>`;
+      bar=`<div class="cta-bar"><button class="btn btn-primary" id="gdJoin">${t("gd_join")}${a.price?` · ${a.price}`:""}</button></div>`;
+    }
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
       <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${g.name} · ${g.when}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${a.venue.split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${g.when}</div></div></div>
       <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${a.venue}</div></div></div>
+      ${a.price?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
       <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${a.planb}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
@@ -1832,19 +2037,8 @@
         ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${g.compat}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
       <div class="map-stub"><span>🗺️ ${a.venue.split(" · ")[1]||"Map"}</span></div>
-      ${joined?`
-        ${dayOf?(state.checkedIn?`
-          <div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.08)"><div class="it-ic">✅</div><div><div class="it-lab" style="color:var(--mint)">${t("gd_checkedin")}</div><div class="it-val">${t("gd_groupknows")}</div></div></div>`:`
-          <div class="info-tile" style="border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.08)"><div class="it-ic">👋</div><div style="flex:1"><div class="it-lab" style="color:var(--amber)">${t("gd_there")}</div><div class="it-val">${t("gd_tapcheck")}</div></div><button class="btn btn-soft" id="gdCheckin" style="width:auto;padding:10px 16px">${t("gd_imhere")}</button></div>`):`
-          <button class="ff" id="gdFastForward" style="margin:2px 0 10px">${t("gd_ff")}</button>`}
-        <button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button>
-        <button class="btn-link" id="gdLeave" style="margin-top:8px">${t("gd_leave")}</button>`
-      :spotsLeft===0?`
-        <div class="empty-state" style="padding:20px 0 10px"><div class="es-em">😔</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div>
-        <div id="altGroupSlot"></div>`
-      :`
-        <p class="tiny" style="text-align:center;margin:4px 0 10px">${t("gd_leave_note")}</p>
-        <button class="btn btn-primary" id="gdJoin">${t("gd_join")}</button>`}`;
+      ${flowExtra}
+      ${bar}`;
     // re-match: if full, show alt group
     const alt=$("#altGroupSlot");
     if(alt){
@@ -1859,10 +2053,17 @@
     if(gp) gp.addEventListener("click",openPerchPlus);
     const j=$("#gdJoin");
     if(j) j.addEventListener("click",()=>{
+      // free tier caps at 2 hangs/week; Perch+ raises it to 5
+      const cap=state.plus?5:2;
+      if(state.joinedGroups.length>=cap){ openPerchPlus(state.plus?null:"limit"); return; }
       if(!state.joinedGroups.some(x=>x.group.id===g.id)){ state.joinedGroups.push({group:g,activity:a}); g.filled=Math.min(g.size,g.filled+1); }
       // fresh intro for this group next time its chat opens
       delete state.chatThreads[g.id];
-      state.chatRead=false;
+      state.unreadChats.add(g.id);
+      if(!state.seedSocial){
+        state.seedSocial=true;
+        state.requests.recv=[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}];
+      }
       goTo("joined");
     });
     const lv=$("#gdLeave");
@@ -1875,7 +2076,7 @@
     if(ci) ci.addEventListener("click",()=>{
       state.checkedIn=true;
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      const line=fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${fn} est là 👋`:`${fn} is here 👋`);
+      const line=fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${esc(fn)} est là 👋`:`${esc(fn)} is here 👋`);
       if(state.chatThreads[g.id]){ pushMsg({sys:true,text:line},g.id); }
       showToast(t("toast_checkin"));
       renderGroupDetail();
@@ -1885,24 +2086,57 @@
       if(m) openMemberActions({name:m[0],emoji:m[1],key:m[2]});
     }));
   }
+  // hosted hang: status, members so far, and the option to cancel it
+  function renderHostedDetail(g){
+    const members=(g.members||[]).map(m=>`<div style="text-align:center"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div><div style="font-size:11px;color:var(--muted);margin-top:4px">${esc(m[0])}</div></div>`).join("");
+    const spotsLeft=g.size-g.filled;
+    $("#s-groupdetail").innerHTML=`
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${g.emoji}</div><div class="ah-n" style="font-size:20px">${g.name}</div><div class="ah-l">${g.when}</div></div>
+      <div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.1)">${t("gd_forming_status")}</span></div>
+      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${g.when}</div></div></div>
+      <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab">${t("gd_whos")}</div><div class="it-val">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</div></div></div>
+      <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
+        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${g.personality}.</p>
+      </div>
+      <button class="btn btn-amber" id="hostedCancel">${t("hosted_cancel")}</button>`;
+    $("#hostedCancel").addEventListener("click",()=>openCancelHang(g));
+  }
+  function openCancelHang(g){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic warn">🚪</div>
+      <div class="sheet-title">${t("cz_title")}</div>
+      <div class="sheet-sub">${t("cz_sub")}</div>
+      <button class="btn btn-amber" id="czGo">${t("cz_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("cz_keep")}</button>`;
+    $("#czGo").addEventListener("click",()=>{
+      state.hostedGroups=state.hostedGroups.filter(x=>x.id!==g.id);
+      if(state.chosenGroup&&state.chosenGroup.id===g.id) state.chosenGroup=null;
+      closeSheet(); showToast(t("cz_done")); goTo("groups");
+    });
+    sheetClose(); openSheet();
+  }
 
   /* ============ HOST A HANG ============ */
   function renderHost(){
     const cats=CATS.filter(c=>c!=="For you");
+    const whenLabel=w=>({Tonight:t("host_tonight"),"This weekend":t("host_weekend"),Flexible:t("host_flex")})[w]||w;
+    const areaLabel=ar=>ar==="Anywhere"?t("host_anywhere"):ar;
     const whens=["Tonight","This weekend","Flexible"];
     const areas=["Plateau","Mile End","Vieux-Port","Griffintown","Anywhere"];
     const sizes=state.plus?["4","5","6","8"]:["4","5","6"];
     const sel={cat:cats[0],when:whens[0],area:areas[0],size:"5"};
-    const chipRow=(items,grp,cur)=>`<div class="chips" data-grp="${grp}">${items.map(i=>`<span class="chip ${i===cur?'sel':''}" data-val="${i}">${i}</span>`).join("")}</div>`;
+    const chipRow=(items,grp,cur,label)=>`<div class="chips" data-grp="${grp}">${items.map(i=>`<span class="chip ${i===cur?'sel':''}" data-val="${i}">${label?label(i):i}</span>`).join("")}</div>`;
     $("#s-host").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Host a hang</div></div>
-      <p class="sub" style="margin-bottom:18px">Pick a vibe and a rough plan — we'll gather the right people. You just show up first.</p>
-      <div class="sec-title">What kind of hang?</div>${chipRow(cats,"cat",sel.cat)}
-      <div class="sec-title" style="margin-top:16px">When?</div>${chipRow(whens,"when",sel.when)}
-      <div class="sec-title" style="margin-top:16px">Around where?</div>${chipRow(areas,"area",sel.area)}
-      <div class="sec-title" style="margin-top:16px">Group size</div>${chipRow(sizes,"size",sel.size)}
-      ${state.plus?"":`<p class="tiny" style="margin-top:10px">Want a bigger hang (7–10)? <span class="link-inline" id="hostPlusLink">Perch+</span></p>`}
-      <button class="btn btn-primary" id="hostGo" style="margin-top:24px">Start forming my group</button>`;
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("host_title")}</div></div>
+      <p class="sub" style="margin-bottom:18px">${t("host_sub")}</p>
+      <div class="sec-title">${t("host_kind")}</div>${chipRow(cats,"cat",sel.cat,catLabel)}
+      <div class="sec-title" style="margin-top:16px">${t("host_when")}</div>${chipRow(whens,"when",sel.when,whenLabel)}
+      <div class="sec-title" style="margin-top:16px">${t("host_where")}</div>${chipRow(areas,"area",sel.area,areaLabel)}
+      <div class="sec-title" style="margin-top:16px">${t("host_size")}</div>${chipRow(sizes,"size",sel.size)}
+      ${state.plus?"":`<p class="tiny" style="margin-top:10px">${t("host_bigger")} <span class="link-inline" id="hostPlusLink">Perch+</span></p>`}
+      <button class="btn btn-primary" id="hostGo" style="margin-top:24px">${t("host_go")}</button>`;
     $$("#s-host [data-grp]").forEach(row=>{ const grp=row.getAttribute("data-grp");
       $$(".chip",row).forEach(c=>c.addEventListener("click",()=>{ $$(".chip",row).forEach(x=>x.classList.remove("sel")); c.classList.add("sel"); sel[grp]=c.getAttribute("data-val"); }));
     });
@@ -1923,7 +2157,8 @@
     const a=state.chosenActivity||ACTIVITIES[0], g=state.chosenGroup;
     $("#joinedOrb").textContent=a.icon;
     $("#joinedOrb").className="joined-orb "+a.g;
-    $("#joinedSub").textContent=state.lang==="fr"?"On se voit là-bas 🌿":("See you "+(g?g.when.split(" · ")[0].toLowerCase():"there")+".");
+    const day=g?g.when.split(" · ")[0].toLowerCase():null;
+    $("#joinedSub").textContent=day?t("joined_see_day").replace("{d}",day):t("joined_see_there");
     $("#joinedWhen").textContent=g?g.when:a.when;
     $("#joinedWhere").textContent=a.venue;
     $("#joinedWho").textContent=`${t("you_plus")} ${g?Math.max(1,g.filled-1):4} ${t("others")}`;
@@ -1994,7 +2229,7 @@
   }
   // Combined inbox: group chats + DM threads in one list
   function enterChats(){
-    state.chatRead=true; syncBadges();
+    syncBadges();
     const groups=chatList(), dms=dmList(), body=$("#chatsBody");
     if(!groups.length && !dms.length){
       body.innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
@@ -2008,7 +2243,8 @@
       if(it.forming) preview=t("chat_forming_sub");
       else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi"); }
       const when=it.when?it.when.split(" · ")[0]:"";
-      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div><span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
+      const unread=state.unreadChats.has(it.id);
+      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
     dms.forEach(d=>{
       html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="online"></span></div>`;
@@ -2021,7 +2257,7 @@
     $$("#chatsBody [data-chatdm]").forEach(el=>el.addEventListener("click",()=>{ state.currentDM=el.getAttribute("data-chatdm"); goTo("dm"); }));
   }
   function openGroupChat(item){
-    state.chatViewGroup=item.id; state.chatRead=true; syncBadges();
+    state.chatViewGroup=item.id; state.unreadChats.delete(item.id); syncBadges();
     state.chosenGroup=item.group; if(item.activity) state.chosenActivity=item.activity;
     const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
@@ -2061,6 +2297,16 @@
     }
   }
 
+  // one contextual scripted reply per thread after the user's first message
+  const repliedThreads=new Set();
+  function maybeAutoReply(){
+    const gid=state.chatViewGroup; if(!gid||repliedThreads.has(gid)) return;
+    repliedThreads.add(gid);
+    const g=state.chosenGroup; const m=(g&&g.members&&g.members[0])||["Maya","😄","connector"];
+    chatTimers.push(setTimeout(()=>showTyping(gid),900));
+    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m[0],emoji:m[1],key:m[2],text:t("chat_auto1"),time:"now"},gid); },2300));
+  }
+
   // long-press reactions
   let lpTimer=null;
   function wireReactTargets(){
@@ -2085,11 +2331,12 @@
           inp.setAttribute("data-reply",preview);
           // show quote above input
           let rq=$("#replyQuote");
-          if(!rq){ rq=document.createElement("div"); rq.id="replyQuote"; rq.style.cssText="font-size:13px;color:var(--accent-text);border-left:3px solid var(--c2);padding:6px 10px;margin:6px 16px 0;border-radius:0 8px 8px 0;background:rgba(142,162,255,.08);display:flex;align-items:center;justify-content:space-between;"; 
+          if(!rq){ rq=document.createElement("div"); rq.id="replyQuote"; rq.style.cssText="font-size:13px;color:var(--accent-text);border-left:3px solid var(--c2);padding:6px 10px;margin:6px 16px 0;border-radius:0 8px 8px 0;background:rgba(142,162,255,.08);display:flex;align-items:center;justify-content:space-between;";
+            const qt=document.createElement("span"); qt.id="replyQuoteText"; rq.appendChild(qt);
             const closeQ=document.createElement("span"); closeQ.textContent="✕"; closeQ.style.cssText="cursor:pointer;color:var(--faint);margin-left:8px;";
             closeQ.addEventListener("click",()=>{ rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say"); });
             rq.appendChild(closeQ); $("#s-chat .chat-input").before(rq); }
-          rq.firstChild.textContent="↩ "+who+": "+preview; inp.placeholder="Reply to "+who+"…"; inp.focus();
+          $("#replyQuoteText").textContent="↩ "+who+": "+preview; inp.placeholder="Reply to "+who+"…"; inp.focus();
         }
       },{passive:true});
     });
@@ -2116,12 +2363,13 @@
     inp.addEventListener("input",()=>send.classList.toggle("off",!inp.value.trim()));
     const doSend=()=>{ const v=inp.value.trim(); if(!v) return;
       const quote=inp.getAttribute("data-reply");
-      pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${quote}</span>`:"")+v,time:"now"});
+      pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${esc(quote)}</span>`:"")+esc(v),time:"now"});
       const rq=$("#replyQuote"); if(rq) rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say");
-      inp.value=""; send.classList.add("off"); };
+      inp.value=""; send.classList.add("off");
+      maybeAutoReply(); };
     send.addEventListener("click",doSend);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") doSend(); });
-    $("#chatPlus").addEventListener("click",()=>showToast("Photos unlock after the group has met 📷"));
+    $("#chatPlus").addEventListener("click",()=>showToast(t("toast_photos")));
     // pinned collapse
     $("#pinnedBar").addEventListener("click",()=>$("#pinned").classList.toggle("open"));
     // guidelines
@@ -2172,6 +2420,7 @@
         return friendRowHTML(p,`Met at ${p.met}`,action);
       }).join("");
     }
+    makeFocusable($("#friendsBody"));
     // wiring
     $$("#friendsBody [data-friend]").forEach(el=>el.addEventListener("click",e=>{
       if(e.target.closest("button")) return;
@@ -2182,7 +2431,7 @@
   }
   function addFriend(name){
     const p=metPool.find(x=>x.name===name)||state.requests.recv.find(x=>x.name===name);
-    if(p&&!state.friends.some(f=>f.name===name)){ state.friends.push({...p}); showToast(`You and ${name} are now friends`); }
+    if(p&&!state.friends.some(f=>f.name===name)){ state.friends.push({...p}); showToast(t("toast_friends").replace("{n}",name)); }
     renderFriends();
   }
   function openFriendProfile(name){ state.currentFriendView=name; goTo("friendprofile"); }
@@ -2229,13 +2478,13 @@
         <div class="sub" style="margin-top:8px">${a.tag}</div>
       </div>
       <div class="info-block"><div class="sec-title">Where you met</div><div class="ib-row"><span class="star">📍</span><span>${p.met||"A Perch meetup"}</span></div></div>
-      ${isFriend?`<div class="info-block"><div class="sec-title">A bit about ${p.name}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">Here for relaxed, friendly hangs. ${a.desc.slice(0,2).join(" and ")} by most accounts.</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">Add ${p.name} as a friend to see more and message privately.</p>`}
+      ${isFriend?`<div class="info-block"><div class="sec-title">A bit about ${p.name}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">Here for relaxed, friendly hangs. ${a.desc[0]} and ${(a.desc[1]||"").toLowerCase()}, by most accounts.</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">Add ${p.name} as a friend to see more and message privately.</p>`}
       <div class="btn-row">
         ${isFriend?`<button class="btn btn-primary" id="fpMsg">💬 Message</button>`:`<button class="btn btn-primary" id="fpAdd">＋ Add friend</button>`}
         <button class="btn btn-soft" id="fpMore" aria-label="More options">···</button>
       </div>`;
     const msg=$("#fpMsg"); if(msg) msg.addEventListener("click",()=>{ state.currentDM=p.name; goTo("dm"); });
-    const add=$("#fpAdd"); if(add) add.addEventListener("click",()=>{ if(state.requests.recv.some(x=>x.name===p.name)){ addFriend(p.name); goTo("friendprofile"); } else { state.requests.sent.push({...p}); showToast(`Friend request sent to ${p.name}`); } });
+    const add=$("#fpAdd"); if(add) add.addEventListener("click",()=>{ if(state.requests.recv.some(x=>x.name===p.name)){ addFriend(p.name); goTo("friendprofile"); } else { state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.name)); } });
     const more=$("#fpMore"); if(more) more.addEventListener("click",()=>openMemberActions(p,isFriend));
   }
 
@@ -2252,13 +2501,20 @@
     if(state.dms[name].some(m=>m.who==="me")) sc.insertAdjacentHTML("beforeend",`<div class="dm-seen">Seen</div>`);
     sc.scrollTop=sc.scrollHeight;
   }
+  const DM_REPLIES={
+    en:["😄 sounds good!","Yes! I was hoping you'd say that","Haha for sure — same time, same place?"],
+    fr:["😄 parfait!","Oui! J'espérais que tu dises ça","Haha certain — même heure, même place?"]
+  };
   function wireDM(){
     const inp=$("#dmInput"), send=$("#dmSend");
     inp.addEventListener("input",()=>send.classList.toggle("off",!inp.value.trim()));
-    const doSend=()=>{ const v=inp.value.trim(); if(!v||!state.currentDM) return; state.dms[state.currentDM].push({who:"me",text:v,time:"now"}); inp.value=""; send.classList.add("off"); renderDM();
+    const doSend=()=>{ const v=inp.value.trim(); if(!v||!state.currentDM) return; state.dms[state.currentDM].push({who:"me",text:esc(v),time:"now"}); inp.value=""; send.classList.add("off"); renderDM();
       const p=state.currentDM;
       setTimeout(()=>{ const sc=$("#dmScroll"); if($("#s-dm").classList.contains("active")&&state.currentDM===p){ sc.insertAdjacentHTML("beforeend",`<div class="typing"><i></i><i></i><i></i></div>`); sc.scrollTop=sc.scrollHeight; } },900);
-      setTimeout(()=>{ if($("#s-dm").classList.contains("active")&&state.currentDM===p){ state.dms[p].push({who:"them",text:"😄 sounds good!",time:"now"}); renderDM(); } },2100);
+      setTimeout(()=>{ if($("#s-dm").classList.contains("active")&&state.currentDM===p){
+        const pool=DM_REPLIES[state.lang]||DM_REPLIES.en;
+        const n=state.dms[p].filter(m=>m.who==="them").length;
+        state.dms[p].push({who:"them",text:pool[n%pool.length],time:"now"}); renderDM(); } },2100);
     };
     send.addEventListener("click",doSend);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") doSend(); });
@@ -2268,44 +2524,46 @@
   /* ============ FEEDBACK ============ */
   function starRow(label,key){
     const v=state.rating[key]||0;
-    return `<div class="star-row"><span class="star-lab">${label}</span><div class="stars" data-rate="${key}">${[1,2,3,4,5].map(n=>`<span data-n="${n}" style="font-size:26px;cursor:pointer;filter:${n<=v?'none':'grayscale(1) opacity(.4)'}">⭐</span>`).join("")}</div></div>`;
+    return `<div class="star-row"><span class="star-lab">${label}</span><div class="stars" data-rate="${key}">${[1,2,3,4,5].map(n=>`<span class="star ${n<=v?'on':''}" data-n="${n}" role="button" tabindex="0" aria-label="${label} · ${n}/5">⭐</span>`).join("")}</div></div>`;
   }
   function renderFeedback(){
     const dots=$("#fbDots"); dots.innerHTML=[0,1,2].map(i=>`<i class="${i===state.fbStep?'on':''}"></i>`).join("");
     const body=$("#fbBody");
     if(state.fbStep===0){
-      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">How was it?</h2>
-        <p class="sub" style="margin-bottom:6px">This shapes future groups.</p>
-        ${starRow("The activity","activity")}${starRow("The venue","venue")}${starRow("The group vibe","vibe")}
-        <button class="btn btn-primary" id="fbNext" style="margin-top:24px">Next</button>`;
+      const r=state.rating, rated=r.activity&&r.venue&&r.vibe;
+      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q1")}</h2>
+        <p class="sub" style="margin-bottom:6px">${t("fb_q1s")}</p>
+        ${starRow(t("fb_act"),"activity")}${starRow(t("fb_venue"),"venue")}${starRow(t("fb_vibe"),"vibe")}
+        <button class="btn btn-primary" id="fbNext" style="margin-top:24px" ${rated?'':'disabled'}>${t("fb_next")}</button>`;
       $$("#fbBody [data-rate]").forEach(row=>$$("span",row).forEach(st=>st.addEventListener("click",()=>{ state.rating[row.getAttribute("data-rate")]=+st.getAttribute("data-n"); renderFeedback(); })));
       $("#fbNext").addEventListener("click",()=>{ state.fbStep=1; renderFeedback(); });
     } else if(state.fbStep===1){
       const v=state.venueOk;
-      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">Would you go back to the venue?</h2>
-        <p class="sub" style="margin-bottom:6px">This helps us pick better spots.</p>
+      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q2")}</h2>
+        <p class="sub" style="margin-bottom:6px">${t("fb_q2s")}</p>
         <div class="yn-row">
-          <button class="yn ${v==='yes'?'on':''}" data-v="yes">Yes</button>
-          <button class="yn ${v==='maybe'?'on':''}" data-v="maybe">Maybe</button>
-          <button class="yn ${v==='no'?'on':''}" data-v="no">No</button>
+          <button class="yn ${v==='yes'?'on':''}" data-v="yes">${t("fb_yes")}</button>
+          <button class="yn ${v==='maybe'?'on':''}" data-v="maybe">${t("fb_maybe")}</button>
+          <button class="yn ${v==='no'?'on':''}" data-v="no">${t("fb_no")}</button>
         </div>
-        <div class="field" style="margin-top:8px"><label>Anything you'd want us to know? (optional)</label><textarea rows="3" placeholder="The lighting, the noise, the staff…"></textarea></div>
-        <button class="btn btn-primary" id="fbNext" style="margin-top:16px">Next</button>`;
-      $$("#fbBody [data-v]").forEach(b=>b.addEventListener("click",()=>{ state.venueOk=b.getAttribute("data-v"); renderFeedback(); }));
-      $("#fbNext").addEventListener("click",()=>{ state.fbStep=2; renderFeedback(); });
+        <div class="field" style="margin-top:8px"><label>${t("fb_note")}</label><textarea id="fbVenueNote" rows="3" placeholder="${t("fb_note_ph")}">${esc(state.venueNote)}</textarea></div>
+        <button class="btn btn-primary" id="fbNext" style="margin-top:16px">${t("fb_next")}</button>`;
+      $$("#fbBody [data-v]").forEach(b=>b.addEventListener("click",()=>{ state.venueOk=b.getAttribute("data-v"); state.venueNote=($("#fbVenueNote")||{}).value||state.venueNote; renderFeedback(); }));
+      $("#fbNext").addEventListener("click",()=>{ state.venueNote=($("#fbVenueNote")||{}).value||""; state.fbStep=2; renderFeedback(); });
     } else {
       const ppl=metPool.slice(0,3);
-      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">Add anyone as a friend?</h2>
-        <p class="sub" style="margin-bottom:14px">Only if you'd like to stay in touch.</p>
+      body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q3")}</h2>
+        <p class="sub" style="margin-bottom:14px">${t("fb_q3s")}</p>
         ${ppl.map(p=>{ const added=state.friends.some(f=>f.name===p.name);
-          return `<div class="friend-row" style="cursor:default">${avatarHTML(p,"av-sm")}<div class="friend-meta"><div class="friend-name">${p.name} ${archBadge(p.key)}</div></div><button class="req-yes" data-fbadd="${p.name}" ${added?'disabled style="opacity:.5"':''}>${added?'Added ✓':'＋ Add'}</button></div>`;
+          return `<div class="friend-row" style="cursor:default">${avatarHTML(p,"av-sm")}<div class="friend-meta"><div class="friend-name">${p.name} ${archBadge(p.key)}</div></div><button class="req-yes" data-fbadd="${p.name}" ${added?'disabled style="opacity:.5"':''}>${added?t("fb_added"):t("fb_add")}</button></div>`;
         }).join("")}
-        <button class="btn btn-primary" id="fbDone" style="margin-top:20px">Done</button>
-        <button class="btn-link" id="fbSkip" style="margin-top:4px">Skip</button>`;
+        <button class="btn btn-primary" id="fbDone" style="margin-top:20px">${t("fb_done")}</button>
+        <button class="btn-link" id="fbSkip" style="margin-top:4px">${t("fb_skip")}</button>`;
       $$("#fbBody [data-fbadd]").forEach(b=>b.addEventListener("click",()=>{ addFriend(b.getAttribute("data-fbadd")); renderFeedback(); }));
-      const finish=()=>{ showToast("Thanks — this helps us shape better groups 💛"); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
+      const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
       $("#fbDone").addEventListener("click",finish); $("#fbSkip").addEventListener("click",finish);
     }
+    makeFocusable($("#s-feedback"));
   }
 
   /* ============ PROFILE ============ */
@@ -2313,50 +2571,62 @@
     const a=prof();
     const photo=state.photo?`<div class="avatar av-lg photo" style="margin:0 auto;width:104px;height:104px;background-image:url('${state.photo}')"></div>`
       :`<div class="avatar av-lg ${a.g}" style="margin:0 auto;width:104px;height:104px;font-size:50px">${state.emoji}</div>`;
+    const nEvents=state.joinedGroups.length, nFriends=state.friends.length;
+    const hist=state.seedSocial?`
+        <div class="hist-card"><div class="hc-n">🧠 Trivia Night</div><div class="hc-v">Pub Saint-Laurent · ${t("prof_thisweek")}</div></div>
+        <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">${t("prof_more")}</div>`
+      :`<div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px;min-height:64px">${t("prof_first")}</div>`;
     $("#profileBody").innerHTML=`
       <div style="text-align:center;margin:4px 0 18px">
         <div style="position:relative;width:104px;margin:0 auto">${photo}
           <button id="pfCam" aria-label="Edit photo" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--phone-bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
-        <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:16px">${state.name}</div>
+        <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:16px">${esc(state.name)}</div>
         <div style="margin-top:8px">${archBadge(state.profileKey||'easygoer')}</div>
-        <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${state.bio}</p>
-        <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${i}</span>`).join("")}</div>
-        <button class="btn-link" id="pfEdit" style="margin-top:12px">Edit profile</button>
+        <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${esc(state.bio)}</p>
+        <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${esc(i)}</span>`).join("")}</div>
+        <button class="btn-link" id="pfEdit" style="margin-top:12px">${t("prof_edit")}</button>
       </div>
       <div class="stats">
-        <div class="stat"><div class="sn">${state.joinedGroups.length||1}</div><div class="sl">Events</div></div>
-        <div class="stat"><div class="sn">${state.friends.length}</div><div class="sl">Friends</div></div>
-        <div class="stat"><div class="sn">100%</div><div class="sl">Show-up</div></div>
-        <div class="stat"><div class="sn">'26</div><div class="sl">Since</div></div>
+        <div class="stat"><div class="sn">${nEvents}</div><div class="sl">${nEvents===1?t("stat_event"):t("stat_events")}</div></div>
+        <div class="stat"><div class="sn">${nFriends}</div><div class="sl">${nFriends===1?t("stat_friend"):t("stat_friends")}</div></div>
+        <div class="stat"><div class="sn">${state.checkedIn?"100%":"—"}</div><div class="sl">${t("stat_showup")}</div></div>
+        <div class="stat"><div class="sn">'26</div><div class="sl">${t("stat_since")}</div></div>
       </div>
       <div id="ppCard" style="border-radius:var(--r-lg);padding:15px 16px;margin-bottom:18px;cursor:pointer;display:flex;align-items:center;gap:13px;border:1.5px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad-warm) border-box">
         <div style="font-size:26px">🪶</div>
-        <div style="flex:1"><div style="font-size:15px;font-weight:700">Perch+${state.plus?' <span class="pill-static pill-mint" style="font-size:10px;padding:2px 8px;vertical-align:2px">✓ Active</span>':''}</div><div class="tiny" style="margin-top:1px">${state.plus?t("pp_member"):t("pp_card_sub")}</div></div>
+        <div style="flex:1"><div style="font-size:15px;font-weight:700">Perch+${state.plus?' <span class="pill-static pill-mint" style="font-size:10px;padding:2px 8px;vertical-align:2px">✓ '+t("pp_active_pill")+'</span>':''}</div><div class="tiny" style="margin-top:1px">${state.plus?t("pp_member"):t("pp_card_sub")}</div></div>
         <span style="color:var(--faint)">›</span>
       </div>
-      <div class="sec-title">Your social type</div>
-      <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${a.e}</div><div><div class="tm-n">${a.n}</div><div class="tm-d">${a.tag}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
-      <div class="sec-title" style="margin-top:8px">Your activity</div>
-      <div class="hist-rail">
-        <div class="hist-card"><div class="hc-n">🧠 Trivia Night</div><div class="hc-v">Pub Saint-Laurent · last week</div></div>
-        <div class="hist-card"><div class="hc-n">🚶 Walking Tour</div><div class="hc-v">Vieux-Port · 2 weeks ago</div></div>
-        <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">More to come</div>
-      </div>
+      <div class="sec-title">${t("prof_type")}</div>
+      <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${a.e}</div><div><div class="tm-n">${archName(state.profileKey||'easygoer')}</div><div class="tm-d">${archTag(state.profileKey||'easygoer')}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
+      <div class="sec-title" style="margin-top:8px">${t("prof_activity")}</div>
+      <div class="hist-rail">${hist}</div>
       <div class="set-list" style="margin-top:12px">
-        <div class="set-item" data-go="invite"><span class="si-ic">💌</span>Invite a friend<span class="chev">›</span></div>
-        <div class="set-item" data-go="settings"><span class="si-ic">⚙️</span>Settings<span class="chev">›</span></div>
-        <div class="set-item" data-go="help"><span class="si-ic">❓</span>Help &amp; FAQ<span class="chev">›</span></div>
-        <div class="set-item" id="pfRestart"><span class="si-ic">↩️</span>Start over<span class="chev">›</span></div>
+        <div class="set-item" data-go="invite"><span class="si-ic">💌</span>${t("prof_invite")}<span class="chev">›</span></div>
+        <div class="set-item" data-go="settings"><span class="si-ic">⚙️</span>${t("prof_settings")}<span class="chev">›</span></div>
+        <div class="set-item" data-go="help"><span class="si-ic">❓</span>${t("prof_help")}<span class="chev">›</span></div>
+        <div class="set-item" id="pfRestart"><span class="si-ic">↩️</span>${t("prof_restart")}<span class="chev">›</span></div>
       </div>`;
     $("#pfType").addEventListener("click",()=>{ state.archetypeView=state.profileKey; goTo("archetype"); });
     $("#pfCam").addEventListener("click",()=>$("#photoInput").click());
     $("#pfEdit").addEventListener("click",openEditProfile);
-    $("#pfRestart").addEventListener("click",()=>goTo("landing"));
-    $("#ppCard").addEventListener("click",openPerchPlus);
+    $("#pfRestart").addEventListener("click",openStartOver);
+    $("#ppCard").addEventListener("click",()=>openPerchPlus());
+  }
+  // "Start over" wipes the whole demo session — confirm before doing it
+  function openStartOver(){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic warn">↩️</div>
+      <div class="sheet-title">${t("so_title")}</div>
+      <div class="sheet-sub">${t("so_sub")}</div>
+      <button class="btn btn-amber" id="soGo">${t("so_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("so_keep")}</button>`;
+    $("#soGo").addEventListener("click",()=>{ closeSheet(); goTo("landing"); });
+    sheetClose(); openSheet();
   }
 
   /* ============ PERCH+ (premium stub) ============ */
-  function openPerchPlus(){
+  function openPerchPlus(reason){
     const bill=state.ppBill||"mo";
     const rows=[
       [t("pp_perk2_t"),"2 / wk","5 / wk"],
@@ -2369,15 +2639,17 @@
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span style="font-size:26px">🪶</span><span class="sheet-title" style="margin-bottom:0">Perch+</span></div>
       <div class="sheet-sub">${t("pp_sub")}</div>
+      ${reason==="limit"&&!state.plus?`<div class="pill-static pill-amber" style="margin-bottom:14px">⚡ ${t("pp_limit")}</div>`:""}
       ${state.plus?`<div class="pill-static pill-mint" style="margin-bottom:14px">✓ ${t("pp_active")}</div>`:`<div class="chips" style="margin-bottom:14px"><span class="chip ${bill==='mo'?'sel':''}" data-bill="mo">${t("pp_mo")}</span><span class="chip ${bill==='yr'?'sel':''}" data-bill="yr">${t("pp_yr")}</span></div>`}
       <div class="info-block" style="padding:0;overflow:hidden;margin-bottom:14px">
         <div class="pp-row pp-head"><span></span><span>Free</span><span>Perch+</span></div>
         ${rows.map(r=>`<div class="pp-row"><span>${r[0]}</span><span style="color:var(--faint)">${r[1]}</span><span style="color:var(--mint);font-weight:700">${r[2]}</span></div>`).join("")}
       </div>
-      ${state.plus?"":`<div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin:0 0 12px">${bill==='mo'?t("pp_price"):t("pp_price_yr")}</div>
+      ${state.plus?"":`<div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin:0 0 4px">${bill==='mo'?t("pp_price"):t("pp_price_yr")}</div>
+      <div class="tiny" style="text-align:center;margin-bottom:12px">${t("pp_trial")}</div>
       <button class="btn btn-primary" id="ppGo">${t("pp_cta")}</button>`}
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("pp_maybe")}</button>`;
-    $$("#sheetBody [data-bill]").forEach(c=>c.addEventListener("click",()=>{ state.ppBill=c.getAttribute("data-bill"); openPerchPlus(); }));
+    $$("#sheetBody [data-bill]").forEach(c=>c.addEventListener("click",()=>{ state.ppBill=c.getAttribute("data-bill"); openPerchPlus(reason); }));
     const go=$("#ppGo");
     if(go) go.addEventListener("click",()=>{ state.plus=true; closeSheet(); showToast(t("toast_plus")); const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-","")); });
     sheetClose(); openSheet();
@@ -2388,64 +2660,68 @@
   function renderSettings(){
     const s=state.settings;
     $("#s-settings").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Settings</div></div>
-      <div class="sec-title">Account</div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("set_title")}</div></div>
+      <div class="sec-title">${t("set_account")}</div>
       <div class="set-list">
-        <div class="set-item" id="setEdit"><span class="si-ic">👤</span>Edit profile<span class="chev">›</span></div>
-        <div class="set-item"><span class="si-ic">✉️</span>Email<span class="si-val">you@email.com</span></div>
-        <div class="set-item"><span class="si-ic">🔐</span>Sign in with Apple<span class="set-badge"></span></div>
+        <div class="set-item" id="setEdit"><span class="si-ic">👤</span>${t("set_edit")}<span class="chev">›</span></div>
+        <div class="set-item" style="cursor:default"><span class="si-ic">✉️</span>${t("set_email")}<span class="si-val">you@email.com</span></div>
+        <div class="set-item" style="cursor:default"><span class="si-ic">🔐</span>${t("set_apple")}<span class="set-badge">${t("set_connected")}</span></div>
+        ${state.plus?`<div class="set-item" id="setManageSub"><span class="si-ic">🪶</span>${t("pp_manage")}<span class="set-badge">✓</span></div>`:""}
       </div>
-      <div class="sec-title">Preferences</div>
+      <div class="sec-title">${t("set_prefs")}</div>
       <div class="set-list">
         <div class="set-item" id="setLang"><span class="si-ic">🌐</span>${t("set_lang_label")}<span class="si-val">${state.lang==="fr"?t("lang_fr"):t("lang_en")}</span></div>
-        <div class="set-item" id="setTheme"><span class="si-ic">🌗</span>Appearance<span class="si-val">${({system:"System",light:"Light",dark:"Dark"})[state.theme||"system"]}</span></div>
+        <div class="set-item" id="setTheme"><span class="si-ic">🌗</span>${t("set_appearance")}<span class="si-val">${({system:t("th_system"),light:t("th_light"),dark:t("th_dark")})[state.theme||"system"]}</span></div>
       </div>
-      <div class="sec-title">Privacy</div>
+      <div class="sec-title">${t("set_privacy_sec")}</div>
       <div class="set-list">
-        <div class="set-item" data-sheet="whoMessage"><span class="si-ic">💬</span>Who can message me<span class="si-val">${({everyone:"Everyone",friends:"Friends only",none:"No one"})[s.whoMessage]||"Friends only"}</span></div>
-        <div class="set-item" data-sheet="whoAdd"><span class="si-ic">➕</span>Who can add me<span class="si-val">${({everyone:"Everyone",fof:"Friends of friends",none:"No one"})[s.whoAdd]||"Everyone"}</span></div>
-        <div class="set-item"><span class="si-ic">🖼️</span>Profile photo<span class="set-badge">Friends only · locked</span></div>
-        <div class="set-item"><span class="si-ic">🟢</span>Show active status${swHTML("activeStatus",s.activeStatus)}</div>
+        <div class="set-item" data-sheet="whoMessage"><span class="si-ic">💬</span>${t("set_whomsg")}<span class="si-val">${({everyone:t("opt_everyone"),friends:t("opt_friends"),none:t("opt_noone")})[s.whoMessage]||t("opt_friends")}</span></div>
+        <div class="set-item" data-sheet="whoAdd"><span class="si-ic">➕</span>${t("set_whoadd")}<span class="si-val">${({everyone:t("opt_everyone"),fof:t("opt_fof"),none:t("opt_noone")})[s.whoAdd]||t("opt_everyone")}</span></div>
+        <div class="set-item" style="cursor:default"><span class="si-ic">🖼️</span>${t("set_photo")}<span class="set-badge">${t("set_photo_val")}</span></div>
+        <div class="set-item"><span class="si-ic">🟢</span>${t("set_active")}${swHTML("activeStatus",s.activeStatus)}</div>
       </div>
-      <div class="sec-title">Notifications</div>
+      <div class="sec-title">${t("set_notifs")}</div>
       <div class="set-list">
-        <div class="set-item"><span class="si-ic">⏰</span>Event reminders${swHTML("reminders",s.notif.reminders)}</div>
-        <div class="set-item"><span class="si-ic">💬</span>Messages${swHTML("messages",s.notif.messages)}</div>
-        <div class="set-item"><span class="si-ic">🤝</span>Friend requests${swHTML("friendReq",s.notif.friendReq)}</div>
-        <div class="set-item"><span class="si-ic">✨</span>New group matches${swHTML("matches",s.notif.matches)}</div>
-        <div class="set-item"><span class="si-ic">📣</span>Product updates${swHTML("updates",s.notif.updates)}</div>
+        <div class="set-item"><span class="si-ic">⏰</span>${t("set_reminders")}${swHTML("reminders",s.notif.reminders)}</div>
+        <div class="set-item"><span class="si-ic">💬</span>${t("set_messages")}${swHTML("messages",s.notif.messages)}</div>
+        <div class="set-item"><span class="si-ic">🤝</span>${t("set_friendreq")}${swHTML("friendReq",s.notif.friendReq)}</div>
+        <div class="set-item"><span class="si-ic">✨</span>${t("set_matches")}${swHTML("matches",s.notif.matches)}</div>
+        <div class="set-item"><span class="si-ic">📣</span>${t("set_updates")}${swHTML("updates",s.notif.updates)}</div>
       </div>
-      <div class="sec-title">Safety</div>
+      <div class="sec-title">${t("set_safety")}</div>
       <div class="set-list">
-        <div class="set-item" id="setBlocked"><span class="si-ic">🚫</span>Blocked accounts<span class="si-val">${state.blocked.size}</span></div>
-        <div class="set-item" id="setBreak"><span class="si-ic">🌙</span>Take a break<span class="chev">›</span></div>
-        <div class="set-item" data-doc="moderation"><span class="si-ic">🛡️</span>How moderation works<span class="chev">›</span></div>
-        <div class="set-item" id="setWell"><span class="si-ic">💛</span>Wellbeing resources<span class="chev">›</span></div>
+        <div class="set-item" id="setBlocked"><span class="si-ic">🚫</span>${t("set_blocked")}<span class="si-val">${state.blocked.size}</span></div>
+        <div class="set-item" id="setBreak"><span class="si-ic">🌙</span>${t("set_break")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="moderation"><span class="si-ic">🛡️</span>${t("set_modn")}<span class="chev">›</span></div>
+        <div class="set-item" id="setWell"><span class="si-ic">💛</span>${t("set_well")}<span class="chev">›</span></div>
       </div>
-      <div class="sec-title">Support</div>
+      <div class="sec-title">${t("set_support_sec")}</div>
       <div class="set-list">
-        <div class="set-item" data-go="help"><span class="si-ic">❓</span>Help &amp; FAQ<span class="chev">›</span></div>
-        <div class="set-item" id="setContact"><span class="si-ic">📧</span>Contact us<span class="chev">›</span></div>
-        <div class="set-item" data-doc="terms"><span class="si-ic">📄</span>Terms of Service<span class="chev">›</span></div>
-        <div class="set-item" data-doc="privacy"><span class="si-ic">🔒</span>Privacy Policy<span class="chev">›</span></div>
-        <div class="set-item" data-doc="guidelines"><span class="si-ic">💛</span>Community Guidelines<span class="chev">›</span></div>
+        <div class="set-item" data-go="help"><span class="si-ic">❓</span>${t("set_help")}<span class="chev">›</span></div>
+        <div class="set-item" id="setContact"><span class="si-ic">📧</span>${t("set_contact")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="terms"><span class="si-ic">📄</span>${t("set_terms")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="privacy"><span class="si-ic">🔒</span>${t("set_privacy_doc")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="guidelines"><span class="si-ic">💛</span>${t("set_guidelines")}<span class="chev">›</span></div>
       </div>
-      <div class="sec-title">Accessibility</div>
+      <div class="sec-title">${t("set_a11y")}</div>
       <div class="set-list">
-        <div class="set-item"><span class="si-ic">🔤</span>Text size<span class="si-val">Default</span></div>
-        <div class="set-item"><span class="si-ic">𝐁</span>Bold text${swHTML("boldText",false)}</div>
-        <div class="set-item"><span class="si-ic">◑</span>High contrast${swHTML("highContrast",false)}</div>
-        <div class="set-item"><span class="si-ic">✋</span>Reduce motion${swHTML("reduceMotion",s.reduceMotion)}</div>
-        <div class="set-item"><span class="si-ic">⊕</span>Larger touch targets${swHTML("largerTargets",false)}</div>
+        <div class="set-item" id="setTextSize"><span class="si-ic">🔤</span>${t("set_textsize")}<span class="si-val">${s.textSize==="large"?t("size_large"):t("size_default")}</span></div>
+        <div class="set-item"><span class="si-ic">𝐁</span>${t("set_bold")}${swHTML("boldText",s.boldText)}</div>
+        <div class="set-item"><span class="si-ic">◑</span>${t("set_contrast")}${swHTML("highContrast",s.highContrast)}</div>
+        <div class="set-item"><span class="si-ic">✋</span>${t("set_motion")}${swHTML("reduceMotion",s.reduceMotion)}</div>
+        <div class="set-item"><span class="si-ic">⊕</span>${t("set_targets")}${swHTML("largerTargets",s.largerTargets)}</div>
       </div>
       <div class="set-list">
-        <div class="set-item danger" id="setDelete"><span class="si-ic">🗑️</span>Delete account<span class="chev">›</span></div>
+        <div class="set-item danger" id="setDelete"><span class="si-ic">🗑️</span>${t("set_delete")}<span class="chev">›</span></div>
       </div>
       <p class="tiny" style="text-align:center;margin-top:16px">Perch · v1.0 · Made with care</p>`;
     $$("#s-settings [data-sw]").forEach(el=>el.addEventListener("click",()=>{
       const k=el.getAttribute("data-sw");
       if(k==="activeStatus") s.activeStatus=!s.activeStatus;
       else if(k==="reduceMotion"){ s.reduceMotion=!s.reduceMotion; document.documentElement.toggleAttribute("data-reduce-motion",s.reduceMotion); }
+      else if(k==="boldText"){ s.boldText=!s.boldText; document.documentElement.toggleAttribute("data-bold",s.boldText); }
+      else if(k==="highContrast"){ s.highContrast=!s.highContrast; document.documentElement.toggleAttribute("data-contrast",s.highContrast); }
+      else if(k==="largerTargets"){ s.largerTargets=!s.largerTargets; document.documentElement.toggleAttribute("data-bigtap",s.largerTargets); }
       else if(k in s.notif) s.notif[k]=!s.notif[k];
       el.classList.toggle("on"); el.setAttribute("aria-checked",el.classList.contains("on"));
     }));
@@ -2458,12 +2734,40 @@
     $("#setDelete").addEventListener("click",openDeleteAccount);
     $("#setLang").addEventListener("click",openLangSheet);
     $("#setTheme").addEventListener("click",openThemeSheet);
+    $("#setTextSize").addEventListener("click",openTextSize);
+    const ms=$("#setManageSub"); if(ms) ms.addEventListener("click",openManageSub);
+  }
+  function openTextSize(){
+    const opts=[["default","size_default"],["large","size_large"]];
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-title">${t("set_textsize")}</div>
+      <div class="set-list" style="margin-top:12px">${opts.map(o=>`<div class="set-item" data-ts="${o[0]}"><span class="si-ic">${state.settings.textSize===o[0]?'🔘':'⚪'}</span>${t(o[1])}</div>`).join("")}</div>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_close")}</button>`;
+    $$("#sheetBody [data-ts]").forEach(el=>el.addEventListener("click",()=>{
+      state.settings.textSize=el.getAttribute("data-ts");
+      document.documentElement.setAttribute("data-textsize",state.settings.textSize);
+      closeSheet(); if($("#s-settings").classList.contains("active")) renderSettings();
+    }));
+    sheetClose(); openSheet();
+  }
+  function openManageSub(){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><span style="font-size:26px">🪶</span><span class="sheet-title" style="margin-bottom:0">${t("pp_manage")}</span></div>
+      <div class="pill-static pill-mint" style="margin:6px 0 10px">✓ ${t("pp_active")}</div>
+      <div class="sheet-sub">${t("pp_cancel_sub")}</div>
+      <button class="btn btn-amber" id="ppCancel">${t("pp_cancel")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_close")}</button>`;
+    $("#ppCancel").addEventListener("click",()=>{
+      state.plus=false; closeSheet(); showToast(t("pp_cancelled"));
+      if($("#s-settings").classList.contains("active")) renderSettings();
+    });
+    sheetClose(); openSheet();
   }
   function openThemeSheet(){
-    const opts=[["system","System"],["light","Light"],["dark","Dark"]];
+    const opts=[["system",t("th_system")],["light",t("th_light")],["dark",t("th_dark")]];
     const cur=state.theme||"system";
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Appearance</div>
+      <div class="sheet-title">${t("set_appearance")}</div>
       <div class="set-list" style="margin-top:12px">${opts.map(o=>`<div class="set-item" data-themeopt="${o[0]}"><span class="si-ic">${cur===o[0]?'🔘':'⚪'}</span>${o[1]}</div>`).join("")}</div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_close")}</button>`;
     $$("#sheetBody [data-themeopt]").forEach(el=>el.addEventListener("click",()=>{ closeSheet(); setTheme(el.getAttribute("data-themeopt")); if($("#s-settings").classList.contains("active")) renderSettings(); }));
@@ -2484,47 +2788,78 @@
     const tab=state.notifTab||"activity";
     $$("#notifSeg .sopt").forEach(s=>s.classList.toggle("on",s.getAttribute("data-tab")===tab));
     const body=$("#notifBody");
-    if(state.notifsCleared){ body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">You're all caught up</div><div class="es-s">New activity will appear here.</div></div>`; return; }
-    const noti=(ic,bg,t,time,unread)=>`<div class="notif ${unread?'unread':''}"><div class="nf-ic" style="background:${bg}">${ic}</div><div><div class="nf-t">${t}</div><div class="nf-time">${time}</div></div></div>`;
+    if(state.notifsCleared){ body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">${t("notif_caught_t")}</div><div class="es-s">${t("notif_caught_s")}</div></div>`; return; }
+    const noti=(ic,bg,txt,time,unread,go)=>`<div class="notif ${unread?'unread':''}" ${go?`data-ngo="${go}" style="cursor:pointer"`:""}><div class="nf-ic" style="background:${bg}">${ic}</div><div><div class="nf-t">${txt}</div><div class="nf-time">${time}</div></div></div>`;
     if(tab==="activity"){
       const rc=state.requests.recv.length;
       const joined=state.joinedGroups[0];
-      body.innerHTML=`<div class="day-div">Today</div>
-        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> sent you a friend request`,"2h ago",true):""}
-        ${joined?noti("💬","rgba(255,119,160,.18)",`New messages in <b>${joined.group.name}</b>`,"Just now",true):""}
-        ${joined?noti("🌿","rgba(165,123,255,.18)",`You joined <b>${joined.group.name}</b>`,"Today",false):""}
-        <div class="day-div">This week</div>
-        ${noti("⏰","rgba(255,182,97,.18)","Reminder · <b>Trivia Night</b> is tomorrow at 7:30 PM","Yesterday",false)}
-        ${noti("✨","rgba(142,162,255,.18)","A new group formed that matches your vibe","2 days ago",false)}`;
-      if(rc){ $$("#notifBody .notif")[0].style.cursor="pointer"; $$("#notifBody .notif")[0].addEventListener("click",()=>goTo("requests")); }
+      if(!rc&&!joined&&!state.seedSocial){
+        body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">${t("notif_none_t")}</div><div class="es-s">${t("notif_none_s")}</div></div>`;
+        return;
+      }
+      body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
+        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> ${t("notif_req")}`,"2h ago",true,"requests"):""}
+        ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${joined.group.name}</b>`,t("notif_justnow"),true,"chat"):""}
+        ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${joined.group.name}</b>`,t("notif_today"),false,"groupdetail"):""}
+        ${state.seedSocial?`<div class="day-div">${t("notif_week")}</div>
+        ${noti("⏰","rgba(255,182,97,.18)",t("notif_reminder"),t("notif_yest"),false,"groups")}
+        ${noti("✨","rgba(142,162,255,.18)",t("notif_newgroup"),"2d",false,"groups")}`:""}`;
+      $$("#notifBody [data-ngo]").forEach(el=>el.addEventListener("click",()=>{
+        const go=el.getAttribute("data-ngo");
+        if(go==="chat"&&joined){ state.chatViewGroup=joined.group.id; goTo("chat"); }
+        else if(go==="groupdetail"&&joined){ state.chosenGroup=joined.group; state.chosenActivity=joined.activity||state.chosenActivity; goTo("groupdetail"); }
+        else goTo(go);
+      }));
     } else {
-      body.innerHTML=`<div class="day-div">From Perch</div>
-        ${noti("💛","rgba(165,123,255,.18)","Welcome to Perch — here's how groups work","On sign-up",false)}
-        ${noti("📣","rgba(142,162,255,.18)","New activities added in your area this week","3 days ago",false)}
-        ${noti("🛡️","rgba(255,182,97,.18)","A note on how we keep groups respectful","Last week",false)}`;
+      body.innerHTML=`<div class="day-div">${t("notif_from")}</div>
+        ${noti("💛","rgba(165,123,255,.18)",t("notif_ann1"),t("notif_signup"),false)}
+        ${noti("📣","rgba(142,162,255,.18)",t("notif_ann2"),"3d",false)}
+        ${noti("🛡️","rgba(255,182,97,.18)",t("notif_ann3"),t("notif_lastweek"),false)}`;
     }
   }
 
   /* ============ HELP ============ */
-  const FAQ=[
-    ["🧭","How do groups get matched?","We use your quiz answers to build small groups with a balanced mix of social styles — so there's always someone to talk to and never too much pressure."],
-    ["👥","Why only first names before we meet?","Group browsing shows first names and an emoji only. Photos and fuller profiles unlock once you become friends — it keeps things low-stakes."],
-    ["🚪","Can I leave a group?","Yes — anytime. Leaving a group is private; it isn't the same as blocking someone, and no one is told."],
-    ["🛡️","How does moderation work?","Reports are reviewed by our team, with AI helping flag issues quickly. There's no public voting or kicking — your safety isn't a popularity contest."],
-    ["🔞","Who can use Perch?","Perch is for adults 18 and over. Everyone agrees to our community guidelines before joining their first group."],
-    ["💬","Is this a dating app?","No. Perch is for platonic, group-based meetups — making friends, not dates."]
-  ];
+  const FAQ={
+    en:[
+      ["🧭","How do groups get matched?","We use your quiz answers to build small groups with a balanced mix of social styles — so there's always someone to talk to and never too much pressure."],
+      ["👥","Why only first names before we meet?","Group browsing shows first names and an emoji only. Photos and fuller profiles unlock once you become friends — it keeps things low-stakes."],
+      ["🚪","Can I leave a group?","Yes — anytime. Leaving a group is private; it isn't the same as blocking someone, and no one is told."],
+      ["🛡️","How does moderation work?","Reports are reviewed by our team, with AI helping flag issues quickly. There's no public voting or kicking — your safety isn't a popularity contest."],
+      ["🔞","Who can use Perch?","Perch is for adults 18 and over. Everyone agrees to our community guidelines before joining their first group."],
+      ["💬","Is this a dating app?","No. Perch is for platonic, group-based meetups — making friends, not dates."]
+    ],
+    fr:[
+      ["🧭","Comment les groupes sont-ils formés?","On utilise tes réponses au quiz pour bâtir de petits groupes avec un mélange équilibré de styles sociaux — il y a toujours quelqu'un à qui parler, jamais trop de pression."],
+      ["👥","Pourquoi seulement les prénoms avant la rencontre?","Avant de devenir amis, on affiche seulement le prénom et un emoji. Les photos et profils complets se débloquent entre amis — ça garde les choses simples."],
+      ["🚪","Est-ce que je peux quitter un groupe?","Oui — n'importe quand. Quitter un groupe est privé; ce n'est pas comme bloquer quelqu'un, et personne n'est averti."],
+      ["🛡️","Comment fonctionne la modération?","Les signalements sont examinés par notre équipe, avec l'aide de l'IA pour trier rapidement. Pas de vote public ni d'expulsion par le groupe — ta sécurité n'est pas un concours de popularité."],
+      ["🔞","Qui peut utiliser Perch?","Perch est réservé aux adultes de 18 ans et plus. Tout le monde accepte nos règles de la communauté avant de rejoindre un premier groupe."],
+      ["💬","Est-ce une app de rencontre?","Non. Perch, c'est pour des sorties de groupe platoniques — se faire des amis, pas des dates."]
+    ]
+  };
   function renderHelp(){
-    $("#helpBody").innerHTML=FAQ.map((f,i)=>`<div class="acc" data-acc="${i}"><div class="acc-head"><span>${f[0]}</span>${f[1]}<span class="ah-chev">▾</span></div><div class="acc-body"><div class="ab-in">${f[2]}</div></div></div>`).join("");
+    const faqs=FAQ[state.lang]||FAQ.en;
+    $("#helpBody").innerHTML=faqs.map((f,i)=>`<div class="acc" data-acc="${i}"><div class="acc-head"><span>${f[0]}</span>${f[1]}<span class="ah-chev">▾</span></div><div class="acc-body"><div class="ab-in">${f[2]}</div></div></div>`).join("");
     $$("#helpBody .acc").forEach(el=>el.querySelector(".acc-head").addEventListener("click",()=>el.classList.toggle("open")));
-    const hc=$("#helpContact"); if(hc&&!hc._w){ hc._w=true; hc.addEventListener("click",openSupport); }
+    const hc=$("#helpContact"); if(hc){ hc.textContent=t("help_contact"); if(!hc._w){ hc._w=true; hc.addEventListener("click",openSupport); } }
   }
 
   /* ============ SHEETS & UTILITIES ============ */
-  function openSheet(){ $("#sheet").classList.add("show"); $("#sheetBackdrop").classList.add("show"); }
-  function closeSheet(){ const s=$("#sheet"); if(s) s.classList.remove("show"); const b=$("#sheetBackdrop"); if(b) b.classList.remove("show"); }
+  let sheetLastFocus=null;
+  function openSheet(){
+    sheetLastFocus=document.activeElement;
+    $("#sheet").classList.add("show"); $("#sheetBackdrop").classList.add("show");
+    makeFocusable($("#sheetBody"));
+    const first=$("#sheetBody button,#sheetBody [tabindex],#sheetBody input,#sheetBody textarea");
+    if(first){ try{ first.focus({preventScroll:true}); }catch(e){} }
+  }
+  function closeSheet(){
+    const s=$("#sheet"); if(s) s.classList.remove("show"); const b=$("#sheetBackdrop"); if(b) b.classList.remove("show");
+    if(sheetLastFocus&&sheetLastFocus.focus){ try{ sheetLastFocus.focus({preventScroll:true}); }catch(e){} sheetLastFocus=null; }
+  }
   let toastT;
   function showToast(msg){ const t=$("#toast"); if(!t) return; t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2600); }
+  function hideToast(){ const el=$("#toast"); if(el) el.classList.remove("show"); }
   function sparkle(){
     const fx=$("#fxLayer"); if(!fx) return; const ems=["✦","✧","·","✦","✧"];
     for(let i=0;i<16;i++){ const s=document.createElement("div"); s.className="sparkle"; s.textContent=ems[i%ems.length];
@@ -2538,39 +2873,43 @@
     isFriend=isFriend||state.friends.some(f=>f.name===p.name);
     const blocked=state.blocked.has(p.name);
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div style="display:flex;align-items:center;gap:13px;margin-bottom:18px">${avatarHTML(p,"av-sm")}<div><div style="font-size:17px;font-weight:700">${p.name} ${archBadge(p.key)}</div><div style="font-size:13px;color:var(--faint)">${isFriend?'Friend':'From your group'}</div></div></div>
+      <div style="display:flex;align-items:center;gap:13px;margin-bottom:18px">${avatarHTML(p,"av-sm")}<div><div style="font-size:17px;font-weight:700">${p.name} ${archBadge(p.key)}</div><div style="font-size:13px;color:var(--faint)">${isFriend?t("ma_friend"):t("ma_fromgroup")}</div></div></div>
       <div class="set-list">
-        ${isFriend?'<div class="set-item" data-act="msg"><span class="si-ic">💬</span>Send a message<span class="chev">›</span></div>':'<div class="set-item" data-act="add"><span class="si-ic">＋</span>Add as friend<span class="chev">›</span></div>'}
-        <div class="set-item" data-act="mute"><span class="si-ic">🔕</span>Mute<span class="chev">›</span></div>
-        <div class="set-item" data-act="report"><span class="si-ic">🚩</span>Report<span class="chev">›</span></div>
-        <div class="set-item danger" data-act="block"><span class="si-ic">🚫</span>${blocked?'Unblock':'Block'} ${p.name}<span class="chev">›</span></div>
-        ${isFriend?'<div class="set-item danger" data-act="unfriend"><span class="si-ic">💔</span>Remove friend<span class="chev">›</span></div>':''}
+        ${isFriend?`<div class="set-item" data-act="msg"><span class="si-ic">💬</span>${t("ma_msg")}<span class="chev">›</span></div>`:`<div class="set-item" data-act="add"><span class="si-ic">＋</span>${t("ma_add")}<span class="chev">›</span></div>`}
+        <div class="set-item" data-act="mute"><span class="si-ic">🔕</span>${t("ma_mute")}<span class="chev">›</span></div>
+        <div class="set-item" data-act="report"><span class="si-ic">🚩</span>${t("ma_report")}<span class="chev">›</span></div>
+        <div class="set-item danger" data-act="block"><span class="si-ic">🚫</span>${blocked?t("ma_unblock"):t("ma_block")} ${p.name}<span class="chev">›</span></div>
+        ${isFriend?`<div class="set-item danger" data-act="unfriend"><span class="si-ic">💔</span>${t("ma_unfriend")}<span class="chev">›</span></div>`:''}
       </div>
-      <p class="sheet-foot">Blocking is private — they're never told, and it doesn't remove anyone from a group.</p>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
+      <p class="sheet-foot">${t("ma_foot")}</p>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-act]").forEach(el=>el.addEventListener("click",()=>{
       const a=el.getAttribute("data-act");
       if(a==="msg"){ closeSheet(); state.currentDM=p.name; goTo("dm"); }
-      else if(a==="add"){ closeSheet(); if(state.requests.recv.some(x=>x.name===p.name)) addFriend(p.name); else { state.requests.sent.push({...p}); showToast(`Friend request sent to ${p.name}`); } }
-      else if(a==="mute"){ closeSheet(); showToast(`${p.name} muted`); }
+      else if(a==="add"){ closeSheet(); if(state.requests.recv.some(x=>x.name===p.name)) addFriend(p.name); else { state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.name)); } }
+      else if(a==="mute"){ closeSheet(); showToast(t("toast_muted").replace("{n}",p.name)); }
       else if(a==="report"){ openReport(p); }
       else if(a==="block"){ openBlockConfirm(p); }
-      else if(a==="unfriend"){ closeSheet(); state.friends=state.friends.filter(f=>f.name!==p.name); showToast(`Removed ${p.name}`); if($("#s-friends").classList.contains("active")) renderFriends(); if($("#s-friendprofile").classList.contains("active")) goBack(); }
+      else if(a==="unfriend"){ closeSheet(); state.friends=state.friends.filter(f=>f.name!==p.name); showToast(t("toast_removed").replace("{n}",p.name)); if($("#s-friends").classList.contains("active")) renderFriends(); if($("#s-friendprofile").classList.contains("active")) goBack(); }
     }));
     sheetClose(); openSheet();
   }
-  const REASONS=["Inappropriate messages","Harassment or bullying","Made me uncomfortable","Spam or scam","No-show / unsafe behaviour","Something else"];
+  const REASONS={
+    en:["Inappropriate messages","Harassment or bullying","Made me uncomfortable","Spam or scam","No-show / unsafe behaviour","Something else"],
+    fr:["Messages inappropriés","Harcèlement ou intimidation","M'a mis·e mal à l'aise","Spam ou arnaque","Absence / comportement non sécuritaire","Autre chose"]
+  };
   function openReport(p){
+    const reasons=REASONS[state.lang]||REASONS.en;
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic warn">🚩</div>
-      <div class="sheet-title">Report ${p.name}</div>
-      <div class="sheet-sub">Pick what happened. Our team reviews every report. ${p.name} won't know who reported them.</div>
-      <div class="set-list">${REASONS.map(r=>`<div class="set-item" data-reason="${r}"><span class="si-ic">›</span>${r}</div>`).join("")}</div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">Cancel</button>`;
+      <div class="sheet-title">${t("rep_title")} ${p.name}</div>
+      <div class="sheet-sub">${t("rep_sub").replace("{n}",p.name)}</div>
+      <div class="set-list">${reasons.map(r=>`<div class="set-item" data-reason="${r}"><span class="si-ic">›</span>${r}</div>`).join("")}</div>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-reason]").forEach(el=>el.addEventListener("click",()=>{
       closeSheet();
-      if($("#s-chat").classList.contains("active")) pushMsg({sys:true,text:"Thanks for reporting. Our team is reviewing this now. You can also block this person anytime."});
-      showToast("Report received — thank you");
+      if($("#s-chat").classList.contains("active")) pushMsg({sys:true,text:t("rep_sys")});
+      showToast(t("rep_done"));
     }));
     sheetClose(); openSheet();
   }
@@ -2578,13 +2917,13 @@
     const blocked=state.blocked.has(p.name);
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic warn">🚫</div>
-      <div class="sheet-title">${blocked?'Unblock':'Block'} ${p.name}?</div>
-      <div class="sheet-sub">${blocked?`${p.name} will be able to see and message you again.`:`You won't see each other's messages or profiles. They're never told. This doesn't remove anyone from a group you're both in.`}</div>
-      <button class="btn ${blocked?'btn-primary':'btn-amber'}" id="blockGo">${blocked?'Unblock':'Block'}</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
+      <div class="sheet-title">${blocked?t("ma_unblock"):t("ma_block")} ${p.name}?</div>
+      <div class="sheet-sub">${blocked?t("blk_sub_u").replace("{n}",p.name):t("blk_sub_b")}</div>
+      <button class="btn ${blocked?'btn-primary':'btn-amber'}" id="blockGo">${blocked?t("ma_unblock"):t("ma_block")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $("#blockGo").addEventListener("click",()=>{
       if(blocked) state.blocked.delete(p.name); else { state.blocked.add(p.name); state.friends=state.friends.filter(f=>f.name!==p.name); }
-      closeSheet(); showToast(blocked?`${p.name} unblocked`:`${p.name} blocked`);
+      closeSheet(); showToast((blocked?t("toast_unblocked"):t("toast_blocked")).replace("{n}",p.name));
       if($("#s-friends").classList.contains("active")) renderFriends();
       if($("#s-settings").classList.contains("active")) renderSettings();
     });
@@ -2594,49 +2933,49 @@
     const act=state.chosenActivity||ACTIVITIES[0];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">🚪</div>
-      <div class="sheet-title">Leaving ${act.name}?</div>
-      <div class="sheet-sub">Your spot will open up for someone else. Leaving is private — no one in the group is notified.</div>
-      <button class="btn btn-amber" id="leaveGo">Leave quietly</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Actually, stay</button>`;
+      <div class="sheet-title">${t("lv_title").replace("{a}",act.name)}</div>
+      <div class="sheet-sub">${t("lv_sub")}</div>
+      <button class="btn btn-amber" id="leaveGo">${t("lv_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("lv_stay")}</button>`;
     $("#leaveGo").addEventListener("click",()=>{
       state.joinedGroups=state.joinedGroups.filter(j=>j.group.id!==g.id);
-      delete state.chatThreads[g.id]; if(state.chatViewGroup===g.id) state.chatViewGroup=null;
-      closeSheet(); showToast("You've left the group"); goTo("groups");
+      delete state.chatThreads[g.id]; state.unreadChats.delete(g.id); if(state.chatViewGroup===g.id) state.chatViewGroup=null;
+      closeSheet(); showToast(t("lv_done")); goTo("groups");
     });
     sheetClose(); openSheet();
   }
   function openSuggest(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">💡</div>
-      <div class="sheet-title">Suggest an activity</div>
-      <div class="sheet-sub">Got an idea for a group hang? Tell us — popular suggestions become real groups.</div>
-      <div class="field"><label>What's the activity?</label><input placeholder="e.g. Sunset kayaking"></div>
-      <div class="field"><label>Where?</label><input placeholder="Neighbourhood or venue"></div>
-      <button class="btn btn-primary" id="sgSend">Submit idea</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
-    $("#sgSend").addEventListener("click",()=>{ closeSheet(); showToast("Thanks — idea submitted 💡"); });
+      <div class="sheet-title">${t("sg_title")}</div>
+      <div class="sheet-sub">${t("sg_sub")}</div>
+      <div class="field"><label>${t("sg_what")}</label><input placeholder="${t("sg_what_ph")}"></div>
+      <div class="field"><label>${t("sg_where")}</label><input placeholder="${t("sg_where_ph")}"></div>
+      <button class="btn btn-primary" id="sgSend">${t("sg_send")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#sgSend").addEventListener("click",()=>{ closeSheet(); showToast(t("sg_done")); });
     sheetClose(); openSheet();
   }
   function openMuteOptions(g){
-    const opts=[["1 hour","1h"],["8 hours","8h"],["Until tomorrow","tomorrow"],["Until event ends","event"]];
+    const opts=[[t("mu_1h"),"1h"],[t("mu_8h"),"8h"],[t("mu_tmrw"),"tomorrow"],[t("mu_event"),"event"]];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Mute notifications</div>
-      <div class="sheet-sub">For ${g?g.name:"this group"}</div>
+      <div class="sheet-title">${t("mu_title")}</div>
+      <div class="sheet-sub">${t("mu_for").replace("{g}",g?g.name:"")}</div>
       <div class="set-list" style="margin-top:16px">${opts.map(o=>`<div class="set-item" data-dur="${o[1]}"><span class="si-ic">🔕</span>${o[0]}</div>`).join("")}</div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-dur]").forEach(el=>el.addEventListener("click",()=>{
       const label=el.querySelector(".si-ic")?el.textContent.replace("🔕","").trim():el.getAttribute("data-dur");
-      closeSheet(); showToast("Notifications muted · "+label);
+      closeSheet(); showToast(t("mu_done")+" · "+label);
     }));
     sheetClose(); openSheet();
   }
   function openMoodNo(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">💛</div>
-      <div class="sheet-title">That's okay</div>
-      <div class="sheet-sub">Want to step back from tonight?</div>
-      <button class="btn btn-soft" id="mnLeave">Leave this group</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Never mind</button>`;
+      <div class="sheet-title">${t("mood_no_t")}</div>
+      <div class="sheet-sub">${t("mood_no_s")}</div>
+      <button class="btn btn-soft" id="mnLeave">${t("mood_no_leave")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("mood_no_nvm")}</button>`;
     $("#mnLeave").addEventListener("click",()=>{ closeSheet(); if(state.chosenGroup) openLeaveSheet(state.chosenGroup); });
     sheetClose(); openSheet();
   }
@@ -2649,12 +2988,22 @@
     moderation:{title:"How moderation works",html:`<h3>Human-first review</h3><p>Every report is read by our team. AI helps us triage quickly, but people make the calls.</p><h3>No public voting</h3><p>No one can be kicked or "voted out" by a group. Removing someone is a moderation decision, never a popularity contest.</p><h3>Blocking is private</h3><p>When you block someone, they're never told, and it doesn't remove anyone from a group.</p><h3>24-hour commitment</h3><p>We act on reports of objectionable behaviour within 24 hours.</p>`},
     wellbeing:{title:"Wellbeing resources",html:`<h3>You're not alone</h3><p>Meeting new people can bring up nerves — that's completely normal.</p><h3>If you're struggling</h3><p>If you're going through a hard time, please reach out to a trusted person or a local support line in your area. Perch isn't a crisis service.</p><h3>Looking after yourself</h3><p>Go at your own pace. It's always okay to leave a group, take a break, or step away from a conversation.</p>`}
   };
+  const DOCS_FR={
+    terms:{title:"Conditions d'utilisation (CLUF)",html:`<h3>Bienvenue sur Perch</h3><p>Perch aide les adultes à se rencontrer en petits groupes, en personne, autour d'activités platoniques. En utilisant Perch, tu confirmes avoir 18 ans ou plus et tu acceptes ces conditions.</p><h3>Tolérance zéro</h3><p>Aucune tolérance pour le contenu répréhensible, le harcèlement ou les comportements abusifs. Les comptes qui enfreignent cette règle peuvent être supprimés sans préavis.</p><h3>Ta conduite</h3><p>Tu t'engages à traiter tout le monde avec respect, à te présenter de bonne foi et à garder privé ce qui est partagé dans les groupes. Tu es responsable de ta propre sécurité lors des rencontres en personne.</p><h3>Modération</h3><p>Les signalements sont examinés en moins de 24 heures. Nous combinons revue humaine et outils automatisés pour agir sur le contenu répréhensible et les personnes qui le publient.</p><h3>Responsabilité</h3><p>Perch facilite les présentations mais n'organise ni ne supervise les rencontres. Rencontrez-vous dans des lieux publics, faites preuve de jugement et veillez les uns sur les autres.</p>`},
+    privacy:{title:"Politique de confidentialité",html:`<h3>Ce qu'on recueille</h3><p>Tes réponses au quiz, les détails de ton profil et ton activité dans l'app. On les utilise pour te jumeler à des groupes équilibrés.</p><h3>Ce que les autres voient</h3><p>Avant de devenir amis, les membres voient seulement ton prénom et un emoji. Ta photo et ta bio sont partagées avec tes amis seulement.</p><h3>Ton contrôle</h3><p>Tu peux modifier ou supprimer tes données en tout temps. Supprimer ton compte efface définitivement ton profil, tes messages et tes connexions.</p><h3>On ne vend jamais tes données</h3><p>Tes informations servent à faire fonctionner Perch — pas à être vendues à des annonceurs.</p>`},
+    guidelines:{title:"Règles de la communauté",html:`<h3>Sois gentil</h3><p>Tout le monde ici fait l'effort de se présenter. Réponds-y avec chaleur.</p><h3>Reste platonique</h3><p>Perch, c'est pour l'amitié et les activités partagées, pas pour le dating.</p><h3>Respecte la vie privée</h3><p>Ce qui se partage dans un groupe reste dans le groupe. Ne partage pas les infos des autres hors de Perch.</p><h3>Présente-toi ou avise</h3><p>Si tes plans changent, avise ton groupe. Les absences touchent de vraies personnes.</p><h3>Signale les problèmes</h3><p>Si quelque chose cloche, signale-le. On examine chaque signalement en moins de 24 heures.</p>`},
+    moderation:{title:"Comment fonctionne la modération",html:`<h3>Revue humaine d'abord</h3><p>Chaque signalement est lu par notre équipe. L'IA nous aide à trier rapidement, mais ce sont des personnes qui décident.</p><h3>Pas de vote public</h3><p>Personne ne peut être expulsé ou « voté dehors » par un groupe. Retirer quelqu'un est une décision de modération, jamais un concours de popularité.</p><h3>Le blocage est privé</h3><p>Quand tu bloques quelqu'un, il n'est jamais averti, et ça ne retire personne d'un groupe.</p><h3>Engagement 24 heures</h3><p>On agit sur les signalements de comportements répréhensibles en moins de 24 heures.</p>`},
+    wellbeing:{title:"Ressources bien-être",html:`<h3>Tu n'es pas seul·e</h3><p>Rencontrer de nouvelles personnes peut rendre nerveux — c'est tout à fait normal.</p><h3>Si ça ne va pas</h3><p>Si tu traverses une période difficile, parle à une personne de confiance ou contacte une ligne d'écoute locale. Perch n'est pas un service de crise.</p><h3>Prendre soin de toi</h3><p>Va à ton rythme. C'est toujours correct de quitter un groupe, de prendre une pause ou de te retirer d'une conversation.</p>`}
+  };
   function openDoc(key){
-    const d=DOCS[key]; if(!d) return;
+    const src=(state.lang==="fr"&&DOCS_FR[key])?DOCS_FR:DOCS;
+    const d=src[key]; if(!d) return;
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${d.title}</div>
-      <div class="doc-body" style="margin-top:12px">${d.html}</div>
-      <button class="btn btn-soft" id="sheetClose" style="margin-top:16px">Close</button>`;
+      <div class="doc-body" style="margin-top:12px">${d.html}
+        <p style="margin-top:14px;color:var(--faint)">${LEGAL.appName} · ${LEGAL.company} · ${LEGAL.email} · ${LEGAL.effective}</p>
+      </div>
+      <button class="btn btn-soft" id="sheetClose" style="margin-top:16px">${t("btn_close")}</button>`;
     sheetClose(); openSheet();
   }
 
@@ -2662,30 +3011,30 @@
   function openEditProfile(){
     const el=$("#sheetBody");
     el.innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Edit profile</div>
+      <div class="sheet-title">${t("ep_title")}</div>
       <div class="photo-edit">
         <div class="photo-prev" id="epPrev" style="${state.photo?`background-image:url('${state.photo}')`:''}">${state.photo?'':'📷'}</div>
         <div class="photo-actions">
-          <button class="mini-btn" id="epPhoto">Change photo</button>
-          <button class="mini-btn ghost" id="epRemPhoto" ${!state.photo?'disabled style="opacity:.4"':''}>Remove</button>
+          <button class="mini-btn" id="epPhoto">${t("ep_change")}</button>
+          <button class="mini-btn ghost" id="epRemPhoto" ${!state.photo?'disabled style="opacity:.4"':''}>${t("ep_remove")}</button>
         </div>
       </div>
-      <div class="field"><label>Name</label><input id="epName" value="${state.name}" placeholder="Your name" maxlength="30"></div>
-      <div class="field"><label>Bio</label><textarea id="epBio" rows="3" placeholder="A line about yourself…" maxlength="120">${state.bio}</textarea></div>
-      <div class="field"><label>Emoji</label>
+      <div class="field"><label>${t("ep_name")}</label><input id="epName" value="${esc(state.name)}" placeholder="${t("ep_name_ph")}" maxlength="30"></div>
+      <div class="field"><label>${t("ep_bio")}</label><textarea id="epBio" rows="3" placeholder="${t("ep_bio_ph")}" maxlength="120">${esc(state.bio)}</textarea></div>
+      <div class="field"><label>${t("ep_emoji")}</label>
         <div class="emoji-pick" id="epEmoji">
           ${["🙂","😄","😊","😌","🤓","😎","🌿","⚡","🎨","🧩","🌙","🚀"].map(e=>`<span data-em="${e}" class="${state.emoji===e?'on':''}">${e}</span>`).join("")}
         </div>
       </div>
-      <button class="btn btn-primary" id="epSave" style="margin-top:8px">Save</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
+      <button class="btn btn-primary" id="epSave" style="margin-top:8px">${t("ep_save")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-em]").forEach(s=>s.addEventListener("click",()=>{ $$("#sheetBody [data-em]").forEach(x=>x.classList.remove("on")); s.classList.add("on"); state.emoji=s.getAttribute("data-em"); }));
     $("#epPhoto").addEventListener("click",()=>$("#photoInput").click());
     $("#epRemPhoto").addEventListener("click",()=>{ state.photo=null; const p=$("#epPrev"); if(p){p.style.backgroundImage="";p.textContent="📷";} });
     $("#epSave").addEventListener("click",()=>{
       const n=$("#epName").value.trim(); if(n) state.name=n;
       const b=$("#epBio").value.trim(); state.bio=b||state.bio;
-      closeSheet(); showToast("Profile updated");
+      closeSheet(); showToast(t("ep_saved"));
       if($("#s-profile").classList.contains("active")) renderProfile();
       if($("#s-settings").classList.contains("active")) renderSettings();
     });
@@ -2693,14 +3042,14 @@
   }
 
   function openPrivacySheet(key){
-    const opts={whoMessage:[["Everyone","everyone"],["Friends only","friends"],["No one","none"]],whoAdd:[["Everyone","everyone"],["Friends of friends","fof"],["No one","none"]]};
-    const label={whoMessage:"Who can message me",whoAdd:"Who can add me"};
+    const opts={whoMessage:[[t("opt_everyone"),"everyone"],[t("opt_friends"),"friends"],[t("opt_noone"),"none"]],whoAdd:[[t("opt_everyone"),"everyone"],[t("opt_fof"),"fof"],[t("opt_noone"),"none"]]};
+    const label={whoMessage:t("set_whomsg"),whoAdd:t("set_whoadd")};
     const list=opts[key]||[];
     const cur=state.settings[key];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${label[key]||key}</div>
       <div class="set-list" style="margin-top:12px">${list.map(o=>`<div class="set-item" data-val="${o[1]}"><span class="si-ic">${cur===o[1]?'✓':''}</span>${o[0]}</div>`).join("")}</div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">Done</button>`;
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_close")}</button>`;
     $$("#sheetBody [data-val]").forEach(el=>el.addEventListener("click",()=>{
       state.settings[key]=el.getAttribute("data-val"); closeSheet();
       if($("#s-settings").classList.contains("active")) renderSettings();
@@ -2724,54 +3073,61 @@
   }
 
   function openTakeBreak(){
-    const opts=[["7 days","7d"],["14 days","14d"],["30 days","30d"]];
+    const opts=[[t("brk_7"),"7d"],[t("brk_14"),"14d"],[t("brk_30"),"30d"]];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">🌙</div>
-      <div class="sheet-title">Take a break</div>
-      <div class="sheet-sub">Pause all activity — no notifications, no groups. You can come back anytime.</div>
+      <div class="sheet-title">${t("brk_title")}</div>
+      <div class="sheet-sub">${t("brk_sub")}</div>
       <div class="set-list">${opts.map(o=>`<div class="set-item" data-brk="${o[1]}"><span class="si-ic">⏸️</span>${o[0]}<span class="chev">›</span></div>`).join("")}</div>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">Cancel</button>`;
-    $$("#sheetBody [data-brk]").forEach(el=>el.addEventListener("click",()=>{ closeSheet(); showToast("Break started — see you when you're ready 🌙"); }));
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_cancel")}</button>`;
+    $$("#sheetBody [data-brk]").forEach(el=>el.addEventListener("click",()=>{ closeSheet(); showToast(t("brk_done")); }));
     sheetClose(); openSheet();
   }
 
   function openDeleteAccount(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic warn">🗑️</div>
-      <div class="sheet-title">Delete account?</div>
-      <div class="sheet-sub">This permanently removes your profile, messages, and connections. There's no undo.</div>
-      <button class="btn btn-amber" id="delGo">Yes, delete my account</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Keep my account</button>`;
-    $("#delGo").addEventListener("click",()=>{ closeSheet(); showToast("Account deleted — goodbye 👋"); setTimeout(()=>goTo("landing"),800); });
+      <div class="sheet-title">${t("del_title")}</div>
+      <div class="sheet-sub">${t("del_sub")}</div>
+      <button class="btn btn-amber" id="delGo">${t("del_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("del_keep")}</button>`;
+    $("#delGo").addEventListener("click",()=>{ closeSheet(); showToast(t("del_done")); setTimeout(()=>goTo("landing"),800); });
     sheetClose(); openSheet();
   }
 
   function openSupport(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">📧</div>
-      <div class="sheet-title">Contact us</div>
-      <div class="sheet-sub">We usually respond within 24 hours.</div>
-      <div class="field"><label>Your message</label><textarea rows="4" id="suppMsg" placeholder="Tell us what's going on…"></textarea></div>
-      <button class="btn btn-primary" id="suppSend">Send message</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Cancel</button>`;
-    $("#suppSend").addEventListener("click",()=>{ closeSheet(); showToast("Message sent — we'll get back to you soon"); });
+      <div class="sheet-title">${t("sup_title")}</div>
+      <div class="sheet-sub">${t("sup_sub")}</div>
+      <div class="field"><label>${t("sup_label")}</label><textarea rows="4" id="suppMsg" placeholder="${t("sup_ph")}"></textarea></div>
+      <button class="btn btn-primary" id="suppSend">${t("sup_send")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#suppSend").addEventListener("click",()=>{ closeSheet(); showToast(t("sup_done")); });
     sheetClose(); openSheet();
   }
 
   function openFilter(){
-    const days=["Any day","Today","This week","Weekend"];
-    const sizes=["Any size","Small (2–4)","Medium (4–6)","Larger (6+)"];
+    const days=[["any","flt_anyday"],["today","flt_today"],["week","flt_week"],["weekend","flt_weekend"]];
+    const sizes=[["any","flt_anysize"],["small","flt_small"],["medium","flt_medium"],["large","flt_large"]];
+    const curDay=state.filters.day||"any", curSize=state.filters.size||"any";
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Filter activities</div>
-      <div class="sec-title" style="margin-top:8px">Day</div>
-      <div class="chips" style="margin-bottom:14px">${days.map(d=>`<span class="chip" data-day="${d}">${d}</span>`).join("")}</div>
-      <div class="sec-title">Group size</div>
-      <div class="chips" style="margin-bottom:18px">${sizes.map(s=>`<span class="chip" data-sz="${s}">${s}</span>`).join("")}</div>
-      <button class="btn btn-primary" id="filterApply">Apply</button>
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">Reset</button>`;
-    $$("#sheetBody [data-day],[data-sz]").forEach(el=>el.addEventListener("click",()=>{ el.classList.toggle("sel"); }));
-    $("#filterApply").addEventListener("click",()=>{ closeSheet(); showToast("Filters applied"); renderExplore(); });
-    sheetClose(); openSheet();
+      <div class="sheet-title">${t("flt_title")}</div>
+      <div class="sec-title" style="margin-top:8px">${t("flt_day")}</div>
+      <div class="chips" style="margin-bottom:14px" id="fltDays">${days.map(d=>`<span class="chip ${d[0]===curDay?'sel':''}" data-day="${d[0]}">${t(d[1])}</span>`).join("")}</div>
+      <div class="sec-title">${t("flt_size")}</div>
+      <div class="chips" style="margin-bottom:18px" id="fltSizes">${sizes.map(s=>`<span class="chip ${s[0]===curSize?'sel':''}" data-sz="${s[0]}">${t(s[1])}</span>`).join("")}</div>
+      <button class="btn btn-primary" id="filterApply">${t("flt_apply")}</button>
+      <button class="btn btn-ghost" id="filterReset" style="margin-top:8px">${t("flt_reset")}</button>`;
+    const sel={day:curDay,size:curSize};
+    $$("#fltDays .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltDays .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.day=el.getAttribute("data-day"); }));
+    $$("#fltSizes .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltSizes .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.size=el.getAttribute("data-sz"); }));
+    $("#filterApply").addEventListener("click",()=>{
+      state.filters={day:sel.day==="any"||sel.day==="week"?null:sel.day,size:sel.size==="any"?null:sel.size};
+      closeSheet(); renderExplore(); syncBadges();
+    });
+    $("#filterReset").addEventListener("click",()=>{ state.filters={day:null,size:null}; closeSheet(); renderExplore(); syncBadges(); });
+    openSheet();
   }
 
   function openChatSafety(){
@@ -2820,17 +3176,17 @@
   $("#friendsReqBtn").addEventListener("click",()=>goTo("requests"));
   $("#profBell").addEventListener("click",()=>goTo("notifications"));
   $("#profGear").addEventListener("click",()=>goTo("settings"));
-  $("#notifClear").addEventListener("click",()=>{ state.notifsCleared=true; renderNotifs(); showToast("Notifications cleared"); });
+  $("#notifClear").addEventListener("click",()=>{ state.notifsCleared=true; renderNotifs(); showToast(t("toast_cleared")); });
   $("#sheetBackdrop").addEventListener("click",closeSheet);
 
   // joined screen
-  $("#joinedCal").addEventListener("click",()=>showToast("Added to your calendar 🗓️"));
-  $("#joinedDir").addEventListener("click",()=>showToast("Directions sent to Maps 🧭"));
+  $("#joinedCal").addEventListener("click",()=>showToast(t("toast_cal")));
+  $("#joinedDir").addEventListener("click",()=>showToast(t("toast_dir")));
   $("#joinedInvite").addEventListener("click",()=>goTo("invite"));
 
   // invite
-  $("#inviteCopy").addEventListener("click",()=>{ try{navigator.clipboard.writeText("https://perch.app/i/you");}catch(e){} showToast("Invite link copied"); });
-  $("#inviteShare").addEventListener("click",()=>showToast("Invite ready to share 📤"));
+  $("#inviteCopy").addEventListener("click",()=>{ try{navigator.clipboard.writeText("https://perch.app/i/you");}catch(e){} showToast(t("toast_invcopy")); });
+  $("#inviteShare").addEventListener("click",()=>showToast(t("toast_invshare")));
 
   // moodcheck
   $$("#s-moodcheck [data-mood]").forEach(el=>el.addEventListener("click",()=>{
@@ -2857,7 +3213,8 @@
   // a11y: keyboard access for the primary div-based controls
   $$(".nav-item,.sopt").forEach(el=>{ el.setAttribute("role","button"); el.setAttribute("tabindex","0"); });
   document.addEventListener("keydown",e=>{
-    if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".nav-item,.sopt,.chip,.cat,.set-item,[role='button']")){ e.preventDefault(); e.target.click(); }
+    if(e.key==="Escape"){ closeSheet(); return; }
+    if((e.key==="Enter"||e.key===" ")&&e.target.matches&&e.target.matches(".nav-item,.sopt,.chip,.cat,.set-item,[role='button'],[role='switch']")){ e.preventDefault(); e.target.click(); }
   });
   goTo("landing");
 
