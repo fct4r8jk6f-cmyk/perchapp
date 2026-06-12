@@ -28,7 +28,7 @@ A 4-person group with one no-show is a bad night; with two it's a failed product
 
 A browse-everything marketplace with 80 users means empty groups and a dead app.
 
-- **Launch with one guaranteed cadence, not a catalogue: Perch Thursdays.** Every week, every signup gets matched into a Thursday group — a group *always* forms. Batch matching on a fixed day beats browse-and-hope at low density (this is the mechanic behind Timeleft's Wednesday dinners). The demo shows this as the flagship Explore card.
+- **Launch with one guaranteed cadence, not a catalogue: Perch Thursdays.** Every week, every signup gets matched into a Thursday group — a group *always* forms. Batch matching on a fixed day beats browse-and-hope at low density (this is the mechanic behind Timeleft's Wednesday dinners). The demo pins this as a guaranteed-group banner at the top of Explore, above the catalogue.
 - 2–3 neighbourhoods at launch, venues pre-arranged by us. The Explore catalogue and "Host a hang" unlock progressively as density allows — they are growth-stage features, not launch features.
 - Invites are tied to the quiz ("find your type"), so acquisition spreads through a shareable artifact rather than a bare referral link.
 
@@ -36,8 +36,8 @@ A browse-everything marketplace with 80 users means empty groups and a dead app.
 
 A friendship app is *supposed* to be low-frequency — success means people need it less. Subscription-only monetization fights that.
 
-- **Perch+ ($4.99/mo / $39/yr)** stays the convenience tier (priority matching, more groups/week, host perks, travel mode). Core matching stays free — paywalling friendship is both wrong and bad funnel math.
-- **The roadmap revenue is per-event:** ticketed premium activities (cooking class, axe throwing, paint & sip — venues already charge for these) with a take rate, and venue partnerships for free hangs (we deliver committed groups on slow weeknights; venues pay or discount).
+- **Perch+ ($4.99/mo / $39/yr)** stays the convenience tier (priority matching, more groups/week, host perks, travel mode). Core matching stays free — paywalling friendship is both wrong and bad funnel math. The demo enforces the free tier's 2-hangs/week cap (the third join opens the paywall) and shows trial terms plus manage/cancel in Settings.
+- **The roadmap revenue is per-event:** ticketed premium activities (cooking class, axe throwing, paint & sip — venues already charge for these) with a take rate, and venue partnerships for free hangs (we deliver committed groups on slow weeknights; venues pay or discount). The demo shows ticket pricing on these activities end-to-end (card badge, detail tile, Join CTA).
 - Per-event payment is also the strongest anti-flake mechanic — the two problems share a solution.
 
 ## Metrics that matter (in order)
@@ -57,6 +57,6 @@ The demo intentionally fakes: auth, the matching backend, payments, push, modera
 **Deferred:** Host a hang, Explore catalogue beyond the weekly cadence, travel mode, Perch+ billing.
 
 **Open items before any real launch:**
-- Legal templates (Terms, Privacy, Guidelines) need attorney review — flagged in-app.
-- Age verification beyond self-attestation, per Quebec/Canada requirements.
+- Legal templates (Terms, Privacy, Guidelines) need attorney review — flagged in-app, now in both en and fr-CA.
+- Age verification beyond self-attestation, per Quebec/Canada requirements. The demo floors the age stepper at 18 and discloses 18+ before the quiz, but the quiz still runs before sign-in by design (it's the shareable acquisition artifact) — real verification and the data-before-consent ordering remain open legal questions.
 - Trust & safety operations: the 24-hour report-review promise in the app is a staffing commitment, not just copy.
