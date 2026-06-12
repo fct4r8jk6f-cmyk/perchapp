@@ -36,6 +36,8 @@ A complete trace of `index.html` (every screen, button, and state transition). I
 
 ## P1 — i18n leakage (CLAUDE.md says this is non-negotiable)
 
+> **Status: all 13 items fixed in commit `c72a1d4` (2026-06-12),** verified with `check-i18n` and an in-browser FR walkthrough. Scope call on the footnote below: ACTIVITIES `vibe`/`planb` (plus size/social/badge/day-time patterns) now translate at render time via `ACTFR`/`BADGE_FR`/`frWhen`; venue names stay (proper nouns). Still English by design: the `makeGroups` seed data (group names, vibetags, personality, compat) — tracked as a follow-up.
+
 The core happy path (landing → quiz → explore → join → chat → feedback) is fully bilingual. Many **secondary screens hardcode English** and show English even when the app is set to Français. Each needs `t()` keys added to both `I18N.en` and `I18N.fr` (and, for data, parallel FR tables like the existing `ARFR`).
 
 1. **Archetype detail screen** (`renderArchetype`, ~1806–1813) — fully English: "Your type", "What you bring to a group", "Activities you tend to love", "People often describe you as…", "You vibe well with", "and", "Retake quiz"/"Take the quiz". The underlying data (`bring`, `loves`, `desc` in `ARCH`) is English-only too — needs FR equivalents (extend `ARFR`).
