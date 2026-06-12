@@ -1,0 +1,5 @@
+# LF in the repo AND in the working tree, on every OS.
+# Overrides core.autocrlf (kills the "LF will be replaced by CRLF" warnings),
+# and keeps .claude/hooks/*.sh runnable — bash breaks on CRLF line endings.
+* text=auto eol=lf
+*.png binary
