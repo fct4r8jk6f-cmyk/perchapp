@@ -1980,9 +1980,15 @@
       const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
+      const gid=el.getAttribute("data-group");
+      // if it's a group you've joined, restore the activity you joined with
+      // (otherwise the detail screen shows whatever activity you last browsed)
+      const joined=state.joinedGroups.find(j=>j.group.id===gid);
       const all=makeGroups().concat(state.joinedGroups.map(j=>j.group));
-      const g=all.find(x=>x.id===el.getAttribute("data-group"));
-      state.chosenGroup=g; goTo("groupdetail");
+      const g=(joined&&joined.group)||all.find(x=>x.id===gid);
+      state.chosenGroup=g;
+      if(joined&&joined.activity) state.chosenActivity=joined.activity;
+      goTo("groupdetail");
     }));
     $$("#groupsBody [data-hosted]").forEach(el=>el.addEventListener("click",()=>{
       const g=state.hostedGroups.find(x=>x.id===el.getAttribute("data-hosted"));
@@ -2293,7 +2299,7 @@
     chatTimers.push(setTimeout(()=>{ pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`I'll grab a table near the back so we can find each other`,time:"7:05 PM"},gid); },4600));
     if(state.checkedIn){
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${fn} est là 👋`:`${fn} is here 👋`)},gid); },5200));
+      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${esc(fn)} est là 👋`:`${esc(fn)} is here 👋`)},gid); },5200));
     }
   }
 
@@ -2452,7 +2458,7 @@
     }
     $$("#reqBody [data-acc]").forEach(el=>el.addEventListener("click",()=>{
       const n=el.getAttribute("data-acc"); const p=state.requests.recv.find(x=>x.name===n);
-      if(p){ state.friends.push({...p,met:p.met}); state.requests.recv=state.requests.recv.filter(x=>x.name!==n); showToast(`You and ${n} are now friends`); }
+      if(p){ state.friends.push({...p,met:p.met}); state.requests.recv=state.requests.recv.filter(x=>x.name!==n); showToast(t("toast_friends").replace("{n}",n)); }
       renderRequests(); syncBadges();
     }));
     $$("#reqBody [data-dec]").forEach(el=>el.addEventListener("click",()=>{
@@ -3108,7 +3114,7 @@
   }
 
   function openFilter(){
-    const days=[["any","flt_anyday"],["today","flt_today"],["week","flt_week"],["weekend","flt_weekend"]];
+    const days=[["any","flt_anyday"],["today","flt_today"],["weekend","flt_weekend"]];
     const sizes=[["any","flt_anysize"],["small","flt_small"],["medium","flt_medium"],["large","flt_large"]];
     const curDay=state.filters.day||"any", curSize=state.filters.size||"any";
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
@@ -3123,7 +3129,7 @@
     $$("#fltDays .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltDays .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.day=el.getAttribute("data-day"); }));
     $$("#fltSizes .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltSizes .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.size=el.getAttribute("data-sz"); }));
     $("#filterApply").addEventListener("click",()=>{
-      state.filters={day:sel.day==="any"||sel.day==="week"?null:sel.day,size:sel.size==="any"?null:sel.size};
+      state.filters={day:sel.day==="any"?null:sel.day,size:sel.size==="any"?null:sel.size};
       closeSheet(); renderExplore(); syncBadges();
     });
     $("#filterReset").addEventListener("click",()=>{ state.filters={day:null,size:null}; closeSheet(); renderExplore(); syncBadges(); });
