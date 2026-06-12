@@ -18,9 +18,11 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 
 ## What's in the demo
 
-- Onboarding: landing → 7-question social-type quiz → 12 archetypes → age gate → sign-in → terms
-- Core loop: Explore activities → join a matched group → pre-event chat → check-in → post-event reflection → friends & DMs
-- Supporting: hosting, notifications, settings, safety flows (report / block / take a break), Perch+ paywall, en / fr-CA, dark & light themes
+- Onboarding: landing → 7-question social-type quiz → 12 archetypes → age gate (18+) → sign-in → terms, with a separate returning-user path
+- Core loop: Perch Thursdays (the pinned weekly guaranteed group) + Explore catalogue with working day/size filters → join a matched group → pre-event chat with scripted replies → day-of check-in → post-event reflection → friends & DMs
+- Monetization: enforced free tier (2 hangs/week), Perch+ paywall with trial terms and manage/cancel in Settings, per-event ticket pricing on premium activities
+- Supporting: hosting (with detail view and cancel), tappable notifications with per-thread unread, settings, safety flows (report / block / take a break), invite with a real QR code
+- Quality: full en / fr-CA coverage including legal docs, dark (default) & light themes, keyboard navigation with functional accessibility settings (text size, bold, contrast, larger targets, reduced motion)
 
 ## Files
 

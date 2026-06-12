@@ -4,8 +4,8 @@
   "description": "Meet your people, doing something real. Small groups around real activities.",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#0d0a14",
-  "theme_color": "#0d0a14",
+  "background_color": "#0F0A15",
+  "theme_color": "#0F0A15",
   "orientation": "portrait",
   "icons": [
     {
