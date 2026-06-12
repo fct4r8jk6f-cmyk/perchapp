@@ -865,10 +865,10 @@
       <section class="screen pad-nav fade" id="s-hostdone">
         <div class="center-col">
           <div class="joined-orb" style="background:var(--grad-warm)">🎉</div>
-          <h1 class="display h1" style="margin-bottom:10px">You're on 🎉</h1>
-          <p class="sub" style="max-width:300px;margin-bottom:8px">We'll find the right people and your group will start forming within a day or two.</p>
-          <p class="sub" style="max-width:300px;margin-bottom:24px">We handle the matching — you just pick the spot and show up first.</p>
-          <button class="btn btn-primary" data-go="explore">Back to Explore</button>
+          <h1 class="display h1" style="margin-bottom:10px" data-i18n="hd_title">You're on 🎉</h1>
+          <p class="sub" style="max-width:300px;margin-bottom:8px" data-i18n="hd_p1">We'll find the right people and your group will start forming within a day or two.</p>
+          <p class="sub" style="max-width:300px;margin-bottom:24px" data-i18n="hd_p2">We handle the matching — you just pick the spot and show up first.</p>
+          <button class="btn btn-primary" data-go="explore" data-i18n="hd_back">Back to Explore</button>
         </div>
       </section>
 
@@ -877,7 +877,7 @@
         <div class="hdr-wash wash-default" id="washExplore"></div>
         <div class="ex-top">
           <div class="search"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="exSearch" placeholder="Search activities" data-i18n-ph="ex_search" aria-label="Search activities"></div>
-          <button class="msg-pill" id="exHost" aria-label="Host a hang" title="Host a hang">＋ Host</button>
+          <button class="msg-pill" id="exHost" aria-label="Host a hang" title="Host a hang" data-i18n="ex_host">＋ Host</button>
           <button class="iconbtn" id="exFilter" aria-label="Filters" style="position:relative">🎚️<span class="badge-dot" id="exFilterDot" style="display:none"></span></button>
           <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="exBellDot"></span></button>
         </div>
@@ -894,7 +894,7 @@
       <!-- GROUPS -->
       <section class="screen pad-nav fade" id="s-groups">
         <div class="hdr-wash wash-default" id="washGroups"></div>
-        <div class="nav-row"><div class="nav-title">Groups</div></div>
+        <div class="nav-row"><div class="nav-title" data-i18n="nav_groups">Groups</div></div>
         <div class="seg" id="groupsSeg"><div class="sopt on" data-tab="up" data-i18n="grp_up">Upcoming</div><div class="sopt" data-tab="past" data-i18n="grp_past_t">Past</div></div>
         <div id="groupsBody"></div>
       </section>
@@ -957,17 +957,17 @@
       <section class="screen pad-nav fade" id="s-friends">
         <div class="hdr-wash wash-default" id="washFriends"></div>
         <div class="nav-row">
-          <div class="nav-title">Friends</div><div class="nav-spacer"></div>
+          <div class="nav-title" data-i18n="nav_friends">Friends</div><div class="nav-spacer"></div>
           <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative">✉️<span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
         <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends" data-i18n="fr_tab">Friends</div><div class="sopt" data-tab="met" data-i18n="fr_met">Met</div></div>
-        <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" aria-label="Search"></div>
+        <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" data-i18n-ph="fr_search_friends" aria-label="Search"></div>
         <div id="friendsBody"></div>
       </section>
 
       <!-- FRIEND REQUESTS -->
       <section class="screen pad-nav fade" id="s-requests">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Requests</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="rq_title">Requests</div></div>
         <div class="seg" id="reqSeg"><div class="sopt on" data-tab="recv" data-i18n="rq_recv">Received</div><div class="sopt" data-tab="sent" data-i18n="rq_sent">Sent</div></div>
         <div id="reqBody"></div>
       </section>
@@ -980,13 +980,13 @@
         <div class="chat-top">
           <button class="iconbtn" data-back aria-label="Back">←</button>
           <div class="ct-ic" id="dmAv" style="background:var(--grad-warm)">🙂</div>
-          <div><div class="ct-name" id="dmName">Friend</div><div class="ct-meta" id="dmMeta">Friends · private</div></div>
+          <div><div class="ct-name" id="dmName">Friend</div><div class="ct-meta" id="dmMeta" data-i18n="dm_meta">Friends · private</div></div>
           <div class="chat-shield" id="dmShield" aria-label="Safety options">🛡️</div>
         </div>
         <div class="chat-scroll" id="dmScroll"></div>
         <div class="chat-input">
           <button class="chat-plus" aria-label="Add media">＋</button>
-          <input id="dmInput" placeholder="Message…" autocomplete="off" aria-label="Message">
+          <input id="dmInput" placeholder="Message…" data-i18n-ph="dm_ph" autocomplete="off" aria-label="Message">
           <button class="send off" id="dmSend" aria-label="Send">↑</button>
         </div>
       </section>
@@ -1000,7 +1000,7 @@
 
       <!-- NOTIFICATIONS -->
       <section class="screen pad-nav fade" id="s-notifications">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)">Clear all</span></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="set_notifs">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)" data-i18n="notif_clear">Clear all</span></div>
         <div class="seg" id="notifSeg"><div class="sopt on" data-tab="activity" data-i18n="nt_act">Activity</div><div class="sopt" data-tab="ann" data-i18n="nt_ann">Announcements</div></div>
         <div id="notifBody"></div>
       </section>
@@ -1010,11 +1010,11 @@
 
       <!-- HELP -->
       <section class="screen pad-nav fade" id="s-help">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">Help &amp; FAQ</div></div>
-        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="helpSearch" placeholder="Search help" aria-label="Search help"></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="set_help">Help &amp; FAQ</div></div>
+        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="helpSearch" placeholder="Search help" data-i18n-ph="help_search" aria-label="Search help"></div>
         <div id="helpBody"></div>
         <div style="text-align:center;margin-top:20px">
-          <button class="btn btn-soft" id="helpContact">Still need help? Contact us</button>
+          <button class="btn btn-soft" id="helpContact" data-i18n="help_contact">Still need help? Contact us</button>
         </div>
       </section>
 
@@ -1036,18 +1036,18 @@
         <div class="center-col" style="align-items:stretch">
           <div style="text-align:center;margin-bottom:24px">
             <div style="font-size:46px;margin-bottom:14px">🌙</div>
-            <h1 class="display h2">How are you feeling<br>about tonight?</h1>
+            <h1 class="display h2" data-i18n-html="mood_title">How are you feeling<br>about tonight?</h1>
           </div>
-          <div class="mood-opt" data-mood="ready"><span class="mo-em">👍</span><span class="mo-t">Ready</span></div>
-          <div class="mood-opt" data-mood="nervous"><span class="mo-em">😌</span><span class="mo-t">A bit nervous</span></div>
-          <div class="mood-opt" data-mood="no"><span class="mo-em">😔</span><span class="mo-t">Not feeling it</span></div>
+          <div class="mood-opt" data-mood="ready"><span class="mo-em">👍</span><span class="mo-t" data-i18n="mood_ready">Ready</span></div>
+          <div class="mood-opt" data-mood="nervous"><span class="mo-em">😌</span><span class="mo-t" data-i18n="mood_nervous">A bit nervous</span></div>
+          <div class="mood-opt" data-mood="no"><span class="mo-em">😔</span><span class="mo-t" data-i18n="mood_no">Not feeling it</span></div>
         </div>
       </section>
 
       <!-- PROFILE -->
       <section class="screen pad-nav fade" id="s-profile">
         <div class="hdr-wash wash-default" id="washProfile"></div>
-        <div class="nav-row"><div class="nav-title">Profile</div><div class="nav-spacer"></div>
+        <div class="nav-row"><div class="nav-title" data-i18n="nav_profile">Profile</div><div class="nav-spacer"></div>
           <button class="iconbtn" id="profBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="profBellDot"></span></button>
           <button class="iconbtn" id="profGear" aria-label="Settings">⚙︎</button>
         </div>
@@ -1211,18 +1211,42 @@
   /* ============ i18n (core demo path · en / fr-CA) ============ */
   const CAT_FR={"For you":"Pour toi","Food & Drink":"Bouffe & boisson","Outdoors":"Plein air","Arts & Culture":"Arts & culture","Games":"Jeux","Chill":"Tranquille","Active":"Actif","Evening Out":"Sortie en soirée"};
   const ARFR={
-    spark:{n:"L'Étincelle",tag:"Une énergie chaleureuse qui lance les choses",traits:["Chaleureux","Sociable","Spontané"]},
-    connector:{n:"Le Lien",tag:"La colle discrète de tout groupe",traits:["Chaleureux","Attentif","Authentique"]},
-    explorer:{n:"L'Explorateur",tag:"Toujours partant pour du nouveau",traits:["Curieux","Ouvert","Aventureux"]},
-    easygoer:{n:"Le Relax",tag:"Détendu et facile à côtoyer",traits:["Relax","Adaptable","Calme"]},
-    anchor:{n:"L'Ancre",tag:"Stable — met les groupes à l'aise",traits:["Stable","Calme","Fiable"]},
-    observer:{n:"L'Observateur",tag:"Réfléchi, perspicace, profond en douceur",traits:["Réfléchi","Perspicace","Calme"]},
-    curator:{n:"Le Curateur",tag:"Amène les idées, donne le ton",traits:["Créatif","Raffiné","Intentionnel"]},
-    grounding:{n:"Le Pilier",tag:"Fiable et solide — toujours présent",traits:["Fiable","Chaleureux","Solide"]},
-    wildcard:{n:"L'Imprévisible",tag:"Une énergie imprévisible, toujours le fun",traits:["Joueur","Audacieux","Surprenant"]},
-    storyteller:{n:"Le Conteur",tag:"Captive le monde, se souvient de tout",traits:["Captivant","Chaleureux","Mémorable"]},
-    navigator:{n:"Le Navigateur",tag:"Leader discret, planificateur naturel",traits:["Organisé","Calme","Décidé"]},
-    wavelength:{n:"La Longueur d'onde",tag:"Connecte avec n'importe qui, lit la salle",traits:["Adaptable","Facile","Intuitif"]}
+    spark:{n:"L'Étincelle",tag:"Une énergie chaleureuse qui lance les choses",traits:["Chaleureux","Sociable","Spontané"],
+      bring:["Tu brises la glace pour que personne d'autre n'ait à le faire","Ton énergie soulève toute la pièce","Tu fais sentir les nouveaux instantanément bienvenus"],
+      loves:["Karaoké","Soirée trivia","Soirée sur un toit"],desc:["Énergisant","Amical","Le fun à côtoyer"]},
+    connector:{n:"Le Lien",tag:"La colle discrète de tout groupe",traits:["Chaleureux","Attentif","Authentique"],
+      bring:["Tu remarques la personne devenue silencieuse","Tu fais sentir aux gens qu'ils sont vraiment écoutés","Tu transformes des inconnus en groupe"],
+      loves:["Rencontre café","Club de lecture","Marché gourmand"],desc:["À l'écoute","Attentionné","Facile à se confier"]},
+    explorer:{n:"L'Explorateur",tag:"Toujours partant pour du nouveau",traits:["Curieux","Ouvert","Aventureux"],
+      bring:["Tu es toujours partant pour essayer la nouveauté","Tu transformes les activités en aventure","Tu rencontres du monde facilement en chemin"],
+      loves:["Visite à pied","Jeu d'évasion","Randonnée au lever du soleil"],desc:["Aventureux","Ouvert d'esprit","Partant pour tout"]},
+    easygoer:{n:"Le Relax",tag:"Détendu et facile à côtoyer",traits:["Relax","Adaptable","Calme"],
+      bring:["Tu gardes l'ambiance légère et sans pression","Tu suis le courant quand les plans changent","Tu es une présence apaisante"],
+      loves:["Marche au parc","Café de jeux de société","Cinéma en plein air"],desc:["Relax","Facile à vivre","Zéro drame"]},
+    anchor:{n:"L'Ancre",tag:"Stable — met les groupes à l'aise",traits:["Stable","Calme","Fiable"],
+      bring:["Tu es une présence stable sur qui on s'appuie","Tu n'as pas besoin de remplir chaque silence","Tu donnes au groupe un sentiment d'ancrage"],
+      loves:["Bar jazz","Poterie","Club de lecture"],desc:["Stable","Ancré","Rassurant"]},
+    observer:{n:"L'Observateur",tag:"Réfléchi, perspicace, profond en douceur",traits:["Réfléchi","Perspicace","Calme"],
+      bring:["Tu remarques ce que les autres manquent","Tu apportes une profondeur tranquille aux conversations","Tu vaux la peine qu'on apprenne à te connaître"],
+      loves:["Cours d'art","Cinéma en plein air","Bar jazz"],desc:["Réfléchi","Perspicace","Discrètement chaleureux"]},
+    curator:{n:"Le Curateur",tag:"Amène les idées, donne le ton",traits:["Créatif","Raffiné","Intentionnel"],
+      bring:["Tu connais toujours la bonne adresse","Tu donnes un ton dont les gens se souviennent","Tu amènes des idées fraîches à la table"],
+      loves:["Peinture et vin","Marché vintage","Cours de cuisine"],desc:["Créatif","Raffiné","Inspirant"]},
+    grounding:{n:"Le Pilier",tag:"Fiable et solide — toujours présent",traits:["Fiable","Chaleureux","Solide"],
+      bring:["Tu es la personne qui se présente pour vrai","Tu rends les plans fiables","Les gens se sentent en sécurité avec toi"],
+      loves:["Randonnée au lever du soleil","Échange de plantes","Cours de cuisine"],desc:["Fiable","Chaleureux","Solide"]},
+    wildcard:{n:"L'Imprévisible",tag:"Une énergie imprévisible, toujours le fun",traits:["Joueur","Audacieux","Surprenant"],
+      bring:["Avec toi, ça ne devient jamais plate","Tu es partant pour le plan inattendu","Tu rends une soirée mémorable"],
+      loves:["Lancer de hache","Spectacle d'humour","Karaoké"],desc:["Le fun","Audacieux","Plein de surprises"]},
+    storyteller:{n:"Le Conteur",tag:"Captive le monde, se souvient de tout",traits:["Captivant","Chaleureux","Mémorable"],
+      bring:["Tu peux tenir une conversation n'importe où","Tu retiens les détails qui comptent","Tu fais sentir aux gens qu'ils font partie de l'histoire"],
+      loves:["Spectacle d'humour","Bar jazz","Tournée gourmande"],desc:["Captivant","Chaleureux","D'excellente compagnie"]},
+    navigator:{n:"Le Navigateur",tag:"Leader discret, planificateur naturel",traits:["Organisé","Calme","Décidé"],
+      bring:["Tu gardes discrètement le plan sur les rails","Tu prends les décisions pour épargner les autres","Tu restes calme quand ça déraille"],
+      loves:["Jeu d'évasion","Visite à pied","Cours de cuisine"],desc:["Organisé","Fiable","Posé"]},
+    wavelength:{n:"La Longueur d'onde",tag:"Connecte avec n'importe qui, lit la salle",traits:["Adaptable","Facile","Intuitif"],
+      bring:["Tu peux cliquer avec presque n'importe qui","Tu lis la salle et tu t'ajustes","Tu rends les groupes variés naturels"],
+      loves:["Marché gourmand","Café de jeux de société","Soirée sur un toit"],desc:["Adaptable","Facile à côtoyer","Sur la même longueur d'onde"]}
   };
   const QFR=[
     {q:"Tu entres dans une salle pleine de monde. Qu'est-ce qui te fait le plus de bien?",o:["Une grande salle pleine de nouveaux visages — j'embarque","Quelques bonnes personnes à qui jaser pour vrai","L'un ou l'autre, honnêtement — ça dépend de mon mood","J'aime lire la salle avant de me lancer"]},
@@ -1233,6 +1257,31 @@
     {q:"Deux personnes du groupe sont en désaccord. Tu as tendance à…",o:["Régler ça calmement et directement","Désamorcer et garder ça léger","Lancer une joke pour casser la tension","Laisser de l'air et prendre du recul"]},
     {q:"Dans un groupe, ton rôle naturel, c'est…",o:["Lancer les choses et garder le momentum","Amener les idées, donner le ton","Soutenir — m'assurer que tout le monde est bien","Rester en retrait et tout observer"]}
   ];
+  /* fr versions of the user-visible ACTIVITIES prose (vibe + plan B). Venue names are proper nouns and stay as-is. */
+  const ACTFR={
+    thursdays:{vibe:"Le classique hebdo — un groupe se forme chaque semaine",planb:"Endroit de secours publié dans la discussion"},
+    trivia:{vibe:"Tranquille, parfait pour une première fois",planb:"Le Library Bar tout près"},
+    boardgame:{vibe:"Relax, facile de se joindre",planb:"Le café Rook à deux portes"},
+    cooking:{vibe:"Les mains occupées, jaser optionnel",planb:"Le Spice Room tout près"},
+    walk:{vibe:"Rythme doux, plein de choses à voir",planb:"Trajet du canal Lachine s'il pleut"},
+    foodmkt:{vibe:"Décontracté et social",planb:"Halle intérieure s'il pleut"},
+    comedy:{vibe:"Côte à côte, rires faciles",planb:"Micro ouvert à l'étage"},
+    bookclub:{vibe:"Monde calme et réfléchi",planb:"Le Reading Room tout près"},
+    cinema:{vibe:"Soirée relax et facile",planb:"Projection intérieure s'il pleut"},
+    pottery:{vibe:"Calme et manuel",planb:"Studio B juste à côté"},
+    escape:{vibe:"Casse-tête d'équipe, ben du fun",planb:"La salle Vault tout près"},
+    hike:{vibe:"Actif, frais, amical",planb:"Boucle du bas si c'est glacé"},
+    jazz:{vibe:"Soirée chaleureuse et relax",planb:"Le Cellar tout près"},
+    plant:{vibe:"Amical et décontracté",planb:"Atrium intérieur s'il pleut"},
+    paint:{vibe:"Créatif, aucun talent requis",planb:"Le Studio Loft tout près"},
+    karaoke:{vibe:"Grosse énergie, tout le monde est bienvenu",planb:"Salle privée si c'est plein"},
+    rooftop:{vibe:"Monde varié, belles vues",planb:"Niveau lounge s'il vente"},
+    artclass:{vibe:"Focus sur la toile, jasette entre deux coups de pinceau",planb:"Atelier libre juste à côté"},
+    improv:{vibe:"Ris de toi-même — tout le monde le fait",planb:"Séance reprise la semaine prochaine"},
+    vintage:{vibe:"Fouine, compare tes trouvailles, jase",planb:"Section intérieure s'il pleut"},
+    axe:{vibe:"Bien plus facile que ça en a l'air",planb:"Salle de tir à l'arc si complet"}
+  };
+  const BADGE_FR={"🔥 Popular":"🔥 Populaire","New":"Nouveau","Almost full":"Presque complet","Popular this weekend":"Populaire ce week-end","🪶 Every week":"🪶 Chaque semaine"};
   const I18N={
     en:{
       land_headline:"Meet your people,<br>doing something real.",
@@ -1335,6 +1384,25 @@
       grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",
       grp_hist_t:"That's your history so far",grp_hist_t0:"No hangs yet",grp_hist_s:"Groups you attend will show up here.",
       fr_tab:"Friends",fr_met:"Met",rq_recv:"Received",rq_sent:"Sent",nt_act:"Activity",nt_ann:"Announcements",
+      arch_yourtype:"Your type",arch_bring:"What you bring to a group",arch_loves:"Activities you tend to love",arch_desc:"People often describe you as…",arch_vibe:"You vibe well with",arch_retake:"Retake quiz",arch_take:"Take the quiz",
+      hd_title:"You're on 🎉",hd_p1:"We'll find the right people and your group will start forming within a day or two.",hd_p2:"We handle the matching — you just pick the spot and show up first.",hd_back:"Back to Explore",
+      mood_title:"How are you feeling<br>about tonight?",mood_ready:"Ready",mood_nervous:"A bit nervous",mood_no:"Not feeling it",
+      toast_mood_ready:"See you there 🌿",toast_mood_nervous:"Totally normal — the group will be glad you came.",
+      act_planb:"Plan B if needed",act_viewgroups:"View groups →",
+      chat_intro_sys:"This is a private chat for the people going to {a}. Be kind — a real meetup is on the other side. 💛",
+      chat_intro1:"Hey everyone! So glad this came together 😊",chat_intro2:"Same! First time doing one of these — see you all there",chat_intro3:"I'll grab a table near the back so we can find each other",
+      sys_here:"{n} is here 👋",hosted_name:"Your {cat} hang",time_now:"now",time_earlier:"earlier",
+      rq_title:"Requests",rq_accept:"Accept",rq_decline:"Decline",rq_sent_sub:"Request sent",
+      rq_empty_recv_t:"No requests right now",rq_empty_recv_s:"Friend requests from people you've met show up here.",
+      rq_empty_sent_t:"No pending sent requests",rq_empty_sent_s:"When you add someone, it'll show here until they respond.",
+      fr_search_friends:"Search friends",fr_search_met:"Search people you've met",search_ph:"Search",
+      fr_empty_t:"Your people are out there",fr_empty_s:"47 people in your area went out last week. Add the ones you clicked with from the Met tab.",fr_seemet:"See people you've met",
+      met_empty_t:"No one new right now",met_empty_s:"People from your groups will show up here after you meet.",met_sec:"People from your events",
+      met_at:"Met at {x}",met_generic:"a meetup",met_perch:"A Perch meetup",
+      fp_where:"Where you met",fp_about:"A bit about {n}",fp_bio:"Here for relaxed, friendly hangs. {d1} and {d2}, by most accounts.",fp_locked:"Add {n} as a friend to see more and message privately.",fp_msg:"💬 Message",fp_add:"＋ Add friend",
+      dm_meta:"Friends · private",dm_seen:"Seen",dm_seed:"Hey! Good meeting you 😊",dm_ph:"Message…",
+      cs_title:"Safety options",cs_sub:"Report something or take action on a group member.",cs_report:"Report a problem",cs_member:"Report a member",
+      blk_none:"No one blocked.",toast_photo:"Photo updated",notif_clear:"Clear all",help_search:"Search help",ex_host:"＋ Host",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     },
     fr:{
@@ -1438,6 +1506,25 @@
       grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",
       grp_hist_t:"C'est ton historique jusqu'ici",grp_hist_t0:"Pas encore de sortie",grp_hist_s:"Les groupes auxquels tu participes apparaîtront ici.",
       fr_tab:"Amis",fr_met:"Rencontres",rq_recv:"Reçues",rq_sent:"Envoyées",nt_act:"Activité",nt_ann:"Annonces",
+      arch_yourtype:"Ton type",arch_bring:"Ce que tu apportes à un groupe",arch_loves:"Des activités que tu as tendance à adorer",arch_desc:"Les gens te décrivent souvent comme…",arch_vibe:"Tu accroches bien avec",arch_retake:"Refaire le quiz",arch_take:"Faire le quiz",
+      hd_title:"C'est lancé 🎉",hd_p1:"On trouve les bonnes personnes et ton groupe commencera à se former d'ici un jour ou deux.",hd_p2:"On s'occupe du jumelage — tu choisis l'endroit et tu arrives en premier.",hd_back:"Retour à Explorer",
+      mood_title:"Comment tu te sens<br>pour ce soir?",mood_ready:"Prêt",mood_nervous:"Un peu nerveux",mood_no:"Pas le goût",
+      toast_mood_ready:"On se voit là-bas 🌿",toast_mood_nervous:"Tout à fait normal — le groupe sera content que tu sois là.",
+      act_planb:"Plan B au besoin",act_viewgroups:"Voir les groupes →",
+      chat_intro_sys:"Ceci est une discussion privée pour les personnes qui vont à {a}. Sois gentil — une vraie rencontre t'attend de l'autre côté. 💛",
+      chat_intro1:"Allô tout le monde! Trop cool que ça se concrétise 😊",chat_intro2:"Pareil! C'est ma première fois — on se voit là-bas",chat_intro3:"Je vais prendre une table vers le fond pour qu'on se trouve facilement",
+      sys_here:"{n} est là 👋",hosted_name:"Ta sortie {cat}",time_now:"à l'instant",time_earlier:"plus tôt",
+      rq_title:"Demandes",rq_accept:"Accepter",rq_decline:"Refuser",rq_sent_sub:"Demande envoyée",
+      rq_empty_recv_t:"Aucune demande pour l'instant",rq_empty_recv_s:"Les demandes d'amitié des gens que t'as rencontrés apparaissent ici.",
+      rq_empty_sent_t:"Aucune demande envoyée en attente",rq_empty_sent_s:"Quand tu ajoutes quelqu'un, ça s'affiche ici jusqu'à sa réponse.",
+      fr_search_friends:"Rechercher des amis",fr_search_met:"Rechercher les gens rencontrés",search_ph:"Rechercher",
+      fr_empty_t:"Ton monde est là, quelque part",fr_empty_s:"47 personnes de ton coin sont sorties la semaine passée. Ajoute celles avec qui t'as cliqué depuis l'onglet Rencontres.",fr_seemet:"Voir les gens rencontrés",
+      met_empty_t:"Personne de nouveau pour l'instant",met_empty_s:"Les gens de tes groupes apparaîtront ici après votre rencontre.",met_sec:"Du monde de tes sorties",
+      met_at:"Rencontré à {x}",met_generic:"une sortie",met_perch:"Une sortie Perch",
+      fp_where:"Où vous vous êtes rencontrés",fp_about:"Un peu à propos de {n}",fp_bio:"Ici pour des sorties relax et amicales. {d1} et {d2}, selon la plupart des gens.",fp_locked:"Ajoute {n} comme ami pour en voir plus et discuter en privé.",fp_msg:"💬 Message",fp_add:"＋ Ajouter comme ami",
+      dm_meta:"Amis · privé",dm_seen:"Vu",dm_seed:"Salut! C'était vraiment cool de te rencontrer 😊",dm_ph:"Message…",
+      cs_title:"Options de sécurité",cs_sub:"Signale un problème ou agis à l'égard d'un membre du groupe.",cs_report:"Signaler un problème",cs_member:"Signaler un membre",
+      blk_none:"Personne de bloqué.",toast_photo:"Photo mise à jour",notif_clear:"Tout effacer",help_search:"Rechercher dans l'aide",ex_host:"＋ Organiser",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
     }
   };
@@ -1451,7 +1538,28 @@
   const archName=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].n:(ARCH[k]?ARCH[k].n:""));
   const archTag=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].tag:(ARCH[k]?ARCH[k].tag:""));
   const archTraits=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].traits:(ARCH[k]?ARCH[k].traits:[]));
+  const archBring=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].bring:(ARCH[k]?ARCH[k].bring:[]));
+  const archLoves=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].loves:(ARCH[k]?ARCH[k].loves:[]));
+  const archDesc=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].desc:(ARCH[k]?ARCH[k].desc:[]));
   const catLabel=c=>(state.lang==="fr"&&CAT_FR[c]?CAT_FR[c]:c);
+  /* ACTIVITIES data stays canonical English (filters/search match on it); these translate at render time only */
+  const actVibe=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].vibe:a.vibe);
+  const actPlanb=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].planb:a.planb);
+  const actBadge=b=>(state.lang==="fr"&&BADGE_FR[b]?BADGE_FR[b]:b);
+  const actSize=a=>(state.lang==="fr"?a.size.replace("people","personnes"):a.size);
+  const actSocial=a=>(state.lang==="fr"?a.social.replace("joined this week","inscrits cette semaine"):a.social);
+  const DAY_FR={Monday:"lundi",Tuesday:"mardi",Wednesday:"mercredi",Thursday:"jeudi",Friday:"vendredi",Saturday:"samedi",Sunday:"dimanche",Mon:"lun",Tue:"mar",Wed:"mer",Thu:"jeu",Fri:"ven",Sat:"sam",Sun:"dim",Today:"Aujourd'hui",Tonight:"Ce soir"};
+  function frWhen(s){
+    if(state.lang!=="fr"||!s) return s;
+    return String(s)
+      .replace(/\b(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|Mon|Tue|Wed|Thu|Fri|Sat|Sun|Today|Tonight)\b/g,w=>DAY_FR[w]||w)
+      .replace(/\b(\d{1,2}):(\d{2})\s?(AM|PM)\b/g,(x,h,m,ap)=>{ let H=(+h)%12; if(ap==="PM") H+=12; return H+" h"+(m==="00"?"":" "+m); });
+  }
+  /* hosted groups are created at runtime — render their labels from keys so a language switch re-translates them */
+  const hostedName=g=>(g.catKey?t("hosted_name").replace("{cat}",catLabel(g.catKey)):g.name);
+  const hostedWhen=g=>(g.whenKey?(({Tonight:t("host_tonight"),"This weekend":t("host_weekend"),Flexible:t("host_flex")})[g.whenKey]||g.whenKey)+" · "+g.area:g.when);
+  const hostedTags=g=>(g.catKey?[catLabel(g.catKey),g.area,g.size+" "+t("chat_people")]:g.vibetags);
+  const msgTime=x=>{ x=x||"now"; if(x==="now") return t("time_now"); if(x==="earlier") return t("time_earlier"); return frWhen(x); };
   function applyI18n(root){
     root=root||document;
     root.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=t(el.getAttribute("data-i18n")); });
@@ -1794,7 +1902,7 @@
         <button id="copyLink" style="background:var(--grad-warm);border:none;border-radius:var(--r-pill);color:#fff;font-size:13px;font-weight:700;padding:7px 14px;cursor:pointer;font-family:inherit;white-space:nowrap">${t("copy_link")}</button>
       </div>
       <button class="btn btn-ghost" id="sheetClose">${t("btn_close")}</button>`;
-    $("#copyLink").addEventListener("click",()=>{ try{navigator.clipboard.writeText("https://"+url);}catch(e){} showToast("Link copied"); });
+    $("#copyLink").addEventListener("click",()=>{ try{navigator.clipboard.writeText("https://"+url);}catch(e){} showToast(t("toast_link")); });
     $("#sheetClose").addEventListener("click",closeSheet); openSheet();
   }
 
@@ -1804,20 +1912,20 @@
     const c1=archName(a.compat[0]), c2=archName(a.compat[1]);
     const isMine=k===state.profileKey;
     $("#s-archetype").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?"Your type":archName(k)}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?t("arch_yourtype"):archName(k)}</div></div>
       <div class="arch-hero ${a.g}"><div class="ah-em">${a.e}</div><div class="ah-n">${archName(k)}</div><div class="ah-l">${archTag(k)}</div></div>
-      <div class="info-block"><div class="sec-title">What you bring to a group</div>${a.bring.map(b=>`<div class="ib-row"><span class="star">✦</span><span>${b}</span></div>`).join("")}</div>
-      <div class="info-block"><div class="sec-title">Activities you tend to love</div><div class="chips">${a.loves.map(l=>`<span class="trait">${l}</span>`).join("")}</div></div>
-      <div class="info-block"><div class="sec-title">People often describe you as…</div><div class="chips">${a.desc.map(d=>`<span class="trait">${d}</span>`).join("")}</div></div>
-      <div class="info-block"><div class="sec-title">You vibe well with</div><div class="ib-row"><span class="star">🤝</span><span>${c1} and ${c2}</span></div></div>
-      ${isMine?'<button class="btn-link" id="retakeQuiz">Retake quiz</button>':'<button class="btn btn-soft" id="retakeQuiz">Take the quiz</button>'}`;
+      <div class="info-block"><div class="sec-title">${t("arch_bring")}</div>${archBring(k).map(b=>`<div class="ib-row"><span class="star">✦</span><span>${b}</span></div>`).join("")}</div>
+      <div class="info-block"><div class="sec-title">${t("arch_loves")}</div><div class="chips">${archLoves(k).map(l=>`<span class="trait">${l}</span>`).join("")}</div></div>
+      <div class="info-block"><div class="sec-title">${t("arch_desc")}</div><div class="chips">${archDesc(k).map(d=>`<span class="trait">${d}</span>`).join("")}</div></div>
+      <div class="info-block"><div class="sec-title">${t("arch_vibe")}</div><div class="ib-row"><span class="star">🤝</span><span>${c1} ${t("and")} ${c2}</span></div></div>
+      ${isMine?`<button class="btn-link" id="retakeQuiz">${t("arch_retake")}</button>`:`<button class="btn btn-soft" id="retakeQuiz">${t("arch_take")}</button>`}`;
     const rt=$("#retakeQuiz"); if(rt) rt.addEventListener("click",()=>{ state.currentQ=0; state.answers=new Array(7).fill(null); goTo("test-intro"); });
   }
 
   /* ============ EXPLORE ============ */
   function actCardHTML(a,picked){
     const tags=[];
-    if(a.badge) tags.push(a.badge);
+    if(a.badge) tags.push(actBadge(a.badge));
     if(a.price) tags.push(`🎟️ ${a.price}`);
     const badges=(tags.length?`<div class="act-badges">${tags.map(b=>`<span class="trait" style="background:rgba(0,0,0,.32);border:none;color:#fff;backdrop-filter:blur(4px)">${b}</span>`).join("")}</div>`:"<div></div>");
     return `<div class="act-card ${picked?'picked-card':''}" data-act="${a.id}">
@@ -1825,11 +1933,11 @@
       <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${a.icon}</div></div>
       <div class="act-body">
         <div class="act-name">${a.name}</div>
-        <div class="act-meta">${a.when} · ${a.size}</div>
+        <div class="act-meta">${frWhen(a.when)} · ${actSize(a)}</div>
         <div class="act-venue">📍 ${a.venue}</div>
-        <div class="act-vibe">${a.vibe}</div>
-        <div class="act-planb">Plan B if needed · ${a.planb}</div>
-        <div class="act-foot"><span class="act-social">${a.social}</span><span class="btn-link link-sm">View groups →</span></div>
+        <div class="act-vibe">${actVibe(a)}</div>
+        <div class="act-planb">${t("act_planb")} · ${actPlanb(a)}</div>
+        <div class="act-foot"><span class="act-social">${actSocial(a)}</span><span class="btn-link link-sm">${t("act_viewgroups")}</span></div>
       </div></div>`;
   }
   function skeletonCards(n){
@@ -1872,7 +1980,7 @@
     const pop=$("#popRail"), popTitle=$("#popTitle");
     const popular=ACTIVITIES.filter(a=>a.badge&&a.id!=="thursdays").slice(0,5);
     if(home){
-      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${a.name}</div><div class="pb-v">${a.when.split(" · ")[0]} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
+      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${a.name}</div><div class="pb-v">${frWhen(a.when.split(" · ")[0])} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
       pop.style.display="flex"; if(popTitle) popTitle.style.display="";
     } else { pop.innerHTML=""; pop.style.display="none"; if(popTitle) popTitle.style.display="none"; }
 
@@ -1927,7 +2035,7 @@
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'}"></span>`).join("");
     return `<div class="group-card ${g.status==='today'?'today':''}" data-group="${g.id}">
       <div class="gc-statusrow">${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
-      <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${g.name}</div><div class="gc-when">${g.when}</div></div></div>
+      <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${g.name}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
       <div class="gc-vibetags">${g.vibetags.map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
       <div class="gc-personality">${g.personality}</div>
@@ -1952,9 +2060,9 @@
         html+=state.hostedGroups.map(g=>`
           <div class="group-card" data-hosted="${g.id}">
             <div class="gc-statusrow"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.1)">${t("gd_forming_status")}</span></div>
-            <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${g.name}</div><div class="gc-when">${g.when}</div></div></div>
-            <div class="gc-vibetags">${g.vibetags.map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
-            <div class="gc-personality">${g.personality}.</div>
+            <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${hostedName(g)}</div><div class="gc-when">${hostedWhen(g)}</div></div></div>
+            <div class="gc-vibetags">${hostedTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
+            <div class="gc-personality">${t("chat_forming_sub")}.</div>
             <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</span><span class="btn-link link-sm">${t("gc_open")}</span></div>
           </div>`).join("");
       }
@@ -2030,12 +2138,12 @@
     }
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${g.name} · ${g.when}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${g.name} · ${frWhen(g.when)}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${a.venue.split(" · ")[0]}</span></div>`:""}
-      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${g.when}</div></div></div>
+      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
       <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${a.venue}</div></div></div>
       ${a.price?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
-      <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${a.planb}</div></div></div>
+      <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${actPlanb(a)}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
@@ -2082,7 +2190,7 @@
     if(ci) ci.addEventListener("click",()=>{
       state.checkedIn=true;
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      const line=fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${esc(fn)} est là 👋`:`${esc(fn)} is here 👋`);
+      const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
       if(state.chatThreads[g.id]){ pushMsg({sys:true,text:line},g.id); }
       showToast(t("toast_checkin"));
       renderGroupDetail();
@@ -2098,13 +2206,13 @@
     const spotsLeft=g.size-g.filled;
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${g.emoji}</div><div class="ah-n" style="font-size:20px">${g.name}</div><div class="ah-l">${g.when}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${g.emoji}</div><div class="ah-n" style="font-size:20px">${hostedName(g)}</div><div class="ah-l">${hostedWhen(g)}</div></div>
       <div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.1)">${t("gd_forming_status")}</span></div>
-      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${g.when}</div></div></div>
+      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${hostedWhen(g)}</div></div></div>
       <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab">${t("gd_whos")}</div><div class="it-val">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${g.personality}.</p>
+        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${t("chat_forming_sub")}.</p>
       </div>
       <button class="btn btn-amber" id="hostedCancel">${t("hosted_cancel")}</button>`;
     $("#hostedCancel").addEventListener("click",()=>openCancelHang(g));
@@ -2149,10 +2257,10 @@
     const hp=$("#hostPlusLink"); if(hp) hp.addEventListener("click",openPerchPlus);
     $("#hostGo").addEventListener("click",()=>{
       const actMatch=ACTIVITIES.find(a=>a.cat===sel.cat)||ACTIVITIES[0];
+      // labels derive from these keys at render time (hostedName/hostedWhen/hostedTags) so they follow the language
       state.hostedGroups.push({ id:"host"+(state.hostedGroups.length+1), emoji:actMatch.icon, g:actMatch.g,
-        name:`Your ${sel.cat} hang`, when:`${sel.when} · ${sel.area}`, status:"forming",
-        vibetags:[sel.cat,sel.area,`${sel.size} people`], mix:["wavelength","easygoer","connector"],
-        personality:"Your group is forming — we'll introduce everyone soon", filled:1, size:+sel.size, hosted:true,
+        catKey:sel.cat, whenKey:sel.when, area:sel.area, status:"forming",
+        mix:["wavelength","easygoer","connector"], filled:1, size:+sel.size, hosted:true,
         members:[["You",state.emoji,state.profileKey||"easygoer"]] });
       goTo("hostdone");
     });
@@ -2163,9 +2271,9 @@
     const a=state.chosenActivity||ACTIVITIES[0], g=state.chosenGroup;
     $("#joinedOrb").textContent=a.icon;
     $("#joinedOrb").className="joined-orb "+a.g;
-    const day=g?g.when.split(" · ")[0].toLowerCase():null;
+    const day=g?frWhen(g.when).split(" · ")[0].toLowerCase():null;
     $("#joinedSub").textContent=day?t("joined_see_day").replace("{d}",day):t("joined_see_there");
-    $("#joinedWhen").textContent=g?g.when:a.when;
+    $("#joinedWhen").textContent=frWhen(g?g.when:a.when);
     $("#joinedWhere").textContent=a.venue;
     $("#joinedWho").textContent=`${t("you_plus")} ${g?Math.max(1,g.filled-1):4} ${t("others")}`;
     const soft=$("#joinedSoftAsk");
@@ -2187,8 +2295,8 @@
   const REACTS=["👍","❤️","😂","😮","👏","🙌"];
   function msgRowHTML(m){
     if(m.sys) return `<div class="msg sys">${m.text}</div>`;
-    if(m.who==="me") return `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${m.time||"now"}</div></div></div>`;
-    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div><div class="msg them" data-react>${m.text}</div><div class="react-row"></div><div class="msg-time">${m.time||""}</div></div></div>`;
+    if(m.who==="me") return `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${msgTime(m.time)}</div></div></div>`;
+    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div><div class="msg them" data-react>${m.text}</div><div class="react-row"></div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`;
   }
   function pushMsg(m,gid){
     gid = gid || state.chatViewGroup;
@@ -2206,7 +2314,7 @@
       out.push({id:j.group.id, emoji:a.icon, grad:a.g||j.group.g, name:j.group.name, when:j.group.when, forming:false, group:j.group, activity:a});
     });
     (state.hostedGroups||[]).forEach(g=>{
-      out.push({id:g.id, emoji:g.emoji, grad:g.g, name:g.name, when:g.when, forming:true, group:g, activity:null});
+      out.push({id:g.id, emoji:g.emoji, grad:g.g, name:hostedName(g), when:hostedWhen(g), forming:true, group:g, activity:null});
     });
     return out;
   }
@@ -2248,7 +2356,7 @@
       let preview;
       if(it.forming) preview=t("chat_forming_sub");
       else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi"); }
-      const when=it.when?it.when.split(" · ")[0]:"";
+      const when=it.when?frWhen(it.when).split(" · ")[0]:"";
       const unread=state.unreadChats.has(it.id);
       html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
@@ -2268,15 +2376,15 @@
     const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").textContent=item.emoji||a.icon;
-    $("#chatName").textContent=(g&&g.name)||t("chat_yourgroup");
+    $("#chatName").textContent=item.name||(g&&g.name)||t("chat_yourgroup");
     if(item.forming){ showChatChrome(false); $("#chatMeta").textContent="";
-      $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${g.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
+      $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${item.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
       return; }
     showChatChrome(true);
     $("#chatMeta").textContent=`${(g&&g.filled)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
     $("#pinEm").textContent=a.icon; $("#pinT").textContent=a.name;
-    $("#pinS").textContent=(g&&g.when)||a.when;
-    $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${a.venue}<br>🗓️ ${(g&&g.when)||a.when}<br>🌦️ Plan B · ${a.planb}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
+    $("#pinS").textContent=frWhen((g&&g.when)||a.when);
+    $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${a.venue}<br>🗓️ ${frWhen((g&&g.when)||a.when)}<br>🌦️ ${t("gd_planb")} · ${actPlanb(a)}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
     const sc=$("#chatScroll");
     if(state.chatThreads[item.id]){
       sc.innerHTML=state.chatThreads[item.id].map(msgRowHTML).join("");
@@ -2290,16 +2398,16 @@
   function runChatIntro(item){
     const gid=item.id, g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     const mem=(g&&g.members)||[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]];
-    pushMsg({sys:true,text:`This is a private chat for the people going to ${a.name}. Be kind — a real meetup is on the other side. 💛`},gid);
+    pushMsg({sys:true,text:t("chat_intro_sys").replace("{a}",a.name)},gid);
     const m0=mem[0], m1=mem[1]||mem[0];
     chatTimers.push(setTimeout(()=>{ showTyping(gid); },700));
-    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`Hey everyone! So glad this came together 😊`,time:"7:02 PM"},gid); },1700));
+    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:t("chat_intro1"),time:"7:02 PM"},gid); },1700));
     chatTimers.push(setTimeout(()=>{ showTyping(gid); },2400));
-    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m1[0],emoji:m1[1],key:m1[2],text:`Same! First time doing one of these — see you all there`,time:"7:04 PM"},gid); },3400));
-    chatTimers.push(setTimeout(()=>{ pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:`I'll grab a table near the back so we can find each other`,time:"7:05 PM"},gid); },4600));
+    chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m1[0],emoji:m1[1],key:m1[2],text:t("chat_intro2"),time:"7:04 PM"},gid); },3400));
+    chatTimers.push(setTimeout(()=>{ pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:t("chat_intro3"),time:"7:05 PM"},gid); },4600));
     if(state.checkedIn){
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):(state.lang==="fr"?`${esc(fn)} est là 👋`:`${esc(fn)} is here 👋`)},gid); },5200));
+      chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn))},gid); },5200));
     }
   }
 
@@ -2387,7 +2495,7 @@
   }
 
   /* ============ FRIENDS ============ */
-  function archBadge(k){ const a=ARCH[k]; if(!a) return ""; return `<span class="friend-arch" style="background:${ARCH_DOTCOLORS[k]}">${a.n.replace("The ","")}</span>`; }
+  function archBadge(k){ if(!ARCH[k]) return ""; return `<span class="friend-arch" style="background:${ARCH_DOTCOLORS[k]}">${archName(k).replace(/^(The |Le |La |L')/,"")}</span>`; }
   function friendRowHTML(p,sub,action){
     return `<div class="friend-row" data-friend="${p.name}">
       ${avatarHTML(p,"av-sm")}
@@ -2402,7 +2510,7 @@
     $$("#friendsSeg .sopt").forEach(s=>s.classList.toggle("on",s.getAttribute("data-tab")===tab));
     const inp=$("#friendSearch"); const q=(inp.value||"").toLowerCase().trim();
     // contextual placeholder + hide the slim search on short/empty lists
-    inp.setAttribute("placeholder",{friends:"Search friends",met:"Search people you've met"}[tab]||"Search");
+    inp.setAttribute("placeholder",{friends:t("fr_search_friends"),met:t("fr_search_met")}[tab]||t("search_ph"));
     const fullCount=tab==="met"?metPool.length:state.friends.length;
     const bar=$("#friendSearchBar"); if(bar) bar.style.display=(fullCount>=5||q)?"flex":"none";
     const body=$("#friendsBody");
@@ -2414,16 +2522,16 @@
     if(tab==="friends"){
       let list=state.friends.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){
-        body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">Your people are out there</div><div class="es-s">47 people in your area went out last week. Add the ones you clicked with from the Met tab.</div><button class="btn btn-soft" id="goMet">See people you've met</button></div>`;
+        body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button></div>`;
         const gm=$("#goMet"); if(gm) gm.addEventListener("click",()=>{ state.friendsTab="met"; renderFriends(); });
-      } else body.innerHTML=list.map(p=>friendRowHTML(p,`Met at ${p.met||"a meetup"}`)).join("");
+      } else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met||t("met_generic")))).join("");
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">No one new right now</div><div class="es-s">People from your groups will show up here after you meet.</div></div>`; }
-      else body.innerHTML=`<div class="sec-title">People from your events</div>`+list.map(p=>{
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">${t("met_empty_t")}</div><div class="es-s">${t("met_empty_s")}</div></div>`; }
+      else body.innerHTML=`<div class="sec-title">${t("met_sec")}</div>`+list.map(p=>{
         const isFriend=state.friends.some(f=>f.name===p.name);
-        const action=isFriend?'<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">Friends</span>':`<div class="req-actions"><button class="req-yes" data-add="${p.name}">＋ Add</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
-        return friendRowHTML(p,`Met at ${p.met}`,action);
+        const action=isFriend?`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("fr_tab")}</span>`:`<div class="req-actions"><button class="req-yes" data-add="${p.name}">${t("fb_add")}</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
+        return friendRowHTML(p,t("met_at").replace("{x}",p.met),action);
       }).join("");
     }
     makeFocusable($("#friendsBody"));
@@ -2449,12 +2557,12 @@
     const body=$("#reqBody");
     if(tab==="recv"){
       const list=state.requests.recv;
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✉️</div><div class="es-t">No requests right now</div><div class="es-s">Friend requests from people you've met show up here.</div></div>`; }
-      else body.innerHTML=list.map(p=>friendRowHTML(p,`Met at ${p.met}`,`<div class="req-actions"><button class="req-yes" data-acc="${p.name}">Accept</button><button class="req-no" data-dec="${p.name}">Decline</button></div>`)).join("");
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✉️</div><div class="es-t">${t("rq_empty_recv_t")}</div><div class="es-s">${t("rq_empty_recv_s")}</div></div>`; }
+      else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met),`<div class="req-actions"><button class="req-yes" data-acc="${p.name}">${t("rq_accept")}</button><button class="req-no" data-dec="${p.name}">${t("rq_decline")}</button></div>`)).join("");
     } else {
       const list=state.requests.sent;
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">📤</div><div class="es-t">No pending sent requests</div><div class="es-s">When you add someone, it'll show here until they respond.</div></div>`; }
-      else body.innerHTML=list.map(p=>friendRowHTML(p,"Request sent",`<button class="req-no" data-cancel="${p.name}">Cancel</button>`)).join("");
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">📤</div><div class="es-t">${t("rq_empty_sent_t")}</div><div class="es-s">${t("rq_empty_sent_s")}</div></div>`; }
+      else body.innerHTML=list.map(p=>friendRowHTML(p,t("rq_sent_sub"),`<button class="req-no" data-cancel="${p.name}">${t("btn_cancel")}</button>`)).join("");
     }
     $$("#reqBody [data-acc]").forEach(el=>el.addEventListener("click",()=>{
       const n=el.getAttribute("data-acc"); const p=state.requests.recv.find(x=>x.name===n);
@@ -2472,21 +2580,21 @@
   /* ============ FRIEND PROFILE ============ */
   function renderFriendProfile(){
     const name=state.currentFriendView;
-    const p=state.friends.find(x=>x.name===name)||metPool.find(x=>x.name===name)||state.requests.recv.find(x=>x.name===name)||{name:name,emoji:"🙂",key:"easygoer",met:"a meetup"};
+    const p=state.friends.find(x=>x.name===name)||metPool.find(x=>x.name===name)||state.requests.recv.find(x=>x.name===name)||{name:name,emoji:"🙂",key:"easygoer"};
     const isFriend=state.friends.some(x=>x.name===name);
-    const a=ARCH[p.key]||ARCH.easygoer;
+    const key=ARCH[p.key]?p.key:"easygoer", desc=archDesc(key);
     $("#s-friendprofile").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${p.name}</div></div>
       <div style="text-align:center;margin:6px 0 18px">
         <div class="avatar av-lg ${archGrad(p.key)}" style="margin:0 auto;font-size:46px;width:96px;height:96px">${p.emoji}</div>
         <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:12px">${p.name}</div>
         <div style="margin-top:8px">${archBadge(p.key)}</div>
-        <div class="sub" style="margin-top:8px">${a.tag}</div>
+        <div class="sub" style="margin-top:8px">${archTag(key)}</div>
       </div>
-      <div class="info-block"><div class="sec-title">Where you met</div><div class="ib-row"><span class="star">📍</span><span>${p.met||"A Perch meetup"}</span></div></div>
-      ${isFriend?`<div class="info-block"><div class="sec-title">A bit about ${p.name}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">Here for relaxed, friendly hangs. ${a.desc[0]} and ${(a.desc[1]||"").toLowerCase()}, by most accounts.</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">Add ${p.name} as a friend to see more and message privately.</p>`}
+      <div class="info-block"><div class="sec-title">${t("fp_where")}</div><div class="ib-row"><span class="star">📍</span><span>${p.met||t("met_perch")}</span></div></div>
+      ${isFriend?`<div class="info-block"><div class="sec-title">${t("fp_about").replace("{n}",p.name)}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">${t("fp_bio").replace("{d1}",desc[0]).replace("{d2}",(desc[1]||"").toLowerCase())}</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">${t("fp_locked").replace("{n}",p.name)}</p>`}
       <div class="btn-row">
-        ${isFriend?`<button class="btn btn-primary" id="fpMsg">💬 Message</button>`:`<button class="btn btn-primary" id="fpAdd">＋ Add friend</button>`}
+        ${isFriend?`<button class="btn btn-primary" id="fpMsg">${t("fp_msg")}</button>`:`<button class="btn btn-primary" id="fpAdd">${t("fp_add")}</button>`}
         <button class="btn btn-soft" id="fpMore" aria-label="More options">···</button>
       </div>`;
     const msg=$("#fpMsg"); if(msg) msg.addEventListener("click",()=>{ state.currentDM=p.name; goTo("dm"); });
@@ -2498,13 +2606,13 @@
   function renderDM(){
     const name=state.currentDM; const p=state.friends.find(x=>x.name===name)||{name:name,emoji:"🙂",key:"easygoer"};
     $("#dmAv").className="ct-ic "+archGrad(p.key); $("#dmAv").textContent=p.emoji;
-    $("#dmName").textContent=p.name; $("#dmMeta").textContent="Friends · private";
-    if(!state.dms[name]) state.dms[name]=[{who:"them",text:`Hey! Good meeting you 😊`,time:"earlier"}];
+    $("#dmName").textContent=p.name; $("#dmMeta").textContent=t("dm_meta");
+    if(!state.dms[name]) state.dms[name]=[{who:"them",text:t("dm_seed"),time:"earlier"}];
     const sc=$("#dmScroll"); sc.innerHTML=state.dms[name].map(m=>m.who==="me"
-      ? `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${m.time||"now"}</div></div></div>`
-      : `<div class="msg-row"><div class="mr-av ${archGrad(p.key)}">${p.emoji}</div><div class="msg-col"><div class="msg them">${m.text}</div><div class="msg-time">${m.time||""}</div></div></div>`
+      ? `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${msgTime(m.time)}</div></div></div>`
+      : `<div class="msg-row"><div class="mr-av ${archGrad(p.key)}">${p.emoji}</div><div class="msg-col"><div class="msg them">${m.text}</div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`
     ).join("");
-    if(state.dms[name].some(m=>m.who==="me")) sc.insertAdjacentHTML("beforeend",`<div class="dm-seen">Seen</div>`);
+    if(state.dms[name].some(m=>m.who==="me")) sc.insertAdjacentHTML("beforeend",`<div class="dm-seen">${t("dm_seen")}</div>`);
     sc.scrollTop=sc.scrollHeight;
   }
   const DM_REPLIES={
@@ -3066,13 +3174,14 @@
   function openBlockedList(){
     const blocked=[...state.blocked];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-title">Blocked accounts</div>
+      <div class="sheet-title">${t("set_blocked")}</div>
       ${!blocked.length
-        ? `<div class="sheet-sub" style="text-align:center;margin-top:8px">No one blocked.</div>`
-        : blocked.map(n=>`<div class="set-item" data-unb="${n}"><span class="si-ic">🚫</span>${n}<span class="chev" style="margin-left:auto;color:var(--accent-text);font-size:13px">Unblock</span></div>`).join("")}
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:16px">Close</button>`;
+        ? `<div class="sheet-sub" style="text-align:center;margin-top:8px">${t("blk_none")}</div>`
+        : blocked.map(n=>`<div class="set-item" data-unb="${n}"><span class="si-ic">🚫</span>${n}<span class="chev" style="margin-left:auto;color:var(--accent-text);font-size:13px">${t("ma_unblock")}</span></div>`).join("")}
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:16px">${t("btn_close")}</button>`;
     $$("#sheetBody [data-unb]").forEach(el=>el.addEventListener("click",()=>{
-      state.blocked.delete(el.getAttribute("data-unb")); closeSheet(); showToast("Unblocked");
+      const n=el.getAttribute("data-unb");
+      state.blocked.delete(n); closeSheet(); showToast(t("toast_unblocked").replace("{n}",n));
       if($("#s-settings").classList.contains("active")) renderSettings();
     }));
     sheetClose(); openSheet();
@@ -3140,19 +3249,19 @@
     const g=state.chosenGroup; const mems=(g&&g.members)||[];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">🛡️</div>
-      <div class="sheet-title">Safety options</div>
-      <div class="sheet-sub">Report something or take action on a group member.</div>
+      <div class="sheet-title">${t("cs_title")}</div>
+      <div class="sheet-sub">${t("cs_sub")}</div>
       <div class="set-list">
-        <div class="set-item" data-act="report"><span class="si-ic">🚩</span>Report a problem<span class="chev">›</span></div>
-        <div class="set-item" data-act="leave"><span class="si-ic">🚪</span>Leave this group<span class="chev">›</span></div>
-        <div class="set-item" data-doc="guidelines"><span class="si-ic">💛</span>Community guidelines<span class="chev">›</span></div>
-        <div class="set-item" data-doc="wellbeing"><span class="si-ic">🌿</span>Wellbeing resources<span class="chev">›</span></div>
+        <div class="set-item" data-act="report"><span class="si-ic">🚩</span>${t("cs_report")}<span class="chev">›</span></div>
+        <div class="set-item" data-act="leave"><span class="si-ic">🚪</span>${t("gd_leave")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="guidelines"><span class="si-ic">💛</span>${t("set_guidelines")}<span class="chev">›</span></div>
+        <div class="set-item" data-doc="wellbeing"><span class="si-ic">🌿</span>${t("set_well")}<span class="chev">›</span></div>
       </div>
-      ${mems.length?`<div class="sec-title" style="margin-top:4px">Report a member</div><div class="set-list">${mems.map(m=>`<div class="set-item rep-member" data-rep="${m[0]}"><div class="avatar av-xs ${archGrad(m[2])}">${m[1]}</div><div class="rep-mname">${m[0]}</div><span class="rep-go">›</span></div>`).join("")}</div>`:""}
-      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">Cancel</button>`;
+      ${mems.length?`<div class="sec-title" style="margin-top:4px">${t("cs_member")}</div><div class="set-list">${mems.map(m=>`<div class="set-item rep-member" data-rep="${m[0]}"><div class="avatar av-xs ${archGrad(m[2])}">${m[1]}</div><div class="rep-mname">${m[0]}</div><span class="rep-go">›</span></div>`).join("")}</div>`:""}
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-act]").forEach(el=>el.addEventListener("click",()=>{
       const a=el.getAttribute("data-act");
-      if(a==="report"){ if(g&&g.members&&g.members[0]){ openReport({name:g.members[0][0],emoji:g.members[0][1],key:g.members[0][2]}); } else { closeSheet(); showToast("Report received — thank you"); } }
+      if(a==="report"){ if(g&&g.members&&g.members[0]){ openReport({name:g.members[0][0],emoji:g.members[0][1],key:g.members[0][2]}); } else { closeSheet(); showToast(t("rep_done")); } }
       else if(a==="leave"){ closeSheet(); if(g) openLeaveSheet(g); }
     }));
     $$("#sheetBody [data-rep]").forEach(el=>el.addEventListener("click",()=>{
@@ -3198,15 +3307,15 @@
   $$("#s-moodcheck [data-mood]").forEach(el=>el.addEventListener("click",()=>{
     const m=el.getAttribute("data-mood");
     if(state.chosenGroup){ state.chatViewGroup=state.chosenGroup.id; }
-    if(m==="ready"){ showToast("See you there 🌿"); setTimeout(()=>goTo("groupdetail",{silent:true}),700); }
-    else if(m==="nervous"){ showToast("Totally normal — the group will be glad you came."); setTimeout(()=>goTo("groupdetail",{silent:true}),1200); }
+    if(m==="ready"){ showToast(t("toast_mood_ready")); setTimeout(()=>goTo("groupdetail",{silent:true}),700); }
+    else if(m==="nervous"){ showToast(t("toast_mood_nervous")); setTimeout(()=>goTo("groupdetail",{silent:true}),1200); }
     else openMoodNo();
   }));
 
   // photo input
   $("#photoInput").addEventListener("change",e=>{
     const f=e.target.files&&e.target.files[0]; if(!f) return;
-    const r=new FileReader(); r.onload=()=>{ state.photo=r.result; closeSheet(); showToast("Photo updated"); if($("#s-profile").classList.contains("active")) renderProfile(); };
+    const r=new FileReader(); r.onload=()=>{ state.photo=r.result; closeSheet(); showToast(t("toast_photo")); if($("#s-profile").classList.contains("active")) renderProfile(); };
     r.readAsDataURL(f); e.target.value="";
   });
 
