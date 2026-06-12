@@ -8,6 +8,8 @@ A complete trace of `index.html` (every screen, button, and state transition). I
 
 ## P0 — Functional bugs
 
+> **Status: all four P0 items fixed in commit `f86df9d` (2026-06-12).** Kept here for the repro steps and as context for the P1/P2 lists below, which are still open.
+
 ### 1. Joined-group detail can show the WRONG activity
 **Where:** `renderGroups` group click handler (~line 1982) + `renderGroupDetail` (~line 1995).
 **What:** A joined group's detail screen reads `state.chosenActivity`, but the `[data-group]` click handler only sets `state.chosenGroup` — it never restores the activity you actually joined with (stored in `j.activity`).
