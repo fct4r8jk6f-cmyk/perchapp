@@ -1200,27 +1200,27 @@
   /* ============ ACTIVITIES ============ */
   const CATS=["For you","Food & Drink","Outdoors","Arts & Culture","Games","Chill","Active","Evening Out"];
   const ACTIVITIES=[
-    {id:"thursdays",icon:"🪶",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week"},
-    {id:"trivia",icon:"🧠",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
-    {id:"boardgame",icon:"🎲",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
-    {id:"cooking",icon:"🍳",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend",price:"$35"},
-    {id:"walk",icon:"🚶",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week"},
-    {id:"foodmkt",icon:"🥘",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
-    {id:"comedy",icon:"🎤",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
-    {id:"bookclub",icon:"📚",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Café Pages · Verdun",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
-    {id:"cinema",icon:"🎬",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop on Saint-Laurent",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, easy evening",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
-    {id:"pottery",icon:"🏺",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Argile · Rosemont",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
-    {id:"escape",icon:"🔐",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Downtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
-    {id:"hike",icon:"⛰️",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
-    {id:"jazz",icon:"🎷",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
-    {id:"plant",icon:"🪴",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
-    {id:"paint",icon:"🖌️",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week",price:"$30"},
-    {id:"karaoke",icon:"🎵",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
-    {id:"rooftop",icon:"🌆",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
-    {id:"artclass",icon:"🖼️",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
-    {id:"improv",icon:"🎭",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
-    {id:"vintage",icon:"🧥",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
-    {id:"axe",icon:"🪓",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular",price:"$28"}
+    {id:"thursdays",icon:"feather",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week"},
+    {id:"trivia",icon:"lightbulb",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
+    {id:"boardgame",icon:"dice",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
+    {id:"cooking",icon:"utensils",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend",price:"$35"},
+    {id:"walk",icon:"route",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week"},
+    {id:"foodmkt",icon:"bag",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
+    {id:"comedy",icon:"mic",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
+    {id:"bookclub",icon:"book",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Café Pages · Verdun",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
+    {id:"cinema",icon:"film",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop on Saint-Laurent",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, easy evening",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
+    {id:"pottery",icon:"vase",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Argile · Rosemont",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
+    {id:"escape",icon:"lock",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Downtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
+    {id:"hike",icon:"mountain",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
+    {id:"jazz",icon:"disc",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
+    {id:"plant",icon:"sprout",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
+    {id:"paint",icon:"wine",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week",price:"$30"},
+    {id:"karaoke",icon:"music",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
+    {id:"rooftop",icon:"building",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
+    {id:"artclass",icon:"image",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
+    {id:"improv",icon:"smile",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
+    {id:"vintage",icon:"shirt",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
+    {id:"axe",icon:"target",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular",price:"$28"}
   ];
 
   const ARCH_DOTCOLORS={spark:"#FF7A5C",connector:"#FF6F91",explorer:"#8E6BFF",easygoer:"#6FE0C6",anchor:"#A57BFF",observer:"#A98FE0",curator:"#F2B33D",grounding:"#A6794E",wildcard:"#FF4D9D",storyteller:"#FF8FA3",navigator:"#2A9D8F",wavelength:"#B9A6F0"};
@@ -1785,11 +1785,32 @@
     target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
     calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
     users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    feather:'<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>',
+    lightbulb:'<path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/>',
+    dice:'<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8" cy="8" r="1.2" fill="currentColor"/><circle cx="16" cy="8" r="1.2" fill="currentColor"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/><circle cx="8" cy="16" r="1.2" fill="currentColor"/><circle cx="16" cy="16" r="1.2" fill="currentColor"/>',
+    utensils:'<path d="M3 2v7c0 1.1.9 2 2 2a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>',
+    route:'<circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/>',
+    bag:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/>',
+    mic:'<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/>',
+    film:'<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M7 3v18M17 3v18M3 7.5h4M3 12h18M3 16.5h4M17 7.5h4M17 16.5h4"/>',
+    vase:'<path d="M8 2h8"/><path d="M9 2c0 3-3 4-3 8a6 6 0 0 0 12 0c0-4-3-5-3-8"/>',
+    lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+    mountain:'<path d="m8 3 4 8 5-5 5 15H2z"/>',
+    disc:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2" fill="currentColor"/>',
+    sprout:'<path d="M7 20h10"/><path d="M10 20c5.5-2.5.8-6.4 3-10"/><path d="M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8z"/><path d="M14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z"/>',
+    wine:'<path d="M8 22h8"/><path d="M7 10h10"/><path d="M12 15v7"/><path d="M7 2h10l-1 9a4 4 0 0 1-8 0z"/>',
+    music:'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>',
+    building:'<path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4M10 10h4M10 14h4M10 18h4"/>',
+    image:'<rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.1-3.1a2 2 0 0 0-2.8 0L6 21"/>',
+    smile:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
+    shirt:'<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/>',
     _dot:'<circle cx="12" cy="12" r="3.5"/>'
   };
   function svgIcon(name,extra){
     return `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra?" "+extra:""}>${ICONS[name]||ICONS._dot}</svg>`;
   }
+  /* glyph(): render a known icon NAME as a line-icon; pass an emoji/avatar string through unchanged (group/people emoji stay emoji) */
+  function glyph(v){ return (v&&ICONS[v])?svgIcon(v):(v==null?"":v); }
   /* whether the profile has been personalised — gates first join/host, drives the "set up" nudges */
   const needsProfile=()=>!state.profileComplete;
   /* reliability — show-up record is Perch's reputation currency (PLAN.md). Earned by ATTENDING (checking in), not merely joining */
@@ -2119,7 +2140,7 @@
     const badges=(tags.length?`<div class="act-badges">${tags.map(b=>`<span class="trait" style="background:rgba(0,0,0,.32);border:none;color:#fff;backdrop-filter:blur(4px)">${b}</span>`).join("")}</div>`:"<div></div>");
     return `<div class="act-card ${picked?'picked-card':''}" data-act="${a.id}">
       ${picked?`<button class="picked-x" data-dismiss="${a.id}" aria-label="Dismiss">✕</button>`:""}
-      <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${a.icon}</div></div>
+      <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${glyph(a.icon)}</div></div>
       <div class="act-body">
         <div class="act-name">${actName(a)}</div>
         <div class="act-meta">${frWhen(a.when)} · ${actSize(a)}</div>
@@ -2170,7 +2191,7 @@
     const pop=$("#popRail"), popTitle=$("#popTitle");
     const popular=ACTIVITIES.filter(a=>a.badge&&a.id!=="thursdays").slice(0,5);
     if(home){
-      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${actName(a)}</div><div class="pb-v">${frWhen(a.when.split(" · ")[0])} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
+      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${glyph(a.icon)}</span></div><div class="pop-body"><div class="pb-n">${actName(a)}</div><div class="pb-v">${frWhen(a.when.split(" · ")[0])} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
       pop.style.display="flex"; if(popTitle) popTitle.style.display="";
     } else { pop.innerHTML=""; pop.style.display="none"; if(popTitle) popTitle.style.display="none"; }
 
@@ -2225,7 +2246,7 @@
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'}"></span>`).join("");
     return `<div class="group-card ${g.status==='today'?'today':''}" data-group="${g.id}">
       <div class="gc-statusrow">${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
-      <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
+      <div class="gc-top"><div class="gc-emoji ${g.g}">${glyph(g.emoji)}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
       <div class="gc-vibetags">${grpTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
       <div class="gc-personality">${grpPersonality(g)}</div>
@@ -2250,7 +2271,7 @@
         html+=state.hostedGroups.map(g=>`
           <div class="group-card" data-hosted="${g.id}">
             <div class="gc-statusrow"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.1)">${t("gd_forming_status")}</span></div>
-            <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${hostedName(g)}</div><div class="gc-when">${hostedWhen(g)}</div></div></div>
+            <div class="gc-top"><div class="gc-emoji ${g.g}">${glyph(g.emoji)}</div><div><div class="gc-name">${hostedName(g)}</div><div class="gc-when">${hostedWhen(g)}</div></div></div>
             <div class="gc-vibetags">${hostedTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
             <div class="gc-personality">${t("chat_forming_sub")}.</div>
             <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</span><span class="btn-link link-sm">${t("gc_open")}</span></div>
@@ -2262,7 +2283,7 @@
         html+=state.waitlisted.map(w=>{ const g=w.group;
           return `<div class="group-card" data-group="${g.id}">
             <div class="gc-statusrow"><span class="gc-vibetag" style="color:var(--accent-text);border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.1)">🕓 ${t("wl_status")}</span></div>
-            <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
+            <div class="gc-top"><div class="gc-emoji ${g.g}">${glyph(g.emoji)}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
             <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("wl_pos_short").replace("{n}",wlPosition(g))}</span><span class="btn-link link-sm">${t("gc_see")}</span></div>
           </div>`; }).join("");
       }
@@ -2349,7 +2370,7 @@
     }
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${actName(a)}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(a.icon)}</div><div class="ah-n" style="font-size:20px">${actName(a)}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${actVenue(a).split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
       <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
@@ -2422,7 +2443,7 @@
     const spotsLeft=g.size-g.filled;
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${g.emoji}</div><div class="ah-n" style="font-size:20px">${hostedName(g)}</div><div class="ah-l">${hostedWhen(g)}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(g.emoji)}</div><div class="ah-n" style="font-size:20px">${hostedName(g)}</div><div class="ah-l">${hostedWhen(g)}</div></div>
       <div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.1)">${t("gd_forming_status")}</span></div>
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${hostedWhen(g)}</div></div></div>
       <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab">${t("gd_whos")}</div><div class="it-val">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</div></div></div>
@@ -2490,7 +2511,7 @@
   /* ============ JOINED ============ */
   function syncJoined(){
     const a=state.chosenActivity||ACTIVITIES[0], g=state.chosenGroup;
-    $("#joinedOrb").textContent=a.icon;
+    $("#joinedOrb").innerHTML=glyph(a.icon);
     $("#joinedOrb").className="joined-orb "+a.g;
     const day=g?frWhen(g.when).split(" · ")[0].toLowerCase():null;
     $("#joinedSub").textContent=day?t("joined_see_day").replace("{d}",day):t("joined_see_there");
@@ -2586,7 +2607,7 @@
       else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi"); }
       const when=it.when?frWhen(it.when).split(" · ")[0]:"";
       const unread=state.unreadChats.has(it.id);
-      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
+      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${glyph(it.emoji)}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
     dms.forEach(d=>{
       html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="${t('dm_online')}"></span></div>`;
@@ -2603,14 +2624,14 @@
     state.chosenGroup=item.group; if(item.activity) state.chosenActivity=item.activity;
     const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
-    $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").textContent=item.emoji||a.icon;
+    $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").innerHTML=glyph(item.emoji||a.icon);
     $("#chatName").textContent=item.name||(g&&grpName(g))||t("chat_yourgroup");
     if(item.forming){ showChatChrome(false); $("#chatMeta").textContent="";
-      $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${item.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
+      $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${glyph(item.emoji)}</div><div class="es-t">${item.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
       return; }
     showChatChrome(true);
     $("#chatMeta").textContent=`${(g&&g.filled)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
-    $("#pinEm").textContent=a.icon; $("#pinT").textContent=actName(a);
+    $("#pinEm").innerHTML=glyph(a.icon); $("#pinT").textContent=actName(a);
     $("#pinS").textContent=frWhen((g&&g.when)||a.when);
     $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${actVenue(a)}<br>🗓️ ${frWhen((g&&g.when)||a.when)}<br>🌦️ ${t("gd_planb")} · ${actPlanb(a)}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
     const sc=$("#chatScroll");
