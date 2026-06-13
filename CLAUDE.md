@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 An interactive product demo for **Perch** — a small-group friend-making app. Everything is simulated: no backend, no real accounts, no payments. `PLAN.md` is the product source of truth (thesis, risks, MVP cut); the demo expresses that plan, so check it before changing product behavior.
 
+The backend the demo *implies* is **designed but not built**: `BACKEND.md` (architecture & decisions), `schema.sql` (validated PostgreSQL DDL — every demo invariant encoded), and `API.md` (REST contract for every flow). These describe a future server, not anything running today — the demo is still single-file, no-build, no-backend. `LAUNCH.md` is the path to launch; `LEGAL.md` the legal-placeholder map; `REVIEW.md` the QA log.
+
 ## Run it
 
 No build step, no dependencies, no package manager — and keep it that way (single-file, no-build is a deliberate constraint).

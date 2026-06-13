@@ -68,6 +68,8 @@ Small items (< ~4 hours each) that unblock decisions and build momentum.
 ### Phase 1 — MVP backend & core flows (Weeks 2–5, parallel)
 **Goal:** auth, identity verification, (ops-assisted) matching, moderation queue, core APIs on staging.
 
+> **The backend is already designed in-repo** — [BACKEND.md](BACKEND.md) (stack + decisions), [schema.sql](schema.sql) (validated PostgreSQL DDL: 41 tables, 24 enums, every demo invariant encoded — weekly cap, single join funnel, attendance-based reliability, pay-at-venue, Law 25 surface), and [API.md](API.md) (the REST contract for every flow below). Phase 1 is **implementing** these, not designing from scratch.
+
 Key tasks (where · effort): PostgreSQL schema — *backend · S*; phone sign-in + SMS code (Twilio Verify) — *backend · M*; Apple/Google OAuth — *backend · M*; **weekly batch-matching engine** (greedy: filter by neighbourhood → sort by reliability → form balanced 4–6 groups → assign to Perch Thursdays; ops reviews output Friday AM) — *backend · M*; REST API (groups/join/reserve/leave/waitlist, with the free-tier cap enforced server-side) — *backend · M*; realtime chat (Firestore at MVP) — *backend · M*; admin panel (group review + reports queue + user actions) — *backend · L*; 24h moderation queue — *backend · M*; account lifecycle (delete / pause / block, PIPEDA-aware) — *backend · L*; deploy to staging — *infra · L*; OpenAPI contract for mobile — *backend · S*.
 
 **Exit:** a test user can sign up → verify phone → quiz → browse groups → join → chat, on staging. API contract published.
@@ -162,8 +164,9 @@ entity │                                             │                      
 ## Post-MVP (weeks 12+)
 Public store launch + Montreal marketing (r/Montreal, Meetup, IG, Product Hunt) → per-event ticketing (Stripe Connect) + photo upload with content moderation → Perch+ real IAP + conversion tuning → 2nd/3rd neighbourhood for density → Toronto expansion planning.
 
-## Companion repo docs to create as you build
-`LEGAL.md` (placeholder map → links to signed docs) · `OPS_RUNBOOK.md` (moderation checklist + 24h SLA + escalation) · `API.md` (OpenAPI spec for mobile) · `TEST_SCENARIOS.md` (QA flows).
+## Companion repo docs
+**Already drafted:** [`LEGAL.md`](LEGAL.md) (placeholder map → links to signed docs) · [`BACKEND.md`](BACKEND.md) (architecture & decisions) · [`schema.sql`](schema.sql) (Postgres DDL) · [`API.md`](API.md) (REST contract).
+**Still to create as you build:** `OPS_RUNBOOK.md` (moderation checklist + 24h SLA + escalation) · `TEST_SCENARIOS.md` (QA flows) · an OpenAPI/Swagger export generated from `API.md`.
 
 ---
 
