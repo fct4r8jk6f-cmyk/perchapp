@@ -2,7 +2,7 @@
 
 Small groups of adults meeting around real activities — the low-pressure way to make friends. This repo contains the **interactive v1 product demo**: a single-file, no-build prototype of the full app flow, framed in an iPhone mock with a clickable flow map.
 
-**The product plan — thesis, risks, metrics, MVP cut — lives in [PLAN.md](PLAN.md).**
+**The product plan — thesis, risks, metrics, MVP cut — lives in [PLAN.md](PLAN.md).** The path from this demo to a Montreal launch (phased, with the legal/backend/store blockers) is in [LAUNCH.md](LAUNCH.md).
 
 ## Run it
 
@@ -34,5 +34,6 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 | `index.html` | The entire demo — styles, markup, data, and logic |
 | `manifest.json`, `icon-*.png` | PWA install support |
 | `PLAN.md` | Product plan and strategy |
+| `LAUNCH.md` | Phased launch-readiness roadmap (demo → App Store) |
 
 Everything in the demo is simulated — no backend, no real accounts. Legal text is a template pending attorney review.
