@@ -1282,6 +1282,13 @@
     axe:{vibe:"Bien plus facile que ça en a l'air",planb:"Salle de tir à l'arc si complet"}
   };
   const BADGE_FR={"🔥 Popular":"🔥 Populaire","New":"Nouveau","Almost full":"Presque complet","Popular this weekend":"Populaire ce week-end","🪶 Every week":"🪶 Chaque semaine"};
+  /* fr versions of the demo group prose (makeGroups), keyed by group id. Names are descriptive, not proper nouns, so they translate too. */
+  const GRPFR={
+    a:{name:"Le Mélange facile",vibetags:["Relax","Jaseux","Âges variés"],personality:"Un mélange d'explorateurs et de gens posés — attends-toi à de la bonne jasette",compat:"2 personnes avec un vibe comme le tien sont dans ce groupe"},
+    b:{name:"Compagnie tranquille",vibetags:["Tranquille","Calme","Petit groupe"],personality:"Du monde posé, facile à vivre — aucune pression de performer",compat:"1 personne avec un vibe comme le tien est dans ce groupe"},
+    c:{name:"La Gang animée",vibetags:["Grosse énergie","Social","Le fun"],personality:"Jaseux et plein d'entrain — une gang sociable et le fun",compat:"1 personne avec un vibe comme le tien est dans ce groupe"},
+    d:{name:"Les Habitués",vibetags:["Amical","Gang hebdo"],personality:"Une gang hebdo qui a cliqué — ce groupe-là est complet"}
+  };
   const I18N={
     en:{
       land_headline:"Meet your people,<br>doing something real.",
@@ -1548,6 +1555,11 @@
   const actBadge=b=>(state.lang==="fr"&&BADGE_FR[b]?BADGE_FR[b]:b);
   const actSize=a=>(state.lang==="fr"?a.size.replace("people","personnes"):a.size);
   const actSocial=a=>(state.lang==="fr"?a.social.replace("joined this week","inscrits cette semaine"):a.social);
+  /* demo groups (makeGroups) likewise stay canonical English; GRPFR translates their prose at render time */
+  const grpName=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].name:g.name);
+  const grpTags=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].vibetags:g.vibetags);
+  const grpPersonality=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].personality:g.personality);
+  const grpCompat=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].compat:g.compat);
   const DAY_FR={Monday:"lundi",Tuesday:"mardi",Wednesday:"mercredi",Thursday:"jeudi",Friday:"vendredi",Saturday:"samedi",Sunday:"dimanche",Mon:"lun",Tue:"mar",Wed:"mer",Thu:"jeu",Fri:"ven",Sat:"sam",Sun:"dim",Today:"Aujourd'hui",Tonight:"Ce soir"};
   function frWhen(s){
     if(state.lang!=="fr"||!s) return s;
@@ -1556,9 +1568,9 @@
       .replace(/\b(\d{1,2}):(\d{2})\s?(AM|PM)\b/g,(x,h,m,ap)=>{ let H=(+h)%12; if(ap==="PM") H+=12; return H+" h"+(m==="00"?"":" "+m); });
   }
   /* hosted groups are created at runtime — render their labels from keys so a language switch re-translates them */
-  const hostedName=g=>(g.catKey?t("hosted_name").replace("{cat}",catLabel(g.catKey)):g.name);
+  const hostedName=g=>(g.catKey?t("hosted_name").replace("{cat}",catLabel(g.catKey)):grpName(g));
   const hostedWhen=g=>(g.whenKey?(({Tonight:t("host_tonight"),"This weekend":t("host_weekend"),Flexible:t("host_flex")})[g.whenKey]||g.whenKey)+" · "+g.area:g.when);
-  const hostedTags=g=>(g.catKey?[catLabel(g.catKey),g.area,g.size+" "+t("chat_people")]:g.vibetags);
+  const hostedTags=g=>(g.catKey?[catLabel(g.catKey),g.area,g.size+" "+t("chat_people")]:grpTags(g));
   const msgTime=x=>{ x=x||"now"; if(x==="now") return t("time_now"); if(x==="earlier") return t("time_earlier"); return frWhen(x); };
   function applyI18n(root){
     root=root||document;
@@ -2035,12 +2047,12 @@
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'}"></span>`).join("");
     return `<div class="group-card ${g.status==='today'?'today':''}" data-group="${g.id}">
       <div class="gc-statusrow">${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
-      <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${g.name}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
-      <div class="gc-vibetags">${g.vibetags.map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
+      <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
+      <div class="gc-vibetags">${grpTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
-      <div class="gc-personality">${g.personality}</div>
+      <div class="gc-personality">${grpPersonality(g)}</div>
       <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} ${t("gc_spots")}</span><span class="btn-link link-sm">${joined?t("gc_open"):t("gc_see")}</span></div>
-      ${g.compat?`<div class="gc-compat">✦ ${g.compat}</div>`:""}</div>`;
+      ${g.compat?`<div class="gc-compat">✦ ${grpCompat(g)}</div>`:""}</div>`;
   }
   function renderGroups(){
     const tab=state.groupsTab||"up";
@@ -2138,7 +2150,7 @@
     }
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${g.name} · ${frWhen(g.when)}</div></div>
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${a.venue.split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
       <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${a.venue}</div></div></div>
@@ -2147,8 +2159,8 @@
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
-        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${g.personality}.</p>
-        ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${g.compat}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
+        <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${grpPersonality(g)}.</p>
+        ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${grpCompat(g)}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
       <div class="map-stub"><span>🗺️ ${a.venue.split(" · ")[1]||"Map"}</span></div>
       ${flowExtra}
@@ -2311,7 +2323,7 @@
     const out=[];
     state.joinedGroups.forEach(j=>{
       const a=j.activity||state.chosenActivity||ACTIVITIES[0];
-      out.push({id:j.group.id, emoji:a.icon, grad:a.g||j.group.g, name:j.group.name, when:j.group.when, forming:false, group:j.group, activity:a});
+      out.push({id:j.group.id, emoji:a.icon, grad:a.g||j.group.g, name:grpName(j.group), when:j.group.when, forming:false, group:j.group, activity:a});
     });
     (state.hostedGroups||[]).forEach(g=>{
       out.push({id:g.id, emoji:g.emoji, grad:g.g, name:hostedName(g), when:hostedWhen(g), forming:true, group:g, activity:null});
@@ -2376,7 +2388,7 @@
     const back=$("#chatBack"); if(back) back.style.display="flex";
     const g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     $("#chatIc").className="ct-ic "+(item.grad||a.g); $("#chatIc").style.background=""; $("#chatIc").textContent=item.emoji||a.icon;
-    $("#chatName").textContent=item.name||(g&&g.name)||t("chat_yourgroup");
+    $("#chatName").textContent=item.name||(g&&grpName(g))||t("chat_yourgroup");
     if(item.forming){ showChatChrome(false); $("#chatMeta").textContent="";
       $("#chatScroll").innerHTML=`<div class="empty-state" style="margin-top:40px"><div class="es-em">${item.emoji}</div><div class="es-t">${item.name}</div><div class="es-s">${t("chat_forming_sub")}</div></div>`;
       return; }
@@ -2913,8 +2925,8 @@
       }
       body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
         ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> ${t("notif_req")}`,"2h ago",true,"requests"):""}
-        ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${joined.group.name}</b>`,t("notif_justnow"),true,"chat"):""}
-        ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${joined.group.name}</b>`,t("notif_today"),false,"groupdetail"):""}
+        ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${grpName(joined.group)}</b>`,t("notif_justnow"),true,"chat"):""}
+        ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${grpName(joined.group)}</b>`,t("notif_today"),false,"groupdetail"):""}
         ${state.seedSocial?`<div class="day-div">${t("notif_week")}</div>
         ${noti("⏰","rgba(255,182,97,.18)",t("notif_reminder"),t("notif_yest"),false,"groups")}
         ${noti("✨","rgba(142,162,255,.18)",t("notif_newgroup"),"2d",false,"groups")}`:""}`;
@@ -3074,7 +3086,7 @@
     const opts=[[t("mu_1h"),"1h"],[t("mu_8h"),"8h"],[t("mu_tmrw"),"tomorrow"],[t("mu_event"),"event"]];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${t("mu_title")}</div>
-      <div class="sheet-sub">${t("mu_for").replace("{g}",g?g.name:"")}</div>
+      <div class="sheet-sub">${t("mu_for").replace("{g}",g?grpName(g):"")}</div>
       <div class="set-list" style="margin-top:16px">${opts.map(o=>`<div class="set-item" data-dur="${o[1]}"><span class="si-ic">🔕</span>${o[0]}</div>`).join("")}</div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-dur]").forEach(el=>el.addEventListener("click",()=>{
