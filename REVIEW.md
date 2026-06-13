@@ -87,7 +87,7 @@ All re-verified in-browser (en + fr): no console errors; `resetDemo`, the 18+ ag
 
 ## P2 — Polish / improvements
 
-1. **`theme-color` / manifest don't follow light theme** — `applyTheme` updates the `<meta theme-color>` (good), but the PWA `manifest.json` `theme_color`/`background_color` stay dark. Minor.
+1. **`theme-color` / manifest don't follow light theme** — `applyTheme` updates the `<meta theme-color>` (good); the PWA `manifest.json` `theme_color`/`background_color` stay dark. **Resolved as intentional (2026-06-13):** the app boots to the dark default and a manifest carries a single theme color, so dark is the correct install/splash chrome. The manifest was instead polished for store readiness (`id`/`lang`/`dir`/`categories`/`scope`, a vector `icon.svg`), and a real branded SVG icon replaced the emoji-data-URI favicon. See `LAUNCH.md` (do-now items) and `LEGAL.md`.
 2. **"Today" filter == Thursday-only** (`renderExplore`, ~1884) — labeled "Today" but matches `when` starting with "Thu". Confusing if read literally; fine if intentional (Perch Thursdays). Consider relabeling.
 3. **`state.dayOf` / `state.checkedIn` are global, not per-group** — checking into one group makes the profile "Show-up" stat 100% globally and the day-of state can bleed across groups. Acceptable for a demo; note it.
 4. **"Picked for you" matching is fragile** (`renderExplore`, ~1865) — matches activity vs archetype `loves` by first word only. Works for current data but breaks silently if names change.

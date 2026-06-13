@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Perch</title>
 <meta name="description" content="Perch — small-group meetups around real activities in Montreal. The low-pressure way to make friends as an adult.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%AA%B6%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -1749,7 +1750,7 @@
   const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
   const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
   function makeFocusable(root){
-    $$(".chip,.cat,.set-item,.mood-opt,.friend-row,.group-card,.act-card,.pop-card,.land-dot,.age-step,.sopt,.star,.yn,.type-card,.invite-method,.acc-head,.terms-toggle,.agree-box,.switch",root||document).forEach(el=>{
+    $$(".chip,.cat,.set-item,.mood-opt,.friend-row,.group-card,.act-card,.pop-card,.land-dot,.age-step,.sopt,.star,.yn,.type-card,.invite-method,.acc-head,.terms-toggle,.agree-box,.switch,.emoji-pick span",root||document).forEach(el=>{
       if(el.tagName==="BUTTON") return;
       if(!el.hasAttribute("role")) el.setAttribute("role",el.classList.contains("switch")?"switch":"button");
       if(!el.hasAttribute("tabindex")) el.setAttribute("tabindex","0");

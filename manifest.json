@@ -1,13 +1,24 @@
 {
+  "id": "/",
   "name": "Perch",
   "short_name": "Perch",
   "description": "Meet your people, doing something real. Small groups around real activities.",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["social", "lifestyle"],
   "start_url": ".",
+  "scope": ".",
   "display": "standalone",
+  "orientation": "portrait",
   "background_color": "#0F0A15",
   "theme_color": "#0F0A15",
-  "orientation": "portrait",
   "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "icon-180.png",
       "sizes": "180x180",

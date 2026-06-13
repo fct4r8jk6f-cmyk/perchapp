@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Perch">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF8A6B"/>
+      <stop offset="0.5" stop-color="#FF77A0"/>
+      <stop offset="1" stop-color="#A57BFF"/>
+    </linearGradient>
+  </defs>
+  <!-- full-bleed gradient: safe as a maskable icon (the platform applies the mask shape) -->
+  <rect width="512" height="512" fill="url(#g)"/>
+  <!-- feather: two white vane halves with a gap that reads as the rachis, plus the bare quill -->
+  <g transform="translate(256 246) rotate(-28)">
+    <path d="M -9 -150 C -82 -104 -100 -6 -64 84 C -46 126 -22 146 -9 150 Z" fill="#fff"/>
+    <path d="M 9 -150 C 82 -104 100 -6 64 84 C 46 126 22 146 9 150 Z" fill="#fff"/>
+    <line x1="0" y1="118" x2="0" y2="182" stroke="#fff" stroke-width="9" stroke-linecap="round"/>
+  </g>
+</svg>
