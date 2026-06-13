@@ -3,6 +3,8 @@
 A complete trace of `index.html` (every screen, button, and state transition). Items are grouped by priority. Line numbers are approximate anchors — confirm before editing.
 
 > Note: this was a **static code trace**, not a live browser click-through (no browser-automation tool was available in this session). Every item below is grounded in the actual code, but please verify each in a running browser (`npx serve .`) before/after fixing.
+>
+> **Update (2026-06-12):** a full live browser click-through (every screen, en + fr) has since been completed — the findings and fixes are in the **"Second sweep"** section below.
 
 ---
 
@@ -55,6 +57,31 @@ The core happy path (landing → quiz → explore → join → chat → feedback
 13. **Stray English toasts/labels:** "Photo updated" (~3203), "Unblocked" (~3069), "Report received — thank you" (~3149), and the hosted-group name `Your ${cat} hang` + `${size} people` vibetags (~2147–2148).
 
 *(Scope decision for you/Claude: the activity `vibe`/`planb`/`venue` text in `ACTIVITIES` is also English-only. Venue names are proper nouns — fine — but `vibe` lines like "Low-key, great for first timers" arguably should translate. Decide whether that's in scope.)*
+
+---
+
+## Second sweep — live browser QA (2026-06-12)
+
+> **Status: all items below fixed in commit `43b4a0e` (2026-06-12).** Found via a full live click-through of every screen in both languages — the in-browser walkthrough the top note asked for — cross-checked with a source-level i18n audit. Re-verified in-browser after fixing; `check-i18n` clean (key parity 506 = 506, 0 unresolved `t()` refs). These are **13 distinct fr-CA leaks beyond the original P1 batch**, plus two layout bugs.
+
+### i18n leaks (13 strings) — English shown under `state.lang==="fr"`
+Each was a hardcoded literal bypassing `t()`; the fix adds a key to both `I18N.en`/`I18N.fr` (12 new keys) and routes the call through `t()`.
+
+1. **Notification timestamps** (`renderNotifs`, ~2947/2952/2962) — "2h ago", "2d", "3d" were raw literals while sibling timestamps already used `t()`. Now `notif_2hago` / `notif_2day` / `notif_3day` → "il y a 2 h" / "2 j" / "3 j".
+2. **Perch+ paywall table** (`openPerchPlus`, ~2778/2791) — the "Free" column header and the "2 / wk" / "5 / wk" quota cells. Now `pp_free` → "Gratuit" and `pp_quota_free` / `pp_quota_plus` → "2 / sem." / "5 / sem." ("Perch+" stays — brand).
+3. **Friend profile "where you met"** (`renderFriendProfile`, ~2624) — interpolated `p.met` raw, so activity names rendered in English ("Trivia Night…") even though the identical string translated on the Friends / Met / Requests lists. Now `frActText(p.met)`, matching the other renderers (the already-documented convention for prose with embedded activity names).
+4. **Iris seed met-string** (~1634) — "Coffee Meetup · Café Pages" had no `ACTIVITIES` match, so `frActText` couldn't translate it in *any* renderer. Changed to "Book Club · Café Pages" — a real activity with an `ACTFR` entry (→ "Club de lecture") — which also fixes a latent venue mismatch, since Café Pages is Book Club's own venue.
+5. **Sign-in toast** (~1828) — `showToast("Signed in with Apple" / "Signed in")` hardcoded both branches. Now `toast_signed_apple` / `toast_signed`.
+6. **Settings footer** (`renderSettings`, ~2863) — "Made with care". Now `set_madewith` → "Fait avec soin".
+7. **Arrival-dot tooltip** (`renderGroupDetail`, ~2147) — `title="arrived"` (the adjacent visible label already used `t("gd_here_tag")`). Now `t("gd_arrived")` → "sur place".
+8. **DM-inbox presence tooltip** (`enterChats`, ~2394) — `title="online"`. Now `t("dm_online")` → "en ligne".
+9. **Swipe-reply placeholder** (`wireReactTargets`, ~2483) — `inp.placeholder = "Reply to " + who + "…"` (the reset path already used `t("chat_say")`). Now `t("chat_replyto").replace("{who}", who)` → "Répondre à …".
+
+### Layout (2)
+10. **"Join this group" floated mid-screen** (`.cta-bar`, CSS ~631) — `position:sticky;bottom:88px` on content much taller than the viewport pins the bar at a fixed offset that lands mid-content, and the screen's `pad-nav` 96px bottom padding double-counted the nav clearance. Dropped sticky positioning; the CTA now sits in normal flow at the content bottom, just above the nav (the joined-view "Open group chat" / check-in CTAs share the bar and behave the same).
+11. **Map preview collapsed to a 20px strip** (`.map-stub`, CSS ~212) — declared `height:120px` but, as a flex item in the `overflow-y:auto` `.screen` column with default `flex-shrink:1`, it was squeezed to its one text line. Added `flex-shrink:0` → restores the 120px box.
+
+All re-verified in-browser (en + fr): no console errors; `resetDemo`, the 18+ age-stepper floor, and the 3rd-join Perch+ paywall still hold; light/dark themes and the accessibility toggles unaffected.
 
 ---
 
