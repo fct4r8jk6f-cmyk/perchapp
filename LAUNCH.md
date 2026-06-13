@@ -10,6 +10,8 @@
 
 ## TL;DR
 
+> 💸 **No budget? This roadmap is the funded, hire-a-team version.** The zero-budget path — prove it by hand, ship a free-tier web app, pay for the stores only once it works — is in **[BOOTSTRAP.md](BOOTSTRAP.md)** (~$0–300 + your time). Read that first if money is the constraint; this file is the destination once you're funded.
+
 **The single biggest gate to a Montreal launch is legal + identity-verification clarity.** Until a Quebec privacy lawyer confirms whether SMS + age self-attestation is sufficient (or if proof-of-age ID verification is mandatory), you can't finalize the onboarding flow, can't be confident of App Store review, and shouldn't ship. Almost everything else can proceed in parallel.
 
 **Critical path to soft launch (50–200 users, ~4–8 weeks of focused work):**
@@ -149,7 +151,7 @@ legal+ │ Phase 1b: Terms / Privacy / Guidelines      │ Capacitor iOS+Android
 entity │                                             │                                 │ approvals      │ iterate on metrics
 ```
 
-**Minimum team:** founder (full-time) · 1 backend engineer (critical path, wks 1–8) · iOS + Android engineers (parallel, wks 2–8) · Quebec privacy lawyer (retainer, wks 1–4) · part-time bilingual moderator (wk 4+) · freelance copywriter + designer (store listing, icons). Rough 12-week burn at contractor rates: **~$120–180k** (validate against real quotes; a co-founder/equity model changes this materially).
+**Minimum team:** founder (full-time) · 1 backend engineer (critical path, wks 1–8) · iOS + Android engineers (parallel, wks 2–8) · Quebec privacy lawyer (retainer, wks 1–4) · part-time bilingual moderator (wk 4+) · freelance copywriter + designer (store listing, icons). Rough 12-week burn at contractor rates: **~$120–180k** (validate against real quotes; a co-founder/equity model changes this materially). **Don't have this? You don't need it to start** — [BOOTSTRAP.md](BOOTSTRAP.md) defers every line here until traction or grants pay for it.
 
 ---
 

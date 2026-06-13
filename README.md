@@ -4,6 +4,8 @@ Small groups of adults meeting around real activities — the low-pressure way t
 
 **The product plan — thesis, risks, metrics, MVP cut — lives in [PLAN.md](PLAN.md).** The path from this demo to a Montreal launch (phased, with the legal/backend/store blockers) is in [LAUNCH.md](LAUNCH.md).
 
+**Launching with no budget? Start with [BOOTSTRAP.md](BOOTSTRAP.md)** — the ~$0 path to first users (prove it by hand → free-tier web app → app stores only once it works). [LAUNCH.md](LAUNCH.md) is the bigger, funded roadmap for later.
+
 ## Run it
 
 No build step, no dependencies:
@@ -34,7 +36,8 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 | `index.html` | The entire demo — styles, markup, data, and logic |
 | `manifest.json`, `icon.svg`, `icon-*.png` | PWA install support |
 | `PLAN.md` | Product plan and strategy |
-| `LAUNCH.md` | Phased launch-readiness roadmap (demo → App Store) |
+| `BOOTSTRAP.md` | Zero-budget launch plan (prove by hand → free web app → stores) |
+| `LAUNCH.md` | Phased launch-readiness roadmap (the funded, hire-a-team path) |
 | `BACKEND.md` | Backend architecture & decisions (the server the demo implies) |
 | `schema.sql` | PostgreSQL schema — validated DDL for that backend |
 | `API.md` | REST API contract (every demo flow as an endpoint) |
