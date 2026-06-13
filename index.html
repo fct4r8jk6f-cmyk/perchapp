@@ -209,7 +209,7 @@
   .es-em{width:72px;height:72px;border-radius:var(--r-xl);background:var(--grad-calm);opacity:.85;display:flex;align-items:center;justify-content:center;font-size:32px;filter:saturate(.7);}
   .es-t{font-size:15px;color:var(--text);font-weight:700;}
   .es-s{font-size:13px;color:var(--muted);line-height:1.5;max-width:240px;}
-  .map-stub{height:120px;border-radius:var(--r-md);border:1px solid var(--line);background:linear-gradient(135deg,rgba(142,162,255,.12),rgba(165,123,255,.08));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;margin:6px 0 16px;}
+  .map-stub{height:120px;flex-shrink:0;border-radius:var(--r-md);border:1px solid var(--line);background:linear-gradient(135deg,rgba(142,162,255,.12),rgba(165,123,255,.08));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;margin:6px 0 16px;}
   .sparkle{position:absolute;font-size:15px;pointer-events:none;animation:sparkRise 1.5s ease-out forwards;}
   @keyframes sparkRise{0%{opacity:0;transform:translateY(0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
   .skel-card{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);margin-bottom:14px;}
@@ -628,7 +628,7 @@
   /* ===== A11Y & UTILITIES ===== */
   :focus-visible{outline:2px solid var(--calm);outline-offset:2px;}
   /* sticky primary CTA (group detail) — stays visible above the bottom nav */
-  .cta-bar{position:sticky;bottom:88px;z-index:10;margin:8px -22px 0;padding:18px 22px 6px;background:linear-gradient(180deg,transparent,var(--phone-bg) 36%);}
+  .cta-bar{margin:8px -22px 0;padding:18px 22px 6px;background:linear-gradient(180deg,transparent,var(--phone-bg) 36%);}
   /* landing: persistent CTA on panels 1–2 */
   .land-cta{position:absolute;left:30px;right:30px;bottom:60px;z-index:5;}
   /* accessibility preferences (Settings) */
@@ -1423,7 +1423,9 @@
       dm_meta:"Friends · private",dm_seen:"Seen",dm_seed:"Hey! Good meeting you 😊",dm_ph:"Message…",
       cs_title:"Safety options",cs_sub:"Report something or take action on a group member.",cs_report:"Report a problem",cs_member:"Report a member",
       blk_none:"No one blocked.",toast_photo:"Photo updated",notif_clear:"Clear all",help_search:"Search help",ex_host:"＋ Host",
-      set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
+      set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français",
+      notif_2hago:"2h ago",notif_2day:"2d",notif_3day:"3d",pp_free:"Free",pp_quota_free:"2 / wk",pp_quota_plus:"5 / wk",
+      toast_signed_apple:"Signed in with Apple",toast_signed:"Signed in",set_madewith:"Made with care",gd_arrived:"arrived",dm_online:"online",chat_replyto:"Reply to {who}…"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1545,7 +1547,9 @@
       dm_meta:"Amis · privé",dm_seen:"Vu",dm_seed:"Salut! C'était vraiment cool de te rencontrer 😊",dm_ph:"Message…",
       cs_title:"Options de sécurité",cs_sub:"Signale un problème ou agis à l'égard d'un membre du groupe.",cs_report:"Signaler un problème",cs_member:"Signaler un membre",
       blk_none:"Personne de bloqué.",toast_photo:"Photo mise à jour",notif_clear:"Tout effacer",help_search:"Rechercher dans l'aide",ex_host:"＋ Organiser",
-      set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français"
+      set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français",
+      notif_2hago:"il y a 2 h",notif_2day:"2 j",notif_3day:"3 j",pp_free:"Gratuit",pp_quota_free:"2 / sem.",pp_quota_plus:"5 / sem.",
+      toast_signed_apple:"Connecté avec Apple",toast_signed:"Connecté",set_madewith:"Fait avec soin",gd_arrived:"sur place",dm_online:"en ligne",chat_replyto:"Répondre à {who}…"
     }
   };
   function detectLang(){
@@ -1631,7 +1635,7 @@
   const MET_SEED=[
     {name:"Maya",emoji:"😄",key:"connector",met:"Trivia Night · Pub Saint-Laurent"},
     {name:"Theo",emoji:"🙂",key:"easygoer",met:"Trivia Night · Pub Saint-Laurent"},
-    {name:"Iris",emoji:"😊",key:"observer",met:"Coffee Meetup · Café Pages"},
+    {name:"Iris",emoji:"😊",key:"observer",met:"Book Club · Café Pages"},
     {name:"Cole",emoji:"🙂",key:"navigator",met:"Walking Tour · Vieux-Port"},
     {name:"Dee",emoji:"😄",key:"storyteller",met:"Food Market · Marché Jean-Talon"}
   ];
@@ -1825,7 +1829,7 @@
   /* ============ SIGN IN ============ */
   $$("[data-auth]").forEach(b=>b.addEventListener("click",()=>{
     state.signedIn=true; const m=b.getAttribute("data-auth");
-    showToast(m==="apple"?"Signed in with Apple":"Signed in");
+    showToast(m==="apple"?t("toast_signed_apple"):t("toast_signed"));
     if(state.returning){
       // returning user: saved type + already-accepted terms — straight to the app
       state.profileKey=state.profileKey||"connector"; state.agreed=true;
@@ -2144,7 +2148,7 @@
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'};width:13px;height:13px"></span>`).join("");
     const members=g.members.map((m,i)=>{
       const arrived=dayOf && i<2;
-      return `<div style="text-align:center;position:relative" data-member="${m[0]}"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div>${arrived?`<span style="position:absolute;top:-2px;right:6px;width:11px;height:11px;border-radius:50%;background:var(--mint);border:2px solid var(--surface)" title="arrived"></span>`:""}<div style="font-size:11px;color:${arrived?'var(--mint)':'var(--muted)'};margin-top:4px">${m[0]}${arrived?t("gd_here_tag"):''}</div></div>`;
+      return `<div style="text-align:center;position:relative" data-member="${m[0]}"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div>${arrived?`<span style="position:absolute;top:-2px;right:6px;width:11px;height:11px;border-radius:50%;background:var(--mint);border:2px solid var(--surface)" title="${t('gd_arrived')}"></span>`:""}<div style="font-size:11px;color:${arrived?'var(--mint)':'var(--muted)'};margin-top:4px">${m[0]}${arrived?t("gd_here_tag"):''}</div></div>`;
     }).join("");
     const spotsLeft=g.size-g.filled;
     // body content + a sticky bottom bar so the primary action never hides behind the nav
@@ -2391,7 +2395,7 @@
       html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${it.emoji}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
     dms.forEach(d=>{
-      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="online"></span></div>`;
+      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="${t('dm_online')}"></span></div>`;
     });
     body.innerHTML=html;
     $$("#chatsBody [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
@@ -2480,7 +2484,7 @@
             const closeQ=document.createElement("span"); closeQ.textContent="✕"; closeQ.style.cssText="cursor:pointer;color:var(--faint);margin-left:8px;";
             closeQ.addEventListener("click",()=>{ rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say"); });
             rq.appendChild(closeQ); $("#s-chat .chat-input").before(rq); }
-          $("#replyQuoteText").textContent="↩ "+who+": "+preview; inp.placeholder="Reply to "+who+"…"; inp.focus();
+          $("#replyQuoteText").textContent="↩ "+who+": "+preview; inp.placeholder=t("chat_replyto").replace("{who}",who); inp.focus();
         }
       },{passive:true});
     });
@@ -2621,7 +2625,7 @@
         <div style="margin-top:8px">${archBadge(p.key)}</div>
         <div class="sub" style="margin-top:8px">${archTag(key)}</div>
       </div>
-      <div class="info-block"><div class="sec-title">${t("fp_where")}</div><div class="ib-row"><span class="star">📍</span><span>${p.met||t("met_perch")}</span></div></div>
+      <div class="info-block"><div class="sec-title">${t("fp_where")}</div><div class="ib-row"><span class="star">📍</span><span>${p.met?frActText(p.met):t("met_perch")}</span></div></div>
       ${isFriend?`<div class="info-block"><div class="sec-title">${t("fp_about").replace("{n}",p.name)}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">${t("fp_bio").replace("{d1}",desc[0]).replace("{d2}",(desc[1]||"").toLowerCase())}</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">${t("fp_locked").replace("{n}",p.name)}</p>`}
       <div class="btn-row">
         ${isFriend?`<button class="btn btn-primary" id="fpMsg">${t("fp_msg")}</button>`:`<button class="btn btn-primary" id="fpAdd">${t("fp_add")}</button>`}
@@ -2775,7 +2779,7 @@
   function openPerchPlus(reason){
     const bill=state.ppBill||"mo";
     const rows=[
-      [t("pp_perk2_t"),"2 / wk","5 / wk"],
+      [t("pp_perk2_t"),t("pp_quota_free"),t("pp_quota_plus")],
       [t("pp_perk1_t"),"—","✓"],
       [t("pp_perk3_t"),"—","✓"],
       [t("pp_perk4_t"),"—","✓"],
@@ -2788,7 +2792,7 @@
       ${reason==="limit"&&!state.plus?`<div class="pill-static pill-amber" style="margin-bottom:14px">⚡ ${t("pp_limit")}</div>`:""}
       ${state.plus?`<div class="pill-static pill-mint" style="margin-bottom:14px">✓ ${t("pp_active")}</div>`:`<div class="chips" style="margin-bottom:14px"><span class="chip ${bill==='mo'?'sel':''}" data-bill="mo">${t("pp_mo")}</span><span class="chip ${bill==='yr'?'sel':''}" data-bill="yr">${t("pp_yr")}</span></div>`}
       <div class="info-block" style="padding:0;overflow:hidden;margin-bottom:14px">
-        <div class="pp-row pp-head"><span></span><span>Free</span><span>Perch+</span></div>
+        <div class="pp-row pp-head"><span></span><span>${t("pp_free")}</span><span>Perch+</span></div>
         ${rows.map(r=>`<div class="pp-row"><span>${r[0]}</span><span style="color:var(--faint)">${r[1]}</span><span style="color:var(--mint);font-weight:700">${r[2]}</span></div>`).join("")}
       </div>
       ${state.plus?"":`<div style="text-align:center;font-family:'Fraunces',serif;font-weight:700;font-size:20px;margin:0 0 4px">${bill==='mo'?t("pp_price"):t("pp_price_yr")}</div>
@@ -2860,7 +2864,7 @@
       <div class="set-list">
         <div class="set-item danger" id="setDelete"><span class="si-ic">🗑️</span>${t("set_delete")}<span class="chev">›</span></div>
       </div>
-      <p class="tiny" style="text-align:center;margin-top:16px">Perch · v1.0 · Made with care</p>`;
+      <p class="tiny" style="text-align:center;margin-top:16px">Perch · v1.0 · ${t("set_madewith")}</p>`;
     $$("#s-settings [data-sw]").forEach(el=>el.addEventListener("click",()=>{
       const k=el.getAttribute("data-sw");
       if(k==="activeStatus") s.activeStatus=!s.activeStatus;
@@ -2944,12 +2948,12 @@
         return;
       }
       body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
-        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> ${t("notif_req")}`,"2h ago",true,"requests"):""}
+        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> ${t("notif_req")}`,t("notif_2hago"),true,"requests"):""}
         ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${grpName(joined.group)}</b>`,t("notif_justnow"),true,"chat"):""}
         ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${grpName(joined.group)}</b>`,t("notif_today"),false,"groupdetail"):""}
         ${state.seedSocial?`<div class="day-div">${t("notif_week")}</div>
         ${noti("⏰","rgba(255,182,97,.18)",t("notif_reminder"),t("notif_yest"),false,"groups")}
-        ${noti("✨","rgba(142,162,255,.18)",t("notif_newgroup"),"2d",false,"groups")}`:""}`;
+        ${noti("✨","rgba(142,162,255,.18)",t("notif_newgroup"),t("notif_2day"),false,"groups")}`:""}`;
       $$("#notifBody [data-ngo]").forEach(el=>el.addEventListener("click",()=>{
         const go=el.getAttribute("data-ngo");
         if(go==="chat"&&joined){ state.chatViewGroup=joined.group.id; goTo("chat"); }
@@ -2959,7 +2963,7 @@
     } else {
       body.innerHTML=`<div class="day-div">${t("notif_from")}</div>
         ${noti("💛","rgba(165,123,255,.18)",t("notif_ann1"),t("notif_signup"),false)}
-        ${noti("📣","rgba(142,162,255,.18)",t("notif_ann2"),"3d",false)}
+        ${noti("📣","rgba(142,162,255,.18)",t("notif_ann2"),t("notif_3day"),false)}
         ${noti("🛡️","rgba(255,182,97,.18)",t("notif_ann3"),t("notif_lastweek"),false)}`;
     }
   }
