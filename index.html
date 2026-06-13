@@ -75,6 +75,8 @@
     -webkit-mask-image:linear-gradient(180deg,#000 0%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,transparent 100%);}
   .hdr-wash::after{display:none!important;}
   .hdr-wash.wash-default{background:var(--grad-calm);}
+  /* inline line-icons inherit size from font-size and color from currentColor */
+  .ic{width:1em;height:1em;display:inline-block;vertical-align:-.125em;flex-shrink:0;}
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
   html,body{height:100%;}
   body{
@@ -228,7 +230,7 @@
   .land-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.4);transition:all .25s;cursor:pointer;padding:0;border:none;}
   .land-dot.on{width:22px;border-radius:4px;background:#fff;}
   .land-row{display:flex;align-items:center;gap:16px;padding:16px 0;}
-  .land-row .lr-ic{width:48px;height:48px;border-radius:var(--r-md);background:rgba(255,255,255,.06);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+  .land-row .lr-ic{width:48px;height:48px;border-radius:var(--r-md);background:rgba(255,255,255,.06);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:23px;flex-shrink:0;color:var(--c1);}
   .land-row .lr-t{font-size:15px;font-weight:500;line-height:1.4;}
   .preview-card{border-radius:var(--r-lg);padding:24px;text-align:center;color:#fff;box-shadow:0 18px 44px rgba(0,0,0,.4);transition:opacity .5s;}
   .pc-emoji{font-size:48px;margin-bottom:8px;}
@@ -754,9 +756,9 @@
             <div style="margin-top:36px"></div>
             <div class="eyebrow" style="margin-bottom:8px" data-i18n="land_how">How it works</div>
             <h2 class="display h2" style="margin-bottom:18px" data-i18n="land_steps">Three steps, that's it</h2>
-            <div class="land-row"><div class="lr-ic">🎯</div><div class="lr-t" data-i18n="land_step1">Take a quick quiz — find your social type</div></div>
-            <div class="land-row"><div class="lr-ic">🗓️</div><div class="lr-t" data-i18n="land_step2">Pick something to do — we match you with a group</div></div>
-            <div class="land-row"><div class="lr-ic">☕</div><div class="lr-t" data-i18n="land_step3">Show up and meet people in real life</div></div>
+            <div class="land-row"><div class="lr-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="lr-t" data-i18n="land_step1">Take a quick quiz — find your social type</div></div>
+            <div class="land-row"><div class="lr-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div class="lr-t" data-i18n="land_step2">Pick something to do — we match you with a group</div></div>
+            <div class="land-row"><div class="lr-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="lr-t" data-i18n="land_step3">Show up and meet people in real life</div></div>
             <div class="land-dots" style="margin-top:auto"><span class="land-dot"></span><span class="land-dot on"></span><span class="land-dot"></span></div>
           </div>
           <div class="land-panel">
@@ -1105,51 +1107,51 @@
 
   /* ============ 12 ARCHETYPES ============ */
   const ARCH={
-    spark:{e:"⚡",n:"The Spark",g:"g-spark",tag:"Warm energy that gets things going",
+    spark:{e:"zap",n:"The Spark",g:"g-spark",tag:"Warm energy that gets things going",
       traits:["Warm","Outgoing","Spontaneous"], compat:["connector","wavelength"], pct:"11%",
       bring:["You break the ice so no one else has to","Your energy lifts the whole room","You make new people feel instantly welcome"],
       loves:["Karaoke","Trivia night","Rooftop social"], desc:["Energising","Friendly","Fun to be around"]},
-    connector:{e:"🫂",n:"The Connector",g:"g-connector",tag:"The quiet glue of any group",
+    connector:{e:"heart",n:"The Connector",g:"g-connector",tag:"The quiet glue of any group",
       traits:["Warm","Attentive","Genuine"], compat:["spark","storyteller"], pct:"14%",
       bring:["You notice the person who's gone quiet","You make people feel actually heard","You turn strangers into a group"],
       loves:["Coffee meetup","Book club","Food market"], desc:["A great listener","Caring","Easy to open up to"]},
-    explorer:{e:"🚀",n:"The Explorer",g:"g-explorer",tag:"Always up for something new",
+    explorer:{e:"compass",n:"The Explorer",g:"g-explorer",tag:"Always up for something new",
       traits:["Curious","Open","Adventurous"], compat:["wildcard","navigator"], pct:"9%",
       bring:["You're always game to try the new thing","You make activities feel like an adventure","You meet people easily along the way"],
       loves:["Walking tour","Escape room","Sunrise hike"], desc:["Adventurous","Open-minded","Up for anything"]},
-    easygoer:{e:"🌿",n:"The Easygoer",g:"g-easygoer",tag:"Relaxed, and easy to be around",
+    easygoer:{e:"leaf",n:"The Easygoer",g:"g-easygoer",tag:"Relaxed, and easy to be around",
       traits:["Chill","Adaptable","Calm"], compat:["grounding","wavelength"], pct:"13%",
       bring:["You keep the mood light and low-stakes","You go with the flow when plans shift","You're a calming presence"],
       loves:["Park walk","Board game café","Outdoor cinema"], desc:["Relaxed","Easygoing","Drama-free"]},
-    anchor:{e:"⚓",n:"The Anchor",g:"g-anchor",tag:"Steady — makes groups feel safe",
+    anchor:{e:"anchor",n:"The Anchor",g:"g-anchor",tag:"Steady — makes groups feel safe",
       traits:["Steady","Calm","Dependable"], compat:["observer","grounding"], pct:"10%",
       bring:["You're a steady presence others lean on","You don't need to fill every silence","You make a group feel grounded"],
       loves:["Jazz bar","Pottery","Book club"], desc:["Steady","Grounded","Reassuring"]},
-    observer:{e:"🌙",n:"The Observer",g:"g-observer",tag:"Thoughtful, perceptive, quietly deep",
+    observer:{e:"moon",n:"The Observer",g:"g-observer",tag:"Thoughtful, perceptive, quietly deep",
       traits:["Thoughtful","Perceptive","Calm"], compat:["anchor","easygoer"], pct:"8%",
       bring:["You notice things others miss","You bring a quiet depth to conversations","You're worth the wait to get to know"],
       loves:["Art class","Outdoor cinema","Jazz bar"], desc:["Thoughtful","Perceptive","Quietly warm"]},
-    curator:{e:"🎨",n:"The Curator",g:"g-curator",tag:"Brings the ideas, sets the tone",
+    curator:{e:"sparkles",n:"The Curator",g:"g-curator",tag:"Brings the ideas, sets the tone",
       traits:["Creative","Tasteful","Intentional"], compat:["storyteller","navigator"], pct:"6%",
       bring:["You always know the good spot","You set a tone people remember","You bring fresh ideas to the table"],
       loves:["Paint & sip","Vintage market","Cooking class"], desc:["Creative","Tasteful","Inspiring"]},
-    grounding:{e:"🌲",n:"The Evergreen",g:"g-grounding",tag:"Reliable, steady — always shows up",
+    grounding:{e:"tree",n:"The Evergreen",g:"g-grounding",tag:"Reliable, steady — always shows up",
       traits:["Reliable","Warm","Grounded"], compat:["anchor","easygoer"], pct:"9%",
       bring:["You're the one who actually shows up","You make plans feel dependable","People feel safe around you"],
       loves:["Sunrise hike","Plant swap","Cooking class"], desc:["Reliable","Warm","Solid"]},
-    wildcard:{e:"🎲",n:"The Wildcard",g:"g-wildcard",tag:"Unpredictable energy, always fun",
+    wildcard:{e:"shuffle",n:"The Wildcard",g:"g-wildcard",tag:"Unpredictable energy, always fun",
       traits:["Playful","Bold","Surprising"], compat:["spark","explorer"], pct:"5%",
       bring:["You keep things from ever getting dull","You're up for the unexpected plan","You make a night memorable"],
       loves:["Axe throwing","Comedy show","Karaoke"], desc:["Fun","Bold","Full of surprises"]},
-    storyteller:{e:"📖",n:"The Storyteller",g:"g-storyteller",tag:"Draws people in, remembers everything",
+    storyteller:{e:"book",n:"The Storyteller",g:"g-storyteller",tag:"Draws people in, remembers everything",
       traits:["Engaging","Warm","Memorable"], compat:["connector","curator"], pct:"7%",
       bring:["You can carry a conversation anywhere","You remember the details that matter","You make people feel part of the story"],
       loves:["Comedy show","Jazz bar","Food crawl"], desc:["Engaging","Warm","Great company"]},
-    navigator:{e:"🧭",n:"The Navigator",g:"g-navigator",tag:"Low-key leader, natural planner",
+    navigator:{e:"map",n:"The Navigator",g:"g-navigator",tag:"Low-key leader, natural planner",
       traits:["Organized","Calm","Decisive"], compat:["explorer","curator"], pct:"4%",
       bring:["You quietly keep the plan on track","You make decisions so others don't have to","You're calm when things go sideways"],
       loves:["Escape room","Walking tour","Cooking class"], desc:["Organized","Dependable","Level-headed"]},
-    wavelength:{e:"〰️",n:"The Wavelength",g:"g-wavelength",tag:"Vibes with anyone, reads the room",
+    wavelength:{e:"wave",n:"The Wavelength",g:"g-wavelength",tag:"Vibes with anyone, reads the room",
       traits:["Adaptable","Easy","Intuitive"], compat:["easygoer","connector"], pct:"4%",
       bring:["You can click with almost anyone","You read the room and adjust","You make mixed groups feel natural"],
       loves:["Food market","Board game café","Rooftop social"], desc:["Adaptable","Easy to be with","In tune"]}
@@ -1766,6 +1768,28 @@
   }
   const prof=()=>ARCH[state.profileKey]||ARCH.easygoer;
   const intLabel=s=>(state.lang==="fr"&&INT_FR[s]?INT_FR[s]:s);
+  /* ---- inline line-icon set (Lucide/Feather-style) — replaces emoji used as UI icons. Avatars stay emoji (brand: first names + emoji). ---- */
+  const ICONS={
+    zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+    heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/>',
+    compass:'<circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>',
+    leaf:'<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/>',
+    anchor:'<circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/>',
+    moon:'<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>',
+    sparkles:'<path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L4 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L20 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 4v3"/><path d="M18.5 17v3"/><path d="M3.5 5.5h3"/><path d="M17 18.5h3"/>',
+    tree:'<path d="M12 2 5 14h14z"/><path d="M10 14h4v6h-4z"/>',
+    shuffle:'<path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"/><path d="m18 2 4 4-4 4"/><path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"/><path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"/><path d="m18 14 4 4-4 4"/>',
+    book:'<path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/>',
+    map:'<polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/>',
+    wave:'<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>',
+    target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+    calendar:'<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+    users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    _dot:'<circle cx="12" cy="12" r="3.5"/>'
+  };
+  function svgIcon(name,extra){
+    return `<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${extra?" "+extra:""}>${ICONS[name]||ICONS._dot}</svg>`;
+  }
   /* whether the profile has been personalised — gates first join/host, drives the "set up" nudges */
   const needsProfile=()=>!state.profileComplete;
   /* reliability — show-up record is Perch's reputation currency (PLAN.md). Earned by ATTENDING (checking in), not merely joining */
@@ -1935,7 +1959,7 @@
   function cycleLandPreview(){
     const keys=["spark","connector","easygoer"];
     const paint=()=>{ const k=keys[landPrevI%keys.length],a=ARCH[k]; const el=$("#landPreview"); if(!el) return;
-      el.className="preview-card "+a.g; el.innerHTML=`<div class="pc-emoji">${a.e}</div><div class="pc-name">${archName(k)}</div><div class="pc-line">${archTag(k)}</div>`; landPrevI++; };
+      el.className="preview-card "+a.g; el.innerHTML=`<div class="pc-emoji">${svgIcon(a.e)}</div><div class="pc-name">${archName(k)}</div><div class="pc-line">${archTag(k)}</div>`; landPrevI++; };
     paint(); clearInterval(landPrevTimer); landPrevTimer=setInterval(()=>{ if($("#s-landing").classList.contains("active")){ const el=$("#landPreview"); if(el){el.style.opacity="0"; setTimeout(()=>{paint();el.style.opacity="1";},250);} } },2600);
   }
   // swipe landing — touch and mouse
@@ -2030,7 +2054,7 @@
       <div class="reveal-bg ${a.g}" id="revealBg"></div>
       <div class="reveal-inner" style="justify-content:flex-start;padding-top:40px;padding-bottom:140px">
         <div style="margin-top:auto"></div>
-        <div class="arch-emoji">${a.e}</div>
+        <div class="arch-emoji">${svgIcon(a.e)}</div>
         <div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);margin-bottom:6px">${t("res_yourtype")}</div>
         <div class="arch-name">${archName(k)}</div>
         <div class="arch-tag-line">${archTag(k)}</div>
@@ -2050,7 +2074,7 @@
     sparkle();
   }
   function openAllTypes(){
-    const cards=ARCH_KEYS.map(k=>{const a=ARCH[k];return `<div class="type-card ${a.g}" data-arch="${k}"><div class="tc-em">${a.e}</div><div class="tc-n">${archName(k)}</div><div class="tc-l">${archTag(k)}</div></div>`;}).join("");
+    const cards=ARCH_KEYS.map(k=>{const a=ARCH[k];return `<div class="type-card ${a.g}" data-arch="${k}"><div class="tc-em">${svgIcon(a.e)}</div><div class="tc-n">${archName(k)}</div><div class="tc-l">${archTag(k)}</div></div>`;}).join("");
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-title" style="padding:0 0 4px">${t("all_types")}</div>
       <div class="sheet-sub">${t("all_types_sub")}</div>
       <div class="types-rail" style="margin:0 -22px">${cards}</div>
@@ -2061,7 +2085,7 @@
   function openShareType(k){
     const a=ARCH[k], url=`perch.app/type/${k}`;
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="type-card ${a.g}" style="min-width:0;margin-bottom:16px"><div class="tc-em" style="font-size:48px">${a.e}</div><div class="tc-n" style="font-size:20px">${archName(k)}</div><div class="tc-l">${archTag(k)}</div></div>
+      <div class="type-card ${a.g}" style="min-width:0;margin-bottom:16px"><div class="tc-em" style="font-size:48px">${svgIcon(a.e)}</div><div class="tc-n" style="font-size:20px">${archName(k)}</div><div class="tc-l">${archTag(k)}</div></div>
       <div style="background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 16px;display:flex;align-items:center;gap:10px;margin-bottom:16px">
         <span style="font-size:13px;color:var(--muted);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">🔗 ${url}</span>
         <button id="copyLink" style="background:var(--grad-warm);border:none;border-radius:var(--r-pill);color:#fff;font-size:13px;font-weight:700;padding:7px 14px;cursor:pointer;font-family:inherit;white-space:nowrap">${t("copy_link")}</button>
@@ -2078,7 +2102,7 @@
     const isMine=k===state.profileKey;
     $("#s-archetype").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?t("arch_yourtype"):archName(k)}</div></div>
-      <div class="arch-hero ${a.g}"><div class="ah-em">${a.e}</div><div class="ah-n">${archName(k)}</div><div class="ah-l">${archTag(k)}</div></div>
+      <div class="arch-hero ${a.g}"><div class="ah-em">${svgIcon(a.e)}</div><div class="ah-n">${archName(k)}</div><div class="ah-l">${archTag(k)}</div></div>
       <div class="info-block"><div class="sec-title">${t("arch_bring")}</div>${archBring(k).map(b=>`<div class="ib-row"><span class="star">✦</span><span>${b}</span></div>`).join("")}</div>
       <div class="info-block"><div class="sec-title">${t("arch_loves")}</div><div class="chips">${archLoves(k).map(l=>`<span class="trait">${l}</span>`).join("")}</div></div>
       <div class="info-block"><div class="sec-title">${t("arch_desc")}</div><div class="chips">${archDesc(k).map(d=>`<span class="trait">${d}</span>`).join("")}</div></div>
@@ -2939,7 +2963,7 @@
         <span style="color:var(--faint)">›</span>
       </div>
       <div class="sec-title">${t("prof_type")}</div>
-      <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${a.e}</div><div><div class="tm-n">${archName(state.profileKey||'easygoer')}</div><div class="tm-d">${archTag(state.profileKey||'easygoer')}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
+      <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${svgIcon(a.e)}</div><div><div class="tm-n">${archName(state.profileKey||'easygoer')}</div><div class="tm-d">${archTag(state.profileKey||'easygoer')}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
       <div class="sec-title" style="margin-top:8px">${t("prof_activity")}</div>
       <div class="hist-rail">${hist}</div>
       <div class="set-list" style="margin-top:12px">
