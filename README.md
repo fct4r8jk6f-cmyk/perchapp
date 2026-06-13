@@ -39,6 +39,7 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 | `schema.sql` | PostgreSQL schema — validated DDL for that backend |
 | `API.md` | REST API contract (every demo flow as an endpoint) |
 | `LEGAL.md` | Legal-text inventory + placeholder map for counsel |
+| `COUNSEL_BRIEF.md` | Brief for a Quebec privacy lawyer + founder decision memo |
 | `REVIEW.md` | Demo QA log (full-sweep code trace + live click-through) |
 
 Everything in the demo is simulated — no backend, no real accounts. The backend it *implies* is **designed but not built** — see [BACKEND.md](BACKEND.md) (architecture), [schema.sql](schema.sql) (Postgres DDL), and [API.md](API.md) (REST contract). Legal text is a template pending attorney review (mapped in [LEGAL.md](LEGAL.md)).

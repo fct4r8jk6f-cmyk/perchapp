@@ -36,7 +36,7 @@ Small items (< ~4 hours each) that unblock decisions and build momentum.
 
 ### Legal / entity
 - [ ] **Incorporate** (Quebec Inc. or federal). Needed for bank, payment processors, contracts. (~$500–2k.)
-- [ ] **Book the lawyer consult** (~1–2 h, ~$250–500) with the 3 critical questions ready.
+- [ ] **Book the lawyer consult** (~1–2 h, ~$250–500) — hand counsel [`COUNSEL_BRIEF.md`](COUNSEL_BRIEF.md) Part A (the 3 critical questions + the full prioritized list, ready to act on).
 - [ ] **Inventory the legal placeholders** — every `[Legal Entity Name, Inc.]`, `[yourdomain]`, `[Effective date]` in `index.html`; stub a `LEGAL.md` structure for Terms / Privacy / Guidelines.
 
 ### Vendor shortlist (create test accounts)
@@ -117,6 +117,8 @@ Run the first ops-assisted Thursday match; watch the metrics that matter (from P
 
 ## Founder Decisions & Legal Questions
 
+> **The actionable version of this section is [`COUNSEL_BRIEF.md`](COUNSEL_BRIEF.md)** — Part A (a Quebec privacy lawyer brief: prioritized questions with stakes, hedged as questions not assertions) and Part B (a founder decision memo: each decision with options, trade-offs, a recommendation, and a decide-by sequence). The lists below are the raw source; the brief sharpens, expands (minors, CASL, biometric/CAI, automated-decision-making, emergency escalation, data-subject-rights SLAs, …), and reconciles them.
+
 ### Decide this week (blocks everything)
 1. **Minimum viable age verification** — is 18+ self-attestation enough, or is SMS / government-ID proof required? *(Consequence: ID proof forces the quiz behind signup, hurting the viral loop.)*
 2. **Quiz-before-consent ordering** — does collecting the 7-question quiz (+ a few demographics) *before* signup/consent violate Law 25's "consent before collection"? Options: re-run post-signup, treat as implicit via ToS, or require signup first.
@@ -165,7 +167,7 @@ entity │                                             │                      
 Public store launch + Montreal marketing (r/Montreal, Meetup, IG, Product Hunt) → per-event ticketing (Stripe Connect) + photo upload with content moderation → Perch+ real IAP + conversion tuning → 2nd/3rd neighbourhood for density → Toronto expansion planning.
 
 ## Companion repo docs
-**Already drafted:** [`LEGAL.md`](LEGAL.md) (placeholder map → links to signed docs) · [`BACKEND.md`](BACKEND.md) (architecture & decisions) · [`schema.sql`](schema.sql) (Postgres DDL) · [`API.md`](API.md) (REST contract).
+**Already drafted:** [`LEGAL.md`](LEGAL.md) (placeholder map → links to signed docs) · [`COUNSEL_BRIEF.md`](COUNSEL_BRIEF.md) (lawyer brief + founder decision memo) · [`BACKEND.md`](BACKEND.md) (architecture & decisions) · [`schema.sql`](schema.sql) (Postgres DDL) · [`API.md`](API.md) (REST contract).
 **Still to create as you build:** `OPS_RUNBOOK.md` (moderation checklist + 24h SLA + escalation) · `TEST_SCENARIOS.md` (QA flows) · an OpenAPI/Swagger export generated from `API.md`.
 
 ---
