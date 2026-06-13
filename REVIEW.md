@@ -101,3 +101,30 @@ All re-verified in-browser (en + fr): no console errors; `resetDemo`, the 18+ ag
 - Free-tier enforcement (2 hangs/week → paywall), Perch+ trial/cancel, ticket pricing end-to-end.
 - Accessibility toggles (text size, bold, contrast, larger targets, reduced motion) are genuinely functional.
 - Back-button / history firewall (U1/U2/U4 rules), legal-gate sequencing, full FR coverage on the core path and all legal docs.
+
+---
+
+## Feature build (2026-06-13) — profile/username, reservations, reliability, verification, day-of, backfill
+
+Two batches of work landed on top of the sweeps above. All verified in-browser (en + fr, dark + light) with no console errors; `check-i18n` clean (key parity 624 = 624, no duplicate keys, 0 unresolved `t()` refs).
+
+**Batch 1 — user-requested core additions:**
+1. **Profile setup, deferred or upfront** — `openProfileSetup(onComplete, gated)` (emoji, display name, `@username` with live availability, bio, interests). Not forced at signup: `needsProfile()` gates the *first* join/host (`requestJoin` / `doHost`); you can also set it up early via the Explore nudge or the Profile card. `state.profileComplete`/`state.username`; reset-covered.
+2. **Username + Discover** — new `s-discover` screen (🔎 in the Friends header), searches the `PEOPLE` directory by name or `@username`, sorts by mutual friends, and sends friend requests (Requested → Sent). Editable username/interests in Edit Profile too.
+3. **Reservations** — every join stores `{code, ticket, price}`; ticketed activities get an `openReservation` booking step (pay-at-venue, no card). Confirmation code on the Joined screen *and* the joined group detail.
+4. **Waitlist** — full groups offer `openWaitlist`; `state.waitlisted` renders a section in Groups and a status block in detail.
+
+**Batch 2 — the 4 proposed features (designed + reviewed via multi-agent workflows):**
+5. **Reliability-aware matching** — `isReliable()` (attendance-based: `checkedIn || attended>0`, *not* mere joining), warm `relTier()` (New → Building → 100%) on the profile Show-up stat with a tap-through `openReliability` explainer; waitlist queue position (`wlPosition`, reliable members ranked higher); a system-level "reliability-aware matching" line on group detail.
+6. **Verification** — `openVerify` (phone → code → `state.verified`); wired the previously-dead `#setVerify` Settings row; reusable `vbadge()` ✓ pill on own profile, friend profiles, and the directory; seeded `verified:true` subset; optional dismissible profile prompt. Strictly optional — never blocks join/host.
+7. **Day-of coordination** — `coordPanelHTML` (on-my-way / running late / here / split-a-ride) shown only on event day; `state.dayStatus[gid]` persists the chosen status (dedup on re-tap), "here" routes through the shared `checkIn(g)`, and `seedDaySim` posts two simulated peers once. Status pills use `pill-mint`/`pill-amber` (theme-safe).
+8. **Waitlist auto-backfill** — joining a waitlist schedules (module-level `backfillTimers`) an offer ~6s later: tappable toast + a `wlclaim` notification; claiming routes through `requestJoin` (cap + gate + reservation all preserved). Leaving a full group shows the "freed a spot" toast.
+
+**Bugs fixed during the build/review:**
+- `openClaimSpot` no longer eagerly drops the waitlist entry (a paywalled claim would have stranded the user); `finishJoin` clears it only on a real join.
+- `#setVerify` Settings row was a dead control (no handler) — now wired.
+- Adversarial review (8 read-only reviewers) caught & fixed: unescaped `grpName`/name interpolation in `openClaimSpot`/`openMuteOptions`/`renderNotifs` (now `esc()`'d); `coordStatusHTML` hardcoded rgba pills → themed `pill-mint`/`pill-amber`; an orphaned backfill-expiry timer when leaving the waitlist (now cleared); and the over-broad "everyone here has a strong show-up record" copy → softened to a system-level statement.
+
+**P2 items from above, now addressed:** #3 (the Show-up stat is no longer a blunt global "100%/—" — it's the warm reliability tier, attendance-gated). #1/#2/#4/#5 remain as previously noted (intentional or minor).
+
+**Process note:** the design-phase workflow agents, despite a "spec only" instruction, *implemented* a partial first pass directly into `index.html`; the review-phase workflow used read-only `Explore` agents to prevent that. Lesson for future workflows here: pass `agentType: 'Explore'` for any read-only/review fan-out.

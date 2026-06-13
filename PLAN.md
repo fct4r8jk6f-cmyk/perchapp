@@ -21,8 +21,9 @@ Small groups (4–6) of adults meeting around real activities — friends, not d
 A 4-person group with one no-show is a bad night; with two it's a failed product promise.
 
 - **Norm, stated everywhere:** leaving is always fine — *early*. Copy across the app frames leaving as "freeing your spot," and the Community Guidelines make "show up or give notice" a core rule.
-- **Show-up rate is a first-class profile stat** (visible in the demo). Reliability is the reputation currency of Perch, not follower counts.
-- **Roadmap:** reliability-aware matching (consistent show-ups get matched together and get priority for scarce spots), automatic waitlist backfill when someone leaves early, and — only if needed — a small refundable hold on high-demand events.
+- **Show-up rate is a first-class profile stat** (visible in the demo) — and earned by *attending* (checking in), not merely joining. Reliability is the reputation currency of Perch, not follower counts. The demo frames it warmly (New → Building → 100%) with a tap-through explainer that states there's no public ranking.
+- **Reliability-aware matching and waitlist backfill are now expressed in the demo:** reliability is surfaced on group matching, waitlisted users see their queue position (reliable members ranked higher), and a freed spot triggers an **automatic backfill offer** (notification + time-boxed "claim your spot"). A claim still routes through the free-tier cap and the per-event reservation step.
+- **Roadmap (still real backend work):** matching that actually weights reliability, and — only if needed — a small refundable hold on high-demand events.
 
 ### 2. Cold start / liquidity
 
@@ -37,7 +38,7 @@ A browse-everything marketplace with 80 users means empty groups and a dead app.
 A friendship app is *supposed* to be low-frequency — success means people need it less. Subscription-only monetization fights that.
 
 - **Perch+ ($4.99/mo / $39/yr)** stays the convenience tier (priority matching, more groups/week, host perks, travel mode). Core matching stays free — paywalling friendship is both wrong and bad funnel math. The demo enforces the free tier's 2-hangs/week cap (the third join opens the paywall) and shows trial terms plus manage/cancel in Settings.
-- **The roadmap revenue is per-event:** ticketed premium activities (cooking class, axe throwing, paint & sip — venues already charge for these) with a take rate, and venue partnerships for free hangs (we deliver committed groups on slow weeknights; venues pay or discount). The demo shows ticket pricing on these activities end-to-end (card badge, detail tile, Join CTA).
+- **The roadmap revenue is per-event:** ticketed premium activities (cooking class, axe throwing, paint & sip — venues already charge for these) with a take rate, and venue partnerships for free hangs (we deliver committed groups on slow weeknights; venues pay or discount). The demo shows ticket pricing on these activities end-to-end (card badge, detail tile, Join CTA) and now a full **reservation step** — a booking sheet, a pay-at-venue framing (no card captured), and a confirmation code on the joined screen and group detail.
 - Per-event payment is also the strongest anti-flake mechanic — the two problems share a solution.
 
 ## Metrics that matter (in order)
@@ -51,12 +52,13 @@ Explicitly *not* goals: DAU, time-in-app, message volume. Perch should be a low-
 
 ## Demo → MVP
 
-The demo intentionally fakes: auth, the matching backend, payments, push, moderation tooling, and all content (groups, chats, people).
+The demo intentionally fakes: auth, the matching backend, payments, push, moderation tooling, identity verification (the phone-code flow accepts any code), and all content (groups, chats, people, the searchable directory).
 
-**MVP cut:** quiz + archetypes → Perch Thursdays batch matching → group chat → check-in → reflection → friends/DMs.
+**MVP cut:** profile setup (name + @username) → quiz + archetypes → Perch Thursdays batch matching → reserve → group chat → day-of coordination → check-in → reflection → friends/DMs.
 **Deferred:** Host a hang, Explore catalogue beyond the weekly cadence, travel mode, Perch+ billing.
 
 **Open items before any real launch:**
 - Legal templates (Terms, Privacy, Guidelines) need attorney review — flagged in-app, now in both en and fr-CA.
 - Age verification beyond self-attestation, per Quebec/Canada requirements. The demo floors the age stepper at 18 and discloses 18+ before the quiz, but the quiz still runs before sign-in by design (it's the shareable acquisition artifact) — real verification and the data-before-consent ordering remain open legal questions.
+- **Identity verification & payments are simulated:** the verification flow accepts any code and reservations are pay-at-venue with no card captured — a real launch needs an SMS/identity provider and a payment processor with the take-rate logic.
 - Trust & safety operations: the 24-hour report-review promise in the app is a staffing commitment, not just copy.

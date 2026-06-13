@@ -895,6 +895,7 @@
           <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative">🔔<span class="badge-dot" id="exBellDot"></span></button>
         </div>
         <div class="cat-rail" id="catRail"></div>
+        <div id="profileNudge"></div>
         <div id="thursBanner"></div>
         <div id="pickedRow"></div>
         <div class="sec-title" id="popTitle" data-i18n="ex_popular">Popular this week</div>
@@ -927,6 +928,7 @@
         <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab" data-i18n="joined_when">When</div><div class="it-val" id="joinedWhen">Saturday · 7:00 PM</div></div></div>
         <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab" data-i18n="joined_where">Where</div><div class="it-val" id="joinedWhere">Pub Saint-Laurent · 4080 boul. St-Laurent</div></div></div>
         <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab" data-i18n="joined_who">Who</div><div class="it-val" id="joinedWho">You + 4 others</div></div></div>
+        <div id="joinedResv"></div>
         <div class="btn-row" style="margin-top:8px">
           <button class="btn btn-soft" id="joinedCal" data-i18n="joined_cal">🗓️ Add to Calendar</button>
           <button class="btn btn-soft" id="joinedDir" data-i18n="joined_dir">🧭 Directions</button>
@@ -971,6 +973,7 @@
         <div class="hdr-wash wash-default" id="washFriends"></div>
         <div class="nav-row">
           <div class="nav-title" data-i18n="nav_friends">Friends</div><div class="nav-spacer"></div>
+          <button class="iconbtn" id="friendsFindBtn" aria-label="Find people">🔎</button>
           <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative">✉️<span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
         <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends" data-i18n="fr_tab">Friends</div><div class="sopt" data-tab="met" data-i18n="fr_met">Met</div></div>
@@ -983,6 +986,13 @@
         <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="rq_title">Requests</div></div>
         <div class="seg" id="reqSeg"><div class="sopt on" data-tab="recv" data-i18n="rq_recv">Received</div><div class="sopt" data-tab="sent" data-i18n="rq_sent">Sent</div></div>
         <div id="reqBody"></div>
+      </section>
+
+      <!-- DISCOVER / ADD PEOPLE -->
+      <section class="screen pad-nav fade" id="s-discover">
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="disc_title">Find people</div></div>
+        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="discSearch" placeholder="Search name or @username" data-i18n-ph="disc_search_ph" aria-label="Search people" autocomplete="off"></div>
+        <div id="discBody"></div>
       </section>
 
       <!-- FRIEND PROFILE -->
@@ -1425,7 +1435,49 @@
       blk_none:"No one blocked.",toast_photo:"Photo updated",notif_clear:"Clear all",help_search:"Search help",ex_host:"＋ Host",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français",
       notif_2hago:"2h ago",notif_2day:"2d",notif_3day:"3d",pp_free:"Free",pp_quota_free:"2 / wk",pp_quota_plus:"5 / wk",
-      toast_signed_apple:"Signed in with Apple",toast_signed:"Signed in",set_madewith:"Made with care",gd_arrived:"arrived",dm_online:"online",chat_replyto:"Reply to {who}…"
+      toast_signed_apple:"Signed in with Apple",toast_signed:"Signed in",set_madewith:"Made with care",gd_arrived:"arrived",dm_online:"online",chat_replyto:"Reply to {who}…",
+      /* ── profile setup + username ── */
+      ps_title:"Set up your profile",ps_sub:"This is what your group sees — first name and emoji only until you become friends.",
+      ps_gate_t:"First, set up your profile",ps_gate_s:"Your group sees your first name and emoji. Set them up to join.",
+      ps_name_label:"Display name",ps_username:"Username",ps_username_ph:"yourname",ps_username_hint:"Letters, numbers, . and _ · 3–20 characters",
+      ps_username_ok:"available",ps_username_taken:"already taken",ps_username_invalid:"letters, numbers, . and _ only",ps_username_short:"a bit too short",
+      ps_interests:"Interests",ps_interests_sub:"Pick a few — it helps us match you.",ps_save:"Create profile",ps_saved:"Profile created 🪶",
+      pf_setup_t:"Finish your profile",pf_setup_s:"Add a username and a line about yourself before your first hang.",pf_setup_cta:"Set up profile",prof_username:"Username",
+      /* ── discover / add people ── */
+      disc_title:"Find people",disc_search_ph:"Search name or @username",disc_suggested:"Suggested for you",disc_intro:"Add people you've met by name or username — they get a friend request.",
+      disc_empty_t:"No one by that name",disc_empty_s:"Try a different name or exact @username.",disc_add:"Add",disc_requested:"Requested",disc_mutual:"{n} mutual",disc_mutual1:"1 mutual",disc_open:"Find people →",
+      /* ── reservations ── */
+      rsv_title:"Reserve your spot",rsv_sub_ticket:"We'll hold your spot. Pay {price} at the venue when you arrive — nothing is charged now.",rsv_sub_free:"Confirm your spot — your group forms around it.",
+      rsv_for:"Reserving for",rsv_you1:"You · 1 spot",rsv_pay_note:"pay at the venue",rsv_go:"Reserve my spot",rsv_go_ticket:"Reserve · {price}",rsv_done:"Spot reserved 🎟️",
+      joined_resv:"Reservation",joined_resv_val:"Confirmed · #{code}",joined_pay:"Payment",joined_pay_val:"{price} · pay at venue",
+      /* ── waitlist ── */
+      wl_join:"Join the waitlist",wl_title:"Join the waitlist?",wl_sub:"We'll offer you the next spot that opens in this group and send a notification. No commitment.",wl_go:"Join waitlist",wl_done:"You're on the waitlist 🕓",wl_status:"On the waitlist",wl_leave:"Leave waitlist",wl_left:"Left the waitlist",wl_section:"Waitlisted",wl_note:"We'll notify you the moment a spot frees up.",alt_try:"A group with space",
+      /* ── reliability ── */
+      rel_badge:"Reliable member",rel_showup:"{n}% show-up",rel_matched:"Reliability-aware matching — Perch groups people who show up",rel_tag:"Reliable",stat_showup_full:"Show-up rate",
+      /* ── verification ── */
+      set_verify:"Verify your identity",set_verified:"Verified",set_unverified:"Not verified",
+      vf_title:"Verify your identity",vf_sub:"A quick check keeps Perch real. We'll text a code to your phone — your number is never shared with your group.",
+      vf_phone:"Phone number",vf_phone_ph:"(514) 555-0143",vf_send:"Send code",vf_code:"Enter the 4-digit code",vf_code_ph:"1234",vf_verify:"Verify",vf_resend:"Resend code",vf_done:"You're verified ✓",vf_badge:"Verified",vf_why:"Verified profiles get into groups faster.",vf_already:"Your identity is verified.",
+      /* ── day-of coordination ── */
+      co_title:"Let the group know",co_omw:"On my way",co_late:"Running late",co_ride:"Split a ride?",
+      co_sys_omw:"{n} is on the way 🚶",co_sys_late:"{n} is running a little late ⏰",co_msg_ride:"Anyone want to split a ride from the metro? 🚕",co_toast:"The group knows 👍",
+      /* ── waitlist backfill ── */
+      wl_sim:"▶ Simulate: a spot opens",wl_claim_t:"A spot just opened 🎉",wl_claim_s:"You're next in line for {g}. Claim it within 30 minutes before it passes to the next person.",wl_claim_go:"Claim my spot",wl_claim_done:"Spot claimed — you're in 🎉",notif_wl:"A spot may open soon in {g} — you're on the waitlist",
+      /* reliability — warm framing + waitlist priority */
+      rel_stat_new:"New",rel_stat_building:"Building",rel_sheet_t:"Your show-up record",
+      rel_sheet_new_s:"You're a new member — welcome. Reliability isn't a score you start at zero; it builds the moment you show up to your first hang.",
+      rel_sheet_building_s:"You're booked into a hang — nice. Check in when you get there and your show-up record starts counting.",
+      rel_sheet_good_s:"You show up — and it shows. Reliable members get matched into groups faster and move up the waitlist sooner.",
+      rel_sheet_b1:"It's a trust signal, not a popularity contest — there are no public rankings.",
+      rel_sheet_b2:"Only your group sees that you're dependable. The number stays between you and Perch.",
+      rel_sheet_b3:"Showing up is the one thing that keeps it strong. Life happens — one miss won't sink you.",
+      rel_sheet_close:"Got it",wl_pos:"You're #{n} in line",wl_pos_short:"#{n} in line",wl_priority:"Reliable members get the next spot first — keep showing up and you move up.",
+      /* day-of coordination */
+      co_here:"I'm here",co_statusrow_title:"Who's coming",co_st_omw:"on the way",co_st_late:"running late",co_st_here:"here",co_you:"You",co_nobody:"No updates yet — be the first to ping the group",
+      /* waitlist backfill (automatic) */
+      wl_offer_toast:"A spot just opened in {g} — claim it",notif_wl_offer:"Your spot in {g} is ready — claim it before it passes on",notif_wl_offer_time:"Just now · expires in 30 min",wl_freed_toast:"You left — the next person on the waitlist just got your spot",wl_offer_expired:"The spot passed to the next person — you're still on the waitlist",
+      /* verification prompt */
+      pf_verify_t:"Get verified",pf_verify_s:"Confirm it's really you — verified members get into groups faster.",pf_verify_cta:"Verify",pf_verify_skip:"Maybe later"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1549,7 +1601,37 @@
       blk_none:"Personne de bloqué.",toast_photo:"Photo mise à jour",notif_clear:"Tout effacer",help_search:"Rechercher dans l'aide",ex_host:"＋ Organiser",
       set_lang_label:"Language / Langue",lang_en:"English",lang_fr:"Français",
       notif_2hago:"il y a 2 h",notif_2day:"2 j",notif_3day:"3 j",pp_free:"Gratuit",pp_quota_free:"2 / sem.",pp_quota_plus:"5 / sem.",
-      toast_signed_apple:"Connecté avec Apple",toast_signed:"Connecté",set_madewith:"Fait avec soin",gd_arrived:"sur place",dm_online:"en ligne",chat_replyto:"Répondre à {who}…"
+      toast_signed_apple:"Connecté avec Apple",toast_signed:"Connecté",set_madewith:"Fait avec soin",gd_arrived:"sur place",dm_online:"en ligne",chat_replyto:"Répondre à {who}…",
+      ps_title:"Configure ton profil",ps_sub:"C'est ce que ton groupe voit — prénom et emoji seulement jusqu'à ce que vous deveniez amis.",
+      ps_gate_t:"D'abord, configure ton profil",ps_gate_s:"Ton groupe voit ton prénom et ton emoji. Configure-les pour rejoindre.",
+      ps_name_label:"Nom affiché",ps_username:"Nom d'utilisateur",ps_username_ph:"tonnom",ps_username_hint:"Lettres, chiffres, . et _ · 3 à 20 caractères",
+      ps_username_ok:"disponible",ps_username_taken:"déjà pris",ps_username_invalid:"lettres, chiffres, . et _ seulement",ps_username_short:"un peu trop court",
+      ps_interests:"Centres d'intérêt",ps_interests_sub:"Choisis-en quelques-uns — ça aide au jumelage.",ps_save:"Créer le profil",ps_saved:"Profil créé 🪶",
+      pf_setup_t:"Termine ton profil",pf_setup_s:"Ajoute un nom d'utilisateur et une ligne sur toi avant ta première sortie.",pf_setup_cta:"Configurer le profil",prof_username:"Nom d'utilisateur",
+      disc_title:"Trouver du monde",disc_search_ph:"Nom ou @nom d'utilisateur",disc_suggested:"Suggéré pour toi",disc_intro:"Ajoute par nom ou nom d'utilisateur les gens rencontrés — ils reçoivent une demande d'amitié.",
+      disc_empty_t:"Personne sous ce nom",disc_empty_s:"Essaie un autre nom ou le @nom exact.",disc_add:"Ajouter",disc_requested:"Demandé",disc_mutual:"{n} en commun",disc_mutual1:"1 en commun",disc_open:"Trouver du monde →",
+      rsv_title:"Réserve ta place",rsv_sub_ticket:"On garde ta place. Tu paies {price} sur place à ton arrivée — aucun frais maintenant.",rsv_sub_free:"Confirme ta place — ton groupe se forme autour.",
+      rsv_for:"Réservation pour",rsv_you1:"Toi · 1 place",rsv_pay_note:"à payer sur place",rsv_go:"Réserver ma place",rsv_go_ticket:"Réserver · {price}",rsv_done:"Place réservée 🎟️",
+      joined_resv:"Réservation",joined_resv_val:"Confirmée · #{code}",joined_pay:"Paiement",joined_pay_val:"{price} · à payer sur place",
+      wl_join:"Rejoindre la liste d'attente",wl_title:"Rejoindre la liste d'attente?",wl_sub:"On t'offre la prochaine place qui se libère dans ce groupe et on t'envoie une notification. Sans engagement.",wl_go:"Rejoindre la liste",wl_done:"Tu es sur la liste d'attente 🕓",wl_status:"Sur la liste d'attente",wl_leave:"Quitter la liste",wl_left:"Liste d'attente quittée",wl_section:"En attente",wl_note:"On t'avise dès qu'une place se libère.",alt_try:"Un groupe avec de la place",
+      rel_badge:"Membre fiable",rel_showup:"{n} % de présence",rel_matched:"Jumelage selon la fiabilité — Perch réunit le monde qui se présente",rel_tag:"Fiable",stat_showup_full:"Taux de présence",
+      set_verify:"Vérifier ton identité",set_verified:"Vérifié",set_unverified:"Non vérifié",
+      vf_title:"Vérifie ton identité",vf_sub:"Une vérification rapide garde Perch authentique. On envoie un code par texto — ton numéro n'est jamais partagé avec ton groupe.",
+      vf_phone:"Numéro de téléphone",vf_phone_ph:"(514) 555-0143",vf_send:"Envoyer le code",vf_code:"Entre le code à 4 chiffres",vf_code_ph:"1234",vf_verify:"Vérifier",vf_resend:"Renvoyer le code",vf_done:"Tu es vérifié ✓",vf_badge:"Vérifié",vf_why:"Les profils vérifiés rejoignent les groupes plus vite.",vf_already:"Ton identité est vérifiée.",
+      co_title:"Avise le groupe",co_omw:"En route",co_late:"En retard",co_ride:"Partager un taxi?",
+      co_sys_omw:"{n} est en route 🚶",co_sys_late:"{n} va être un peu en retard ⏰",co_msg_ride:"Quelqu'un veut partager un taxi depuis le métro? 🚕",co_toast:"Le groupe le sait 👍",
+      wl_sim:"▶ Simuler : une place se libère",wl_claim_t:"Une place vient de se libérer 🎉",wl_claim_s:"Tu es le prochain sur la liste pour {g}. Réclame-la dans les 30 minutes avant qu'elle passe à la prochaine personne.",wl_claim_go:"Réclamer ma place",wl_claim_done:"Place réclamée — c'est confirmé 🎉",notif_wl:"Une place pourrait se libérer bientôt dans {g} — tu es sur la liste d'attente",
+      rel_stat_new:"Nouveau",rel_stat_building:"En cours",rel_sheet_t:"Ton historique de présence",
+      rel_sheet_new_s:"T'es un nouveau membre — bienvenue. La fiabilité, c'est pas une note qui part à zéro; ça se bâtit dès que tu te présentes à ta première sortie.",
+      rel_sheet_building_s:"T'es inscrit à une sortie — parfait. Enregistre-toi en arrivant pis ton historique de présence commence à compter.",
+      rel_sheet_good_s:"Tu te présentes — pis ça paraît. Les membres fiables sont jumelés plus vite pis montent plus vite sur la liste d'attente.",
+      rel_sheet_b1:"C'est un signe de confiance, pas un concours de popularité — y'a aucun classement public.",
+      rel_sheet_b2:"Juste ton groupe voit que t'es fiable. Le chiffre reste entre toi pis Perch.",
+      rel_sheet_b3:"Te présenter, c'est la seule affaire qui le garde solide. La vie arrive — un oubli te coulera pas.",
+      rel_sheet_close:"C'est noté",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
+      co_here:"Je suis là",co_statusrow_title:"Qui s'en vient",co_st_omw:"en route",co_st_late:"en retard",co_st_here:"sur place",co_you:"Toi",co_nobody:"Pas encore de nouvelles — sois le premier à faire signe au groupe",
+      wl_offer_toast:"Une place vient de se libérer dans {g} — réclame-la",notif_wl_offer:"Ta place dans {g} est prête — réclame-la avant qu'elle passe à un autre",notif_wl_offer_time:"À l'instant · expire dans 30 min",wl_freed_toast:"Tu as quitté — la prochaine personne sur la liste d'attente vient d'avoir ta place",wl_offer_expired:"La place est passée à la prochaine personne — tu es encore sur la liste d'attente",
+      pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard"
     }
   };
   function detectLang(){
@@ -1626,20 +1708,41 @@
     rating:{activity:0,venue:0,vibe:0}, fbStep:0, venueNote:"",
     blocked:new Set(), friends:[], dms:{}, currentDM:null, currentFriendView:null,
     requests:{recv:[],sent:[]},
-    photo:null, name:"You", emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
+    photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
+    waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
       notif:{reminders:true,messages:true,friendReq:true,matches:true,updates:false}}
   };
   const MET_SEED=[
-    {name:"Maya",emoji:"😄",key:"connector",met:"Trivia Night · Pub Saint-Laurent"},
+    {name:"Maya",emoji:"😄",key:"connector",met:"Trivia Night · Pub Saint-Laurent",verified:true},
     {name:"Theo",emoji:"🙂",key:"easygoer",met:"Trivia Night · Pub Saint-Laurent"},
-    {name:"Iris",emoji:"😊",key:"observer",met:"Book Club · Café Pages"},
+    {name:"Iris",emoji:"😊",key:"observer",met:"Book Club · Café Pages",verified:true},
     {name:"Cole",emoji:"🙂",key:"navigator",met:"Walking Tour · Vieux-Port"},
     {name:"Dee",emoji:"😄",key:"storyteller",met:"Food Market · Marché Jean-Talon"}
   ];
   let metPool=MET_SEED.map(p=>({...p}));
+
+  /* interests — canonical English (matching/storage); translated at render time via intLabel */
+  const INTERESTS=["Board games","Coffee","Hiking","Cooking","Live music","Art","Reading","Running","Photography","Gaming","Cycling","Movies"];
+  const INT_FR={"Board games":"Jeux de société","Coffee":"Café","Hiking":"Randonnée","Cooking":"Cuisine","Live music":"Musique live","Art":"Art","Reading":"Lecture","Running":"Course","Photography":"Photographie","Gaming":"Jeux vidéo","Cycling":"Vélo","Movies":"Cinéma"};
+  /* searchable people directory — names/usernames are proper nouns (no i18n); archetype shows translated */
+  const PEOPLE=[
+    {name:"Élodie",username:"elodie.mtl",emoji:"😊",key:"connector",mutual:3,verified:true},
+    {name:"Marcus",username:"marcusj",emoji:"😎",key:"storyteller",mutual:2},
+    {name:"Noah",username:"noahb",emoji:"🙂",key:"navigator",mutual:0},
+    {name:"Lea",username:"lea.rose",emoji:"🌿",key:"easygoer",mutual:2,verified:true},
+    {name:"Ravi",username:"ravi.codes",emoji:"🚀",key:"explorer",mutual:1},
+    {name:"Chloé",username:"chloe.mtl",emoji:"🎨",key:"curator",mutual:3,verified:true},
+    {name:"Jordan",username:"jordan.p",emoji:"🎲",key:"wildcard",mutual:0},
+    {name:"Amara",username:"amara.w",emoji:"📖",key:"storyteller",mutual:2},
+    {name:"Felix",username:"felixg",emoji:"🎷",key:"anchor",mutual:1},
+    {name:"Sofia",username:"sofia.k",emoji:"😄",key:"spark",mutual:4,verified:true},
+    {name:"Liam",username:"liam.b",emoji:"😌",key:"observer",mutual:1},
+    {name:"Mina",username:"mina.w",emoji:"〰️",key:"wavelength",mutual:2}
+  ];
+  const RESERVED_NAMES=["perch","admin","you","root","support","help","staff"];
 
   /* ============ HELPERS ============ */
   const $=(s,r=document)=>r.querySelector(s);
@@ -1660,6 +1763,28 @@
     return `<div class="avatar ${cls}" style="background:${(o&&o.color)||'var(--grad-warm)'}">${(o&&o.emoji)||"🙂"}</div>`;
   }
   const prof=()=>ARCH[state.profileKey]||ARCH.easygoer;
+  const intLabel=s=>(state.lang==="fr"&&INT_FR[s]?INT_FR[s]:s);
+  /* whether the profile has been personalised — gates first join/host, drives the "set up" nudges */
+  const needsProfile=()=>!state.profileComplete;
+  /* reliability — show-up record is Perch's reputation currency (PLAN.md). Earned by ATTENDING (checking in), not merely joining */
+  const isReliable=()=>state.checkedIn||state.attended>0;
+  const showupRate=()=>isReliable()?100:null;
+  // warm tiering: new members aren't punished with a bare "—"; booked-but-not-attended reads as "Building"
+  const relTier=()=>isReliable()?"good":((state.joinedGroups.length||state.waitlisted.length)?"building":"new");
+  const relStatLabel=()=>showupRate()!=null?showupRate()+"%":t(relTier()==="building"?"rel_stat_building":"rel_stat_new");
+  // deterministic, stable demo waitlist position (never #1 — you're never the only one waiting); reliable members sit one slot higher
+  function wlPosition(g){ const seed=String(g.id).charCodeAt(0)||2; const base=2+(seed%3); return isReliable()?Math.max(2,base-1):base; }
+  /* live username validity + availability (a demo check against the directory + reserved words) */
+  function usernameStatus(v){
+    v=(v||"").trim().toLowerCase();
+    if(v.length<3) return {ok:false,key:"ps_username_short"};
+    if(v.length>20||!/^[a-z0-9._]+$/.test(v)) return {ok:false,key:"ps_username_invalid"};
+    if(v===(state.username||"").toLowerCase()) return {ok:true,key:"ps_username_ok"};
+    if(PEOPLE.some(p=>p.username.toLowerCase()===v)||RESERVED_NAMES.includes(v)) return {ok:false,key:"ps_username_taken"};
+    return {ok:true,key:"ps_username_ok"};
+  }
+  /* short human-readable reservation code, e.g. PCH-7K2Q */
+  function resvCode(){ const c="ABCDEFGHJKMNPQRSTUVWXYZ23456789"; let s=""; for(let i=0;i<4;i++) s+=c[Math.floor(Math.random()*c.length)]; return "PCH-"+s; }
   function applyHeaderWash(){
     const g=state.profileKey?archGrad(state.profileKey):null;
     ["washExplore","washGroups","washFriends","washProfile"].forEach(id=>{
@@ -1668,12 +1793,14 @@
   }
 
   /* ============ NAVIGATION ============ */
-  const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","requests","friendprofile","notifications","settings","help","invite","archetype"];
-  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chats",chat:"chats",friends:"friends",dm:"chats",requests:"friends",friendprofile:"friends",feedback:"chats",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
-  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,host:7,hostdone:7,groups:8,groupdetail:9,moodcheck:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
+  const NAV_SCREENS=["explore","groups","groupdetail","joined","chats","chat","friends","dm","feedback","profile","requests","discover","friendprofile","notifications","settings","help","invite","archetype"];
+  const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chats",chat:"chats",friends:"friends",dm:"chats",requests:"friends",discover:"friends",friendprofile:"friends",feedback:"chats",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
+  const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,host:7,hostdone:7,groups:8,groupdetail:9,moodcheck:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,discover:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
-  let history=[], chatTimers=[], reachedExplore=false, navPopping=false;
+  let history=[], chatTimers=[], backfillTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
+  // backfill timers are module-level (like chatTimers) so an in-flight setTimeout can't fire against a reset demo
+  const clearBackfillTimers=()=>{backfillTimers.forEach(clearTimeout);backfillTimers=[];};
 
   function goTo(id,opts={}){
     const cur=$(".screen.active");
@@ -1715,6 +1842,7 @@
     if(id==="friends")        renderFriends();
     if(id==="dm")             renderDM();
     if(id==="requests")       renderRequests();
+    if(id==="discover")       renderDiscover();
     if(id==="friendprofile")  renderFriendProfile();
     if(id==="feedback")       renderFeedback();
     if(id==="notifications")  renderNotifs();
@@ -1739,12 +1867,13 @@
     return false;
   }
   function resetDemo(){
-    clearChatTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
+    clearChatTimers(); clearBackfillTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
     Object.assign(state,{age:24,signedIn:false,agreed:false,returning:false,currentQ:0,profileKey:null,
       chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,seedSocial:false,fbStep:0,venueNote:"",
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null},
-      photo:null,name:"You",emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
+      photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -1981,6 +2110,7 @@
     const cr=$("#catRail");
     cr.innerHTML=CATS.map(c=>`<div class="cat ${c===state.activeCat?'on':''}" data-cat="${c}">${catLabel(c)}</div>`).join("");
     $$("#catRail .cat").forEach(el=>el.addEventListener("click",()=>{ state.activeCat=el.getAttribute("data-cat"); renderExplore(); }));
+    renderProfileNudge();
 
     const q=($("#exSearch").value||"").toLowerCase().trim();
     const home=state.activeCat==="For you" && !q;
@@ -2100,6 +2230,16 @@
             <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</span><span class="btn-link link-sm">${t("gc_open")}</span></div>
           </div>`).join("");
       }
+      // waitlisted groups (full groups you're queued for)
+      if(state.waitlisted.length){
+        html+=`<div class="day-div">${t("wl_section")}</div>`;
+        html+=state.waitlisted.map(w=>{ const g=w.group;
+          return `<div class="group-card" data-group="${g.id}">
+            <div class="gc-statusrow"><span class="gc-vibetag" style="color:var(--accent-text);border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.1)">🕓 ${t("wl_status")}</span></div>
+            <div class="gc-top"><div class="gc-emoji ${g.g}">${g.emoji}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
+            <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} · ${t("wl_pos_short").replace("{n}",wlPosition(g))}</span><span class="btn-link link-sm">${t("gc_see")}</span></div>
+          </div>`; }).join("");
+      }
       const groups=makeGroups();
       const joinedIds=new Set(state.joinedGroups.map(j=>j.group.id));
       const open=groups.filter(g=>!joinedIds.has(g.id));
@@ -2123,13 +2263,15 @@
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
       const gid=el.getAttribute("data-group");
-      // if it's a group you've joined, restore the activity you joined with
+      // if it's a group you've joined (or are waitlisted for), restore the activity you used
       // (otherwise the detail screen shows whatever activity you last browsed)
       const joined=state.joinedGroups.find(j=>j.group.id===gid);
-      const all=makeGroups().concat(state.joinedGroups.map(j=>j.group));
-      const g=(joined&&joined.group)||all.find(x=>x.id===gid);
+      const wl=state.waitlisted.find(w=>w.group.id===gid);
+      const all=makeGroups().concat(state.joinedGroups.map(j=>j.group)).concat(state.waitlisted.map(w=>w.group));
+      const g=(joined&&joined.group)||(wl&&wl.group)||all.find(x=>x.id===gid);
       state.chosenGroup=g;
       if(joined&&joined.activity) state.chosenActivity=joined.activity;
+      else if(wl&&wl.activity) state.chosenActivity=wl.activity;
       goTo("groupdetail");
     }));
     $$("#groupsBody [data-hosted]").forEach(el=>el.addEventListener("click",()=>{
@@ -2145,6 +2287,9 @@
     if(g.hosted){ renderHostedDetail(g); return; }
     const joined=state.joinedGroups.some(j=>j.group.id===g.id);
     const dayOf=joined && state.dayOf===g.id;
+    const joinEntry=joined?state.joinedGroups.find(j=>j.group.id===g.id):null;
+    const rv=joinEntry&&joinEntry.reservation;
+    const resvTileHTML=rv?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`:"";
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'};width:13px;height:13px"></span>`).join("");
     const members=g.members.map((m,i)=>{
       const arrived=dayOf && i<2;
@@ -2163,9 +2308,15 @@
           :`<button class="ff" id="gdFastForward" style="margin:2px 0 10px">${t("gd_ff")}</button>`;
         bar=`<div class="cta-bar"><button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
       }
+      // day-of coordination panel (status chips + a live "who's coming" row)
+      if(dayOf){ seedDaySim(g); flowExtra+=coordPanelHTML(g); }
       flowExtra+=`<button class="btn-link" id="gdLeave" style="margin-top:8px">${t("gd_leave")}</button>`;
     } else if(spotsLeft===0){
-      flowExtra=`<div class="empty-state" style="padding:20px 0 10px"><div class="es-em">😔</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div><div id="altGroupSlot"></div>`;
+      const wld=state.waitlisted.some(w=>w.group.id===g.id);
+      const wlBlock=wld
+        ? `<div class="info-tile" style="border-color:rgba(142,162,255,.4);background:rgba(142,162,255,.08)"><div class="it-ic">🕓</div><div style="flex:1"><div class="it-lab" style="color:var(--accent-text)">${t("wl_status")} · ${t("wl_pos").replace("{n}",wlPosition(g))}</div><div class="it-val">${t("wl_note")}</div><div class="tiny" style="margin-top:4px">${t("wl_priority")}</div></div></div><button class="ff" id="gdClaimSim" style="margin:2px 0 6px">${t("wl_sim")}</button><button class="btn-link" id="gdLeaveWl">${t("wl_leave")}</button>`
+        : `<button class="btn btn-soft" id="gdWaitlist">${t("wl_join")}</button>`;
+      flowExtra=`<div class="empty-state" style="padding:20px 0 10px"><div class="es-em">😔</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div>${wlBlock}<div class="day-div" style="margin-top:14px">${t("alt_try")}</div><div id="altGroupSlot"></div>`;
     } else {
       flowExtra=`<p class="tiny" style="text-align:center;margin:4px 0 10px">${t("gd_leave_note")}</p>`;
       bar=`<div class="cta-bar"><button class="btn btn-primary" id="gdJoin">${t("gd_join")}${a.price?` · ${a.price}`:""}</button></div>`;
@@ -2176,12 +2327,14 @@
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${actVenue(a).split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
       <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
+      ${resvTileHTML}
       ${a.price?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
       <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${actPlanb(a)}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${grpPersonality(g)}.</p>
+        <div class="gc-compat" style="margin-top:8px;color:var(--accent-text)">🛡️ ${t("rel_matched")}</div>
         ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${grpCompat(g)}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
       <div class="map-stub"><span>🗺️ ${actVenue(a).split(" · ")[1]||"Map"}</span></div>
@@ -2200,20 +2353,30 @@
     const gp=$("#gdPlus");
     if(gp) gp.addEventListener("click",openPerchPlus);
     const j=$("#gdJoin");
-    if(j) j.addEventListener("click",()=>{
-      // free tier caps at 2 hangs/week; Perch+ raises it to 5
-      const cap=state.plus?5:2;
-      if(state.joinedGroups.length>=cap){ openPerchPlus(state.plus?null:"limit"); return; }
-      if(!state.joinedGroups.some(x=>x.group.id===g.id)){ state.joinedGroups.push({group:g,activity:a}); g.filled=Math.min(g.size,g.filled+1); }
-      // fresh intro for this group next time its chat opens
-      delete state.chatThreads[g.id];
-      state.unreadChats.add(g.id);
-      if(!state.seedSocial){
-        state.seedSocial=true;
-        state.requests.recv=[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}];
-      }
-      goTo("joined");
+    if(j) j.addEventListener("click",()=>requestJoin(g,a));
+    const wlBtn=$("#gdWaitlist");
+    if(wlBtn) wlBtn.addEventListener("click",()=>openWaitlist(g,a));
+    const wlLeave=$("#gdLeaveWl");
+    if(wlLeave) wlLeave.addEventListener("click",()=>{
+      state.waitlisted=state.waitlisted.filter(w=>w.group.id!==g.id);
+      // leaving the waitlist cancels any pending/active backfill offer so no stale toast fires later
+      if(state.backfillOffer&&state.backfillOffer.group.id===g.id) state.backfillOffer=null;
+      clearBackfillTimers();
+      showToast(t("wl_left")); renderGroupDetail();
     });
+    const claimSim=$("#gdClaimSim");
+    if(claimSim) claimSim.addEventListener("click",()=>openClaimSpot(g,a));
+    // day-of coordination: persistent status, posted once to the group chat
+    $$("#s-groupdetail [data-coord]").forEach(el=>el.addEventListener("click",()=>{
+      const kind=el.getAttribute("data-coord"), gid=g.id;
+      const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
+      if(!state.chatThreads[gid]) state.chatThreads[gid]=[];
+      if(kind==="here"){ checkIn(g); renderGroupDetail(); return; }
+      if(kind==="ride"){ pushMsg({who:"me",text:esc(t("co_msg_ride")),time:"now"},gid); showToast(t("co_toast")); return; }
+      // omw / late — mutually exclusive, no duplicate posts on re-tap
+      if(state.dayStatus[gid]!==kind){ state.dayStatus[gid]=kind; pushMsg({sys:true,text:t(kind==="omw"?"co_sys_omw":"co_sys_late").replace("{n}",esc(fn))},gid); showToast(t("co_toast")); }
+      renderGroupDetail();
+    }));
     const lv=$("#gdLeave");
     if(lv) lv.addEventListener("click",()=>openLeaveSheet(g));
     const mt=$("#gdMute");
@@ -2221,14 +2384,7 @@
     const ff=$("#gdFastForward");
     if(ff) ff.addEventListener("click",()=>{ state.dayOf=g.id; state.checkedIn=false; goTo("moodcheck"); });
     const ci=$("#gdCheckin");
-    if(ci) ci.addEventListener("click",()=>{
-      state.checkedIn=true;
-      const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
-      const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
-      if(state.chatThreads[g.id]){ pushMsg({sys:true,text:line},g.id); }
-      showToast(t("toast_checkin"));
-      renderGroupDetail();
-    });
+    if(ci) ci.addEventListener("click",()=>{ checkIn(g); renderGroupDetail(); });
     $$("#s-groupdetail [data-member]").forEach(el=>el.addEventListener("click",()=>{
       const m=g.members.find(x=>x[0]===el.getAttribute("data-member"));
       if(m) openMemberActions({name:m[0],emoji:m[1],key:m[2]});
@@ -2289,7 +2445,7 @@
       $$(".chip",row).forEach(c=>c.addEventListener("click",()=>{ $$(".chip",row).forEach(x=>x.classList.remove("sel")); c.classList.add("sel"); sel[grp]=c.getAttribute("data-val"); }));
     });
     const hp=$("#hostPlusLink"); if(hp) hp.addEventListener("click",openPerchPlus);
-    $("#hostGo").addEventListener("click",()=>{
+    const doHost=()=>{
       const actMatch=ACTIVITIES.find(a=>a.cat===sel.cat)||ACTIVITIES[0];
       // labels derive from these keys at render time (hostedName/hostedWhen/hostedTags) so they follow the language
       state.hostedGroups.push({ id:"host"+(state.hostedGroups.length+1), emoji:actMatch.icon, g:actMatch.g,
@@ -2297,6 +2453,11 @@
         mix:["wavelength","easygoer","connector"], filled:1, size:+sel.size, hosted:true,
         members:[["You",state.emoji,state.profileKey||"easygoer"]] });
       goTo("hostdone");
+    };
+    $("#hostGo").addEventListener("click",()=>{
+      // hosting a hang also needs a set-up profile
+      if(needsProfile()){ openProfileSetup(doHost,true); return; }
+      doHost();
     });
   }
 
@@ -2310,6 +2471,13 @@
     $("#joinedWhen").textContent=frWhen(g?g.when:a.when);
     $("#joinedWhere").textContent=actVenue(a);
     $("#joinedWho").textContent=`${t("you_plus")} ${g?Math.max(1,g.filled-1):4} ${t("others")}`;
+    const entry=g&&state.joinedGroups.find(j=>j.group.id===g.id);
+    const rv=entry&&entry.reservation;
+    const rEl=$("#joinedResv");
+    if(rEl){
+      rEl.innerHTML=rv?(`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`
+        +(rv.ticket?`<div class="info-tile"><div class="it-ic">💳</div><div><div class="it-lab">${t("joined_pay")}</div><div class="it-val">${t("joined_pay_val").replace("{price}",rv.price)}</div></div></div>`:"")):"";
+    }
     const soft=$("#joinedSoftAsk");
     if(soft){
       if(!state.firstJoinAsked){
@@ -2530,6 +2698,8 @@
 
   /* ============ FRIENDS ============ */
   function archBadge(k){ if(!ARCH[k]) return ""; return `<span class="friend-arch" style="background:${ARCH_DOTCOLORS[k]}">${archName(k).replace(/^(The |Le |La |L')/,"")}</span>`; }
+  // reusable verified badge (mint ✓) — distinct from the blue 🛡️ "Reliable" pill so trust signals read separately
+  function vbadge(on){ return on?`<span class="pill-static pill-mint" style="font-size:11px">✓ ${t("vf_badge")}</span>`:""; }
   function friendRowHTML(p,sub,action){
     return `<div class="friend-row" data-friend="${p.name}">
       ${avatarHTML(p,"av-sm")}
@@ -2556,8 +2726,9 @@
     if(tab==="friends"){
       let list=state.friends.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){
-        body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button></div>`;
+        body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button><button class="btn-link" id="goDiscover">${t("disc_open")}</button></div>`;
         const gm=$("#goMet"); if(gm) gm.addEventListener("click",()=>{ state.friendsTab="met"; renderFriends(); });
+        const gd=$("#goDiscover"); if(gd) gd.addEventListener("click",()=>goTo("discover"));
       } else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met?frActText(p.met):t("met_generic")))).join("");
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
@@ -2613,16 +2784,18 @@
 
   /* ============ FRIEND PROFILE ============ */
   function renderFriendProfile(){
-    const name=state.currentFriendView;
-    const p=state.friends.find(x=>x.name===name)||metPool.find(x=>x.name===name)||state.requests.recv.find(x=>x.name===name)||{name:name,emoji:"🙂",key:"easygoer"};
-    const isFriend=state.friends.some(x=>x.name===name);
+    const id=state.currentFriendView;
+    const byId=x=>x.name===id||(x.username&&x.username===id);
+    const p=state.friends.find(byId)||metPool.find(byId)||state.requests.recv.find(byId)||state.requests.sent.find(byId)||PEOPLE.find(byId)||{name:id,emoji:"🙂",key:"easygoer"};
+    const isFriend=state.friends.some(byId);
     const key=ARCH[p.key]?p.key:"easygoer", desc=archDesc(key);
     $("#s-friendprofile").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${p.name}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${esc(p.name)}</div></div>
       <div style="text-align:center;margin:6px 0 18px">
         <div class="avatar av-lg ${archGrad(p.key)}" style="margin:0 auto;font-size:46px;width:96px;height:96px">${p.emoji}</div>
-        <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:12px">${p.name}</div>
-        <div style="margin-top:8px">${archBadge(p.key)}</div>
+        <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:12px">${esc(p.name)}</div>
+        ${p.username?`<div class="tiny" style="margin-top:3px">@${esc(p.username)}</div>`:""}
+        <div style="margin-top:8px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center">${archBadge(p.key)}${vbadge(p.verified)}</div>
         <div class="sub" style="margin-top:8px">${archTag(key)}</div>
       </div>
       <div class="info-block"><div class="sec-title">${t("fp_where")}</div><div class="ib-row"><span class="star">📍</span><span>${p.met?frActText(p.met):t("met_perch")}</span></div></div>
@@ -2632,7 +2805,7 @@
         <button class="btn btn-soft" id="fpMore" aria-label="More options">···</button>
       </div>`;
     const msg=$("#fpMsg"); if(msg) msg.addEventListener("click",()=>{ state.currentDM=p.name; goTo("dm"); });
-    const add=$("#fpAdd"); if(add) add.addEventListener("click",()=>{ if(state.requests.recv.some(x=>x.name===p.name)){ addFriend(p.name); goTo("friendprofile"); } else { state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.name)); } });
+    const add=$("#fpAdd"); if(add) add.addEventListener("click",()=>{ if(state.requests.recv.some(byId)){ addFriend(p.name); goTo("friendprofile"); } else { if(!state.requests.sent.some(byId)) state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.username?"@"+p.username:p.name)); } });
     const more=$("#fpMore"); if(more) more.addEventListener("click",()=>openMemberActions(p,isFriend));
   }
 
@@ -2727,21 +2900,37 @@
         <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">${t("prof_more")}</div>`
       :`<div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px;min-height:64px">${t("prof_first")}</div>`;
     $("#profileBody").innerHTML=`
+      ${!state.profileComplete?`<div id="pfSetupCard" style="border:1.5px solid rgba(255,138,107,.45);border-radius:var(--r-lg);padding:15px;margin-bottom:16px;display:flex;align-items:center;gap:13px;cursor:pointer">
+        <div style="font-size:24px">🪶</div>
+        <div style="flex:1"><div style="font-weight:700">${t("pf_setup_t")}</div><div class="tiny" style="margin-top:2px">${t("pf_setup_s")}</div></div>
+        <span style="color:var(--faint)">›</span></div>`:""}
       <div style="text-align:center;margin:4px 0 18px">
         <div style="position:relative;width:104px;margin:0 auto">${photo}
           <button id="pfCam" aria-label="Edit photo" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--phone-bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
         <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:16px">${esc(state.name)}</div>
-        <div style="margin-top:8px">${archBadge(state.profileKey||'easygoer')}</div>
+        ${state.username?`<div class="tiny" style="margin-top:3px">@${esc(state.username)}</div>`:""}
+        <div style="margin-top:8px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center">
+          ${archBadge(state.profileKey||'easygoer')}
+          ${vbadge(state.verified)}
+          ${isReliable()?`<span class="pill-static pill-cal" style="font-size:11px">🛡️ ${t("rel_badge")}</span>`:""}
+        </div>
         <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${esc(state.bio)}</p>
-        <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${esc(i)}</span>`).join("")}</div>
+        <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${esc(intLabel(i))}</span>`).join("")}</div>
         <button class="btn-link" id="pfEdit" style="margin-top:12px">${t("prof_edit")}</button>
       </div>
       <div class="stats">
         <div class="stat"><div class="sn">${nEvents}</div><div class="sl">${nEvents===1?t("stat_event"):t("stat_events")}</div></div>
         <div class="stat"><div class="sn">${nFriends}</div><div class="sl">${nFriends===1?t("stat_friend"):t("stat_friends")}</div></div>
-        <div class="stat"><div class="sn">${state.checkedIn?"100%":"—"}</div><div class="sl">${t("stat_showup")}</div></div>
+        <div class="stat" id="pfShowupStat" role="button" tabindex="0" aria-label="${esc(t("stat_showup_full"))}" style="cursor:pointer"><div class="sn">${relStatLabel()}</div><div class="sl">${t("stat_showup")}</div></div>
         <div class="stat"><div class="sn">'26</div><div class="sl">${t("stat_since")}</div></div>
       </div>
+      ${(!state.verified&&state.profileComplete&&!state.verifyPromptDismissed)?`<div id="pfVerifyCard" style="border:1.5px solid rgba(111,224,198,.4);border-radius:var(--r-lg);padding:15px;margin-bottom:18px;display:flex;align-items:center;gap:13px">
+        <div style="font-size:24px">🛡️</div>
+        <div style="flex:1"><div style="font-weight:700">${t("pf_verify_t")}</div><div class="tiny" style="margin-top:2px">${t("pf_verify_s")}</div></div>
+        <div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">
+          <button class="mini-btn" id="pfVerifyGo">${t("pf_verify_cta")}</button>
+          <button class="mini-btn ghost" id="pfVerifySkip">${t("pf_verify_skip")}</button>
+        </div></div>`:""}
       <div id="ppCard" style="border-radius:var(--r-lg);padding:15px 16px;margin-bottom:18px;cursor:pointer;display:flex;align-items:center;gap:13px;border:1.5px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,var(--grad-warm) border-box">
         <div style="font-size:26px">🪶</div>
         <div style="flex:1"><div style="font-size:15px;font-weight:700">Perch+${state.plus?' <span class="pill-static pill-mint" style="font-size:10px;padding:2px 8px;vertical-align:2px">✓ '+t("pp_active_pill")+'</span>':''}</div><div class="tiny" style="margin-top:1px">${state.plus?t("pp_member"):t("pp_card_sub")}</div></div>
@@ -2759,6 +2948,10 @@
       </div>`;
     $("#pfType").addEventListener("click",()=>{ state.archetypeView=state.profileKey; goTo("archetype"); });
     $("#pfCam").addEventListener("click",()=>$("#photoInput").click());
+    const setupCard=$("#pfSetupCard"); if(setupCard) setupCard.addEventListener("click",()=>openProfileSetup(()=>renderProfile(),false));
+    const showupStat=$("#pfShowupStat"); if(showupStat){ showupStat.addEventListener("click",openReliability); showupStat.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openReliability(); } }); }
+    const vGo=$("#pfVerifyGo"); if(vGo) vGo.addEventListener("click",e=>{ e.stopPropagation(); openVerify(); });
+    const vSkip=$("#pfVerifySkip"); if(vSkip) vSkip.addEventListener("click",e=>{ e.stopPropagation(); state.verifyPromptDismissed=true; renderProfile(); });
     $("#pfEdit").addEventListener("click",openEditProfile);
     $("#pfRestart").addEventListener("click",openStartOver);
     $("#ppCard").addEventListener("click",()=>openPerchPlus());
@@ -2814,6 +3007,7 @@
       <div class="sec-title">${t("set_account")}</div>
       <div class="set-list">
         <div class="set-item" id="setEdit"><span class="si-ic">👤</span>${t("set_edit")}<span class="chev">›</span></div>
+        <div class="set-item" id="setVerify"><span class="si-ic">${state.verified?'✅':'🪪'}</span>${t("set_verify")}<span class="${state.verified?'set-badge':'si-val'}">${state.verified?t("set_verified"):t("set_unverified")}</span></div>
         <div class="set-item" style="cursor:default"><span class="si-ic">✉️</span>${t("set_email")}<span class="si-val">you@email.com</span></div>
         <div class="set-item" style="cursor:default"><span class="si-ic">🔐</span>${t("set_apple")}<span class="set-badge">${t("set_connected")}</span></div>
         ${state.plus?`<div class="set-item" id="setManageSub"><span class="si-ic">🪶</span>${t("pp_manage")}<span class="set-badge">✓</span></div>`:""}
@@ -2877,6 +3071,7 @@
     }));
     $$("#s-settings [data-sheet]").forEach(el=>el.addEventListener("click",()=>openPrivacySheet(el.getAttribute("data-sheet"))));
     $("#setEdit").addEventListener("click",openEditProfile);
+    const sv=$("#setVerify"); if(sv) sv.addEventListener("click",openVerify);
     $("#setBlocked").addEventListener("click",openBlockedList);
     $("#setBreak").addEventListener("click",openTakeBreak);
     $("#setWell").addEventListener("click",()=>openDoc("wellbeing"));
@@ -2943,20 +3138,23 @@
     if(tab==="activity"){
       const rc=state.requests.recv.length;
       const joined=state.joinedGroups[0];
-      if(!rc&&!joined&&!state.seedSocial){
+      const offer=state.backfillOffer;
+      if(!rc&&!joined&&!offer&&!state.seedSocial){
         body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">${t("notif_none_t")}</div><div class="es-s">${t("notif_none_s")}</div></div>`;
         return;
       }
       body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
-        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${state.requests.recv[0].name}</b> ${t("notif_req")}`,t("notif_2hago"),true,"requests"):""}
-        ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${grpName(joined.group)}</b>`,t("notif_justnow"),true,"chat"):""}
-        ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${grpName(joined.group)}</b>`,t("notif_today"),false,"groupdetail"):""}
+        ${offer?noti("🎟️","rgba(111,224,198,.18)",t("notif_wl_offer").replace("{g}",`<b>${esc(grpName(offer.group))}</b>`),t("notif_wl_offer_time"),true,"wlclaim"):""}
+        ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${esc(state.requests.recv[0].name)}</b> ${t("notif_req")}`,t("notif_2hago"),true,"requests"):""}
+        ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${esc(grpName(joined.group))}</b>`,t("notif_justnow"),true,"chat"):""}
+        ${joined?noti("🌿","rgba(165,123,255,.18)",`${t("notif_joined")} <b>${esc(grpName(joined.group))}</b>`,t("notif_today"),false,"groupdetail"):""}
         ${state.seedSocial?`<div class="day-div">${t("notif_week")}</div>
         ${noti("⏰","rgba(255,182,97,.18)",t("notif_reminder"),t("notif_yest"),false,"groups")}
         ${noti("✨","rgba(142,162,255,.18)",t("notif_newgroup"),t("notif_2day"),false,"groups")}`:""}`;
       $$("#notifBody [data-ngo]").forEach(el=>el.addEventListener("click",()=>{
         const go=el.getAttribute("data-ngo");
-        if(go==="chat"&&joined){ state.chatViewGroup=joined.group.id; goTo("chat"); }
+        if(go==="wlclaim"&&offer){ openClaimSpot(offer.group,offer.activity); }
+        else if(go==="chat"&&joined){ state.chatViewGroup=joined.group.id; goTo("chat"); }
         else if(go==="groupdetail"&&joined){ state.chosenGroup=joined.group; state.chosenActivity=joined.activity||state.chosenActivity; goTo("groupdetail"); }
         else goTo(go);
       }));
@@ -3088,9 +3286,11 @@
       <button class="btn btn-amber" id="leaveGo">${t("lv_go")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("lv_stay")}</button>`;
     $("#leaveGo").addEventListener("click",()=>{
+      const wasFull=g.filled>=g.size;
       state.joinedGroups=state.joinedGroups.filter(j=>j.group.id!==g.id);
       delete state.chatThreads[g.id]; state.unreadChats.delete(g.id); if(state.chatViewGroup===g.id) state.chatViewGroup=null;
-      closeSheet(); showToast(t("lv_done")); goTo("groups");
+      // leaving a full group frees the spot for the next person on the waitlist (the other side of backfill)
+      closeSheet(); showToast(wasFull?t("wl_freed_toast"):t("lv_done")); goTo("groups");
     });
     sheetClose(); openSheet();
   }
@@ -3110,7 +3310,7 @@
     const opts=[[t("mu_1h"),"1h"],[t("mu_8h"),"8h"],[t("mu_tmrw"),"tomorrow"],[t("mu_event"),"event"]];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${t("mu_title")}</div>
-      <div class="sheet-sub">${t("mu_for").replace("{g}",g?grpName(g):"")}</div>
+      <div class="sheet-sub">${t("mu_for").replace("{g}",g?esc(grpName(g)):"")}</div>
       <div class="set-list" style="margin-top:16px">${opts.map(o=>`<div class="set-item" data-dur="${o[1]}"><span class="si-ic">🔕</span>${o[0]}</div>`).join("")}</div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-dur]").forEach(el=>el.addEventListener("click",()=>{
@@ -3157,9 +3357,298 @@
     sheetClose(); openSheet();
   }
 
+  /* ============ PROFILE SETUP (first-run, optional) ============ */
+  const PROFILE_EMOJIS=["🙂","😄","😊","😌","🤓","😎","🌿","⚡","🎨","🧩","🌙","🚀"];
+  // onComplete runs after a successful save (e.g. continue a gated join). gated=true reframes the copy.
+  function openProfileSetup(onComplete,gated){
+    const startName=state.name&&state.name!=="You"?state.name:"";
+    const chosen={emoji:state.emoji,interests:state.interests.slice()};
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-title">${gated?t("ps_gate_t"):t("ps_title")}</div>
+      <div class="sheet-sub">${gated?t("ps_gate_s"):t("ps_sub")}</div>
+      <div class="field"><label>${t("ep_emoji")}</label>
+        <div class="emoji-pick" id="psEmoji">${PROFILE_EMOJIS.map(e=>`<span data-em="${e}" class="${state.emoji===e?'on':''}">${e}</span>`).join("")}</div></div>
+      <div class="field"><label>${t("ps_name_label")}</label><input id="psName" value="${esc(startName)}" placeholder="${t("ep_name_ph")}" maxlength="30" autocomplete="off"></div>
+      <div class="field"><label>${t("ps_username")}</label>
+        <input id="psUser" value="${esc(state.username||"")}" placeholder="${t("ps_username_ph")}" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false">
+        <div class="tiny" id="psUserMsg" style="margin-top:6px">${t("ps_username_hint")}</div></div>
+      <div class="field"><label>${t("ep_bio")}</label><textarea id="psBio" rows="2" placeholder="${t("ep_bio_ph")}" maxlength="120">${esc(state.name==="You"?"":state.bio)}</textarea></div>
+      <div class="field"><label>${t("ps_interests")}</label>
+        <div class="tiny" style="margin:-2px 0 8px">${t("ps_interests_sub")}</div>
+        <div class="chips" id="psInts">${INTERESTS.map(i=>`<span class="chip ${chosen.interests.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
+      <button class="btn btn-primary" id="psSave" style="margin-top:8px" disabled>${t("ps_save")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    const nameEl=$("#psName"), userEl=$("#psUser"), msg=$("#psUserMsg"), saveBtn=$("#psSave");
+    const refresh=()=>{
+      const st=usernameStatus(userEl.value);
+      const empty=!userEl.value.trim();
+      msg.textContent=empty?t("ps_username_hint"):t(st.key);
+      msg.style.color=empty?"var(--faint)":(st.ok?"var(--mint)":"var(--danger-text)");
+      saveBtn.disabled=!(nameEl.value.trim()&&st.ok&&!empty);
+    };
+    nameEl.addEventListener("input",refresh); userEl.addEventListener("input",refresh);
+    $$("#psEmoji [data-em]").forEach(s=>s.addEventListener("click",()=>{ $$("#psEmoji [data-em]").forEach(x=>x.classList.remove("on")); s.classList.add("on"); chosen.emoji=s.getAttribute("data-em"); }));
+    $$("#psInts [data-int]").forEach(c=>c.addEventListener("click",()=>{
+      const v=c.getAttribute("data-int"); const i=chosen.interests.indexOf(v);
+      if(i>=0) chosen.interests.splice(i,1); else { if(chosen.interests.length>=5) return; chosen.interests.push(v); }
+      c.classList.toggle("sel");
+    }));
+    saveBtn.addEventListener("click",()=>{
+      const n=nameEl.value.trim(); if(!n||!usernameStatus(userEl.value).ok) return;
+      state.name=n; state.username=userEl.value.trim().toLowerCase(); state.emoji=chosen.emoji;
+      const b=$("#psBio").value.trim(); if(b) state.bio=b;
+      if(chosen.interests.length) state.interests=chosen.interests.slice();
+      state.profileComplete=true;
+      closeSheet(); showToast(t("ps_saved"));
+      const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-",""));
+      if(onComplete) onComplete();
+    });
+    refresh(); sheetClose(); openSheet();
+  }
+  // explore: a dismissible nudge to set up the profile (no hard gate until you join)
+  function renderProfileNudge(){
+    const el=$("#profileNudge"); if(!el) return;
+    if(state.profileComplete||state.nudgeDismissed){ el.innerHTML=""; return; }
+    el.innerHTML=`<div class="guide-bar" style="margin:2px 0 12px"><div class="guide-head" id="nudgeHead" style="cursor:pointer">
+      <span>🪶 ${t("pf_setup_s")}</span><span class="guide-x" id="nudgeX" role="button" aria-label="Dismiss">✕</span></div></div>`;
+    $("#nudgeHead").addEventListener("click",e=>{
+      if(e.target.id==="nudgeX"){ state.nudgeDismissed=true; renderProfileNudge(); return; }
+      openProfileSetup(null,false);
+    });
+  }
+
+  /* ============ DISCOVER / ADD PEOPLE ============ */
+  function personRowHTML(p){
+    const isFriend=state.friends.some(f=>(f.username&&f.username===p.username)||f.name===p.name);
+    const requested=state.requests.sent.some(x=>(x.username&&x.username===p.username)||x.name===p.name);
+    let action;
+    if(isFriend) action=`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("fr_tab")}</span>`;
+    else if(requested) action=`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("disc_requested")}</span>`;
+    else action=`<button class="add-pill" data-discadd="${esc(p.username)}">${t("disc_add")}</button>`;
+    const mutual=p.mutual>0?(p.mutual===1?t("disc_mutual1"):t("disc_mutual").replace("{n}",p.mutual)):"";
+    return `<div class="friend-row" data-discview="${esc(p.username)}">
+      ${avatarHTML(p,"av-sm")}
+      <div class="friend-meta"><div class="friend-name">${esc(p.name)} ${archBadge(p.key)}${p.verified?" "+vbadge(true):""}</div><div class="friend-sub">@${esc(p.username)}${mutual?" · "+mutual:""}</div></div>
+      ${action}</div>`;
+  }
+  function renderDiscover(){
+    const inp=$("#discSearch"); const q=(inp.value||"").toLowerCase().trim().replace(/^@/,"");
+    const body=$("#discBody");
+    let list,title;
+    if(q){ list=PEOPLE.filter(p=>p.name.toLowerCase().includes(q)||p.username.toLowerCase().includes(q)); title=t("ex_results"); }
+    else { list=PEOPLE.slice().sort((a,b)=>b.mutual-a.mutual); title=t("disc_suggested"); }
+    if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">🔍</div><div class="es-t">${t("disc_empty_t")}</div><div class="es-s">${t("disc_empty_s")}</div></div>`; return; }
+    body.innerHTML=`<p class="tiny" style="margin:0 0 14px">${t("disc_intro")}</p><div class="sec-title">${title}</div>`+list.map(personRowHTML).join("");
+    makeFocusable(body);
+    $$("#discBody [data-discadd]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); discAdd(el.getAttribute("data-discadd")); }));
+    $$("#discBody [data-discview]").forEach(el=>el.addEventListener("click",e=>{ if(e.target.closest("button")) return; const p=PEOPLE.find(x=>x.username===el.getAttribute("data-discview")); if(p){ state.currentFriendView=p.username; goTo("friendprofile"); } }));
+  }
+  function discAdd(username){
+    const p=PEOPLE.find(x=>x.username===username); if(!p) return;
+    if(state.friends.some(f=>f.username===username)) return;
+    if(!state.requests.sent.some(x=>x.username===username)) state.requests.sent.push({name:p.name,username:p.username,emoji:p.emoji,key:p.key,met:null});
+    showToast(t("toast_reqsent").replace("{n}","@"+p.username));
+    renderDiscover();
+  }
+
+  /* ============ RESERVATIONS / WAITLIST ============ */
+  function openReservation(g,a,onConfirm){
+    const when=frWhen((g&&g.when)||a.when);
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic">🎟️</div>
+      <div class="sheet-title">${t("rsv_title")}</div>
+      <div class="sheet-sub">${a.price?t("rsv_sub_ticket").replace("{price}",a.price):t("rsv_sub_free")}</div>
+      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${when}</div></div></div>
+      <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
+      <div class="info-tile"><div class="it-ic">👤</div><div><div class="it-lab">${t("rsv_for")}</div><div class="it-val">${t("rsv_you1")}</div></div></div>
+      ${a.price?`<div class="info-tile"><div class="it-ic">💳</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("rsv_pay_note")}</div></div></div>`:""}
+      <button class="btn btn-primary" id="rsvGo" style="margin-top:8px">${a.price?t("rsv_go_ticket").replace("{price}",a.price):t("rsv_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#rsvGo").addEventListener("click",()=>{ closeSheet(); showToast(t("rsv_done")); if(onConfirm) onConfirm(); });
+    sheetClose(); openSheet();
+  }
+  function openWaitlist(g,a){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic">🕓</div>
+      <div class="sheet-title">${t("wl_title")}</div>
+      <div class="sheet-sub">${t("wl_sub")}</div>
+      <button class="btn btn-primary" id="wlGo">${t("wl_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#wlGo").addEventListener("click",()=>{
+      if(!state.waitlisted.some(w=>w.group.id===g.id)) state.waitlisted.push({group:g,activity:a});
+      closeSheet(); showToast(t("wl_done"));
+      scheduleBackfillOffer(g,a);   // a spot frees up shortly (simulated)
+      if($("#s-groupdetail").classList.contains("active")) renderGroupDetail();
+    });
+    sheetClose(); openSheet();
+  }
+  // ticketed activities get a reservation/booking step; free ones confirm instantly
+  function beginJoin(g,a){
+    if(a&&a.price) openReservation(g,a,()=>finishJoin(g,a));
+    else finishJoin(g,a);
+  }
+  function finishJoin(g,a){
+    if(!state.joinedGroups.some(x=>x.group.id===g.id)){
+      const reservation={code:resvCode(),ticket:!!(a&&a.price),price:(a&&a.price)||null};
+      state.joinedGroups.push({group:g,activity:a,reservation});
+      g.filled=Math.min(g.size,g.filled+1);
+    }
+    // joining clears any waitlist entry for the same group
+    state.waitlisted=state.waitlisted.filter(w=>w.group.id!==g.id);
+    delete state.chatThreads[g.id];   // fresh intro next time its chat opens
+    state.unreadChats.add(g.id);
+    if(!state.seedSocial){
+      state.seedSocial=true;
+      state.requests.recv=[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}];
+    }
+    goTo("joined");
+  }
+  // shared entry for joining: free-tier cap → profile gate → booking. Used by Join and waitlist-claim.
+  function requestJoin(g,a){
+    const cap=state.plus?5:2;
+    if(state.joinedGroups.length>=cap){ openPerchPlus(state.plus?null:"limit"); return; }
+    if(needsProfile()){ openProfileSetup(()=>beginJoin(g,a),true); return; }
+    beginJoin(g,a);
+  }
+  // waitlist backfill: a spot opens → claim it within a window → join
+  function openClaimSpot(g,a){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic">🎉</div>
+      <div class="sheet-title">${t("wl_claim_t")}</div>
+      <div class="sheet-sub">${t("wl_claim_s").replace("{g}",esc(grpName(g)))}</div>
+      <button class="btn btn-primary" id="claimGo">${t("wl_claim_go")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#claimGo").addEventListener("click",()=>{
+      // don't drop the waitlist entry here: finishJoin clears it only on a real join,
+      // so a claim that hits the Perch+ cap keeps the user on the waitlist
+      state.backfillOffer=null; clearBackfillTimers();
+      closeSheet(); showToast(t("wl_claim_done"));
+      requestJoin(g,a);
+    });
+    sheetClose(); openSheet();
+  }
+  // identity verification (simulated phone + code) — optional, builds trust
+  function openVerify(){
+    const render=(step)=>{
+      if(state.verified){
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">✅</div>
+          <div class="sheet-title">${t("vf_badge")}</div><div class="sheet-sub">${t("vf_already")}</div>
+          <button class="btn btn-ghost" id="sheetClose">${t("btn_close")}</button>`;
+      } else if(step==="phone"){
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">🪪</div>
+          <div class="sheet-title">${t("vf_title")}</div><div class="sheet-sub">${t("vf_sub")}</div>
+          <div class="field"><label>${t("vf_phone")}</label><input id="vfPhone" type="tel" placeholder="${t("vf_phone_ph")}" autocomplete="off"></div>
+          <p class="tiny" style="margin:-6px 0 12px">${t("vf_why")}</p>
+          <button class="btn btn-primary" id="vfSend" disabled>${t("vf_send")}</button>
+          <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+        const ph=$("#vfPhone"), b=$("#vfSend");
+        ph.addEventListener("input",()=>{ b.disabled=ph.value.replace(/\D/g,"").length<7; });
+        b.addEventListener("click",()=>render("code"));
+      } else {
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">💬</div>
+          <div class="sheet-title">${t("vf_code")}</div><div class="sheet-sub">${t("vf_sub")}</div>
+          <div class="field"><input id="vfCode" inputmode="numeric" maxlength="4" placeholder="${t("vf_code_ph")}" style="text-align:center;letter-spacing:10px;font-size:22px" autocomplete="one-time-code"></div>
+          <button class="btn btn-primary" id="vfGo" disabled>${t("vf_verify")}</button>
+          <button class="btn-link" id="vfResend">${t("vf_resend")}</button>
+          <button class="btn btn-ghost" id="sheetClose" style="margin-top:4px">${t("btn_cancel")}</button>`;
+        const c=$("#vfCode"), b=$("#vfGo");
+        try{ c.focus(); }catch(e){}
+        c.addEventListener("input",()=>{ b.disabled=c.value.replace(/\D/g,"").length<4; });
+        b.addEventListener("click",()=>{ state.verified=true; closeSheet(); showToast(t("vf_done")); const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-","")); });
+        $("#vfResend").addEventListener("click",()=>showToast(t("vf_send")));
+      }
+      sheetClose();
+    };
+    render("phone"); openSheet();
+  }
+
+  // reliability explainer — warm, tier-aware, no public ranking (PLAN: "not a popularity contest")
+  function openReliability(){
+    const tier=relTier();
+    const sub=tier==="good"?t("rel_sheet_good_s"):(tier==="building"?t("rel_sheet_building_s"):t("rel_sheet_new_s"));
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic">🛡️</div>
+      <div class="sheet-title">${t("rel_sheet_t")}</div>
+      <div class="sheet-sub">${sub}</div>
+      <div class="info-block">
+        <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b1")}</span></div>
+        <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b2")}</span></div>
+        <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b3")}</span></div>
+      </div>
+      <button class="btn btn-ghost" id="sheetClose">${t("rel_sheet_close")}</button>`;
+    sheetClose(); openSheet();
+  }
+
+  /* ============ DAY-OF COORDINATION ============ */
+  // simulated peers referenced by member index, so names/emoji come from the real group (translation-free)
+  const DAY_SIM=[{i:0,status:"omw"},{i:1,status:"here"}];
+  function coordStatusHTML(g){
+    const rows=[];
+    DAY_SIM.forEach(d=>{ const m=g.members&&g.members[d.i]; if(m) rows.push({name:m[0],status:d.status}); });
+    const mine=state.dayStatus[g.id]||((state.checkedIn&&state.dayOf===g.id)?"here":null);
+    if(mine) rows.push({name:t("co_you"),status:mine});
+    if(!rows.length) return `<p class="tiny" style="margin-top:8px">${t("co_nobody")}</p>`;
+    // reuse the existing themed pill classes so light theme + a11y settings flip automatically (mint = here, amber = en route/late)
+    const tag=s=>`<span class="pill-static ${s==="here"?"pill-mint":"pill-amber"}">${t("co_st_"+s)}</span>`;
+    return `<div class="sec-title" style="margin-top:12px">${t("co_statusrow_title")}</div>`+rows.map(r=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0"><span style="font-size:13px;font-weight:600">${esc(r.name)}</span>${tag(r.status)}</div>`).join("");
+  }
+  function coordPanelHTML(g){
+    const cur=state.dayStatus[g.id]||((state.checkedIn&&state.dayOf===g.id)?"here":null);
+    const chip=(k,emoji,key)=>`<span class="chip ${cur===k?'sel':''}" data-coord="${k}">${emoji} ${t(key)}</span>`;
+    return `<div class="info-block"><div class="sec-title">${t("co_title")}</div>
+      <div class="chips">${chip("omw","🚶","co_omw")}${chip("late","⏰","co_late")}${chip("here","✅","co_here")}<span class="chip" data-coord="ride">🚕 ${t("co_ride")}</span></div>
+      ${coordStatusHTML(g)}</div>`;
+  }
+  // one-time seed of simulated peer statuses into the group's chat
+  function seedDaySim(g){
+    const gid=g.id; if(state.daySimSeeded[gid]) return;
+    if(!state.chatThreads[gid]) state.chatThreads[gid]=[];
+    state.daySimSeeded[gid]=true;
+    DAY_SIM.forEach(d=>{ const m=g.members&&g.members[d.i]; if(!m) return;
+      const text=d.status==="here"?t("sys_here").replace("{n}",esc(m[0])):t("co_sys_omw").replace("{n}",esc(m[0]));
+      pushMsg({sys:true,text},gid);
+    });
+  }
+  // shared check-in (used by the day-of CTA and the "I'm here" coordination chip) — idempotent
+  function checkIn(g){
+    if(state.checkedIn&&state.dayStatus[g.id]==="here") return;
+    state.checkedIn=true; state.attended=Math.max(state.attended,1); state.dayStatus[g.id]="here";
+    const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
+    const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
+    if(state.chatThreads[g.id]) pushMsg({sys:true,text:line},g.id);
+    showToast(t("toast_checkin"));
+  }
+
+  /* ============ WAITLIST BACKFILL (automatic loop) ============ */
+  // a tappable toast variant that runs onTap when clicked (reuses #toast / toastT, cleans up its listener)
+  function showToastGo(msg,onTap){
+    const el=$("#toast"); if(!el) return; el.textContent=msg; el.classList.add("show"); el.style.cursor="pointer";
+    const done=run=>{ el.classList.remove("show"); el.style.cursor=""; el.removeEventListener("click",tap); clearTimeout(toastT); if(run&&onTap) onTap(); };
+    const tap=()=>done(true);
+    el.addEventListener("click",tap); clearTimeout(toastT); toastT=setTimeout(()=>done(false),5000);
+  }
+  function scheduleBackfillOffer(g,a){
+    if(state.backfillSeen) return; state.backfillSeen=true;          // one-shot per session
+    backfillTimers.push(setTimeout(()=>fireBackfillOffer(g,a),6000));
+  }
+  function fireBackfillOffer(g,a){
+    if(!state.waitlisted.some(w=>w.group.id===g.id)) return;          // bailed out / already joined
+    state.backfillOffer={group:g,activity:a}; state.notifsCleared=false; syncBadges();
+    showToastGo(t("wl_offer_toast").replace("{g}",esc(grpName(g))),()=>openClaimSpot(g,a));
+    if($("#s-notifications").classList.contains("active")) renderNotifs();
+    backfillTimers.push(setTimeout(()=>expireBackfillOffer(g),90000));   // comfortable claim window
+  }
+  function expireBackfillOffer(g){
+    if(state.backfillOffer&&state.backfillOffer.group.id===g.id){
+      state.backfillOffer=null; showToast(t("wl_offer_expired"));   // copy says "still on the waitlist" — keep the entry
+      if($("#s-notifications").classList.contains("active")) renderNotifs();
+    }
+  }
+
   /* ============ SHEET FUNCTIONS ============ */
   function openEditProfile(){
     const el=$("#sheetBody");
+    const chosenInts=state.interests.slice();
     el.innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${t("ep_title")}</div>
       <div class="photo-edit">
@@ -3169,21 +3658,40 @@
           <button class="mini-btn ghost" id="epRemPhoto" ${!state.photo?'disabled style="opacity:.4"':''}>${t("ep_remove")}</button>
         </div>
       </div>
-      <div class="field"><label>${t("ep_name")}</label><input id="epName" value="${esc(state.name)}" placeholder="${t("ep_name_ph")}" maxlength="30"></div>
+      <div class="field"><label>${t("ep_name")}</label><input id="epName" value="${esc(state.name==="You"?"":state.name)}" placeholder="${t("ep_name_ph")}" maxlength="30"></div>
+      <div class="field"><label>${t("ps_username")}</label>
+        <input id="epUser" value="${esc(state.username||"")}" placeholder="${t("ps_username_ph")}" maxlength="20" autocomplete="off" autocapitalize="none" spellcheck="false">
+        <div class="tiny" id="epUserMsg" style="margin-top:6px">${t("ps_username_hint")}</div></div>
       <div class="field"><label>${t("ep_bio")}</label><textarea id="epBio" rows="3" placeholder="${t("ep_bio_ph")}" maxlength="120">${esc(state.bio)}</textarea></div>
       <div class="field"><label>${t("ep_emoji")}</label>
         <div class="emoji-pick" id="epEmoji">
-          ${["🙂","😄","😊","😌","🤓","😎","🌿","⚡","🎨","🧩","🌙","🚀"].map(e=>`<span data-em="${e}" class="${state.emoji===e?'on':''}">${e}</span>`).join("")}
+          ${PROFILE_EMOJIS.map(e=>`<span data-em="${e}" class="${state.emoji===e?'on':''}">${e}</span>`).join("")}
         </div>
       </div>
+      <div class="field"><label>${t("ps_interests")}</label>
+        <div class="chips" id="epInts">${INTERESTS.map(i=>`<span class="chip ${chosenInts.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
       <button class="btn btn-primary" id="epSave" style="margin-top:8px">${t("ep_save")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    const userEl=$("#epUser"), umsg=$("#epUserMsg"), saveBtn=$("#epSave");
+    const refresh=()=>{ const v=userEl.value.trim(); if(!v){ umsg.textContent=t("ps_username_hint"); umsg.style.color="var(--faint)"; saveBtn.disabled=false; return; }
+      const st=usernameStatus(v); umsg.textContent=t(st.key); umsg.style.color=st.ok?"var(--mint)":"var(--danger-text)"; saveBtn.disabled=!st.ok; };
+    userEl.addEventListener("input",refresh);
     $$("#sheetBody [data-em]").forEach(s=>s.addEventListener("click",()=>{ $$("#sheetBody [data-em]").forEach(x=>x.classList.remove("on")); s.classList.add("on"); state.emoji=s.getAttribute("data-em"); }));
+    $$("#epInts [data-int]").forEach(c=>c.addEventListener("click",()=>{
+      const v=c.getAttribute("data-int"); const i=chosenInts.indexOf(v);
+      if(i>=0) chosenInts.splice(i,1); else { if(chosenInts.length>=5) return; chosenInts.push(v); }
+      c.classList.toggle("sel");
+    }));
     $("#epPhoto").addEventListener("click",()=>$("#photoInput").click());
     $("#epRemPhoto").addEventListener("click",()=>{ state.photo=null; const p=$("#epPrev"); if(p){p.style.backgroundImage="";p.textContent="📷";} });
     $("#epSave").addEventListener("click",()=>{
+      const uv=userEl.value.trim(); if(uv&&!usernameStatus(uv).ok) return;
       const n=$("#epName").value.trim(); if(n) state.name=n;
+      if(uv) state.username=uv.toLowerCase();
       const b=$("#epBio").value.trim(); state.bio=b||state.bio;
+      state.interests=chosenInts.slice();
+      // editing in a real name + username also counts as a completed profile
+      if(state.name&&state.name!=="You"&&state.username) state.profileComplete=true;
       closeSheet(); showToast(t("ep_saved"));
       if($("#s-profile").classList.contains("active")) renderProfile();
       if($("#s-settings").classList.contains("active")) renderSettings();
@@ -3326,6 +3834,8 @@
   $("#friendSearch").addEventListener("input",renderFriends);
   $("#helpSearch").addEventListener("input",()=>{ const q=$("#helpSearch").value.toLowerCase().trim(); $$("#helpBody .acc").forEach(el=>{ el.style.display=!q||el.textContent.toLowerCase().includes(q)?"":"none"; }); });
   $("#friendsReqBtn").addEventListener("click",()=>goTo("requests"));
+  $("#friendsFindBtn").addEventListener("click",()=>goTo("discover"));
+  $("#discSearch").addEventListener("input",renderDiscover);
   $("#profBell").addEventListener("click",()=>goTo("notifications"));
   $("#profGear").addEventListener("click",()=>goTo("settings"));
   $("#notifClear").addEventListener("click",()=>{ state.notifsCleared=true; renderNotifs(); showToast(t("toast_cleared")); });

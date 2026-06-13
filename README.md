@@ -19,7 +19,10 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 ## What's in the demo
 
 - Onboarding: landing → 7-question social-type quiz → 12 archetypes → age gate (18+) → sign-in → terms, with a separate returning-user path
-- Core loop: Perch Thursdays (the pinned weekly guaranteed group) + Explore catalogue with working day/size filters → join a matched group → pre-event chat with scripted replies → day-of check-in → post-event reflection → friends & DMs
+- Profile: optional profile setup (name, **@username**, bio, emoji, interests) that is *not* forced at signup — you can browse first and it's only required the moment you join or host (or set it up early via the Explore nudge / Profile card)
+- Core loop: Perch Thursdays (the pinned weekly guaranteed group) + Explore catalogue with working day/size filters → join a matched group → **reserve your spot** (booking step + confirmation code; ticketed events are pay-at-venue) → pre-event chat with scripted replies → **day-of coordination panel** (on-my-way / running late / here / split-a-ride) → post-event reflection → friends & DMs
+- People: **find & add other members by name or @username** (Discover), friend requests (received/sent), and a **verified-identity** badge (simulated phone check) shown across profiles and the directory
+- Reliability & waitlists: a warm **show-up reputation** (New → Building → 100%) surfaced on the profile with an explainer; full groups offer a **waitlist** with your queue position, and an **automatic backfill** offer (notification + claim) when a spot frees — claims still respect the free-tier cap and reservation flow
 - Monetization: enforced free tier (2 hangs/week), Perch+ paywall with trial terms and manage/cancel in Settings, per-event ticket pricing on premium activities
 - Supporting: hosting (with detail view and cancel), tappable notifications with per-thread unread, settings, safety flows (report / block / take a break), invite with a real QR code
 - Quality: full en / fr-CA coverage including legal docs, dark (default) & light themes, keyboard navigation with functional accessibility settings (text size, bold, contrast, larger targets, reduced motion)
