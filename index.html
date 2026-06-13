@@ -321,13 +321,25 @@
   .arch-hero .ah-em{font-size:58px;filter:drop-shadow(0 8px 18px rgba(0,0,0,.35));}
   .arch-hero .ah-n{font-family:'Fraunces',serif;font-weight:700;font-size:32px;letter-spacing:-.6px;margin-top:8px;}
   .arch-hero .ah-l{font-size:15px;color:rgba(255,255,255,.9);margin-top:4px;}
+  /* depth lighting over the flat type gradients: top sheen, center glow behind the emoji, bottom vignette.
+     z-index:1 sits above the g-* ::after texture; hero/card children stay on top via [class*="g-"] > * z-index:2 */
+  .arch-hero::before,.type-card::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;background:
+    radial-gradient(130% 90% at 82% -12%,rgba(255,255,255,.28),transparent 52%),
+    radial-gradient(90% 64% at 50% 36%,rgba(255,255,255,.13),transparent 62%),
+    radial-gradient(150% 110% at 14% 118%,rgba(0,0,0,.36),transparent 58%);}
+  .arch-hero{box-shadow:0 16px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.07);}
+  .type-card{box-shadow:0 12px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25),inset 0 0 0 1px rgba(255,255,255,.07);}
   .info-block{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;margin-bottom:14px;}
   .ib-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:9px;font-size:13px;color:var(--muted);line-height:1.5;}
   .ib-row:last-child{margin-bottom:0;}
   .ib-row .star{color:var(--mint);flex-shrink:0;margin-top:2px;}
 
   /* ===== EXPLORE ===== */
-  .ex-top{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;padding:2px 0 12px;background:linear-gradient(180deg,var(--phone-bg) 70%,transparent);}
+  /* the opaque backdrop only fades in once content scrolls underneath — painted at rest it
+     shows as a rectangle against the hdr-wash glow behind it */
+  .ex-top{display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:20;padding:2px 0 12px;}
+  .ex-top::before{content:"";position:absolute;inset:-14px -22px 0;z-index:-1;pointer-events:none;background:linear-gradient(180deg,var(--phone-bg) 72%,transparent);opacity:0;transition:opacity .25s;}
+  .ex-top.stuck::before{opacity:1;}
   .search{flex:1;min-width:0;display:flex;align-items:center;gap:9px;background:var(--surface);border:1.5px solid var(--line);border-radius:var(--r-md);padding:11px 14px;}
   .search input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--text);font-size:15px;font-family:'Hanken Grotesk',sans-serif;}
   .search input::placeholder{color:var(--faint);}
@@ -374,7 +386,8 @@
   .group-card.muted-card{opacity:.62;}
   .gc-statusrow{display:flex;align-items:center;gap:8px;margin-bottom:11px;}
   .gc-top{display:flex;align-items:flex-start;gap:13px;margin-bottom:11px;}
-  .gc-emoji{width:48px;height:48px;border-radius:var(--r-md);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+  /* inset shadows paint under the emoji glyph, so the tile gets lighting without dimming it */
+  .gc-emoji{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:27px;flex-shrink:0;border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 10px 14px -8px rgba(255,255,255,.4),inset 0 -12px 18px -10px rgba(0,0,0,.45),0 5px 12px rgba(0,0,0,.25);text-shadow:0 2px 5px rgba(0,0,0,.3);}
   .gc-name{font-size:17px;font-weight:700;letter-spacing:-.2px;}
   .gc-when{font-size:13px;color:var(--muted);margin-top:2px;}
   .gc-vibetags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
@@ -396,7 +409,7 @@
   .gd-mname{font-size:15px;font-weight:600;}
   .gd-msub{font-size:13px;color:var(--faint);}
   .gd-private{margin-left:auto;font-size:11px;color:var(--faint);}
-  .info-tile{display:flex;align-items:center;gap:11px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);margin-bottom:10px;}
+  .info-tile{display:flex;align-items:center;gap:11px;padding:14px;border-radius:var(--r-md);background:var(--surface);border:1px solid var(--line);margin-bottom:10px;text-align:left;}
   .info-tile .it-ic{width:40px;height:40px;border-radius:var(--r-sm);background:var(--surface-3);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
   .info-tile .it-lab{font-size:11px;color:var(--faint);}
   .info-tile .it-val{font-size:15px;font-weight:600;margin-top:1px;color:var(--text);}
@@ -1257,29 +1270,29 @@
     {q:"Deux personnes du groupe sont en désaccord. Tu as tendance à…",o:["Régler ça calmement et directement","Désamorcer et garder ça léger","Lancer une joke pour casser la tension","Laisser de l'air et prendre du recul"]},
     {q:"Dans un groupe, ton rôle naturel, c'est…",o:["Lancer les choses et garder le momentum","Amener les idées, donner le ton","Soutenir — m'assurer que tout le monde est bien","Rester en retrait et tout observer"]}
   ];
-  /* fr versions of the user-visible ACTIVITIES prose (vibe + plan B). Venue names are proper nouns and stay as-is. */
+  /* fr versions of the user-visible ACTIVITIES prose (name + vibe + plan B). Venue names are proper nouns and stay as-is. */
   const ACTFR={
-    thursdays:{vibe:"Le classique hebdo — un groupe se forme chaque semaine",planb:"Endroit de secours publié dans la discussion"},
-    trivia:{vibe:"Tranquille, parfait pour une première fois",planb:"Le Library Bar tout près"},
-    boardgame:{vibe:"Relax, facile de se joindre",planb:"Le café Rook à deux portes"},
-    cooking:{vibe:"Les mains occupées, jaser optionnel",planb:"Le Spice Room tout près"},
-    walk:{vibe:"Rythme doux, plein de choses à voir",planb:"Trajet du canal Lachine s'il pleut"},
-    foodmkt:{vibe:"Décontracté et social",planb:"Halle intérieure s'il pleut"},
-    comedy:{vibe:"Côte à côte, rires faciles",planb:"Micro ouvert à l'étage"},
-    bookclub:{vibe:"Monde calme et réfléchi",planb:"Le Reading Room tout près"},
-    cinema:{vibe:"Soirée relax et facile",planb:"Projection intérieure s'il pleut"},
-    pottery:{vibe:"Calme et manuel",planb:"Studio B juste à côté"},
-    escape:{vibe:"Casse-tête d'équipe, ben du fun",planb:"La salle Vault tout près"},
-    hike:{vibe:"Actif, frais, amical",planb:"Boucle du bas si c'est glacé"},
-    jazz:{vibe:"Soirée chaleureuse et relax",planb:"Le Cellar tout près"},
-    plant:{vibe:"Amical et décontracté",planb:"Atrium intérieur s'il pleut"},
-    paint:{vibe:"Créatif, aucun talent requis",planb:"Le Studio Loft tout près"},
-    karaoke:{vibe:"Grosse énergie, tout le monde est bienvenu",planb:"Salle privée si c'est plein"},
-    rooftop:{vibe:"Monde varié, belles vues",planb:"Niveau lounge s'il vente"},
-    artclass:{vibe:"Focus sur la toile, jasette entre deux coups de pinceau",planb:"Atelier libre juste à côté"},
-    improv:{vibe:"Ris de toi-même — tout le monde le fait",planb:"Séance reprise la semaine prochaine"},
-    vintage:{vibe:"Fouine, compare tes trouvailles, jase",planb:"Section intérieure s'il pleut"},
-    axe:{vibe:"Bien plus facile que ça en a l'air",planb:"Salle de tir à l'arc si complet"}
+    thursdays:{name:"Jeudis Perch",venue:"Endroit tournant · révélé le lundi",vibe:"Le classique hebdo — un groupe se forme chaque semaine",planb:"Endroit de secours publié dans la discussion"},
+    trivia:{name:"Soirée trivia",vibe:"Tranquille, parfait pour une première fois",planb:"Le Library Bar tout près"},
+    boardgame:{name:"Café jeux de société",vibe:"Relax, facile de se joindre",planb:"Le café Rook à deux portes"},
+    cooking:{name:"Cours de cuisine",vibe:"Les mains occupées, jaser optionnel",planb:"Le Spice Room tout près"},
+    walk:{name:"Balade urbaine",vibe:"Rythme doux, plein de choses à voir",planb:"Trajet du canal Lachine s'il pleut"},
+    foodmkt:{name:"Marché gourmand",vibe:"Décontracté et social",planb:"Halle intérieure s'il pleut"},
+    comedy:{name:"Spectacle d'humour",vibe:"Côte à côte, rires faciles",planb:"Micro ouvert à l'étage"},
+    bookclub:{name:"Club de lecture",vibe:"Monde calme et réfléchi",planb:"Le Reading Room tout près"},
+    cinema:{name:"Cinéma en plein air",vibe:"Soirée relax et facile",planb:"Projection intérieure s'il pleut"},
+    pottery:{name:"Poterie",vibe:"Calme et manuel",planb:"Studio B juste à côté"},
+    escape:{name:"Jeu d'évasion",vibe:"Casse-tête d'équipe, ben du fun",planb:"La salle Vault tout près"},
+    hike:{name:"Rando au lever du soleil",vibe:"Actif, frais, amical",planb:"Boucle du bas si c'est glacé"},
+    jazz:{name:"Bar jazz",vibe:"Soirée chaleureuse et relax",planb:"Le Cellar tout près"},
+    plant:{name:"Échange de plantes",vibe:"Amical et décontracté",planb:"Atrium intérieur s'il pleut"},
+    paint:{name:"Peinture et vin",vibe:"Créatif, aucun talent requis",planb:"Le Studio Loft tout près"},
+    karaoke:{name:"Karaoké",vibe:"Grosse énergie, tout le monde est bienvenu",planb:"Salle privée si c'est plein"},
+    rooftop:{name:"5 à 7 sur le toit",vibe:"Monde varié, belles vues",planb:"Niveau lounge s'il vente"},
+    artclass:{name:"Cours d'art",vibe:"Focus sur la toile, jasette entre deux coups de pinceau",planb:"Atelier libre juste à côté"},
+    improv:{name:"Cours d'impro",vibe:"Ris de toi-même — tout le monde le fait",planb:"Séance reprise la semaine prochaine"},
+    vintage:{name:"Marché vintage",vibe:"Fouine, compare tes trouvailles, jase",planb:"Section intérieure s'il pleut"},
+    axe:{name:"Lancer de hache",vibe:"Bien plus facile que ça en a l'air",planb:"Salle de tir à l'arc si complet"}
   };
   const BADGE_FR={"🔥 Popular":"🔥 Populaire","New":"Nouveau","Almost full":"Presque complet","Popular this weekend":"Populaire ce week-end","🪶 Every week":"🪶 Chaque semaine"};
   /* fr versions of the demo group prose (makeGroups), keyed by group id. Names are descriptive, not proper nouns, so they translate too. */
@@ -1550,6 +1563,11 @@
   const archDesc=k=>(state.lang==="fr"&&ARFR[k]?ARFR[k].desc:(ARCH[k]?ARCH[k].desc:[]));
   const catLabel=c=>(state.lang==="fr"&&CAT_FR[c]?CAT_FR[c]:c);
   /* ACTIVITIES data stays canonical English (filters/search match on it); these translate at render time only */
+  const actName=a=>(state.lang==="fr"&&ACTFR[a.id]&&ACTFR[a.id].name?ACTFR[a.id].name:a.name);
+  /* venues are proper nouns and stay canonical, except prose ones with an explicit ACTFR venue override */
+  const actVenue=a=>(state.lang==="fr"&&ACTFR[a.id]&&ACTFR[a.id].venue?ACTFR[a.id].venue:a.venue);
+  /* for prose that embeds canonical activity names (e.g. friends' "met" strings) */
+  const frActText=s=>{ if(state.lang!=="fr"||!s) return s; let out=s; ACTIVITIES.forEach(a=>{ if(ACTFR[a.id]&&ACTFR[a.id].name) out=out.replace(a.name,ACTFR[a.id].name); }); return out; };
   const actVibe=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].vibe:a.vibe);
   const actPlanb=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].planb:a.planb);
   const actBadge=b=>(state.lang==="fr"&&BADGE_FR[b]?BADGE_FR[b]:b);
@@ -1944,9 +1962,9 @@
       ${picked?`<button class="picked-x" data-dismiss="${a.id}" aria-label="Dismiss">✕</button>`:""}
       <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${a.icon}</div></div>
       <div class="act-body">
-        <div class="act-name">${a.name}</div>
+        <div class="act-name">${actName(a)}</div>
         <div class="act-meta">${frWhen(a.when)} · ${actSize(a)}</div>
-        <div class="act-venue">📍 ${a.venue}</div>
+        <div class="act-venue">📍 ${actVenue(a)}</div>
         <div class="act-vibe">${actVibe(a)}</div>
         <div class="act-planb">${t("act_planb")} · ${actPlanb(a)}</div>
         <div class="act-foot"><span class="act-social">${actSocial(a)}</span><span class="btn-link link-sm">${t("act_viewgroups")}</span></div>
@@ -1970,7 +1988,7 @@
         <div class="act-hero g-cat-evening" style="height:auto;padding:16px 14px">
           <div style="display:flex;align-items:center;gap:12px">
             <span style="font-size:34px">🪶</span>
-            <div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:#fff">Perch Thursdays</div>
+            <div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:20px;color:#fff">${actName(ACTIVITIES.find(x=>x.id==="thursdays"))}</div>
             <div style="font-size:13px;color:rgba(255,255,255,.92)">${t("thu_s")}</div></div>
           </div>
         </div>
@@ -1992,14 +2010,14 @@
     const pop=$("#popRail"), popTitle=$("#popTitle");
     const popular=ACTIVITIES.filter(a=>a.badge&&a.id!=="thursdays").slice(0,5);
     if(home){
-      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${a.name}</div><div class="pb-v">${frWhen(a.when.split(" · ")[0])} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
+      pop.innerHTML=popular.map(a=>`<div class="pop-card" data-act="${a.id}"><div class="pop-hero ${a.g}"><span style="font-size:32px">${a.icon}</span></div><div class="pop-body"><div class="pb-n">${actName(a)}</div><div class="pb-v">${frWhen(a.when.split(" · ")[0])} · ${a.social.split(" ")[0]} ${t("ex_going")}</div></div></div>`).join("");
       pop.style.display="flex"; if(popTitle) popTitle.style.display="";
     } else { pop.innerHTML=""; pop.style.display="none"; if(popTitle) popTitle.style.display="none"; }
 
     // Feed — category, search, then user filters
     let list=ACTIVITIES.filter(a=>a.id!=="thursdays");
     if(state.activeCat!=="For you") list=list.filter(a=>a.cat===state.activeCat);
-    if(q) list=list.filter(a=>a.name.toLowerCase().includes(q)||a.cat.toLowerCase().includes(q)||a.venue.toLowerCase().includes(q));
+    if(q) list=list.filter(a=>a.name.toLowerCase().includes(q)||actName(a).toLowerCase().includes(q)||a.cat.toLowerCase().includes(q)||catLabel(a.cat).toLowerCase().includes(q)||a.venue.toLowerCase().includes(q));
     const f=state.filters;
     if(f.day==="today") list=list.filter(a=>a.when.startsWith("Thu"));
     else if(f.day==="weekend") list=list.filter(a=>/^(Sat|Sun)/.test(a.when));
@@ -2082,7 +2100,7 @@
       const joinedIds=new Set(state.joinedGroups.map(j=>j.group.id));
       const open=groups.filter(g=>!joinedIds.has(g.id));
       const today=open.filter(g=>g.status==="today"), week=open.filter(g=>g.status!=="today");
-      html+=`<div class="day-div">${state.chosenActivity.name} · ${t("grp_forming_for")}</div>`;
+      html+=`<div class="day-div">${actName(state.chosenActivity)} · ${t("grp_forming_for")}</div>`;
       if(today.length){ html+=today.map(g=>groupCardHTML(g,false)).join(""); }
       if(week.length){ html+=`<div class="day-div">${t("grp_later")}</div>`+week.map(g=>groupCardHTML(g,false)).join(""); }
       body.innerHTML=html;
@@ -2091,7 +2109,7 @@
       const past=state.seedSocial?`<div class="day-div">${t("grp_past")}</div>
         <div class="group-card muted-card" data-past="trivia">
           <div class="gc-statusrow"><span class="gc-vibetag">${t("grp_completed")}</span></div>
-          <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">Trivia Night</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
+          <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">${frActText("Trivia Night")}</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
           <div class="gc-personality">${t("grp_met_ppl")}</div>
           <div class="gc-foot"><span class="gc-spots">${t("grp_went")}</span><span class="btn-link link-sm">${t("grp_reflect")}</span></div>
         </div>`:"";
@@ -2150,10 +2168,10 @@
     }
     $("#s-groupdetail").innerHTML=`
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
-      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${a.name}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
-      ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${a.venue.split(" · ")[0]}</span></div>`:""}
+      <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${a.icon}</div><div class="ah-n" style="font-size:20px">${actName(a)}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
+      ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${actVenue(a).split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
-      <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${a.venue}</div></div></div>
+      <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
       ${a.price?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
       <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${actPlanb(a)}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
@@ -2162,7 +2180,7 @@
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${grpPersonality(g)}.</p>
         ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${grpCompat(g)}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
-      <div class="map-stub"><span>🗺️ ${a.venue.split(" · ")[1]||"Map"}</span></div>
+      <div class="map-stub"><span>🗺️ ${actVenue(a).split(" · ")[1]||"Map"}</span></div>
       ${flowExtra}
       ${bar}`;
     // re-match: if full, show alt group
@@ -2286,7 +2304,7 @@
     const day=g?frWhen(g.when).split(" · ")[0].toLowerCase():null;
     $("#joinedSub").textContent=day?t("joined_see_day").replace("{d}",day):t("joined_see_there");
     $("#joinedWhen").textContent=frWhen(g?g.when:a.when);
-    $("#joinedWhere").textContent=a.venue;
+    $("#joinedWhere").textContent=actVenue(a);
     $("#joinedWho").textContent=`${t("you_plus")} ${g?Math.max(1,g.filled-1):4} ${t("others")}`;
     const soft=$("#joinedSoftAsk");
     if(soft){
@@ -2394,9 +2412,9 @@
       return; }
     showChatChrome(true);
     $("#chatMeta").textContent=`${(g&&g.filled)||5} ${t("chat_people")} · ${t("chat_firstnames")}`;
-    $("#pinEm").textContent=a.icon; $("#pinT").textContent=a.name;
+    $("#pinEm").textContent=a.icon; $("#pinT").textContent=actName(a);
     $("#pinS").textContent=frWhen((g&&g.when)||a.when);
-    $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${a.venue}<br>🗓️ ${frWhen((g&&g.when)||a.when)}<br>🌦️ ${t("gd_planb")} · ${actPlanb(a)}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
+    $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${actVenue(a)}<br>🗓️ ${frWhen((g&&g.when)||a.when)}<br>🌦️ ${t("gd_planb")} · ${actPlanb(a)}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
     const sc=$("#chatScroll");
     if(state.chatThreads[item.id]){
       sc.innerHTML=state.chatThreads[item.id].map(msgRowHTML).join("");
@@ -2410,7 +2428,7 @@
   function runChatIntro(item){
     const gid=item.id, g=item.group, a=item.activity||state.chosenActivity||ACTIVITIES[0];
     const mem=(g&&g.members)||[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]];
-    pushMsg({sys:true,text:t("chat_intro_sys").replace("{a}",a.name)},gid);
+    pushMsg({sys:true,text:t("chat_intro_sys").replace("{a}",actName(a))},gid);
     const m0=mem[0], m1=mem[1]||mem[0];
     chatTimers.push(setTimeout(()=>{ showTyping(gid); },700));
     chatTimers.push(setTimeout(()=>{ hideTyping(); pushMsg({who:"them",name:m0[0],emoji:m0[1],key:m0[2],text:t("chat_intro1"),time:"7:02 PM"},gid); },1700));
@@ -2536,14 +2554,14 @@
       if(!list.length){
         body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button></div>`;
         const gm=$("#goMet"); if(gm) gm.addEventListener("click",()=>{ state.friendsTab="met"; renderFriends(); });
-      } else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met||t("met_generic")))).join("");
+      } else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met?frActText(p.met):t("met_generic")))).join("");
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">${t("met_empty_t")}</div><div class="es-s">${t("met_empty_s")}</div></div>`; }
       else body.innerHTML=`<div class="sec-title">${t("met_sec")}</div>`+list.map(p=>{
         const isFriend=state.friends.some(f=>f.name===p.name);
         const action=isFriend?`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("fr_tab")}</span>`:`<div class="req-actions"><button class="req-yes" data-add="${p.name}">${t("fb_add")}</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
-        return friendRowHTML(p,t("met_at").replace("{x}",p.met),action);
+        return friendRowHTML(p,t("met_at").replace("{x}",frActText(p.met)),action);
       }).join("");
     }
     makeFocusable($("#friendsBody"));
@@ -2570,7 +2588,7 @@
     if(tab==="recv"){
       const list=state.requests.recv;
       if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✉️</div><div class="es-t">${t("rq_empty_recv_t")}</div><div class="es-s">${t("rq_empty_recv_s")}</div></div>`; }
-      else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met),`<div class="req-actions"><button class="req-yes" data-acc="${p.name}">${t("rq_accept")}</button><button class="req-no" data-dec="${p.name}">${t("rq_decline")}</button></div>`)).join("");
+      else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",frActText(p.met)),`<div class="req-actions"><button class="req-yes" data-acc="${p.name}">${t("rq_accept")}</button><button class="req-no" data-dec="${p.name}">${t("rq_decline")}</button></div>`)).join("");
     } else {
       const list=state.requests.sent;
       if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">📤</div><div class="es-t">${t("rq_empty_sent_t")}</div><div class="es-s">${t("rq_empty_sent_s")}</div></div>`; }
@@ -2660,9 +2678,11 @@
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q1")}</h2>
         <p class="sub" style="margin-bottom:6px">${t("fb_q1s")}</p>
         ${starRow(t("fb_act"),"activity")}${starRow(t("fb_venue"),"venue")}${starRow(t("fb_vibe"),"vibe")}
-        <button class="btn btn-primary" id="fbNext" style="margin-top:24px" ${rated?'':'disabled'}>${t("fb_next")}</button>`;
+        <button class="btn btn-primary" id="fbNext" style="margin-top:24px" ${rated?'':'disabled'}>${t("fb_next")}</button>
+        <button class="btn-link" id="fbSkip0" style="margin-top:4px">${t("fb_skip")}</button>`;
       $$("#fbBody [data-rate]").forEach(row=>$$("span",row).forEach(st=>st.addEventListener("click",()=>{ state.rating[row.getAttribute("data-rate")]=+st.getAttribute("data-n"); renderFeedback(); })));
       $("#fbNext").addEventListener("click",()=>{ state.fbStep=1; renderFeedback(); });
+      $("#fbSkip0").addEventListener("click",()=>{ state.fbStep=1; renderFeedback(); });
     } else if(state.fbStep===1){
       const v=state.venueOk;
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q2")}</h2>
@@ -2699,7 +2719,7 @@
       :`<div class="avatar av-lg ${a.g}" style="margin:0 auto;width:104px;height:104px;font-size:50px">${state.emoji}</div>`;
     const nEvents=state.joinedGroups.length, nFriends=state.friends.length;
     const hist=state.seedSocial?`
-        <div class="hist-card"><div class="hc-n">🧠 Trivia Night</div><div class="hc-v">Pub Saint-Laurent · ${t("prof_thisweek")}</div></div>
+        <div class="hist-card"><div class="hc-n">🧠 ${frActText("Trivia Night")}</div><div class="hc-v">Pub Saint-Laurent · ${t("prof_thisweek")}</div></div>
         <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">${t("prof_more")}</div>`
       :`<div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px;min-height:64px">${t("prof_first")}</div>`;
     $("#profileBody").innerHTML=`
@@ -3059,7 +3079,7 @@
     const act=state.chosenActivity||ACTIVITIES[0];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic">🚪</div>
-      <div class="sheet-title">${t("lv_title").replace("{a}",act.name)}</div>
+      <div class="sheet-title">${t("lv_title").replace("{a}",actName(act))}</div>
       <div class="sheet-sub">${t("lv_sub")}</div>
       <button class="btn btn-amber" id="leaveGo">${t("lv_go")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("lv_stay")}</button>`;
@@ -3290,6 +3310,7 @@
   $$("#notifSeg .sopt").forEach(s=>s.addEventListener("click",()=>{ state.notifTab=s.getAttribute("data-tab"); renderNotifs(); }));
 
   $("#exSearch").addEventListener("input",renderExplore);
+  $("#s-explore").addEventListener("scroll",e=>{ const tb=$("#s-explore .ex-top"); if(tb) tb.classList.toggle("stuck",e.target.scrollTop>10); });
   $("#exFilter").addEventListener("click",openFilter);
   $("#exBell").addEventListener("click",()=>goTo("notifications"));
   $("#exHost").addEventListener("click",()=>goTo("host"));

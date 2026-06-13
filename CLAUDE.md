@@ -24,7 +24,7 @@ When asked to test or screenshot the app in a browser (e.g. via Playwright), sta
 
 One file (~3.4k lines), three blocks:
 
-- `<style>` (top): CSS custom properties define the **dark theme (default)**; a light theme overrides the same tokens under `body.light`. The app renders inside a fixed iPhone-proportioned frame.
+- `<style>` (top): CSS custom properties define the **dark theme (default)**; a light theme overrides the same tokens under `[data-theme="light"]` (set on `<html>` by `applyTheme`). The app renders inside a fixed iPhone-proportioned frame.
 - Static markup: each screen is a `<section class="screen" id="s-NAME">` (28 screens: landing, q, result, explore, groupdetail, chat, settings, …).
 - `<script>` (bottom), ordered: data constants (`ARCH` 12 archetypes, `QUESTIONS`, `ACTIVITIES`, `I18N`) → the single global `state` object → helpers (`$`, `$$`, `esc`, `t`) → navigation (`goTo`, `goBack`, `runEnter`) → per-screen `renderX()` functions → event wiring.
 
@@ -36,7 +36,7 @@ Key conventions:
 
 ## i18n — non-negotiable
 
-Full en / fr-CA coverage, including legal docs. Every user-visible string must exist in both `I18N.en` and `I18N.fr` (plus the parallel tables `CAT_FR`, `ARFR`, `QFR`, `ACTFR`, `BADGE_FR`, `GRPFR` for data-driven content). Static markup is translated via `data-i18n` attributes (`data-i18n-html` for strings with markup, `data-i18n-ph` for placeholders); script-built strings via `t("key")`. Data constants (`ACTIVITIES`, `ARCH`, the `makeGroups()` demo groups) stay canonical English — search and filters match on them — and are translated only at render time through helpers (`actVibe`, `actPlanb`, `actBadge`, `actSize`, `actSocial`, `frWhen`, `archBring`/`archLoves`/`archDesc`, `hostedName`/`hostedWhen`/`hostedTags`, `grpName`/`grpTags`/`grpPersonality`/`grpCompat`). Adding an activity means adding its `ACTFR` entry (and `BADGE_FR` if it introduces a new badge); adding a demo group means adding its `GRPFR` entry. Group names translate (they're descriptive, not proper nouns); activity and venue names don't. Never hardcode visible English in markup or render functions without an fr counterpart.
+Full en / fr-CA coverage, including legal docs. Every user-visible string must exist in both `I18N.en` and `I18N.fr` (plus the parallel tables `CAT_FR`, `ARFR`, `QFR`, `ACTFR`, `BADGE_FR`, `GRPFR` for data-driven content). Static markup is translated via `data-i18n` attributes (`data-i18n-html` for strings with markup, `data-i18n-ph` for placeholders); script-built strings via `t("key")`. Data constants (`ACTIVITIES`, `ARCH`, the `makeGroups()` demo groups) stay canonical English — search and filters match on them — and are translated only at render time through helpers (`actVibe`, `actPlanb`, `actBadge`, `actSize`, `actSocial`, `frWhen`, `archBring`/`archLoves`/`archDesc`, `hostedName`/`hostedWhen`/`hostedTags`, `grpName`/`grpTags`/`grpPersonality`/`grpCompat`). Adding an activity means adding its `ACTFR` entry (`name`, `vibe`, `planb` — and `BADGE_FR` if it introduces a new badge); adding a demo group means adding its `GRPFR` entry. Group and activity names translate (they're descriptive, not proper nouns); venue names don't. Prose that embeds canonical activity names (e.g. friends' `met` strings) goes through `frActText`. Never hardcode visible English in markup or render functions without an fr counterpart.
 
 ## Other invariants
 

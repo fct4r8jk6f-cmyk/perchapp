@@ -13,7 +13,7 @@ Perch requires every user-visible string to ship in both English and Québec Fre
    - every key of `ARCH` has an entry in `ARFR`, and each `ARFR` entry carries all of `n`, `tag`, `traits`, `bring`, `loves`, `desc`
    - every category in `CATS` has an entry in `CAT_FR`
    - `QFR` has the same length and option counts as `QUESTIONS`
-   - every activity `id` in `ACTIVITIES` has an entry in `ACTFR` (with `vibe` and `planb`)
+   - every activity `id` in `ACTIVITIES` has an entry in `ACTFR` (with `name`, `vibe`, and `planb`)
    - every distinct `badge` value in `ACTIVITIES` has an entry in `BADGE_FR`
    - every group `id` returned by `makeGroups()` has an entry in `GRPFR` with `name`, `vibetags` (same length), `personality`, and `compat` whenever the group has one
 
