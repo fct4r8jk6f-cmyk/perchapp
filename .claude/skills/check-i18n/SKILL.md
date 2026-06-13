@@ -15,6 +15,7 @@ Perch requires every user-visible string to ship in both English and Québec Fre
    - `QFR` has the same length and option counts as `QUESTIONS`
    - every activity `id` in `ACTIVITIES` has an entry in `ACTFR` (with `vibe` and `planb`)
    - every distinct `badge` value in `ACTIVITIES` has an entry in `BADGE_FR`
+   - every group `id` returned by `makeGroups()` has an entry in `GRPFR` with `name`, `vibetags` (same length), `personality`, and `compat` whenever the group has one
 
 4. **No hardcoded visible English** in render functions: scan recently changed template literals for user-facing English text not wrapped in `t()` or sourced from a translated table. (Ignore emoji, names, CSS classes, and aria-hidden content.)
 
