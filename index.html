@@ -1582,7 +1582,9 @@
       /* waitlist backfill (automatic) */
       wl_offer_toast:"A spot just opened in {g} — claim it",notif_wl_offer:"Your spot in {g} is ready — claim it before it passes on",notif_wl_offer_time:"Just now · expires in 30 min",wl_freed_toast:"You left — the next person on the waitlist just got your spot",wl_offer_expired:"The spot passed to the next person — you're still on the waitlist",
       /* verification prompt */
-      pf_verify_t:"Get verified",pf_verify_s:"Confirm it's really you — verified members get into groups faster.",pf_verify_cta:"Verify",pf_verify_skip:"Maybe later"
+      pf_verify_t:"Get verified",pf_verify_s:"Confirm it's really you — verified members get into groups faster.",pf_verify_cta:"Verify",pf_verify_skip:"Maybe later",
+      /* live-backend email sign-in (only shown when the real backend is connected) */
+      auth_email_t:"Sign in to Perch",auth_email_sub:"We'll email you a 6-digit code — no password needed.",auth_email_label:"Email",auth_email_ph:"you@example.com",auth_send:"Send code",auth_code_t:"Enter your code",auth_code_sub:"We sent a 6-digit code to {email}.",auth_code_ph:"123456",auth_verify:"Verify & continue",auth_resend:"Resend code",auth_sent:"Code sent — check your email",auth_err:"Couldn't sign in — try again"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1741,7 +1743,9 @@
       rel_sheet_close:"C'est noté",rel_streak:"Tu t'es présenté {n} fois",rel_bar_new:"Ton historique commence dès que tu te présentes",rel_bar_building:"Un check-in et c'est parti",rel_bar_good:"T'es un membre fiable",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
       co_here:"Je suis là",co_statusrow_title:"Qui s'en vient",co_st_omw:"en route",co_st_late:"en retard",co_st_here:"sur place",co_you:"Toi",co_nobody:"Pas encore de nouvelles — sois le premier à faire signe au groupe",
       wl_offer_toast:"Une place vient de se libérer dans {g} — réclame-la",notif_wl_offer:"Ta place dans {g} est prête — réclame-la avant qu'elle passe à un autre",notif_wl_offer_time:"À l'instant · expire dans 30 min",wl_freed_toast:"Tu as quitté — la prochaine personne sur la liste d'attente vient d'avoir ta place",wl_offer_expired:"La place est passée à la prochaine personne — tu es encore sur la liste d'attente",
-      pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard"
+      pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard",
+      /* connexion par courriel (affiché seulement quand le vrai backend est branché) */
+      auth_email_t:"Connexion à Perch",auth_email_sub:"On t'envoie un code à 6 chiffres — pas besoin de mot de passe.",auth_email_label:"Courriel",auth_email_ph:"toi@exemple.com",auth_send:"Envoyer le code",auth_code_t:"Entre ton code",auth_code_sub:"On a envoyé un code à 6 chiffres à {email}.",auth_code_ph:"123456",auth_verify:"Vérifier et continuer",auth_resend:"Renvoyer le code",auth_sent:"Code envoyé — regarde tes courriels",auth_err:"Connexion impossible — réessaie"
     }
   };
   function detectLang(){
@@ -2270,8 +2274,8 @@
   $("#ageContinue").addEventListener("click",()=>{ goTo("signin"); });
 
   /* ============ SIGN IN ============ */
-  $$("[data-auth]").forEach(b=>b.addEventListener("click",()=>{
-    state.signedIn=true; const m=b.getAttribute("data-auth");
+  function afterSignIn(m){
+    state.signedIn=true;
     showToast(m==="apple"?t("toast_signed_apple"):t("toast_signed"));
     if(state.returning){
       // returning user: saved type + already-accepted terms — straight to the app
@@ -2279,6 +2283,56 @@
       setTimeout(()=>goTo("explore"),360); return;
     }
     setTimeout(()=>goTo("terms"),360);
+  }
+  // Live mode (config.js present): real email-OTP sign-in via the Perch backend.
+  // Sim mode: this is never called — the demo stays click-through.
+  async function perchLiveSignIn(method){
+    var P=window.Perch;
+    try{ const u=await P.auth.getUser(); if(u){ afterSignIn(method); return; } }catch(e){}  // existing session → straight in
+    let email="";
+    function emailStep(){
+      $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+        <div class="sheet-ic">${svgIcon('message')}</div>
+        <div class="sheet-title">${t("auth_email_t")}</div>
+        <div class="sheet-sub">${t("auth_email_sub")}</div>
+        <div class="field"><label>${t("auth_email_label")}</label><input id="auE" type="email" inputmode="email" placeholder="${t('auth_email_ph')}" autocomplete="email"></div>
+        <button class="btn btn-primary" id="auSend" disabled>${t("auth_send")}</button>
+        <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+      const inp=$("#auE"), btn=$("#auSend");
+      inp.addEventListener("input",()=>{ btn.disabled=!/.+@.+\..+/.test(inp.value.trim()); });
+      btn.addEventListener("click",async ()=>{
+        email=inp.value.trim(); btn.disabled=true;
+        try{ await P.auth.signInWithEmail(email); showToast(t("auth_sent")); codeStep(); }
+        catch(err){ btn.disabled=false; showToast(t("auth_err")); }
+      });
+      sheetClose();
+    }
+    function codeStep(){
+      $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+        <div class="sheet-ic">${svgIcon('message')}</div>
+        <div class="sheet-title">${t("auth_code_t")}</div>
+        <div class="sheet-sub">${t("auth_code_sub").replace("{email}",esc(email))}</div>
+        <div class="field"><input id="auC" inputmode="numeric" maxlength="6" placeholder="${t('auth_code_ph')}" style="text-align:center;letter-spacing:8px;font-size:22px" autocomplete="one-time-code"></div>
+        <button class="btn btn-primary" id="auV" disabled>${t("auth_verify")}</button>
+        <button class="btn-link" id="auR">${t("auth_resend")}</button>
+        <button class="btn btn-ghost" id="sheetClose" style="margin-top:4px">${t("btn_cancel")}</button>`;
+      const c=$("#auC"), btn=$("#auV");
+      try{ c.focus(); }catch(e){}
+      c.addEventListener("input",()=>{ btn.disabled=c.value.replace(/\D/g,"").length<6; });
+      btn.addEventListener("click",async ()=>{
+        btn.disabled=true;
+        try{ await P.auth.verifyEmailCode(email,c.value.trim()); closeSheet(); afterSignIn(method); }
+        catch(err){ btn.disabled=false; showToast(t("auth_err")); }
+      });
+      $("#auR").addEventListener("click",async ()=>{ try{ await P.auth.signInWithEmail(email); showToast(t("auth_sent")); }catch(e){} });
+      sheetClose();
+    }
+    emailStep(); openSheet();
+  }
+  $$("[data-auth]").forEach(b=>b.addEventListener("click",()=>{
+    const m=b.getAttribute("data-auth");
+    if(window.PERCH_LIVE){ perchLiveSignIn(m); return; }
+    afterSignIn(m);
   }));
 
   /* ============ TERMS ============ */
@@ -4418,6 +4472,29 @@
     if(!wentBack){ try{ window.history.pushState({screen:"__root__"},""); }catch(e){} }
   });
 
+})();
+</script>
+
+<!-- Optional live backend: loads config.js if present (defines window.PERCH_CONFIG). Absent on the public demo — harmless 404, app stays simulated. -->
+<script>
+(function(){ var s=document.createElement("script"); s.src="config.js"; s.onerror=function(){}; document.head.appendChild(s); })();
+</script>
+<!-- Perch live-backend bridge. Activates ONLY when config.js supplied real Supabase keys; otherwise it's a no-op and the demo runs as pure simulation. Additive — never changes demo behaviour when off. -->
+<script type="module">
+(async function(){
+  let cfg=null;
+  for(let i=0;i<60;i++){ cfg=window.PERCH_CONFIG; if(cfg) break; await new Promise(r=>setTimeout(r,25)); }
+  if(!cfg||!cfg.url||!cfg.anonKey||/YOUR-/.test(String(cfg.url)+String(cfg.anonKey))) return;  // no real keys → stay simulated
+  try{
+    const { createPerch } = await import("./backend/perch-api.js");
+    const perch = createPerch(cfg);
+    window.Perch = perch; window.PERCH_LIVE = true;
+    document.documentElement.setAttribute("data-perch-live","1");
+    let session=null; try{ session = await perch.auth.getSession(); }catch(e){}
+    window.dispatchEvent(new CustomEvent("perch-ready",{detail:{session:session}}));
+    perch.auth.onChange(function(s){ window.dispatchEvent(new CustomEvent("perch-auth",{detail:{session:s}})); });
+    console.info("[Perch] live backend connected:", cfg.url);
+  }catch(e){ console.warn("[Perch] live backend unavailable; staying simulated:", e); }
 })();
 </script>
 </body>
