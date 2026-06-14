@@ -214,6 +214,22 @@
   .es-t{font-size:15px;color:var(--text);font-weight:700;}
   .es-s{font-size:13px;color:var(--muted);line-height:1.5;max-width:240px;}
   .map-stub{height:120px;flex-shrink:0;border-radius:var(--r-md);border:1px solid var(--line);background:linear-gradient(135deg,rgba(165,123,255,.12),rgba(165,123,255,.08));display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:13px;margin:6px 0 16px;}
+  /* stylized neighbourhood map */
+  .hood-map{position:relative;height:150px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line);margin:6px 0 16px;}
+  .hood-map svg{width:100%;height:100%;display:block;}
+  .hm-bg{fill:var(--surface-2);}
+  .hm-block{fill:var(--surface-3);}
+  .hm-park{fill:rgba(111,224,198,.16);}
+  .hm-ave{stroke:var(--line-2);stroke-width:9;fill:none;opacity:.65;}
+  .hm-street{stroke:var(--line-2);stroke-width:3;fill:none;opacity:.55;}
+  .hm-pin{fill:var(--c1);}
+  .hm-dot{fill:#fff;}
+  .hm-pulse{fill:var(--c1);opacity:.2;transform-box:fill-box;transform-origin:center;animation:hmPulse 2.6s ease-out infinite;}
+  @keyframes hmPulse{0%{transform:scale(.4);opacity:.4;}70%{transform:scale(1.6);opacity:0;}100%{opacity:0;}}
+  .hm-grad{position:absolute;left:0;right:0;bottom:0;height:64px;background:linear-gradient(to top,rgba(0,0,0,.5),transparent);pointer-events:none;}
+  .hm-label{position:absolute;left:13px;bottom:11px;display:flex;flex-direction:column;gap:1px;}
+  .hm-hood{font-family:'Fraunces',serif;font-weight:600;font-size:15px;color:#fff;}
+  .hm-venue{font-size:11.5px;color:rgba(255,255,255,.82);}
   .sparkle{position:absolute;font-size:15px;pointer-events:none;animation:sparkRise 1.5s ease-out forwards;}
   @keyframes sparkRise{0%{opacity:0;transform:translateY(0) scale(.4)}15%{opacity:1}100%{opacity:0;transform:translateY(-120px) scale(1.1)}}
   .skel-card{border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--line);background:var(--surface);margin-bottom:14px;}
@@ -1433,6 +1449,7 @@
       sg_title:"Suggest an activity",sg_sub:"Got an idea for a group hang? Tell us — popular suggestions become real groups.",sg_what:"What's the activity?",sg_what_ph:"e.g. Sunset kayaking",sg_where:"Where?",sg_where_ph:"Neighbourhood or venue",sg_send:"Submit idea",sg_done:"Thanks — idea submitted 💡",
       flt_title:"Filter activities",flt_day:"Day",flt_size:"Group size",flt_apply:"Apply",flt_reset:"Reset",
       flt_anyday:"Any day",flt_today:"Today",flt_week:"This week",flt_weekend:"Weekend",flt_anysize:"Any size",flt_small:"Small (4–5)",flt_medium:"Medium (5–6)",flt_large:"Larger (6+)",
+      flt_vibe:"Vibe",flt_anyvibe:"Any vibe",flt_lowkey:"Low-key",flt_lively:"Lively",flt_active:"Active",
       mu_title:"Mute notifications",mu_for:"For {g}",mu_1h:"1 hour",mu_8h:"8 hours",mu_tmrw:"Until tomorrow",mu_event:"Until event ends",mu_done:"Notifications muted",
       mood_no_t:"That's okay",mood_no_s:"Want to step back from tonight?",mood_no_leave:"Leave this group",mood_no_nvm:"Never mind",
       ep_title:"Edit profile",ep_change:"Change photo",ep_remove:"Remove",ep_name:"Name",ep_name_ph:"Your name",ep_bio:"Bio",ep_bio_ph:"A line about yourself…",ep_emoji:"Emoji",ep_save:"Save",ep_saved:"Profile updated",
@@ -1600,6 +1617,7 @@
       sg_title:"Suggérer une activité",sg_sub:"Une idée de sortie de groupe? Dis-nous — les suggestions populaires deviennent de vrais groupes.",sg_what:"C'est quoi l'activité?",sg_what_ph:"p. ex. Kayak au coucher du soleil",sg_where:"Où?",sg_where_ph:"Quartier ou endroit",sg_send:"Soumettre l'idée",sg_done:"Merci — idée soumise 💡",
       flt_title:"Filtrer les activités",flt_day:"Jour",flt_size:"Taille du groupe",flt_apply:"Appliquer",flt_reset:"Réinitialiser",
       flt_anyday:"Tous les jours",flt_today:"Aujourd'hui",flt_week:"Cette semaine",flt_weekend:"Week-end",flt_anysize:"Toutes",flt_small:"Petit (4–5)",flt_medium:"Moyen (5–6)",flt_large:"Grand (6+)",
+      flt_vibe:"Ambiance",flt_anyvibe:"Toutes",flt_lowkey:"Tranquille",flt_lively:"Animé",flt_active:"Actif",
       mu_title:"Sourdine des notifications",mu_for:"Pour {g}",mu_1h:"1 heure",mu_8h:"8 heures",mu_tmrw:"Jusqu'à demain",mu_event:"Jusqu'à la fin de l'activité",mu_done:"Notifications en sourdine",
       mood_no_t:"C'est correct",mood_no_s:"Tu veux te retirer pour ce soir?",mood_no_leave:"Quitter ce groupe",mood_no_nvm:"Finalement non",
       ep_title:"Modifier le profil",ep_change:"Changer la photo",ep_remove:"Retirer",ep_name:"Nom",ep_name_ph:"Ton nom",ep_bio:"Bio",ep_bio_ph:"Une ligne sur toi…",ep_emoji:"Emoji",ep_save:"Enregistrer",ep_saved:"Profil mis à jour",
@@ -1697,6 +1715,9 @@
   /* for prose that embeds canonical activity names (e.g. friends' "met" strings) */
   const frActText=s=>{ if(state.lang!=="fr"||!s) return s; let out=s; ACTIVITIES.forEach(a=>{ if(ACTFR[a.id]&&ACTFR[a.id].name) out=out.replace(a.name,ACTFR[a.id].name); }); return out; };
   const actVibe=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].vibe:a.vibe);
+  // coarse energy bucket for the vibe filter — derived from category (clean, no string-parsing)
+  const ENERGY_BY_CAT={"Evening Out":"lively","Games":"lively","Outdoors":"active","Active":"active","Chill":"lowkey","Arts & Culture":"lowkey","Food & Drink":"lowkey"};
+  const actEnergy=a=>ENERGY_BY_CAT[a.cat]||"lowkey";
   const actPlanb=a=>(state.lang==="fr"&&ACTFR[a.id]?ACTFR[a.id].planb:a.planb);
   const actBadge=b=>(state.lang==="fr"&&BADGE_FR[b]?BADGE_FR[b]:b);
   const actSize=a=>(state.lang==="fr"?a.size.replace("people","personnes"):a.size);
@@ -1752,6 +1773,35 @@
       ${state.plus?"":`<span class="link-inline mf-deep" id="gdPlus">${svgIcon('sliders')} ${t("mf_deep")}</span>`}
     </div>`;
   }
+  // Stylized neighbourhood map — abstract street grid + pin (no external tiles, zero-budget)
+  function neighbourhoodMapHTML(a){
+    const parts=(actVenue(a)||"").split(" · ");
+    const venue=parts[0]||"";
+    // use the second half as the place name only if it's a proper place (capitalized); else fall back to the venue
+    let hood=(parts.length>1 && /^[A-ZÀ-Ü]/.test(parts[1]))?parts[1]:venue;
+    return `<div class="hood-map" role="img" aria-label="${esc(hood)}">
+      <svg viewBox="0 0 320 150" preserveAspectRatio="xMidYMid slice">
+        <rect class="hm-bg" x="0" y="0" width="320" height="150"/>
+        <g class="hm-block">
+          <rect x="16" y="14" width="76" height="44" rx="4"/>
+          <rect x="104" y="14" width="118" height="44" rx="4"/>
+          <rect x="234" y="14" width="72" height="60" rx="4"/>
+          <rect x="16" y="70" width="76" height="66" rx="4"/>
+          <rect x="234" y="86" width="72" height="50" rx="4"/>
+        </g>
+        <rect class="hm-park" x="104" y="70" width="60" height="66" rx="7"/>
+        <path class="hm-ave" d="M-12 128 L196 -16"/>
+        <g class="hm-street"><path d="M176 64 H312"/><path d="M178 70 V150"/></g>
+        <g class="hm-pin" transform="translate(190,84)">
+          <circle class="hm-pulse" cx="0" cy="0" r="15"/>
+          <path d="M0 -13 C7.5 -13 12 -7.5 12 -2 C12 6.5 0 15 0 15 C0 15 -12 6.5 -12 -2 C-12 -7.5 -7.5 -13 0 -13 Z"/>
+          <circle class="hm-dot" cx="0" cy="-2" r="4"/>
+        </g>
+      </svg>
+      <div class="hm-grad"></div>
+      <div class="hm-label"><span class="hm-hood">${esc(hood)}</span>${venue&&venue!==hood?`<span class="hm-venue">${esc(venue)}</span>`:""}</div>
+    </div>`;
+  }
   const DAY_FR={Monday:"lundi",Tuesday:"mardi",Wednesday:"mercredi",Thursday:"jeudi",Friday:"vendredi",Saturday:"samedi",Sunday:"dimanche",Mon:"lun",Tue:"mar",Wed:"mer",Thu:"jeu",Fri:"ven",Sat:"sam",Sun:"dim",Today:"Aujourd'hui",Tonight:"Ce soir"};
   function frWhen(s){
     if(state.lang!=="fr"||!s) return s;
@@ -1788,7 +1838,7 @@
     age:24, signedIn:false, agreed:false, returning:false,
     currentQ:0, answers:new Array(7).fill(null),
     profileKey:null,
-    picked:new Set(), dismissedPicks:new Set(), activeCat:"For you", filters:{day:null,size:null},
+    picked:new Set(), dismissedPicks:new Set(), activeCat:"For you", filters:{day:null,size:null,vibe:null},
     chosenActivity:null, chosenGroup:null,
     joinedGroups:[], hostedGroups:[], firstJoinAsked:false, dayOf:null, checkedIn:false, seedSocial:false,
     chatThreads:{}, chatViewGroup:null, unreadChats:new Set(), guideDismissed:false,
@@ -2039,7 +2089,7 @@
     Object.assign(state,{age:24,signedIn:false,agreed:false,returning:false,currentQ:0,profileKey:null,
       chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,seedSocial:false,fbStep:0,venueNote:"",
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
-      blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null},
+      blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
@@ -2060,7 +2110,7 @@
     const rbd=$("#reqBadge"); if(rbd) rbd.style.display=rc>0?"block":"none";
     const bell=state.notifsCleared?"none":"block";
     ["exBellDot","profBellDot"].forEach(i=>{ const e=document.getElementById(i); if(e) e.style.display=bell; });
-    const fd=$("#exFilterDot"); if(fd) fd.style.display=(state.filters.day||state.filters.size)?"block":"none";
+    const fd=$("#exFilterDot"); if(fd) fd.style.display=(state.filters.day||state.filters.size||state.filters.vibe)?"block":"none";
   }
 
   document.addEventListener("click",e=>{
@@ -2329,6 +2379,7 @@
     else if(f.day==="weekend") list=list.filter(a=>/^(Sat|Sun)/.test(a.when));
     if(f.size) list=list.filter(a=>{ const ns=(a.size.match(/\d+/g)||[]).map(Number); const max=ns[ns.length-1]||0;
       return f.size==="small"?max<=5:(f.size==="medium"?max===6:max>=7); });
+    if(f.vibe) list=list.filter(a=>actEnergy(a)===f.vibe);
     const ft=$("#feedTitle");
     if(ft) ft.textContent=q?`${t("ex_results")} · “${$("#exSearch").value.trim()}”`:(state.activeCat!=="For you"?catLabel(state.activeCat):t("ex_browse"));
     const feed=$("#actList");
@@ -2340,7 +2391,7 @@
     const sg=$("#suggestLink");
     if(!list.length){
       feed.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('search')}</div><div class="es-t">${t("ex_empty_t")}</div><div class="es-s">${t("ex_empty_s")}</div><button class="btn btn-soft" id="esClear">${t("ex_clear")}</button><button class="btn-link" id="esSuggest">${t("ex_suggest")}</button></div>`;
-      const ec=$("#esClear"); if(ec) ec.addEventListener("click",()=>{ $("#exSearch").value=""; state.filters={day:null,size:null}; renderExplore(); syncBadges(); });
+      const ec=$("#esClear"); if(ec) ec.addEventListener("click",()=>{ $("#exSearch").value=""; state.filters={day:null,size:null,vibe:null}; renderExplore(); syncBadges(); });
       const sgl=$("#esSuggest"); if(sgl) sgl.addEventListener("click",openSuggest);
       if(sg) sg.style.display="none";
     } else {
@@ -2508,7 +2559,7 @@
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${grpPersonality(g)}.</p>
       </div>
       ${matchPanelHTML(g)}
-      <div class="map-stub"><span>${svgIcon('pin')} ${actVenue(a).split(" · ")[1]||"Map"}</span></div>
+      ${neighbourhoodMapHTML(a)}
       ${flowExtra}
       ${bar}`;
     // re-match: if full, show alt group
@@ -3940,23 +3991,27 @@
   function openFilter(){
     const days=[["any","flt_anyday"],["today","flt_today"],["weekend","flt_weekend"]];
     const sizes=[["any","flt_anysize"],["small","flt_small"],["medium","flt_medium"],["large","flt_large"]];
-    const curDay=state.filters.day||"any", curSize=state.filters.size||"any";
+    const vibes=[["any","flt_anyvibe"],["lowkey","flt_lowkey"],["lively","flt_lively"],["active","flt_active"]];
+    const curDay=state.filters.day||"any", curSize=state.filters.size||"any", curVibe=state.filters.vibe||"any";
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${t("flt_title")}</div>
       <div class="sec-title" style="margin-top:8px">${t("flt_day")}</div>
       <div class="chips" style="margin-bottom:14px" id="fltDays">${days.map(d=>`<span class="chip ${d[0]===curDay?'sel':''}" data-day="${d[0]}">${t(d[1])}</span>`).join("")}</div>
       <div class="sec-title">${t("flt_size")}</div>
-      <div class="chips" style="margin-bottom:18px" id="fltSizes">${sizes.map(s=>`<span class="chip ${s[0]===curSize?'sel':''}" data-sz="${s[0]}">${t(s[1])}</span>`).join("")}</div>
+      <div class="chips" style="margin-bottom:14px" id="fltSizes">${sizes.map(s=>`<span class="chip ${s[0]===curSize?'sel':''}" data-sz="${s[0]}">${t(s[1])}</span>`).join("")}</div>
+      <div class="sec-title">${t("flt_vibe")}</div>
+      <div class="chips" style="margin-bottom:18px" id="fltVibes">${vibes.map(v=>`<span class="chip ${v[0]===curVibe?'sel':''}" data-vibe="${v[0]}">${t(v[1])}</span>`).join("")}</div>
       <button class="btn btn-primary" id="filterApply">${t("flt_apply")}</button>
       <button class="btn btn-ghost" id="filterReset" style="margin-top:8px">${t("flt_reset")}</button>`;
-    const sel={day:curDay,size:curSize};
+    const sel={day:curDay,size:curSize,vibe:curVibe};
     $$("#fltDays .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltDays .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.day=el.getAttribute("data-day"); }));
     $$("#fltSizes .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltSizes .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.size=el.getAttribute("data-sz"); }));
+    $$("#fltVibes .chip").forEach(el=>el.addEventListener("click",()=>{ $$("#fltVibes .chip").forEach(x=>x.classList.remove("sel")); el.classList.add("sel"); sel.vibe=el.getAttribute("data-vibe"); }));
     $("#filterApply").addEventListener("click",()=>{
-      state.filters={day:sel.day==="any"?null:sel.day,size:sel.size==="any"?null:sel.size};
+      state.filters={day:sel.day==="any"?null:sel.day,size:sel.size==="any"?null:sel.size,vibe:sel.vibe==="any"?null:sel.vibe};
       closeSheet(); renderExplore(); syncBadges();
     });
-    $("#filterReset").addEventListener("click",()=>{ state.filters={day:null,size:null}; closeSheet(); renderExplore(); syncBadges(); });
+    $("#filterReset").addEventListener("click",()=>{ state.filters={day:null,size:null,vibe:null}; closeSheet(); renderExplore(); syncBadges(); });
     openSheet();
   }
 
