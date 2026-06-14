@@ -409,6 +409,18 @@
   .gc-foot{display:flex;align-items:center;justify-content:space-between;}
   .gc-spots{font-size:13px;color:var(--faint);}
   .gc-compat{font-size:13px;color:var(--mint);margin-top:8px;}
+  /* match engine — fit pill + "why this group" panel */
+  .fit-pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;border:1px solid;letter-spacing:.01em;white-space:nowrap;}
+  .fit-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+  .match-panel{margin-top:14px;padding:15px 15px 13px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);}
+  .mf-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:9px;}
+  .mf-title{font-family:'Fraunces',serif;font-weight:600;font-size:16px;color:var(--text);}
+  .mf-reason{display:flex;align-items:flex-start;gap:9px;font-size:13px;color:var(--text);line-height:1.5;margin-top:8px;}
+  .mf-reason .ic{color:var(--c3);margin-top:1px;flex-shrink:0;}
+  .mf-reason.mf-soft{color:var(--muted);}
+  .mf-reason.mf-soft .ic{color:var(--accent-text);}
+  .mf-count{font-size:12.5px;color:var(--accent-text);margin-top:11px;}
+  .mf-deep{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;margin-top:11px;}
 
   /* group detail */
   .gd-hero{display:flex;align-items:center;gap:14px;margin:4px 0 16px;}
@@ -1367,6 +1379,7 @@
       ex_search:"Search activities",ex_popular:"Popular this week",ex_browse:"Browse",ex_picked:"Picked for you · matches",ex_more:"More to explore",ex_going:"going",ex_suggest:"Don't see what you're looking for?",
       gc_today:"● Today · starts in 3h",gc_filling:"⚡ Filling up · 1 spot left",gc_forming:"Forming this week",gc_joined:"✓ Joined",
       gc_mixed:"Mixed group of",gc_spots:"spots filled",of:"of",gc_see:"See group →",gc_open:"Open →",
+      mf_why:"Why this group",mf_strong:"Strong fit",mf_good:"Good fit",mf_try:"Worth a try",mf_r_kin:"Someone here shares your type — {type}",mf_r_compat:"A natural match for your type: {who}",mf_r_vibe:"The room leans {vibe} — your kind of energy",mf_r_small:"Small enough to actually connect",mf_deep:"See the full compatibility breakdown · Perch+",
       gd_hosting:"You're hosting",gd_forming_status:"● Forming · matching people",gd_host:"you're the host",
       grp_your:"Your groups",grp_forming_for:"groups forming",grp_later:"Later this week",grp_past:"Past",
       gd_when:"When",gd_where:"Where",gd_planb:"Plan B",gd_whos:"Who's going",gd_mixed:"A mixed group",gd_open_spot:"open",
@@ -1533,6 +1546,7 @@
       ex_search:"Rechercher des activités",ex_popular:"Populaire cette semaine",ex_browse:"Explorer",ex_picked:"Choisi pour toi · selon",ex_more:"Plus à explorer",ex_going:"y vont",ex_suggest:"Tu ne trouves pas ce que tu cherches?",
       gc_today:"● Aujourd'hui · dans 3h",gc_filling:"⚡ Se remplit · 1 place restante",gc_forming:"En formation cette semaine",gc_joined:"✓ Inscrit",
       gc_mixed:"Groupe varié de",gc_spots:"places comblées",of:"de",gc_see:"Voir le groupe →",gc_open:"Ouvrir →",
+      mf_why:"Pourquoi ce groupe",mf_strong:"Super match",mf_good:"Bon match",mf_try:"Ça vaut le coup",mf_r_kin:"Quelqu'un ici a le même type que toi — {type}",mf_r_compat:"Fait pour ton type : {who}",mf_r_vibe:"L'ambiance est plutôt {vibe} — ton genre d'énergie",mf_r_small:"Assez petit pour vraiment connecter",mf_deep:"Voir l'analyse de compatibilité complète · Perch+",
       gd_hosting:"Tu organises",gd_forming_status:"● En formation · jumelage en cours",gd_host:"tu es l'hôte",
       grp_your:"Tes groupes",grp_forming_for:"groupes en formation",grp_later:"Plus tard cette semaine",grp_past:"Passé",
       gd_when:"Quand",gd_where:"Où",gd_planb:"Plan B",gd_whos:"Qui y va",gd_mixed:"Un groupe varié",gd_open_spot:"libre",
@@ -1692,6 +1706,52 @@
   const grpTags=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].vibetags:g.vibetags);
   const grpPersonality=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].personality:g.personality);
   const grpCompat=g=>(state.lang==="fr"&&GRPFR[g.id]?GRPFR[g.id].compat:g.compat);
+  /* ---- Match engine: deterministic fit between YOU and a group's archetype mix ----
+     Pure function of state.profileKey + g.mix (+ size); no randomness, stable per render. */
+  function matchFit(g){
+    const uk=state.profileKey||"easygoer", ua=ARCH[uk]||ARCH.easygoer, uc=ua.compat||[];
+    const mix=(g&&g.mix)||[];
+    const kindred=mix.filter(k=>k===uk).length;                          // your own type, in the room
+    const compatHits=[...new Set(mix.filter(k=>k!==uk&&uc.includes(k)))]; // types you naturally click with
+    const revHits=[...new Set(mix.filter(k=>k!==uk&&!uc.includes(k)&&ARCH[k]&&(ARCH[k].compat||[]).includes(uk)))];
+    let score=kindred*3+compatHits.length*2+revHits.length;
+    if(((g&&g.size)||6)<=5) score+=1;                                    // small groups read as a closer fit
+    const tier=score>=5?"strong":(score>=2?"good":"try");
+    return {tier,score,kindred,compatHits,revHits};
+  }
+  function fitMeta(g){
+    const tier=matchFit(g).tier;
+    if(tier==="strong") return {lab:t("mf_strong"),col:"var(--mint)", bg:"rgba(111,224,198,.12)",bd:"rgba(111,224,198,.4)"};
+    if(tier==="good")   return {lab:t("mf_good"),  col:"var(--amber)",bg:"rgba(255,182,97,.12)", bd:"rgba(255,182,97,.4)"};
+    return                     {lab:t("mf_try"),   col:"var(--faint)",bg:"var(--surface-3)",     bd:"var(--line-2)"};
+  }
+  function fitPill(g){
+    const f=fitMeta(g);
+    return `<span class="fit-pill" style="color:${f.col};border-color:${f.bd};background:${f.bg}"><span class="fit-dot" style="background:${f.col}"></span>${f.lab}</span>`;
+  }
+  function matchReasons(g){
+    const m=matchFit(g), out=[], uk=state.profileKey||"easygoer";
+    if(m.kindred) out.push({icon:"users",text:t("mf_r_kin").replace("{type}",archName(uk))});
+    if(m.compatHits.length||m.revHits.length){
+      const names=(m.compatHits.length?m.compatHits:m.revHits).slice(0,2).map(archName);
+      const who=names.length>1?`${names[0]} ${t("and")} ${names[1]}`:names[0];
+      out.push({icon:"sparkles",text:t("mf_r_compat").replace("{who}",who)});
+    }
+    const tags=grpTags(g); if(tags&&tags[0]) out.push({icon:"heart",text:t("mf_r_vibe").replace("{vibe}",tags[0].toLowerCase())});
+    if(((g&&g.size)||6)<=5) out.push({icon:"leaf",text:t("mf_r_small")});
+    return out.slice(0,3);
+  }
+  function matchPanelHTML(g){
+    const f=fitMeta(g);
+    const reasons=matchReasons(g).map(r=>`<div class="mf-reason">${svgIcon(r.icon)}<span>${r.text}</span></div>`).join("");
+    return `<div class="match-panel">
+      <div class="mf-head"><span class="mf-title">${t("mf_why")}</span><span class="fit-pill" style="color:${f.col};border-color:${f.bd};background:${f.bg}"><span class="fit-dot" style="background:${f.col}"></span>${f.lab}</span></div>
+      ${reasons}
+      <div class="mf-reason mf-soft">${svgIcon('shield')}<span>${t("rel_matched")}</span></div>
+      ${g.compat?`<div class="mf-count">✦ ${grpCompat(g)}</div>`:""}
+      ${state.plus?"":`<span class="link-inline mf-deep" id="gdPlus">${svgIcon('sliders')} ${t("mf_deep")}</span>`}
+    </div>`;
+  }
   const DAY_FR={Monday:"lundi",Tuesday:"mardi",Wednesday:"mercredi",Thursday:"jeudi",Friday:"vendredi",Saturday:"samedi",Sunday:"dimanche",Mon:"lun",Tue:"mar",Wed:"mer",Thu:"jeu",Fri:"ven",Sat:"sam",Sun:"dim",Today:"Aujourd'hui",Tonight:"Ce soir"};
   function frWhen(s){
     if(state.lang!=="fr"||!s) return s;
@@ -2310,7 +2370,7 @@
   function groupCardHTML(g,joined){
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'}"></span>`).join("");
     return `<div class="group-card ${g.status==='today'?'today':''}" data-group="${g.id}">
-      <div class="gc-statusrow">${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
+      <div class="gc-statusrow">${fitPill(g)}${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
       <div class="gc-top"><div class="gc-emoji ${g.g}">${glyph(g.emoji)}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
       <div class="gc-vibetags">${grpTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
@@ -2446,10 +2506,9 @@
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${grpPersonality(g)}.</p>
-        <div class="gc-compat" style="margin-top:8px;color:var(--accent-text)">🛡️ ${t("rel_matched")}</div>
-        ${g.compat?`<div class="gc-compat" style="margin-top:8px">✦ ${grpCompat(g)}${state.plus?'':` · <span class="link-inline" id="gdPlus" style="font-size:11px">${t("pp_why")}</span>`}</div>`:""}
       </div>
-      <div class="map-stub"><span>🗺️ ${actVenue(a).split(" · ")[1]||"Map"}</span></div>
+      ${matchPanelHTML(g)}
+      <div class="map-stub"><span>${svgIcon('pin')} ${actVenue(a).split(" · ")[1]||"Map"}</span></div>
       ${flowExtra}
       ${bar}`;
     // re-match: if full, show alt group
