@@ -63,6 +63,8 @@
     --accent-text-2:#8a4fd6;
     --danger-text:#b3264f;
     --nav-bg:rgba(255,253,249,.92);
+    /* darker brand tokens so accents stay legible on cream (gradients use literal hex, unaffected) */
+    --c1:#C85636; --c2:#C13E6B; --c3:#7A3FA0; --mint:#1B8A73; --amber:#9A6B12;
   }
   [data-theme="light"] .dot-prog i.past{background:rgba(40,28,18,.25);}
   [data-theme="light"] .trait{background:rgba(40,28,18,.05);}
@@ -2186,7 +2188,7 @@
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],mutedMembers:new Set(),mutedGroups:{},guardian:null,
-      notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
+      notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null,theme:"dark",rating:{activity:0,venue:0,vibe:0},venueOk:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
     repliedThreads.clear();
@@ -2194,7 +2196,7 @@
     // reset skeleton flags
     const fb=$("#friendsBody"); if(fb) delete fb._loaded;
     const ab=$("#agreeBox"); if(ab) ab.classList.remove("on"); const ac=$("#agreeContinue"); if(ac) ac.disabled=true;
-    closeSheet();
+    applyTheme(); closeSheet();
   }
   function syncBadges(){
     const cb=$("#navChatBadge"); const un=state.unreadChats.size;
@@ -2840,7 +2842,7 @@
     if(m.who==="me") return `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${msgTime(m.time)}</div></div></div>`;
     const muted=state.mutedMembers&&state.mutedMembers.has(m.name);
     const bubble=muted?`<div class="msg them mu-collapsed" data-mtext="${esc(m.text)}">${t("mu_collapsed")}</div>`:`<div class="msg them" data-react>${m.text}</div>`;
-    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div>${bubble}<div class="react-row"></div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`;
+    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${esc(m.name)}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${esc(m.name)}</div>${bubble}<div class="react-row"></div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`;
   }
   function pushMsg(m,gid){
     gid = gid || state.chatViewGroup;
@@ -3246,7 +3248,7 @@
         <div class="recap-line">${vibeLine}</div>
         ${firstAdded?`<button class="btn btn-primary" id="fbMsg" style="margin-top:18px">${t("fb_recap_msg").replace("{n}",esc(firstAdded.name.split(" ")[0]))}</button>`:""}
         <button class="btn ${firstAdded?'btn-ghost':'btn-primary'}" id="fbDone" style="margin-top:${firstAdded?'8px':'18px'}">${t("fb_done")}</button>`;
-      const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; scheduleReturnNudge(); setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
+      const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; scheduleReturnNudge(); setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore",{silent:true}); },1500); };
       const fm=$("#fbMsg"); if(fm) fm.addEventListener("click",()=>{ state.currentDM=firstAdded.name; goTo("dm"); });
       $("#fbDone").addEventListener("click",finish);
     }
@@ -4266,7 +4268,7 @@
 
   // ---- In-person safety (day-of): share-plan beacon + made-it-home + discreet silent help ----
   function dayofSafetyHTML(g,je){
-    const guard=state.guardian;
+    const guard=(state.guardian&&state.guardian.gid===g.id)?state.guardian:null;
     const shareTile=guard
       ?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.06)"><div class="it-ic" style="color:var(--mint)">${svgIcon('shield')}</div><div style="flex:1"><div class="it-lab">${t("sp_following").replace("{n}",esc(guard.name))}</div><div class="it-val">${t("sp_shares_what")}</div></div><span class="link-inline" data-shareplan style="font-size:11px">${t("sp_change")}</span></div>`
       :`<div class="info-tile" data-shareplan style="cursor:pointer;border-color:rgba(165,123,255,.35)"><div class="it-ic" style="color:var(--accent-text)">${svgIcon('shield')}</div><div style="flex:1"><div class="it-lab">${t("sp_title")}</div><div class="it-val">${t("sp_sub")}</div></div><span class="chev">›</span></div>`;
@@ -4287,7 +4289,7 @@
       <p class="sheet-foot">${t("sp_only_tonight")}</p>
       <button class="btn btn-primary" id="spSave">${t("sp_share_btn")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
-    $("#spSave").addEventListener("click",()=>{ const n=($("#spName").value||"").trim(); if(!n) return; state.guardian={name:n}; closeSheet(); showToast(t("sp_done").replace("{n}",n)); if($("#s-groupdetail").classList.contains("active")) renderGroupDetail(); setTimeout(()=>showToast(n+" · "+t("sp_reply")),2400); });
+    $("#spSave").addEventListener("click",()=>{ const n=($("#spName").value||"").trim(); if(!n) return; state.guardian={name:n,gid:state.dayOf}; closeSheet(); showToast(t("sp_done").replace("{n}",n)); if($("#s-groupdetail").classList.contains("active")) renderGroupDetail(); setTimeout(()=>showToast(n+" · "+t("sp_reply")),2400); });
     sheetClose(); openSheet();
   }
   function openGetHelp(){
