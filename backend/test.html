@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Perch — backend smoke test</title>
+<style>
+  :root{
+    --bg:#15110f; --panel:#1f1916; --line:#34291f; --ink:#f4ece4; --dim:#b3a392;
+    --c1:#FF7A5C; --ok:#6fe0c6; --bad:#ff7a90; --r:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:24px;max-width:760px;margin:0 auto}
+  h1{font-size:21px;margin:0 0 2px;display:flex;align-items:center;gap:8px}
+  .sub{color:var(--dim);margin:0 0 20px;font-size:13px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+  .card h2{font-size:14px;margin:0 0 10px;letter-spacing:.02em;text-transform:uppercase;color:var(--dim)}
+  label{display:block;font-size:12px;color:var(--dim);margin:8px 0 4px}
+  input{width:100%;background:#120e0c;border:1px solid var(--line);border-radius:10px;color:var(--ink);padding:10px 12px;font:inherit}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end}
+  .row > div{flex:1;min-width:120px}
+  button{background:var(--c1);color:#1a0f0b;border:0;border-radius:10px;padding:10px 14px;font:600 14px/1 inherit;cursor:pointer;margin-top:10px}
+  button.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  .pill{display:inline-block;font-size:12px;padding:3px 9px;border-radius:999px;border:1px solid var(--line)}
+  .pill.ok{color:var(--ok);border-color:rgba(111,224,198,.4)}
+  .pill.bad{color:var(--bad);border-color:rgba(255,122,144,.4)}
+  #log{background:#0e0b09;border:1px solid var(--line);border-radius:var(--r);padding:12px;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,monospace;white-space:pre-wrap;word-break:break-word;max-height:300px;overflow:auto;color:#d6c9bb}
+  .log-ok{color:var(--ok)} .log-bad{color:var(--bad)} .log-dim{color:var(--dim)}
+  .msgs{background:#120e0c;border:1px solid var(--line);border-radius:10px;padding:10px;max-height:200px;overflow:auto;margin-bottom:8px}
+  .msg{padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+  .msg .who{color:var(--c1);font-weight:600;font-size:12px}
+  .msg.sys .who{color:var(--dim)}
+  code{background:#0e0b09;padding:2px 6px;border-radius:6px;font-size:12px}
+  a{color:var(--c1)}
+</style>
+</head>
+<body>
+  <h1>🪶 Perch — backend smoke test</h1>
+  <p class="sub">Proves the live Supabase path (auth → profile → book → chat → check-in) before it's wired into the app. Status: <span id="conn" class="pill">checking…</span></p>
+
+  <div id="needsConfig" class="card" style="display:none;border-color:rgba(255,122,144,.4)">
+    <h2>Setup needed</h2>
+    <p>No <code>config.js</code> found (or it's still the template). Copy <code>config.example.js</code> → <code>config.js</code>, paste your Supabase URL + anon key, then reload. See <a href="../docs/DEPLOY.md">docs/DEPLOY.md</a>.</p>
+  </div>
+
+  <div id="app" style="display:none">
+    <!-- 1. AUTH -->
+    <div class="card">
+      <h2>1 · Sign in <span id="authState" class="pill log-dim">signed out</span></h2>
+      <div class="row">
+        <div><label>Email</label><input id="email" type="email" placeholder="you@example.com" autocomplete="email" /></div>
+        <button id="sendLink">Send magic link</button>
+      </div>
+      <p class="sub" style="margin:8px 0 0">A link is emailed to you. Open it (same browser) and you'll return here signed in. Then continue below.</p>
+      <div class="row" style="margin-top:6px">
+        <div><label>…or paste the 6-digit code from the email</label><input id="otp" inputmode="numeric" placeholder="123456" /></div>
+        <button id="verifyOtp" class="ghost">Verify code</button>
+      </div>
+      <button id="signOut" class="ghost" style="display:none">Sign out</button>
+    </div>
+
+    <!-- 2. PROFILE -->
+    <div class="card">
+      <h2>2 · Profile (the on-demand join gate)</h2>
+      <div class="row">
+        <div><label>First name</label><input id="pName" placeholder="Alex" /></div>
+        <div><label>Emoji</label><input id="pEmoji" value="🙂" maxlength="4" /></div>
+      </div>
+      <div class="row">
+        <div><label>@username</label><input id="pUser" placeholder="alex.mtl" /></div>
+        <button id="checkUser" class="ghost">Check availability</button>
+      </div>
+      <button id="saveProfile">Save profile</button>
+    </div>
+
+    <!-- 3. GROUP + JOIN -->
+    <div class="card">
+      <h2>3 · This Thursday's group</h2>
+      <button id="loadGroup" class="ghost">Load group</button>
+      <div id="groupInfo" class="sub"></div>
+      <button id="joinGroup">Book my spot</button>
+      <div id="joinResult" class="sub"></div>
+    </div>
+
+    <!-- 4. CHAT -->
+    <div class="card">
+      <h2>4 · Group chat (realtime)</h2>
+      <div id="msgs" class="msgs"><span class="log-dim">Join, then load messages…</span></div>
+      <div class="row">
+        <div><input id="msgInput" placeholder="Say hi 👋" /></div>
+        <button id="sendMsg">Send</button>
+      </div>
+      <p class="sub" style="margin:8px 0 0">Open this page in a second tab/browser, sign in as a different email, join, and send — messages should appear here live.</p>
+    </div>
+
+    <!-- 5. CHECK-IN -->
+    <div class="card">
+      <h2>5 · Check in (reliability)</h2>
+      <button id="checkIn">Check in</button>
+      <div id="checkResult" class="sub"></div>
+    </div>
+  </div>
+
+  <h2 style="font-size:13px;color:var(--dim);text-transform:uppercase;margin:18px 0 8px">Log</h2>
+  <div id="log"></div>
+
+<script src="../config.js" onerror="window.__noConfig=true"></script>
+<script type="module">
+  import { createPerch } from "./perch-api.js";
+
+  const $ = (id) => document.getElementById(id);
+  const logEl = $("log");
+  const log = (msg, cls) => {
+    const line = document.createElement("div");
+    if (cls) line.className = cls;
+    line.textContent = msg;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  };
+  const ok = (m) => log("✓ " + m, "log-ok");
+  const err = (e) => log("✗ " + (e && e.message ? e.message : e), "log-bad");
+
+  const cfg = window.PERCH_CONFIG;
+  const configured = cfg && cfg.url && cfg.anonKey && !/YOUR-/.test(cfg.url + cfg.anonKey);
+  if (!configured) {
+    $("needsConfig").style.display = "block";
+    $("conn").textContent = "not configured";
+    $("conn").className = "pill bad";
+    log("No usable config.js — see the setup note above.", "log-bad");
+  } else {
+    $("app").style.display = "block";
+    let perch;
+    try {
+      perch = createPerch(cfg);
+      $("conn").textContent = "client ready";
+      $("conn").className = "pill ok";
+      ok("Supabase client created for " + cfg.url);
+    } catch (e) {
+      $("conn").textContent = "error";
+      $("conn").className = "pill bad";
+      err(e);
+    }
+
+    let currentGroupId = perch ? perch.THURSDAY_GROUP_ID : null;
+    let unsub = null;
+
+    const renderAuth = (session) => {
+      const signedIn = !!session;
+      $("authState").textContent = signedIn ? "signed in: " + session.user.email : "signed out";
+      $("authState").className = "pill " + (signedIn ? "ok" : "log-dim");
+      $("signOut").style.display = signedIn ? "inline-block" : "none";
+    };
+
+    if (perch) {
+      perch.auth.onChange((s) => {
+        renderAuth(s);
+        if (s) ok("Auth state: signed in as " + s.user.email);
+      });
+      perch.auth.getSession().then(renderAuth).catch(err);
+
+      // --- auth ---
+      $("sendLink").onclick = async () => {
+        try {
+          await perch.auth.signInWithEmail($("email").value.trim());
+          ok("Magic link sent to " + $("email").value.trim() + " — check your inbox.");
+        } catch (e) { err(e); }
+      };
+      $("verifyOtp").onclick = async () => {
+        try {
+          await perch.auth.verifyEmailCode($("email").value.trim(), $("otp").value.trim());
+          ok("Code verified.");
+        } catch (e) { err(e); }
+      };
+      $("signOut").onclick = async () => { try { await perch.auth.signOut(); ok("Signed out."); } catch (e) { err(e); } };
+
+      // --- profile ---
+      $("checkUser").onclick = async () => {
+        try {
+          const avail = await perch.profile.usernameAvailable($("pUser").value.trim());
+          log((avail ? "✓ available" : "✗ taken/invalid") + ": @" + $("pUser").value.trim(), avail ? "log-ok" : "log-bad");
+        } catch (e) { err(e); }
+      };
+      $("saveProfile").onclick = async () => {
+        try {
+          const p = await perch.profile.save({
+            name: $("pName").value.trim(),
+            username: $("pUser").value.trim(),
+            emoji: $("pEmoji").value.trim(),
+          });
+          ok("Profile saved: " + p.name + " @" + p.username + " (complete=" + p.profile_complete + ")");
+        } catch (e) { err(e); }
+      };
+
+      // --- group ---
+      $("loadGroup").onclick = async () => {
+        try {
+          const g = await perch.groups.thursday();
+          if (!g) { err("No Thursday group found — did the seed run?"); return; }
+          currentGroupId = g.id;
+          const cnt = await perch.groups.weeklyJoinCount();
+          $("groupInfo").innerHTML = `${g.emoji} <b>${g.name}</b> · ${g.when_text} · ${g.venue_text}<br>${g.filled}/${g.max_size} filled · status ${g.status} · your joins this week: ${cnt}`;
+          ok("Loaded group " + g.id + " (" + g.filled + "/" + g.max_size + ")");
+        } catch (e) { err(e); }
+      };
+      $("joinGroup").onclick = async () => {
+        try {
+          const r = await perch.groups.join(currentGroupId);
+          if (r.ok) {
+            $("joinResult").innerHTML = `Booked — reservation <code>${r.code}</code>${r.ticket ? " · ticket $" + r.price + " (pay at venue)" : ""}`;
+            ok("Joined. Reservation code " + r.code);
+          } else {
+            log("Join refused (expected for cap/gate tests): " + r.error + (r.cap ? " (cap " + r.cap + ")" : ""), "log-dim");
+          }
+        } catch (e) { err(e); }
+      };
+
+      // --- chat ---
+      const renderMsg = (m) => {
+        const who = m.kind === "system" ? "·" : ((m.sender && m.sender.emoji) || "🙂") + " " + ((m.sender && m.sender.name) || "Someone");
+        const div = document.createElement("div");
+        div.className = "msg" + (m.kind === "system" ? " sys" : "");
+        div.innerHTML = `<span class="who">${who}</span> ${m.body}`;
+        $("msgs").appendChild(div);
+        $("msgs").scrollTop = $("msgs").scrollHeight;
+      };
+      const loadMsgs = async () => {
+        try {
+          const list = await perch.chat.messages(currentGroupId);
+          $("msgs").innerHTML = "";
+          list.forEach(renderMsg);
+          ok("Loaded " + list.length + " messages.");
+          if (unsub) unsub();
+          unsub = perch.chat.subscribe(currentGroupId, (m) => { log("realtime → new message", "log-dim"); renderMsg(m); });
+          ok("Subscribed to realtime for this group.");
+        } catch (e) { err(e); }
+      };
+      $("sendMsg").onclick = async () => {
+        try {
+          if (!$("msgs").dataset.loaded) { await loadMsgs(); $("msgs").dataset.loaded = "1"; }
+          await perch.chat.send(currentGroupId, $("msgInput").value);
+          $("msgInput").value = "";
+        } catch (e) { err(e); }
+      };
+
+      // --- check-in ---
+      $("checkIn").onclick = async () => {
+        try {
+          const r = await perch.attendance.checkIn(currentGroupId);
+          if (r.ok) {
+            $("checkResult").textContent = `Checked in. attended=${r.attended}${r.first_time ? " (first time — reliability bumped)" : " (already checked in)"}`;
+            ok("Check-in ok. attended=" + r.attended);
+          } else { err("Check-in refused: " + r.error); }
+        } catch (e) { err(e); }
+      };
+    }
+  }
+</script>
+</body>
+</html>

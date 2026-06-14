@@ -45,6 +45,9 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 |---|---|
 | `index.html` | The entire demo — styles, markup, data, and logic (~4.3k lines) |
 | `manifest.json`, `icon.svg`, `icon-*.png` | PWA install support |
+| `supabase/` | The real backend, ready to run — `migrations/0001_init.sql` (thin-slice schema + RLS + cap/join/check-in functions, one paste into Supabase) |
+| `backend/` | `perch-api.js` (live data layer, no build step) + `test.html` (a smoke-test page that proves the backend before it's wired into the app) |
+| `config.example.js` | Template for your Supabase URL + anon key → copy to `config.js` |
 | `CLAUDE.md` | Guide for working in this repo with Claude Code |
 | `docs/` | Product, launch, backend-design, and legal docs (below) |
 
@@ -55,11 +58,12 @@ Or just open `index.html` in a browser. It also installs as a PWA (manifest + ic
 | [`docs/PLAN.md`](docs/PLAN.md) | Product plan & strategy — thesis, risks, MVP cut |
 | [`docs/BOOTSTRAP.md`](docs/BOOTSTRAP.md) | **Zero-budget launch plan** (the current path: prove by hand → free web app → stores) |
 | [`docs/LAUNCH.md`](docs/LAUNCH.md) | Funded, hire-a-team launch roadmap (the destination once resourced) |
-| [`docs/BACKEND.md`](docs/BACKEND.md) | Backend architecture & decisions (designed, not built) |
-| [`docs/schema.sql`](docs/schema.sql) | Validated PostgreSQL schema for that backend |
+| [`docs/DEPLOY.md`](docs/DEPLOY.md) | **Deploy & backend runbook** — stand up the real backend (Supabase) + host the site, step by step |
+| [`docs/BACKEND.md`](docs/BACKEND.md) | Backend architecture & decisions (full design) |
+| [`docs/schema.sql`](docs/schema.sql) | Validated PostgreSQL schema for that backend (the `supabase/` migration is its first slice) |
 | [`docs/API.md`](docs/API.md) | REST API contract for every demo flow |
 | [`docs/LEGAL.md`](docs/LEGAL.md) | Legal-text inventory + placeholder map for counsel |
 | [`docs/COUNSEL_BRIEF.md`](docs/COUNSEL_BRIEF.md) | Quebec privacy-lawyer brief + founder decision memo |
 | [`docs/REVIEW.md`](docs/REVIEW.md) | QA log (code audit + live verification) |
 
-Everything in the demo is simulated. The backend it *implies* is **designed but not built** — see [`docs/BACKEND.md`](docs/BACKEND.md) (architecture), [`docs/schema.sql`](docs/schema.sql) (Postgres DDL), and [`docs/API.md`](docs/API.md) (REST contract). Legal text is a template pending attorney review (mapped in [`docs/LEGAL.md`](docs/LEGAL.md)). **No budget? Start with [`docs/BOOTSTRAP.md`](docs/BOOTSTRAP.md).**
+The demo itself is simulated. The backend it implies is **fully designed** ([`docs/BACKEND.md`](docs/BACKEND.md), [`docs/schema.sql`](docs/schema.sql), [`docs/API.md`](docs/API.md)) and its **critical path is now built and runnable** — the `supabase/` migration + `backend/` data layer turn *sign in → book this Thursday → chat → check in* into real, server-authoritative Postgres. To stand it up: **[`docs/DEPLOY.md`](docs/DEPLOY.md)** (≈10 min, free tier). Legal text is a template pending attorney review (mapped in [`docs/LEGAL.md`](docs/LEGAL.md)). **No budget? Start with [`docs/BOOTSTRAP.md`](docs/BOOTSTRAP.md).**

@@ -4,3 +4,7 @@
 # OS
 .DS_Store
 Thumbs.db
+
+# Backend secrets — copy config.example.js -> config.js and fill in your keys.
+# (The Supabase anon key is public, but keep keys out of git by default.)
+config.js
