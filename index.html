@@ -1584,7 +1584,9 @@
       /* verification prompt */
       pf_verify_t:"Get verified",pf_verify_s:"Confirm it's really you — verified members get into groups faster.",pf_verify_cta:"Verify",pf_verify_skip:"Maybe later",
       /* live-backend email sign-in (only shown when the real backend is connected) */
-      auth_email_t:"Sign in to Perch",auth_email_sub:"We'll email you a 6-digit code — no password needed.",auth_email_label:"Email",auth_email_ph:"you@example.com",auth_send:"Send code",auth_code_t:"Enter your code",auth_code_sub:"We sent a 6-digit code to {email}.",auth_code_ph:"123456",auth_verify:"Verify & continue",auth_resend:"Resend code",auth_sent:"Code sent — check your email",auth_err:"Couldn't sign in — try again"
+      auth_email_t:"Sign in to Perch",auth_email_sub:"We'll email you a 6-digit code — no password needed.",auth_email_label:"Email",auth_email_ph:"you@example.com",auth_send:"Send code",auth_code_t:"Enter your code",auth_code_sub:"We sent a 6-digit code to {email}.",auth_code_ph:"123456",auth_verify:"Verify & continue",auth_resend:"Resend code",auth_sent:"Code sent — check your email",auth_err:"Couldn't sign in — try again",
+      /* the live Perch Thursdays group (real backend) */
+      thurs_g_name:"This Thursday's Perch",thurs_g_personality:"A fresh mix forms each week — easygoing, curious, up for a real conversation",thurs_g_compat:"Balanced on purpose, so there's always someone to break the ice",thurs_g_tag1:"Weekly",thurs_g_tag2:"Beginner-friendly"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1745,7 +1747,9 @@
       wl_offer_toast:"Une place vient de se libérer dans {g} — réclame-la",notif_wl_offer:"Ta place dans {g} est prête — réclame-la avant qu'elle passe à un autre",notif_wl_offer_time:"À l'instant · expire dans 30 min",wl_freed_toast:"Tu as quitté — la prochaine personne sur la liste d'attente vient d'avoir ta place",wl_offer_expired:"La place est passée à la prochaine personne — tu es encore sur la liste d'attente",
       pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard",
       /* connexion par courriel (affiché seulement quand le vrai backend est branché) */
-      auth_email_t:"Connexion à Perch",auth_email_sub:"On t'envoie un code à 6 chiffres — pas besoin de mot de passe.",auth_email_label:"Courriel",auth_email_ph:"toi@exemple.com",auth_send:"Envoyer le code",auth_code_t:"Entre ton code",auth_code_sub:"On a envoyé un code à 6 chiffres à {email}.",auth_code_ph:"123456",auth_verify:"Vérifier et continuer",auth_resend:"Renvoyer le code",auth_sent:"Code envoyé — regarde tes courriels",auth_err:"Connexion impossible — réessaie"
+      auth_email_t:"Connexion à Perch",auth_email_sub:"On t'envoie un code à 6 chiffres — pas besoin de mot de passe.",auth_email_label:"Courriel",auth_email_ph:"toi@exemple.com",auth_send:"Envoyer le code",auth_code_t:"Entre ton code",auth_code_sub:"On a envoyé un code à 6 chiffres à {email}.",auth_code_ph:"123456",auth_verify:"Vérifier et continuer",auth_resend:"Renvoyer le code",auth_sent:"Code envoyé — regarde tes courriels",auth_err:"Connexion impossible — réessaie",
+      /* le vrai groupe Jeudis Perch (backend réel) */
+      thurs_g_name:"Le Perch de ce jeudi",thurs_g_personality:"Un nouveau mélange se forme chaque semaine — détendu, curieux, partant pour une vraie conversation",thurs_g_compat:"Équilibré exprès, pour qu'il y ait toujours quelqu'un pour briser la glace",thurs_g_tag1:"Hebdo",thurs_g_tag2:"Accueillant pour les débutants"
     }
   };
   function detectLang(){
@@ -2290,7 +2294,68 @@
         state.checkedIn=!!p.checked_in;
         state.plus=p.subscription_tier==="plus";
       }
-    }catch(e){ console.warn("[Perch] hydrate failed:",e); }
+    }catch(e){ console.warn("[Perch] profile hydrate failed:",e); }
+    // joined groups (real bookings + reservation codes) → the Joined screen + Hangs count
+    try{
+      const mems=await window.Perch.groups.mine();
+      const tact=ACTIVITIES.find(x=>x.id==="thursdays");
+      const built=(mems||[]).filter(m=>m.group).map(m=>{
+        const rv=m.reservation?(Array.isArray(m.reservation)?m.reservation[0]:m.reservation):null;
+        return { group:liveThursGroup(m.group), activity:tact,
+          reservation: rv?{code:rv.code,ticket:!!rv.ticket,price:rv.price}:{code:resvCode(),ticket:false,price:null} };
+      });
+      if(built.length) state.joinedGroups=built;
+    }catch(e){ console.warn("[Perch] joined hydrate failed:",e); }
+  }
+  // A sim-shaped group object bound to the REAL Thursday group (so the existing
+  // group-detail / joined screens render it unchanged). grp* helpers fall back to
+  // these fields when there's no GRPFR entry (there isn't, for a UUID id).
+  function liveThursGroup(rg){
+    rg=rg||{};
+    return { id: rg.id||window.Perch.THURSDAY_GROUP_ID, name:t("thurs_g_name"),
+      when: rg.when_text||"Thu · 7:00 PM", size: rg.max_size||6, filled: rg.filled||0,
+      g:"g-cat-evening", mix:["connector","explorer","easygoer","observer"], members:[],
+      interests:["Coffee","Board games"], vibetags:[t("thurs_g_tag1"),t("thurs_g_tag2")],
+      personality:t("thurs_g_personality"), compat:t("thurs_g_compat"), live:true };
+  }
+  // Live join funnel for Perch Thursdays — the backend enforces cap / capacity /
+  // reservation; the local profile gate opens the setup sheet first for nicer UX.
+  function perchRequestJoinLive(g,a){
+    if(needsProfile()){ openProfileSetup(()=>perchRequestJoinLive(g,a),true); return; }
+    (async()=>{
+      try{
+        const r=await window.Perch.groups.join(window.Perch.THURSDAY_GROUP_ID,"thursdays");
+        if(!r||!r.ok){
+          if(r&&r.error==="cap"){ openPerchPlus(state.plus?null:"limit"); return; }
+          if(r&&r.error==="profile_incomplete"){ openProfileSetup(()=>perchRequestJoinLive(g,a),true); return; }
+          if(!(r&&r.error==="already_joined")){ showToast(t("auth_err")); return; }
+        }
+        let fresh=null; try{ fresh=await window.Perch.groups.thursday(); }catch(e){}
+        const lg=liveThursGroup(fresh||{});
+        if(!state.joinedGroups.some(x=>x.group.id===lg.id)){
+          state.joinedGroups.push({group:lg,activity:a,reservation:{code:(r&&r.code)||resvCode(),ticket:!!(r&&r.ticket),price:(r&&r.price)||null}});
+        }
+        delete state.chatThreads[lg.id]; state.unreadChats.add(lg.id);
+        goTo("joined");
+      }catch(e){ console.warn("[Perch] join failed:",e); showToast(t("auth_err")); }
+    })();
+  }
+  // Live check-in for the real group — idempotent; attended comes back authoritative.
+  function perchCheckInLive(g){
+    (async()=>{
+      try{
+        const r=await window.Perch.attendance.checkIn(g.id);
+        if(!r||!r.ok){ showToast(t("auth_err")); return; }
+        state.checkedIn=true; state.attended=r.attended||state.attended; state.dayStatus[g.id]="here";
+        const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
+        const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
+        if(state.chatThreads[g.id]) pushMsg({sys:true,text:line},g.id);
+        const ms=[1,3,5].includes(state.attended)&&!state.milestonesSeen.includes(state.attended)?state.attended:null;
+        if(ms) state.milestonesSeen.push(ms);
+        showToast(ms?t("fb_milestone_"+ms):t("toast_checkin"));
+        const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-",""));
+      }catch(e){ console.warn("[Perch] check-in failed:",e); showToast(t("auth_err")); }
+    })();
   }
   async function afterSignIn(m){
     state.signedIn=true;
@@ -3998,6 +4063,7 @@
   }
   // shared entry for joining: free-tier cap → profile gate → booking. Used by Join and waitlist-claim.
   function requestJoin(g,a){
+    if(window.PERCH_LIVE && a && a.id==="thursdays"){ perchRequestJoinLive(g,a); return; }  // real Perch Thursdays join
     const cap=state.plus?5:2;
     if(state.joinedGroups.length>=cap){ openPerchPlus(state.plus?null:"limit"); return; }
     if(needsProfile()){ openProfileSetup(()=>beginJoin(g,a),true); return; }
@@ -4112,6 +4178,7 @@
   }
   function checkIn(g){
     if(state.checkedIn&&state.dayStatus[g.id]==="here") return;
+    if(window.PERCH_LIVE && g && g.live){ perchCheckInLive(g); return; }  // real check-in for the live group
     state.checkedIn=true; state.attended++; state.dayStatus[g.id]="here";
     const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
     const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
