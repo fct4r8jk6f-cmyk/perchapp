@@ -453,6 +453,11 @@
   .recap-line{font-family:'Fraunces',serif;font-size:17px;color:var(--text);line-height:1.45;}
   .rel-streak{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;color:var(--accent-text);margin:-4px 0 14px;}
   .rel-streak .ic{color:var(--mint);}
+  .prof-storyline{font-size:12.5px;color:var(--muted);margin:-2px 0 10px;}
+  .met-header{font-size:13px;color:var(--muted);line-height:1.5;margin:2px 0 12px;}
+  .rel-bar{height:8px;border-radius:999px;background:var(--surface-3);overflow:hidden;margin:2px 0 6px;}
+  .rel-bar-fill{height:100%;border-radius:999px;background:var(--grad-warm);transition:width .5s ease;}
+  .rel-bar-lab{font-size:11.5px;color:var(--muted);text-align:center;margin-bottom:14px;}
 
   /* group detail */
   .gd-hero{display:flex;align-items:center;gap:14px;margin:4px 0 16px;}
@@ -1472,7 +1477,7 @@
       ep_title:"Edit profile",ep_change:"Change photo",ep_remove:"Remove",ep_name:"Name",ep_name_ph:"Your name",ep_bio:"Bio",ep_bio_ph:"A line about yourself…",ep_emoji:"Emoji",ep_save:"Save",ep_saved:"Profile updated",
       ticket:"Ticket",ticket_note:"pay when you book",hosted_cancel:"Cancel this hang",
       stat_event:"Hang",stat_events:"Hangs",stat_friend:"Friend",stat_friends:"Friends",stat_showup:"Show-up",stat_since:"Since",
-      prof_type:"Your social type",prof_activity:"Your activity",prof_first:"Your first hang awaits",prof_more:"More to come",prof_thisweek:"this week",
+      prof_type:"Your social type",prof_activity:"Your activity",prof_first:"Your first hang awaits",prof_more:"More to come",prof_thisweek:"this week",prof_story_t:"Your Perch story",prof_story_line:"Evenings out: {e} · People met: {p}",
       prof_invite:"Invite a friend",prof_settings:"Settings",prof_help:"Help & FAQ",prof_restart:"Start over",prof_edit:"Edit profile",
       notif_today:"Today",notif_week:"This week",notif_from:"From Perch",notif_caught_t:"You're all caught up",notif_caught_s:"New activity will appear here.",
       notif_none_t:"Nothing yet",notif_none_s:"Join a hang and activity will show up here.",
@@ -1483,7 +1488,7 @@
       toast_cal:"Added to your calendar 🗓️",toast_dir:"Directions sent to Maps 🧭",toast_invcopy:"Invite link copied",toast_invshare:"Invite ready to share 📤",toast_link:"Link copied",
       toast_friends:"You and {n} are now friends",toast_reqsent:"Friend request sent to {n}",toast_muted:"{n} muted",toast_removed:"Removed {n}",toast_unblocked:"{n} unblocked",toast_blocked:"{n} blocked",
       toast_photos:"Photos unlock after the group has met 📷",toast_cleared:"Notifications cleared",
-      grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",grp_rejoin:"Find your next one →",notif_return:"A new group that matches your vibe is forming — want in?",return_toast:"Your next group is forming — tap to peek",
+      grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",grp_rejoin:"Find your next one →",grp_revisit:"Revisit your night →",grp_metppl_n:"You met {n}",notif_return:"A new group that matches your vibe is forming — want in?",return_toast:"Your next group is forming — tap to peek",
       grp_hist_t:"That's your history so far",grp_hist_t0:"No hangs yet",grp_hist_s:"Groups you attend will show up here.",
       fr_tab:"Friends",fr_met:"Met",rq_recv:"Received",rq_sent:"Sent",nt_act:"Activity",nt_ann:"Announcements",
       arch_yourtype:"Your type",arch_bring:"What you bring to a group",arch_loves:"Activities you tend to love",arch_desc:"People often describe you as…",arch_edge:"Your edge",arch_vibe:"You vibe well with",arch_retake:"Retake quiz",arch_take:"Take the quiz",
@@ -1500,7 +1505,7 @@
       fr_search_friends:"Search friends",fr_search_met:"Search people you've met",search_ph:"Search",
       fr_empty_t:"Your people are out there",fr_empty_s:"47 people in your area went out last week. Add the ones you clicked with from the Met tab.",fr_seemet:"See people you've met",
       met_empty_t:"No one new right now",met_empty_s:"People from your groups will show up here after you meet.",met_sec:"People from your events",
-      met_at:"Met at {x}",met_generic:"a meetup",met_perch:"A Perch meetup",
+      met_at:"Met at {x}",met_generic:"a meetup",met_perch:"A Perch meetup",met_header:"You've shared a table with {n} people",met_sayhi:"Say hi",
       fp_where:"Where you met",fp_about:"A bit about {n}",fp_bio:"Here for relaxed, friendly hangs. {d1} and {d2}, by most accounts.",fp_locked:"Add {n} as a friend to see more and message privately.",fp_msg:"💬 Message",fp_add:"＋ Add friend",
       dm_meta:"Friends · private",dm_seen:"Seen",dm_seed:"Hey! Good meeting you 😊",dm_ph:"Message…",
       cs_title:"Safety options",cs_sub:"Report something or take action on a group member.",cs_report:"Report a problem",cs_member:"Report a member",
@@ -1543,7 +1548,7 @@
       rel_sheet_b1:"It's a trust signal, not a popularity contest — there are no public rankings.",
       rel_sheet_b2:"Only your group sees that you're dependable. The number stays between you and Perch.",
       rel_sheet_b3:"Showing up is the one thing that keeps it strong. Life happens — one miss won't sink you.",
-      rel_sheet_close:"Got it",rel_streak:"You've shown up {n} time(s)",wl_pos:"You're #{n} in line",wl_pos_short:"#{n} in line",wl_priority:"Reliable members get the next spot first — keep showing up and you move up.",
+      rel_sheet_close:"Got it",rel_streak:"You've shown up {n} time(s)",rel_bar_new:"Your record starts the moment you show up",rel_bar_building:"One check-in and you're rolling",rel_bar_good:"You're a reliable member",wl_pos:"You're #{n} in line",wl_pos_short:"#{n} in line",wl_priority:"Reliable members get the next spot first — keep showing up and you move up.",
       /* day-of coordination */
       co_here:"I'm here",co_statusrow_title:"Who's coming",co_st_omw:"on the way",co_st_late:"running late",co_st_here:"here",co_you:"You",co_nobody:"No updates yet — be the first to ping the group",
       /* waitlist backfill (automatic) */
@@ -1641,7 +1646,7 @@
       ep_title:"Modifier le profil",ep_change:"Changer la photo",ep_remove:"Retirer",ep_name:"Nom",ep_name_ph:"Ton nom",ep_bio:"Bio",ep_bio_ph:"Une ligne sur toi…",ep_emoji:"Emoji",ep_save:"Enregistrer",ep_saved:"Profil mis à jour",
       ticket:"Billet",ticket_note:"payable à la réservation",hosted_cancel:"Annuler cette sortie",
       stat_event:"Sortie",stat_events:"Sorties",stat_friend:"Ami",stat_friends:"Amis",stat_showup:"Présence",stat_since:"Depuis",
-      prof_type:"Ton type social",prof_activity:"Ton activité",prof_first:"Ta première sortie t'attend",prof_more:"À suivre",prof_thisweek:"cette semaine",
+      prof_type:"Ton type social",prof_activity:"Ton activité",prof_first:"Ta première sortie t'attend",prof_more:"À suivre",prof_thisweek:"cette semaine",prof_story_t:"Ton histoire Perch",prof_story_line:"Soirées : {e} · Personnes rencontrées : {p}",
       prof_invite:"Inviter un ami",prof_settings:"Réglages",prof_help:"Aide & FAQ",prof_restart:"Recommencer",prof_edit:"Modifier le profil",
       notif_today:"Aujourd'hui",notif_week:"Cette semaine",notif_from:"De Perch",notif_caught_t:"T'es à jour",notif_caught_s:"La nouvelle activité apparaîtra ici.",
       notif_none_t:"Rien pour l'instant",notif_none_s:"Rejoins une sortie et l'activité apparaîtra ici.",
@@ -1652,7 +1657,7 @@
       toast_cal:"Ajouté à ton calendrier 🗓️",toast_dir:"Itinéraire envoyé à Plans 🧭",toast_invcopy:"Lien d'invitation copié",toast_invshare:"Invitation prête à partager 📤",toast_link:"Lien copié",
       toast_friends:"Toi et {n} êtes maintenant amis",toast_reqsent:"Demande d'amitié envoyée à {n}",toast_muted:"{n} en sourdine",toast_removed:"{n} retiré",toast_unblocked:"{n} débloqué",toast_blocked:"{n} bloqué",
       toast_photos:"Les photos se débloquent après la rencontre 📷",toast_cleared:"Notifications effacées",
-      grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",grp_rejoin:"Trouve ta prochaine →",notif_return:"Un nouveau groupe qui matche ta vibe se forme — ça te dit?",return_toast:"Ton prochain groupe se forme — tape pour voir",
+      grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",grp_rejoin:"Trouve ta prochaine →",grp_revisit:"Revois ta soirée →",grp_metppl_n:"Tu as rencontré {n}",notif_return:"Un nouveau groupe qui matche ta vibe se forme — ça te dit?",return_toast:"Ton prochain groupe se forme — tape pour voir",
       grp_hist_t:"C'est ton historique jusqu'ici",grp_hist_t0:"Pas encore de sortie",grp_hist_s:"Les groupes auxquels tu participes apparaîtront ici.",
       fr_tab:"Amis",fr_met:"Rencontres",rq_recv:"Reçues",rq_sent:"Envoyées",nt_act:"Activité",nt_ann:"Annonces",
       arch_yourtype:"Ton type",arch_bring:"Ce que tu apportes à un groupe",arch_loves:"Des activités que tu as tendance à adorer",arch_desc:"Les gens te décrivent souvent comme…",arch_edge:"Là où tu grandis",arch_vibe:"Tu accroches bien avec",arch_retake:"Refaire le quiz",arch_take:"Faire le quiz",
@@ -1669,7 +1674,7 @@
       fr_search_friends:"Rechercher des amis",fr_search_met:"Rechercher les gens rencontrés",search_ph:"Rechercher",
       fr_empty_t:"Ton monde est là, quelque part",fr_empty_s:"47 personnes de ton coin sont sorties la semaine passée. Ajoute celles avec qui t'as cliqué depuis l'onglet Rencontres.",fr_seemet:"Voir les gens rencontrés",
       met_empty_t:"Personne de nouveau pour l'instant",met_empty_s:"Les gens de tes groupes apparaîtront ici après votre rencontre.",met_sec:"Du monde de tes sorties",
-      met_at:"Rencontré à {x}",met_generic:"une sortie",met_perch:"Une sortie Perch",
+      met_at:"Rencontré à {x}",met_generic:"une sortie",met_perch:"Une sortie Perch",met_header:"Tu as partagé une table avec {n} personnes",met_sayhi:"Dis bonjour",
       fp_where:"Où vous vous êtes rencontrés",fp_about:"Un peu à propos de {n}",fp_bio:"Ici pour des sorties relax et amicales. {d1} et {d2}, selon la plupart des gens.",fp_locked:"Ajoute {n} comme ami pour en voir plus et discuter en privé.",fp_msg:"💬 Message",fp_add:"＋ Ajouter comme ami",
       dm_meta:"Amis · privé",dm_seen:"Vu",dm_seed:"Salut! C'était vraiment cool de te rencontrer 😊",dm_ph:"Message…",
       cs_title:"Options de sécurité",cs_sub:"Signale un problème ou agis à l'égard d'un membre du groupe.",cs_report:"Signaler un problème",cs_member:"Signaler un membre",
@@ -1703,7 +1708,7 @@
       rel_sheet_b1:"C'est un signe de confiance, pas un concours de popularité — y'a aucun classement public.",
       rel_sheet_b2:"Juste ton groupe voit que t'es fiable. Le chiffre reste entre toi pis Perch.",
       rel_sheet_b3:"Te présenter, c'est la seule affaire qui le garde solide. La vie arrive — un oubli te coulera pas.",
-      rel_sheet_close:"C'est noté",rel_streak:"Tu t'es présenté {n} fois",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
+      rel_sheet_close:"C'est noté",rel_streak:"Tu t'es présenté {n} fois",rel_bar_new:"Ton historique commence dès que tu te présentes",rel_bar_building:"Un check-in et c'est parti",rel_bar_good:"T'es un membre fiable",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
       co_here:"Je suis là",co_statusrow_title:"Qui s'en vient",co_st_omw:"en route",co_st_late:"en retard",co_st_here:"sur place",co_you:"Toi",co_nobody:"Pas encore de nouvelles — sois le premier à faire signe au groupe",
       wl_offer_toast:"Une place vient de se libérer dans {g} — réclame-la",notif_wl_offer:"Ta place dans {g} est prête — réclame-la avant qu'elle passe à un autre",notif_wl_offer_time:"À l'instant · expire dans 30 min",wl_freed_toast:"Tu as quitté — la prochaine personne sur la liste d'attente vient d'avoir ta place",wl_offer_expired:"La place est passée à la prochaine personne — tu es encore sur la liste d'attente",
       pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard"
@@ -2496,17 +2501,17 @@
       body.innerHTML=html;
     } else {
       // past history appears only once you've actually joined something — fresh accounts start empty
-      const past=state.seedSocial?`<div class="day-div">${t("grp_past")}</div>
-        <div class="group-card muted-card" data-past="trivia">
+      const past=state.seedSocial?`<div class="day-div">${t("grp_past")}</div>`+state.hangLog.map((h,i)=>{ const act=ACTIVITIES.find(x=>x.name===h.activity);
+        return `<div class="group-card muted-card" data-hang="${i}">
           <div class="gc-statusrow"><span class="gc-vibetag">${t("grp_completed")}</span></div>
-          <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">${frActText("Trivia Night")}</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
-          <div class="gc-personality">${t("grp_met_ppl")}</div>
-          <div class="gc-foot"><span class="btn-link link-sm">${t("grp_reflect")}</span><span class="btn-link link-sm" data-rejoin="thursdays" style="color:var(--accent-text)">${t("grp_rejoin")}</span></div>
-        </div>`:"";
-      body.innerHTML=`${past}
-        <div class="empty-state" style="margin-top:12px"><div class="es-em">${svgIcon('grid')}</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
-      const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
-      const rj=$("#s-groups [data-rejoin]"); if(rj) rj.addEventListener("click",e=>{ e.stopPropagation(); const a=ACTIVITIES.find(x=>x.id===rj.getAttribute("data-rejoin")); if(a){ state.chosenActivity=a; state.groupsTab="up"; } goTo("groups"); });
+          <div class="gc-top"><div class="gc-emoji ${act?act.g:'g-spark'}">${glyph(act?act.icon:'sparkles')}</div><div><div class="gc-name">${frActText(h.activity)}</div><div class="gc-when">${esc(h.venue.split(" · ")[0])} · ${frWhen(h.when)}</div></div></div>
+          <div class="gc-personality">${t("grp_metppl_n").replace("{n}",esc(h.metNames.join(", ")))}</div>
+          <div class="gc-foot"><span class="btn-link link-sm">${t("grp_revisit")}</span><span class="btn-link link-sm" data-rejoin="${act?act.id:'thursdays'}" style="color:var(--accent-text)">${t("grp_rejoin")}</span></div>
+        </div>`; }).join(""):"";
+      const emptyHist=`<div class="empty-state" style="margin-top:12px"><div class="es-em">${svgIcon('grid')}</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
+      body.innerHTML=`${past}${state.hangLog.length?"":emptyHist}`;
+      $$("#s-groups [data-hang]").forEach(el=>el.addEventListener("click",()=>{ const h=state.hangLog[+el.getAttribute("data-hang")]; if(!h)return; const a=ACTIVITIES.find(x=>x.name===h.activity); if(a) state.chosenActivity=a; state.rating.vibe=h.vibe||0; state.fbStep=3; goTo("feedback"); }));
+      $$("#s-groups [data-rejoin]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); const a=ACTIVITIES.find(x=>x.id===el.getAttribute("data-rejoin")); if(a){ state.chosenActivity=a; state.groupsTab="up"; } goTo("groups"); }));
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
       const gid=el.getAttribute("data-group");
@@ -2979,9 +2984,9 @@
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('sparkles')}</div><div class="es-t">${t("met_empty_t")}</div><div class="es-s">${t("met_empty_s")}</div></div>`; }
-      else body.innerHTML=`<div class="sec-title">${t("met_sec")}</div>`+list.map(p=>{
+      else body.innerHTML=`<div class="met-header">${t("met_header").replace("{n}",metPool.length)}</div>`+list.map(p=>{
         const isFriend=state.friends.some(f=>f.name===p.name);
-        const action=isFriend?`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("fr_tab")}</span>`:`<div class="req-actions"><button class="req-yes" data-add="${p.name}">${t("fb_add")}</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
+        const action=isFriend?`<button class="mini-btn" data-sayhi="${esc(p.name)}">${t("met_sayhi")}</button>`:`<div class="req-actions"><button class="req-yes" data-add="${p.name}">${t("fb_add")}</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
         return friendRowHTML(p,t("met_at").replace("{x}",frActText(p.met)),action);
       }).join("");
     }
@@ -2993,6 +2998,7 @@
     }));
     $$("#friendsBody [data-add]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); addFriend(el.getAttribute("data-add")); }));
     $$("#friendsBody [data-skip]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); metPool=metPool.filter(p=>p.name!==el.getAttribute("data-skip")); renderFriends(); }));
+    $$("#friendsBody [data-sayhi]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); state.currentDM=el.getAttribute("data-sayhi"); goTo("dm"); }));
   }
   function addFriend(name){
     const p=metPool.find(x=>x.name===name)||state.requests.recv.find(x=>x.name===name);
@@ -3129,7 +3135,7 @@
         <button class="btn btn-primary" id="fbDone" style="margin-top:20px">${t("fb_next")}</button>
         <button class="btn-link" id="fbSkip" style="margin-top:4px">${t("fb_skip")}</button>`;
       $$("#fbBody [data-fbadd]").forEach(b=>b.addEventListener("click",()=>{ addFriend(b.getAttribute("data-fbadd")); renderFeedback(); }));
-      const toRecap=()=>{ state.fbStep=3; renderFeedback(); };
+      const toRecap=()=>{ logHang(state.chosenGroup,state.chosenActivity); state.fbStep=3; renderFeedback(); };
       $("#fbDone").addEventListener("click",toRecap); $("#fbSkip").addEventListener("click",toRecap);
     } else {
       // step 3 — the keepsake recap (the payoff the old finish() threw away)
@@ -3137,7 +3143,6 @@
       const addedNames=ppl.filter(p=>state.friends.some(f=>f.name===p.name));
       const firstAdded=addedNames[0];
       const vibeLine=(state.rating.vibe>=4)?t("fb_recap_warm"):t("fb_recap_ok");
-      logHang(g,a);
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:10px">${t("fb_recap_t")}</h2>
         ${a?`<div class="recap-hang"><div class="rh-em ${a.g}">${glyph(a.icon)}</div><div><div class="rh-n">${actName(a)}</div><div class="rh-v">${esc(actVenue(a))}</div></div></div>`:""}
         <div class="recap-met"><div class="rm-faces">${ppl.map(p=>`<div class="rm-face">${avatarHTML(p,"av-sm")}${state.friends.some(f=>f.name===p.name)?`<span class="rm-tick">${svgIcon('check')}</span>`:""}</div>`).join("")}</div>
@@ -3158,9 +3163,10 @@
     const photo=state.photo?`<div class="avatar av-lg photo" style="margin:0 auto;width:104px;height:104px;background-image:url('${state.photo}')"></div>`
       :`<div class="avatar av-lg ${a.g}" style="margin:0 auto;width:104px;height:104px;font-size:50px">${state.emoji}</div>`;
     const nEvents=state.joinedGroups.length, nFriends=state.friends.length;
-    const hist=state.seedSocial?`
-        <div class="hist-card"><div class="hc-n">🧠 ${frActText("Trivia Night")}</div><div class="hc-v">Pub Saint-Laurent · ${t("prof_thisweek")}</div></div>
-        <div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px">${t("prof_more")}</div>`
+    const totalPeople=[...new Set(state.hangLog.flatMap(h=>h.metNames))].length;
+    const hist=state.hangLog.length
+      ? state.hangLog.map((h,i)=>{ const act=ACTIVITIES.find(x=>x.name===h.activity);
+          return `<div class="hist-card" data-phang="${i}"><div class="hc-n">${glyph(act?act.icon:'sparkles')} ${frActText(h.activity)}</div><div class="hc-v">${esc(h.venue.split(" · ")[0])} · ${frWhen(h.when)}</div></div>`; }).join("")
       :`<div class="hist-card" style="display:flex;align-items:center;justify-content:center;color:var(--faint);font-size:13px;min-height:64px">${t("prof_first")}</div>`;
     $("#profileBody").innerHTML=`
       ${!state.profileComplete?`<div id="pfSetupCard" style="border:1.5px solid rgba(255,138,107,.45);border-radius:var(--r-lg);padding:15px;margin-bottom:16px;display:flex;align-items:center;gap:13px;cursor:pointer">
@@ -3201,7 +3207,8 @@
       </div>
       <div class="sec-title">${t("prof_type")}</div>
       <div class="type-mini" id="pfType"><div class="tm-em ${a.g}">${svgIcon(a.e)}</div><div><div class="tm-n">${archName(state.profileKey||'easygoer')}</div><div class="tm-d">${archTag(state.profileKey||'easygoer')}</div></div><span style="margin-left:auto;color:var(--faint)">›</span></div>
-      <div class="sec-title" style="margin-top:8px">${t("prof_activity")}</div>
+      <div class="sec-title" style="margin-top:8px">${t("prof_story_t")}</div>
+      ${state.hangLog.length?`<div class="prof-storyline">${t("prof_story_line").replace("{e}",state.hangLog.length).replace("{p}",totalPeople)}</div>`:""}
       <div class="hist-rail">${hist}</div>
       <div class="set-list" style="margin-top:12px">
         <div class="set-item" data-go="invite"><span class="si-ic">${svgIcon('send')}</span>${t("prof_invite")}<span class="chev">›</span></div>
@@ -3210,6 +3217,7 @@
         <div class="set-item" id="pfRestart"><span class="si-ic">${svgIcon('rotate')}</span>${t("prof_restart")}<span class="chev">›</span></div>
       </div>`;
     $("#pfType").addEventListener("click",()=>{ state.archetypeView=state.profileKey; goTo("archetype"); });
+    $$("#profileBody [data-phang]").forEach(el=>el.addEventListener("click",()=>{ const h=state.hangLog[+el.getAttribute("data-phang")]; if(!h)return; const a=ACTIVITIES.find(x=>x.name===h.activity); if(a) state.chosenActivity=a; state.rating.vibe=h.vibe||0; state.fbStep=3; goTo("feedback"); }));
     $("#pfCam").addEventListener("click",()=>$("#photoInput").click());
     const setupCard=$("#pfSetupCard"); if(setupCard) setupCard.addEventListener("click",()=>openProfileSetup(()=>renderProfile(),false));
     const showupStat=$("#pfShowupStat"); if(showupStat){ showupStat.addEventListener("click",openReliability); showupStat.addEventListener("keydown",e=>{ if(e.key==="Enter"||e.key===" "){ e.preventDefault(); openReliability(); } }); }
@@ -3838,6 +3846,7 @@
       <div class="sheet-title">${t("rel_sheet_t")}</div>
       <div class="sheet-sub">${sub}</div>
       ${state.attended>0?`<div class="rel-streak">${svgIcon('check')} ${t("rel_streak").replace("{n}",state.attended)}</div>`:""}
+      ${(()=>{ const tr=relTier(), w=tr==="good"?100:(tr==="building"?58:18), lb=tr==="good"?t("rel_bar_good"):(tr==="building"?t("rel_bar_building"):t("rel_bar_new")); return `<div class="rel-bar"><div class="rel-bar-fill" style="width:${w}%"></div></div><div class="rel-bar-lab">${lb}</div>`; })()}
       <div class="info-block">
         <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b1")}</span></div>
         <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b2")}</span></div>
