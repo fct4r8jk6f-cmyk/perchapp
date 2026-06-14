@@ -2274,8 +2274,27 @@
   $("#ageContinue").addEventListener("click",()=>{ goTo("signin"); });
 
   /* ============ SIGN IN ============ */
-  function afterSignIn(m){
+  // Live mode: pull the signed-in account into `state` so the whole UI (profile,
+  // reliability, joined groups) reflects real data. No-op in sim mode.
+  async function perchHydrate(){
+    if(!window.PERCH_LIVE||!window.Perch) return;
+    try{
+      const p=await window.Perch.profile.mine();
+      if(p){
+        if(p.name) state.name=p.name;
+        if(p.username) state.username=p.username;
+        if(p.emoji) state.emoji=p.emoji;
+        if(p.profile_key) state.profileKey=p.profile_key;
+        state.profileComplete=!!p.profile_complete;
+        state.attended=p.attended||0;
+        state.checkedIn=!!p.checked_in;
+        state.plus=p.subscription_tier==="plus";
+      }
+    }catch(e){ console.warn("[Perch] hydrate failed:",e); }
+  }
+  async function afterSignIn(m){
     state.signedIn=true;
+    if(window.PERCH_LIVE) await perchHydrate();
     showToast(m==="apple"?t("toast_signed_apple"):t("toast_signed"));
     if(state.returning){
       // returning user: saved type + already-accepted terms — straight to the app
