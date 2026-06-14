@@ -439,6 +439,20 @@
   .mf-deep{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;margin-top:11px;}
   .sort-note{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);margin:-4px 0 12px;}
   .sort-note .ic{color:var(--c3);}
+  /* post-hang recap (reflection step 3) + reliability streak */
+  .recap-hang{display:flex;align-items:center;gap:12px;padding:14px;border-radius:16px;background:var(--surface-2);border:1px solid var(--line);margin:0 0 14px;}
+  .rh-em{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;color:#fff;}
+  .rh-n{font-family:'Fraunces',serif;font-weight:600;font-size:17px;}
+  .rh-v{font-size:12.5px;color:var(--muted);margin-top:2px;}
+  .recap-met{display:flex;align-items:center;gap:14px;margin:0 0 16px;}
+  .rm-faces{display:flex;}
+  .rm-face{position:relative;margin-right:-9px;}
+  .rm-tick{position:absolute;bottom:-3px;right:-3px;width:17px;height:17px;border-radius:50%;background:var(--mint);color:#0a2a22;display:flex;align-items:center;justify-content:center;border:2px solid var(--phone-bg);}
+  .rm-tick .ic{width:10px;height:10px;}
+  .rm-text{font-size:13px;color:var(--text);}
+  .recap-line{font-family:'Fraunces',serif;font-size:17px;color:var(--text);line-height:1.45;}
+  .rel-streak{display:flex;align-items:center;justify-content:center;gap:6px;font-size:12.5px;color:var(--accent-text);margin:-4px 0 14px;}
+  .rel-streak .ic{color:var(--mint);}
 
   /* group detail */
   .gd-hero{display:flex;align-items:center;gap:14px;margin:4px 0 16px;}
@@ -1426,6 +1440,7 @@
       fb_title:"Reflection",fb_q1:"How was it?",fb_q1s:"This shapes future groups.",fb_act:"The activity",fb_venue:"The venue",fb_vibe:"The group vibe",fb_next:"Next",
       fb_q2:"Would you go back to the venue?",fb_q2s:"This helps us pick better spots.",fb_yes:"Yes",fb_maybe:"Maybe",fb_no:"No",fb_note:"Anything you'd want us to know? (optional)",fb_note_ph:"The lighting, the noise, the staff…",
       fb_q3:"Add anyone as a friend?",fb_q3s:"Only if you'd like to stay in touch.",fb_added:"Added ✓",fb_add:"＋ Add",fb_done:"Done",fb_skip:"Skip",fb_thanks:"Thanks — this helps us shape better groups 💛",
+      fb_recap_t:"Your night, recapped",fb_recap_met:"You met {n} new people",fb_recap_added:"{n} added as friends ✓",fb_recap_warm:"Sounds like your kind of crowd 💛",fb_recap_ok:"Glad you came out 🌿",fb_recap_msg:"Message {n}",fb_milestone_1:"First hang done — you showed up 🎉",fb_milestone_3:"Three hangs in — you're finding your rhythm",fb_milestone_5:"Five hangs — you're a regular now 🌿",
       host_title:"Host a hang",host_sub:"Pick a vibe and a rough plan — we'll gather the right people. You just show up first.",host_kind:"What kind of hang?",host_when:"When?",host_where:"Around where?",host_size:"Group size",host_bigger:"Want a bigger hang (7–10)?",host_go:"Start forming my group",
       host_tonight:"Tonight",host_weekend:"This weekend",host_flex:"Flexible",host_anywhere:"Anywhere",
       inv_nav:"Invite",inv_title:"Bring someone<br>along",inv_sub:"They take the quiz and find their own group.",inv_copy:"Copy link",inv_share:"Share",inv_scan:"Or scan",
@@ -1528,7 +1543,7 @@
       rel_sheet_b1:"It's a trust signal, not a popularity contest — there are no public rankings.",
       rel_sheet_b2:"Only your group sees that you're dependable. The number stays between you and Perch.",
       rel_sheet_b3:"Showing up is the one thing that keeps it strong. Life happens — one miss won't sink you.",
-      rel_sheet_close:"Got it",wl_pos:"You're #{n} in line",wl_pos_short:"#{n} in line",wl_priority:"Reliable members get the next spot first — keep showing up and you move up.",
+      rel_sheet_close:"Got it",rel_streak:"You've shown up {n} time(s)",wl_pos:"You're #{n} in line",wl_pos_short:"#{n} in line",wl_priority:"Reliable members get the next spot first — keep showing up and you move up.",
       /* day-of coordination */
       co_here:"I'm here",co_statusrow_title:"Who's coming",co_st_omw:"on the way",co_st_late:"running late",co_st_here:"here",co_you:"You",co_nobody:"No updates yet — be the first to ping the group",
       /* waitlist backfill (automatic) */
@@ -1594,6 +1609,7 @@
       fb_title:"Réflexion",fb_q1:"C'était comment?",fb_q1s:"Ça façonne les prochains groupes.",fb_act:"L'activité",fb_venue:"L'endroit",fb_vibe:"L'ambiance du groupe",fb_next:"Suivant",
       fb_q2:"Tu retournerais à cet endroit?",fb_q2s:"Ça nous aide à choisir de meilleurs endroits.",fb_yes:"Oui",fb_maybe:"Peut-être",fb_no:"Non",fb_note:"Quelque chose à nous dire? (optionnel)",fb_note_ph:"L'éclairage, le bruit, le personnel…",
       fb_q3:"Ajouter quelqu'un comme ami?",fb_q3s:"Seulement si tu veux rester en contact.",fb_added:"Ajouté ✓",fb_add:"＋ Ajouter",fb_done:"Terminé",fb_skip:"Passer",fb_thanks:"Merci — ça nous aide à former de meilleurs groupes 💛",
+      fb_recap_t:"Ta soirée, en résumé",fb_recap_met:"Tu as rencontré {n} nouvelles personnes",fb_recap_added:"{n} ajouté(s) en ami(e)s ✓",fb_recap_warm:"On dirait ton genre de monde 💛",fb_recap_ok:"Content que tu sois sorti 🌿",fb_recap_msg:"Écrire à {n}",fb_milestone_1:"Première sortie faite — t'as été là 🎉",fb_milestone_3:"Trois sorties — tu prends ton rythme",fb_milestone_5:"Cinq sorties — t'es un régulier maintenant 🌿",
       host_title:"Organiser une sortie",host_sub:"Choisis une ambiance et un plan approximatif — on rassemble les bonnes personnes. Tu n'as qu'à arriver en premier.",host_kind:"Quel genre de sortie?",host_when:"Quand?",host_where:"Dans quel coin?",host_size:"Taille du groupe",host_bigger:"Envie d'une plus grosse sortie (7–10)?",host_go:"Former mon groupe",
       host_tonight:"Ce soir",host_weekend:"Ce week-end",host_flex:"Flexible",host_anywhere:"N'importe où",
       inv_nav:"Inviter",inv_title:"Amène quelqu'un<br>avec toi",inv_sub:"Il fait le quiz et trouve son propre groupe.",inv_copy:"Copier le lien",inv_share:"Partager",inv_scan:"Ou scanne",
@@ -1687,7 +1703,7 @@
       rel_sheet_b1:"C'est un signe de confiance, pas un concours de popularité — y'a aucun classement public.",
       rel_sheet_b2:"Juste ton groupe voit que t'es fiable. Le chiffre reste entre toi pis Perch.",
       rel_sheet_b3:"Te présenter, c'est la seule affaire qui le garde solide. La vie arrive — un oubli te coulera pas.",
-      rel_sheet_close:"C'est noté",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
+      rel_sheet_close:"C'est noté",rel_streak:"Tu t'es présenté {n} fois",wl_pos:"T'es le n° {n} dans la file",wl_pos_short:"n° {n} dans la file",wl_priority:"Les membres fiables ont la prochaine place en premier — continue de te présenter pis tu montes.",
       co_here:"Je suis là",co_statusrow_title:"Qui s'en vient",co_st_omw:"en route",co_st_late:"en retard",co_st_here:"sur place",co_you:"Toi",co_nobody:"Pas encore de nouvelles — sois le premier à faire signe au groupe",
       wl_offer_toast:"Une place vient de se libérer dans {g} — réclame-la",notif_wl_offer:"Ta place dans {g} est prête — réclame-la avant qu'elle passe à un autre",notif_wl_offer_time:"À l'instant · expire dans 30 min",wl_freed_toast:"Tu as quitté — la prochaine personne sur la liste d'attente vient d'avoir ta place",wl_offer_expired:"La place est passée à la prochaine personne — tu es encore sur la liste d'attente",
       pf_verify_t:"Fais-toi vérifier",pf_verify_s:"Confirme que c'est ben toi — les membres vérifiés rejoignent les groupes plus vite.",pf_verify_cta:"Vérifier",pf_verify_skip:"Peut-être plus tard"
@@ -1850,6 +1866,7 @@
     requests:{recv:[],sent:[]},
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
+    hangLog:[], milestonesSeen:[],
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -2093,7 +2110,7 @@
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -3075,7 +3092,7 @@
     return `<div class="star-row"><span class="star-lab">${label}</span><div class="stars" data-rate="${key}">${[1,2,3,4,5].map(n=>`<span class="star ${n<=v?'on':''}" data-n="${n}" role="button" tabindex="0" aria-label="${label} · ${n}/5">⭐</span>`).join("")}</div></div>`;
   }
   function renderFeedback(){
-    const dots=$("#fbDots"); dots.innerHTML=[0,1,2].map(i=>`<i class="${i===state.fbStep?'on':''}"></i>`).join("");
+    const dots=$("#fbDots"); dots.innerHTML=[0,1,2].map(i=>`<i class="${(state.fbStep===3||i===state.fbStep)?'on':''}"></i>`).join("");
     const body=$("#fbBody");
     if(state.fbStep===0){
       const r=state.rating, rated=r.activity&&r.venue&&r.vibe;
@@ -3100,18 +3117,35 @@
         <button class="btn btn-primary" id="fbNext" style="margin-top:16px">${t("fb_next")}</button>`;
       $$("#fbBody [data-v]").forEach(b=>b.addEventListener("click",()=>{ state.venueOk=b.getAttribute("data-v"); state.venueNote=($("#fbVenueNote")||{}).value||state.venueNote; renderFeedback(); }));
       $("#fbNext").addEventListener("click",()=>{ state.venueNote=($("#fbVenueNote")||{}).value||""; state.fbStep=2; renderFeedback(); });
-    } else {
+    } else if(state.fbStep===2){
       const ppl=metPool.slice(0,3);
       body.innerHTML=`<h2 class="display h2" style="margin-bottom:4px">${t("fb_q3")}</h2>
         <p class="sub" style="margin-bottom:14px">${t("fb_q3s")}</p>
         ${ppl.map(p=>{ const added=state.friends.some(f=>f.name===p.name);
           return `<div class="friend-row" style="cursor:default">${avatarHTML(p,"av-sm")}<div class="friend-meta"><div class="friend-name">${p.name} ${archBadge(p.key)}</div></div><button class="req-yes" data-fbadd="${p.name}" ${added?'disabled style="opacity:.5"':''}>${added?t("fb_added"):t("fb_add")}</button></div>`;
         }).join("")}
-        <button class="btn btn-primary" id="fbDone" style="margin-top:20px">${t("fb_done")}</button>
+        <button class="btn btn-primary" id="fbDone" style="margin-top:20px">${t("fb_next")}</button>
         <button class="btn-link" id="fbSkip" style="margin-top:4px">${t("fb_skip")}</button>`;
       $$("#fbBody [data-fbadd]").forEach(b=>b.addEventListener("click",()=>{ addFriend(b.getAttribute("data-fbadd")); renderFeedback(); }));
+      const toRecap=()=>{ state.fbStep=3; renderFeedback(); };
+      $("#fbDone").addEventListener("click",toRecap); $("#fbSkip").addEventListener("click",toRecap);
+    } else {
+      // step 3 — the keepsake recap (the payoff the old finish() threw away)
+      const a=state.chosenActivity, g=state.chosenGroup, ppl=metPool.slice(0,3);
+      const addedNames=ppl.filter(p=>state.friends.some(f=>f.name===p.name));
+      const firstAdded=addedNames[0];
+      const vibeLine=(state.rating.vibe>=4)?t("fb_recap_warm"):t("fb_recap_ok");
+      logHang(g,a);
+      body.innerHTML=`<h2 class="display h2" style="margin-bottom:10px">${t("fb_recap_t")}</h2>
+        ${a?`<div class="recap-hang"><div class="rh-em ${a.g}">${glyph(a.icon)}</div><div><div class="rh-n">${actName(a)}</div><div class="rh-v">${esc(actVenue(a))}</div></div></div>`:""}
+        <div class="recap-met"><div class="rm-faces">${ppl.map(p=>`<div class="rm-face">${avatarHTML(p,"av-sm")}${state.friends.some(f=>f.name===p.name)?`<span class="rm-tick">${svgIcon('check')}</span>`:""}</div>`).join("")}</div>
+          <div class="rm-text">${addedNames.length?t("fb_recap_added").replace("{n}",addedNames.length):t("fb_recap_met").replace("{n}",ppl.length)}</div></div>
+        <div class="recap-line">${vibeLine}</div>
+        ${firstAdded?`<button class="btn btn-primary" id="fbMsg" style="margin-top:18px">${t("fb_recap_msg").replace("{n}",esc(firstAdded.name.split(" ")[0]))}</button>`:""}
+        <button class="btn ${firstAdded?'btn-ghost':'btn-primary'}" id="fbDone" style="margin-top:${firstAdded?'8px':'18px'}">${t("fb_done")}</button>`;
       const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
-      $("#fbDone").addEventListener("click",finish); $("#fbSkip").addEventListener("click",finish);
+      const fm=$("#fbMsg"); if(fm) fm.addEventListener("click",()=>{ state.currentDM=firstAdded.name; goTo("dm"); });
+      $("#fbDone").addEventListener("click",finish);
     }
     makeFocusable($("#s-feedback"));
   }
@@ -3727,6 +3761,8 @@
     if(!state.seedSocial){
       state.seedSocial=true;
       state.requests.recv=[{name:"Priya",emoji:"😊",key:"connector",met:"Trivia Night"},{name:"Leo",emoji:"😎",key:"explorer",met:"Walking Tour"}];
+      // seed one past hang so the demo's Perch story / past tab is populated (canonical EN; translated at render)
+      state.hangLog.push({gid:"seed-trivia",activity:"Trivia Night",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",metNames:["Maya","Theo"],vibe:5,ts:Date.now()});
     }
     goTo("joined");
   }
@@ -3797,6 +3833,7 @@
       <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="sheet-title">${t("rel_sheet_t")}</div>
       <div class="sheet-sub">${sub}</div>
+      ${state.attended>0?`<div class="rel-streak">${svgIcon('check')} ${t("rel_streak").replace("{n}",state.attended)}</div>`:""}
       <div class="info-block">
         <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b1")}</span></div>
         <div class="ib-row"><span class="star">✦</span><span>${t("rel_sheet_b2")}</span></div>
@@ -3837,13 +3874,21 @@
     });
   }
   // shared check-in (used by the day-of CTA and the "I'm here" coordination chip) — idempotent
+  // record a completed hang once per group per session (canonical EN; translated at render)
+  function logHang(g,a){
+    if(!g||!a||state.hangLog.some(h=>h.gid===g.id)) return;
+    state.hangLog.unshift({gid:g.id,activity:a.name,venue:a.venue,when:g.when||a.when,metNames:metPool.slice(0,3).map(p=>p.name),vibe:state.rating.vibe||0,ts:Date.now()});
+  }
   function checkIn(g){
     if(state.checkedIn&&state.dayStatus[g.id]==="here") return;
-    state.checkedIn=true; state.attended=Math.max(state.attended,1); state.dayStatus[g.id]="here";
+    state.checkedIn=true; state.attended++; state.dayStatus[g.id]="here";
     const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
     const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
     if(state.chatThreads[g.id]) pushMsg({sys:true,text:line},g.id);
-    showToast(t("toast_checkin"));
+    // first/3rd/5th hang gets a warm, private milestone toast (attendance-based, self-only)
+    const ms=[1,3,5].includes(state.attended)&&!state.milestonesSeen.includes(state.attended)?state.attended:null;
+    if(ms) state.milestonesSeen.push(ms);
+    showToast(ms?t("fb_milestone_"+ms):t("toast_checkin"));
   }
 
   /* ============ WAITLIST BACKFILL (automatic loop) ============ */
