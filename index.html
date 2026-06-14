@@ -437,6 +437,8 @@
   .mf-reason.mf-soft .ic{color:var(--accent-text);}
   .mf-count{font-size:12.5px;color:var(--accent-text);margin-top:11px;}
   .mf-deep{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;margin-top:11px;}
+  .sort-note{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);margin:-4px 0 12px;}
+  .sort-note .ic{color:var(--c3);}
 
   /* group detail */
   .gd-hero{display:flex;align-items:center;gap:14px;margin:4px 0 16px;}
@@ -1397,7 +1399,7 @@
       gc_mixed:"Mixed group of",gc_spots:"spots filled",of:"of",gc_see:"See group →",gc_open:"Open →",
       mf_why:"Why this group",mf_strong:"Strong fit",mf_good:"Good fit",mf_try:"Worth a try",mf_r_kin:"Someone here shares your type — {type}",mf_r_compat:"A natural match for your type: {who}",mf_r_vibe:"The room leans {vibe} — your kind of energy",mf_r_small:"Small enough to actually connect",mf_deep:"See the full compatibility breakdown · Perch+",
       gd_hosting:"You're hosting",gd_forming_status:"● Forming · matching people",gd_host:"you're the host",
-      grp_your:"Your groups",grp_forming_for:"groups forming",grp_later:"Later this week",grp_past:"Past",
+      grp_your:"Your groups",grp_forming_for:"groups forming",grp_later:"Later this week",grp_past:"Past",grp_sorted:"Sorted by your fit",
       gd_when:"When",gd_where:"Where",gd_planb:"Plan B",gd_whos:"Who's going",gd_mixed:"A mixed group",gd_open_spot:"open",
       gd_leave_note:"You can leave anytime — the earlier you do, the easier it is for someone else to take your spot.",gd_join:"Join this group",gd_openchat:"Open group chat",gd_leave:"Leave this group",
       gd_your:"Your group",gd_group:"Group",gd_full_t:"This group just filled up",gd_full_s:"Here's a similar one with a spot open.",
@@ -1565,7 +1567,7 @@
       gc_mixed:"Groupe varié de",gc_spots:"places comblées",of:"de",gc_see:"Voir le groupe →",gc_open:"Ouvrir →",
       mf_why:"Pourquoi ce groupe",mf_strong:"Super match",mf_good:"Bon match",mf_try:"Ça vaut le coup",mf_r_kin:"Quelqu'un ici a le même type que toi — {type}",mf_r_compat:"Fait pour ton type : {who}",mf_r_vibe:"L'ambiance est plutôt {vibe} — ton genre d'énergie",mf_r_small:"Assez petit pour vraiment connecter",mf_deep:"Voir l'analyse de compatibilité complète · Perch+",
       gd_hosting:"Tu organises",gd_forming_status:"● En formation · jumelage en cours",gd_host:"tu es l'hôte",
-      grp_your:"Tes groupes",grp_forming_for:"groupes en formation",grp_later:"Plus tard cette semaine",grp_past:"Passé",
+      grp_your:"Tes groupes",grp_forming_for:"groupes en formation",grp_later:"Plus tard cette semaine",grp_past:"Passé",grp_sorted:"Trié selon ton match",
       gd_when:"Quand",gd_where:"Où",gd_planb:"Plan B",gd_whos:"Qui y va",gd_mixed:"Un groupe varié",gd_open_spot:"libre",
       gd_leave_note:"Tu peux partir quand tu veux — plus tu le fais tôt, plus c'est facile pour quelqu'un d'autre de prendre ta place.",gd_join:"Rejoindre ce groupe",gd_openchat:"Ouvrir la discussion",gd_leave:"Quitter ce groupe",
       gd_your:"Ton groupe",gd_group:"Groupe",gd_full_t:"Ce groupe vient de se remplir",gd_full_s:"En voici un semblable avec une place libre.",
@@ -2466,8 +2468,11 @@
       const groups=makeGroups();
       const joinedIds=new Set(state.joinedGroups.map(j=>j.group.id));
       const open=groups.filter(g=>!joinedIds.has(g.id));
-      const today=open.filter(g=>g.status==="today"), week=open.filter(g=>g.status!=="today");
+      // strongest matches first — the match engine drives the order you see
+      const byFit=(x,y)=>matchFit(y).score-matchFit(x).score;
+      const today=open.filter(g=>g.status==="today").sort(byFit), week=open.filter(g=>g.status!=="today").sort(byFit);
       html+=`<div class="day-div">${actName(state.chosenActivity)} · ${t("grp_forming_for")}</div>`;
+      if(today.length||week.length) html+=`<div class="sort-note">${svgIcon('sparkles')} ${t("grp_sorted")}</div>`;
       if(today.length){ html+=today.map(g=>groupCardHTML(g,false)).join(""); }
       if(week.length){ html+=`<div class="day-div">${t("grp_later")}</div>`+week.map(g=>groupCardHTML(g,false)).join(""); }
       body.innerHTML=html;
