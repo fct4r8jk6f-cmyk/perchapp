@@ -182,17 +182,17 @@ create or replace function public.gen_resv_code() returns text
 language plpgsql as $$
 declare
   alphabet text := 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';  -- no I,O,0,1
-  code text;
+  v_code text;  -- NOT "code": a var named "code" collides with reservations.code (ambiguous)
   i int;
 begin
   loop
-    code := 'PCH-';
+    v_code := 'PCH-';
     for i in 1..4 loop
-      code := code || substr(alphabet, 1 + floor(random() * length(alphabet))::int, 1);
+      v_code := v_code || substr(alphabet, 1 + floor(random() * length(alphabet))::int, 1);
     end loop;
-    exit when not exists (select 1 from public.reservations r where r.code = code);
+    exit when not exists (select 1 from public.reservations r where r.code = v_code);
   end loop;
-  return code;
+  return v_code;
 end;
 $$;
 
