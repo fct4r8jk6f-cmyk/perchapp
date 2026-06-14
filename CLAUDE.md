@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-An interactive product demo for **Perch** — a small-group friend-making app. Everything is simulated: no backend, no real accounts, no payments. `PLAN.md` is the product source of truth (thesis, risks, MVP cut); the demo expresses that plan, so check it before changing product behavior.
+An interactive product demo for **Perch** — a small-group friend-making app. Everything is simulated: no backend, no real accounts, no payments. `docs/PLAN.md` is the product source of truth (thesis, risks, MVP cut); the demo expresses that plan, so check it before changing product behavior. (All planning/design/legal docs live in `docs/`; only `README.md` and this file sit at the repo root.)
 
-The backend the demo *implies* is **designed but not built**: `BACKEND.md` (architecture & decisions), `schema.sql` (validated PostgreSQL DDL — every demo invariant encoded), and `API.md` (REST contract for every flow). These describe a future server, not anything running today — the demo is still single-file, no-build, no-backend. `BOOTSTRAP.md` is the zero-budget launch plan (the current plan: prove by hand → free-tier web app → stores later); `LAUNCH.md` the full funded roadmap; `LEGAL.md` the legal-placeholder map; `COUNSEL_BRIEF.md` the Quebec-lawyer brief + founder decision memo; `REVIEW.md` the QA log.
+The backend the demo *implies* is **designed but not built**: `docs/BACKEND.md` (architecture & decisions), `docs/schema.sql` (validated PostgreSQL DDL — every demo invariant encoded), and `docs/API.md` (REST contract for every flow). These describe a future server, not anything running today — the demo is still single-file, no-build, no-backend. `docs/BOOTSTRAP.md` is the zero-budget launch plan (the current plan: prove by hand → free-tier web app → stores later); `docs/LAUNCH.md` the full funded roadmap; `docs/LEGAL.md` the legal-placeholder map; `docs/COUNSEL_BRIEF.md` the Quebec-lawyer brief + founder decision memo; `docs/REVIEW.md` the QA log.
 
 ## Run it
 

@@ -2078,7 +2078,7 @@
   function glyph(v){ return (v&&ICONS[v])?svgIcon(v):(v==null?"":v); }
   /* whether the profile has been personalised — gates first join/host, drives the "set up" nudges */
   const needsProfile=()=>!state.profileComplete;
-  /* reliability — show-up record is Perch's reputation currency (PLAN.md). Earned by ATTENDING (checking in), not merely joining */
+  /* reliability — show-up record is Perch's reputation currency (docs/PLAN.md). Earned by ATTENDING (checking in), not merely joining */
   const isReliable=()=>state.checkedIn||state.attended>0;
   const showupRate=()=>isReliable()?100:null;
   // warm tiering: new members aren't punished with a bare "—"; booked-but-not-attended reads as "Building"

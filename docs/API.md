@@ -375,4 +375,4 @@ Reference data is canonical-English in the DB and returned with locale-resolved 
 
 ---
 
-*The wire contract above is consistent with [`schema.sql`](schema.sql) (tables / columns / enums) and the demo flow functions in [`index.html`](index.html): `requestJoin` / `beginJoin` / `finishJoin` / `openReservation` / `openWaitlist` / `scheduleBackfillOffer` / `fireBackfillOffer` (~L3456–3647), `resvCode` / `wlPosition` / `usernameStatus` (~L1777–1788), `checkIn` / `seedDaySim` (~L3604–3621).*
+*The wire contract above is consistent with [`schema.sql`](schema.sql) (tables / columns / enums) and the demo flow functions in [`index.html`](../index.html): `requestJoin` / `beginJoin` / `finishJoin` / `openReservation` / `openWaitlist` / `scheduleBackfillOffer` / `fireBackfillOffer` (~L3456–3647), `resvCode` / `wlPosition` / `usernameStatus` (~L1777–1788), `checkIn` / `seedDaySim` (~L3604–3621).*

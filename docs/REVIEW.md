@@ -5,6 +5,8 @@ A complete trace of `index.html` (every screen, button, and state transition). I
 > Note: this was a **static code trace**, not a live browser click-through (no browser-automation tool was available in this session). Every item below is grounded in the actual code, but please verify each in a running browser (`npx serve .`) before/after fixing.
 >
 > **Update (2026-06-12):** a full live browser click-through (every screen, en + fr) has since been completed — the findings and fixes are in the **"Second sweep"** section below.
+>
+> **Update (2026-06-14):** the four feature areas (Discovery & matching, Retention & delight, Profiles & onboarding, Trust & safety depth) plus the warm-editorial de-AI redesign and deepened archetypes have since shipped — each designed via a multi-agent workflow, built in verified batches, and pushed. A fresh **7-dimension QA audit** (i18n, state/reset, invariants, escaping, feature-logic, navigation, theming/a11y) then ran with adversarial verification: **7 of 20 candidate findings confirmed, 6 fixed** (commit `765b3eb`) — `resetDemo` now resets theme/rating; the chat member name is `esc()`'d; the share-plan guardian is scoped to its event; the post-recap redirect is silent; light-theme brand tokens were darkened for contrast. *Not fixed by design:* `resetDemo` intentionally does **not** reset accessibility settings — they should persist across a restart, not be re-imposed. i18n parity holds at **723 = 723**.
 
 ---
 

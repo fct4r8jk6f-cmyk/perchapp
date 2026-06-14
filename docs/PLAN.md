@@ -2,6 +2,8 @@
 
 *"Perch" is a working name. This repo holds the interactive v1 demo (`index.html`); this document is the plan the demo expresses.*
 
+> **Demo status (2026-06-14):** the v1 demo is **feature-complete and QA'd** — discovery & matching, retention & delight, profiles & onboarding, and trust & safety are all built and verified (bilingual en/fr-CA, dark + light themes, accessibility settings). Next is go-live: deploy + a custom domain, then the backend ([`BOOTSTRAP.md`](BOOTSTRAP.md) is the ~$0 path). The strategy below is unchanged — it's what the demo expresses.
+
 ## One line
 
 Small groups (4–6) of adults meeting around real activities — friends, not dates — matched by social-style compatibility, starting in Montreal.
