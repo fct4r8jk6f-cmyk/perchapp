@@ -1444,6 +1444,7 @@
       gd_leave_note:"You can leave anytime — the earlier you do, the easier it is for someone else to take your spot.",gd_join:"Join this group",gd_openchat:"Open group chat",gd_leave:"Leave this group",
       gd_your:"Your group",gd_group:"Group",gd_full_t:"This group just filled up",gd_full_s:"Here's a similar one with a spot open.",
       gd_ff:"▶ Fast-forward to event time",gd_happening:"● Happening now ·",gd_there:"There? Let the group know",gd_tapcheck:"Tap to check in",gd_imhere:"I'm here",gd_checkedin:"Checked in",gd_groupknows:"The group knows you're here",gd_here_tag:" · here",
+      sp_title:"Share tonight's plan",sp_sub:"Pick one person who'll know where you are.",sp_add:"Add a trusted contact",sp_name_ph:"Their name",sp_who:"What they'll see",sp_shares_what:"The activity, venue, time and your status.",sp_only_tonight:"Shared only with them, only for tonight.",sp_share_btn:"Share my plan",sp_following:"{n} is following along tonight",sp_done:"{n} can see tonight's plan",sp_reply:"Have fun — text me when you're home",sp_change:"Change",home_safe:"Made it home safe",home_done:"Glad you made it home",home_reply:"Glad you're home safe",help_title:"Need a hand?",help_sub:"Quiet options, just for you.",help_quiet_leave:"Quietly leave this group",help_text_contact:"Text my trusted contact now",help_resources:"Wellbeing & local lines",help_private_note:"No one in your group sees this.",help_sent:"Sent — {n} will call you",
       toast_checkin:"You're checked in — the group knows 👋",sys_here_you:"You're here 👋",
       joined_title:"You're in.",joined_when:"When",joined_where:"Where",joined_who:"Who",you_plus:"You +",others:"others",
       joined_cal:"🗓️ Add to Calendar",joined_dir:"🧭 Directions",joined_chatbtn:"View Group Chat",joined_invite:"Know someone who'd enjoy this? Invite them",
@@ -1614,6 +1615,7 @@
       gd_leave_note:"Tu peux partir quand tu veux — plus tu le fais tôt, plus c'est facile pour quelqu'un d'autre de prendre ta place.",gd_join:"Rejoindre ce groupe",gd_openchat:"Ouvrir la discussion",gd_leave:"Quitter ce groupe",
       gd_your:"Ton groupe",gd_group:"Groupe",gd_full_t:"Ce groupe vient de se remplir",gd_full_s:"En voici un semblable avec une place libre.",
       gd_ff:"▶ Avancer à l'heure de l'activité",gd_happening:"● En cours ·",gd_there:"Sur place? Avise le groupe",gd_tapcheck:"Touche pour t'enregistrer",gd_imhere:"Je suis là",gd_checkedin:"Enregistré",gd_groupknows:"Le groupe sait que t'es là",gd_here_tag:" · sur place",
+      sp_title:"Partage ton plan de ce soir",sp_sub:"Choisis une personne qui saura où tu es.",sp_add:"Ajouter un contact de confiance",sp_name_ph:"Son nom",sp_who:"Ce qu'iel verra",sp_shares_what:"L'activité, le lieu, l'heure et ton statut.",sp_only_tonight:"Partagé seulement avec cette personne, seulement ce soir.",sp_share_btn:"Partager mon plan",sp_following:"{n} suit ton plan ce soir",sp_done:"{n} voit ton plan de ce soir",sp_reply:"Amuse-toi — écris-moi quand t'es rentré·e",sp_change:"Modifier",home_safe:"Bien rentré·e",home_done:"Content que tu sois bien rentré·e",home_reply:"Content que tu sois rentré·e",help_title:"Besoin d'un coup de main?",help_sub:"Des options discrètes, juste pour toi.",help_quiet_leave:"Quitter ce groupe discrètement",help_text_contact:"Écrire à mon contact de confiance",help_resources:"Bien-être et lignes d'écoute",help_private_note:"Personne dans ton groupe ne voit ça.",help_sent:"Envoyé — {n} va t'appeler",
       toast_checkin:"Tu es enregistré — le groupe le sait 👋",sys_here_you:"Tu es là 👋",
       joined_title:"C'est confirmé.",joined_when:"Quand",joined_where:"Où",joined_who:"Qui",you_plus:"Toi +",others:"autres",
       joined_cal:"🗓️ Ajouter au calendrier",joined_dir:"🧭 Itinéraire",joined_chatbtn:"Voir la discussion",joined_invite:"Tu connais quelqu'un que ça intéresserait? Invite-le",
@@ -1898,7 +1900,7 @@
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
     hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false, prompts:[], groupVibe:[], depthDismissed:false,
-    reports:[], mutedMembers:new Set(), mutedGroups:{},
+    reports:[], mutedMembers:new Set(), mutedGroups:{}, guardian:null,
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -2180,7 +2182,7 @@
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],mutedMembers:new Set(),mutedGroups:{},
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],mutedMembers:new Set(),mutedGroups:{},guardian:null,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -2642,7 +2644,7 @@
         bar=`<div class="cta-bar"><button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
       }
       // day-of coordination panel (status chips + a live "who's coming" row)
-      if(dayOf){ seedDaySim(g); flowExtra+=coordPanelHTML(g); }
+      if(dayOf){ seedDaySim(g); flowExtra+=coordPanelHTML(g)+dayofSafetyHTML(g,joinEntry); }
       flowExtra+=`<button class="btn-link" id="gdLeave" style="margin-top:8px">${t("gd_leave")}</button>`;
     } else if(spotsLeft===0){
       const wld=state.waitlisted.some(w=>w.group.id===g.id);
@@ -2721,6 +2723,9 @@
       const m=g.members.find(x=>x[0]===el.getAttribute("data-member"));
       if(m) openMemberActions({name:m[0],emoji:m[1],key:m[2]});
     }));
+    $$("#s-groupdetail [data-shareplan]").forEach(el=>el.addEventListener("click",openShareplans));
+    const hm=$("#s-groupdetail [data-home]"); if(hm) hm.addEventListener("click",()=>{ const je=state.joinedGroups.find(j=>j.group.id===g.id); if(je) je.gotHome=true; showToast(t("home_done")); if(state.guardian) setTimeout(()=>showToast(state.guardian.name+" · "+t("home_reply")),1400); renderGroupDetail(); });
+    const gh=$("#s-groupdetail [data-gethelp]"); if(gh) gh.addEventListener("click",openGetHelp);
   }
   // hosted hang: status, members so far, and the option to cancel it
   function renderHostedDetail(g){
@@ -4245,6 +4250,53 @@
     openSheet();
   }
 
+  // ---- In-person safety (day-of): share-plan beacon + made-it-home + discreet silent help ----
+  function dayofSafetyHTML(g,je){
+    const guard=state.guardian;
+    const shareTile=guard
+      ?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.06)"><div class="it-ic" style="color:var(--mint)">${svgIcon('shield')}</div><div style="flex:1"><div class="it-lab">${t("sp_following").replace("{n}",esc(guard.name))}</div><div class="it-val">${t("sp_shares_what")}</div></div><span class="link-inline" data-shareplan style="font-size:11px">${t("sp_change")}</span></div>`
+      :`<div class="info-tile" data-shareplan style="cursor:pointer;border-color:rgba(165,123,255,.35)"><div class="it-ic" style="color:var(--accent-text)">${svgIcon('shield')}</div><div style="flex:1"><div class="it-lab">${t("sp_title")}</div><div class="it-val">${t("sp_sub")}</div></div><span class="chev">›</span></div>`;
+    const home=(state.checkedIn&&state.dayOf===g.id)
+      ?(je&&je.gotHome
+        ?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.06)"><div class="it-ic" style="color:var(--mint)">${svgIcon('check')}</div><div><div class="it-lab">${t("home_done")}</div></div></div>`
+        :`<button class="btn btn-soft" data-home style="margin-top:8px">${svgIcon('check')} ${t("home_safe")}</button>`)
+      :"";
+    return shareTile+home+`<button class="btn-link" data-gethelp style="margin-top:8px;color:var(--accent-text)">${svgIcon('heart')} ${t("help_title")}</button>`;
+  }
+  function openShareplans(){
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="sheet-title">${t("sp_title")}</div>
+      <div class="sheet-sub">${t("sp_sub")}</div>
+      <div class="field"><label>${t("sp_add")}</label><input id="spName" placeholder="${t("sp_name_ph")}" maxlength="30" autocomplete="off"></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('eye')}</div><div><div class="it-lab">${t("sp_who")}</div><div class="it-val">${t("sp_shares_what")}</div></div></div>
+      <p class="sheet-foot">${t("sp_only_tonight")}</p>
+      <button class="btn btn-primary" id="spSave">${t("sp_share_btn")}</button>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
+    $("#spSave").addEventListener("click",()=>{ const n=($("#spName").value||"").trim(); if(!n) return; state.guardian={name:n}; closeSheet(); showToast(t("sp_done").replace("{n}",n)); if($("#s-groupdetail").classList.contains("active")) renderGroupDetail(); setTimeout(()=>showToast(n+" · "+t("sp_reply")),2400); });
+    sheetClose(); openSheet();
+  }
+  function openGetHelp(){
+    const g=state.chosenGroup;
+    $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
+      <div class="sheet-title">${t("help_title")}</div>
+      <div class="sheet-sub">${t("help_sub")}</div>
+      <div class="set-list">
+        <div class="set-item" data-help="leave"><span class="si-ic">${svgIcon('logout')}</span>${t("help_quiet_leave")}<span class="chev">›</span></div>
+        ${state.guardian?`<div class="set-item" data-help="contact"><span class="si-ic">${svgIcon('send')}</span>${t("help_text_contact")}<span class="chev">›</span></div>`:""}
+        <div class="set-item" data-help="well"><span class="si-ic">${svgIcon('leaf')}</span>${t("help_resources")}<span class="chev">›</span></div>
+      </div>
+      <p class="sheet-foot">${t("help_private_note")}</p>
+      <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_close")}</button>`;
+    $$("#sheetBody [data-help]").forEach(el=>el.addEventListener("click",()=>{
+      const k=el.getAttribute("data-help");
+      if(k==="leave"){ closeSheet(); if(g) openLeaveSheet(g); }
+      else if(k==="contact"){ closeSheet(); showToast(t("help_sent").replace("{n}",state.guardian?state.guardian.name:"")); }
+      else if(k==="well"){ closeSheet(); openDoc("wellbeing"); }
+    }));
+    sheetClose(); openSheet();
+  }
   function openChatSafety(){
     const g=state.chosenGroup; const mems=(g&&g.members)||[];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
@@ -4252,6 +4304,7 @@
       <div class="sheet-title">${t("cs_title")}</div>
       <div class="sheet-sub">${t("cs_sub")}</div>
       <div class="set-list">
+        <div class="set-item" data-act="help"><span class="si-ic">${svgIcon('heart')}</span>${t("help_title")}<span class="chev">›</span></div>
         <div class="set-item" data-act="report"><span class="si-ic">${svgIcon('flag')}</span>${t("cs_report")}<span class="chev">›</span></div>
         <div class="set-item" data-act="leave"><span class="si-ic">${svgIcon('logout')}</span>${t("gd_leave")}<span class="chev">›</span></div>
         <div class="set-item" data-doc="guidelines"><span class="si-ic">${svgIcon('heart')}</span>${t("set_guidelines")}<span class="chev">›</span></div>
@@ -4261,7 +4314,8 @@
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-act]").forEach(el=>el.addEventListener("click",()=>{
       const a=el.getAttribute("data-act");
-      if(a==="report"){ if(g&&g.members&&g.members[0]){ openReport({name:g.members[0][0],emoji:g.members[0][1],key:g.members[0][2]}); } else { closeSheet(); showToast(t("rep_done")); } }
+      if(a==="help"){ openGetHelp(); }
+      else if(a==="report"){ if(g&&g.members&&g.members[0]){ openReport({name:g.members[0][0],emoji:g.members[0][1],key:g.members[0][2]}); } else { closeSheet(); showToast(t("rep_done")); } }
       else if(a==="leave"){ closeSheet(); if(g) openLeaveSheet(g); }
     }));
     $$("#sheetBody [data-rep]").forEach(el=>el.addEventListener("click",()=>{
