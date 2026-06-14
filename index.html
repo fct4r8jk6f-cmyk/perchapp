@@ -1270,27 +1270,27 @@
   /* ============ ACTIVITIES ============ */
   const CATS=["For you","Food & Drink","Outdoors","Arts & Culture","Games","Chill","Active","Evening Out"];
   const ACTIVITIES=[
-    {id:"thursdays",icon:"feather",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week"},
-    {id:"trivia",icon:"lightbulb",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular"},
-    {id:"boardgame",icon:"dice",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week"},
-    {id:"cooking",icon:"utensils",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend",price:"$35"},
-    {id:"walk",icon:"route",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week"},
-    {id:"foodmkt",icon:"bag",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week"},
-    {id:"comedy",icon:"mic",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full"},
-    {id:"bookclub",icon:"book",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Café Pages · Verdun",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week"},
-    {id:"cinema",icon:"film",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop on Saint-Laurent",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, easy evening",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New"},
-    {id:"pottery",icon:"vase",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Argile · Rosemont",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week"},
-    {id:"escape",icon:"lock",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Downtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week"},
-    {id:"hike",icon:"mountain",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week"},
-    {id:"jazz",icon:"disc",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week"},
-    {id:"plant",icon:"sprout",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week"},
-    {id:"paint",icon:"wine",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week",price:"$30"},
-    {id:"karaoke",icon:"music",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular"},
-    {id:"rooftop",icon:"building",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week"},
-    {id:"artclass",icon:"image",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week"},
-    {id:"improv",icon:"smile",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New"},
-    {id:"vintage",icon:"shirt",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week"},
-    {id:"axe",icon:"target",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular",price:"$28"}
+    {id:"thursdays",icon:"feather",name:"Perch Thursdays",cat:"Evening Out",g:"g-cat-evening",venue:"Rotating spot · revealed Monday",when:"Thu · 7:00 PM",size:"4–6 people",vibe:"The weekly classic — a group forms every single week",planb:"Backup venue posted in chat",social:"26 joined this week",badge:"🪶 Every week",interests:["Coffee","Board games"]},
+    {id:"trivia",icon:"lightbulb",name:"Trivia Night",cat:"Games",g:"g-cat-games",venue:"Pub Saint-Laurent · Plateau",when:"Wed · 7:30 PM",size:"4–6 people",vibe:"Low-key, great for first timers",planb:"The Library Bar nearby",social:"8 joined this week",badge:"🔥 Popular",interests:["Board games"]},
+    {id:"boardgame",icon:"dice",name:"Board Game Café",cat:"Games",g:"g-cat-games",venue:"Café Meeple · Mile End",when:"Thu · 6:30 PM",size:"4–5 people",vibe:"Relaxed, easy to join in",planb:"Café Rook two doors down",social:"5 joined this week",interests:["Board games","Gaming"]},
+    {id:"cooking",icon:"utensils",name:"Cooking Class",cat:"Food & Drink",g:"g-cat-food",venue:"Atelier Safran · Griffintown",when:"Sat · 5:00 PM",size:"5–6 people",vibe:"Hands busy, talk optional",planb:"The Spice Room nearby",social:"11 joined this week",badge:"Popular this weekend",price:"$35",interests:["Cooking"]},
+    {id:"walk",icon:"route",name:"Walking Tour",cat:"Outdoors",g:"g-cat-outdoors",venue:"Vieux-Port meet point",when:"Sun · 10:00 AM",size:"5–8 people",vibe:"Gentle pace, lots to see",planb:"Canal Lachine route if wet",social:"6 joined this week",interests:["Hiking","Photography"]},
+    {id:"foodmkt",icon:"bag",name:"Food Market",cat:"Food & Drink",g:"g-cat-food",venue:"Marché Jean-Talon",when:"Sat · 12:00 PM",size:"4–6 people",vibe:"Easygoing & social",planb:"Indoor hall if rain",social:"9 joined this week",interests:["Cooking","Coffee"]},
+    {id:"comedy",icon:"mic",name:"Comedy Show",cat:"Evening Out",g:"g-cat-evening",venue:"The Basement Club · Quartier des Spectacles",when:"Fri · 8:00 PM",size:"4–6 people",vibe:"Side by side, easy laughs",planb:"Open mic upstairs",social:"7 joined this week",badge:"Almost full",interests:["Movies"]},
+    {id:"bookclub",icon:"book",name:"Book Club",cat:"Chill",g:"g-cat-chill",venue:"Café Pages · Verdun",when:"Tue · 6:30 PM",size:"4–5 people",vibe:"Quiet, thoughtful crowd",planb:"The Reading Room nearby",social:"4 joined this week",interests:["Reading","Coffee"]},
+    {id:"cinema",icon:"film",name:"Outdoor Cinema",cat:"Arts & Culture",g:"g-cat-arts",venue:"Rooftop on Saint-Laurent",when:"Fri · 8:30 PM",size:"5–7 people",vibe:"Chilled, easy evening",planb:"Indoor screening if rain",social:"10 joined this week",badge:"New",interests:["Movies"]},
+    {id:"pottery",icon:"vase",name:"Pottery",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Argile · Rosemont",when:"Sun · 2:00 PM",size:"4–5 people",vibe:"Calm and hands-on",planb:"Studio B next door",social:"3 joined this week",interests:["Art"]},
+    {id:"escape",icon:"lock",name:"Escape Room",cat:"Games",g:"g-cat-games",venue:"Locked In · Downtown",when:"Sat · 7:00 PM",size:"4–6 people",vibe:"Team puzzle, lots of fun",planb:"The Vault room nearby",social:"6 joined this week",interests:["Board games","Gaming"]},
+    {id:"hike",icon:"mountain",name:"Sunrise Hike",cat:"Active",g:"g-cat-active",venue:"Mount Royal trailhead",when:"Sun · 6:00 AM",size:"5–7 people",vibe:"Active, fresh, friendly",planb:"Lower loop if icy",social:"5 joined this week",interests:["Hiking","Running"]},
+    {id:"jazz",icon:"disc",name:"Jazz Bar",cat:"Evening Out",g:"g-cat-evening",venue:"La Note Bleue · Quartier des Spectacles",when:"Thu · 9:00 PM",size:"4–5 people",vibe:"Warm, relaxed evening",planb:"The Cellar nearby",social:"8 joined this week",interests:["Live music"]},
+    {id:"plant",icon:"sprout",name:"Plant Swap",cat:"Outdoors",g:"g-cat-outdoors",venue:"Greenhouse Collective · Mile-Ex",when:"Sat · 11:00 AM",size:"4–6 people",vibe:"Friendly and laid-back",planb:"Indoor atrium if rain",social:"4 joined this week",interests:["Photography"]},
+    {id:"paint",icon:"wine",name:"Paint & Sip",cat:"Arts & Culture",g:"g-cat-arts",venue:"Toile & Vin · Plateau",when:"Fri · 7:00 PM",size:"5–6 people",vibe:"Creative, no skill needed",planb:"Studio Loft nearby",social:"9 joined this week",price:"$30",interests:["Art"]},
+    {id:"karaoke",icon:"music",name:"Karaoke",cat:"Evening Out",g:"g-cat-evening",venue:"Sing City · Chinatown",when:"Sat · 9:00 PM",size:"5–7 people",vibe:"High energy, all welcome",planb:"Private room if busy",social:"12 joined this week",badge:"🔥 Popular",interests:["Live music"]},
+    {id:"rooftop",icon:"building",name:"Rooftop Social",cat:"Evening Out",g:"g-cat-evening",venue:"Terrasse Place Royale · Old Port",when:"Fri · 6:30 PM",size:"5–8 people",vibe:"Mixed crowd, good views",planb:"Lounge level if windy",social:"11 joined this week",interests:["Coffee"]},
+    {id:"artclass",icon:"image",name:"Art Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"Studio Bleu · Saint-Henri",when:"Sat · 3:00 PM",size:"4–6 people",vibe:"Focus on the canvas, chat in between",planb:"Open studio next door",social:"5 joined this week",interests:["Art"]},
+    {id:"improv",icon:"smile",name:"Improv Class",cat:"Arts & Culture",g:"g-cat-arts",venue:"The Stage Door · Quartier Latin",when:"Wed · 7:00 PM",size:"6–8 people",vibe:"Laugh at yourself — everyone does",planb:"Repeat session next week",social:"7 joined this week",badge:"New",interests:["Movies"]},
+    {id:"vintage",icon:"shirt",name:"Vintage Market",cat:"Outdoors",g:"g-cat-outdoors",venue:"Marché des Possibles · Mile End",when:"Sun · 10:00 AM",size:"4–6 people",vibe:"Browse, compare finds, chat",planb:"Indoor section if raining",social:"6 joined this week",interests:["Photography"]},
+    {id:"axe",icon:"target",name:"Axe Throwing",cat:"Active",g:"g-cat-active",venue:"Bullseye · Griffintown",when:"Sat · 5:00 PM",size:"4–6 people",vibe:"Way easier than it looks",planb:"Archery room if full",social:"8 joined this week",badge:"🔥 Popular",price:"$28",interests:["Gaming"]}
   ];
 
   const ARCH_DOTCOLORS={spark:"#FF7A5C",connector:"#FF6F91",explorer:"#8E6BFF",easygoer:"#6FE0C6",anchor:"#A57BFF",observer:"#A98FE0",curator:"#F2B33D",grounding:"#A6794E",wildcard:"#FF4D9D",storyteller:"#FF8FA3",navigator:"#2A9D8F",wavelength:"#B9A6F0"};
@@ -1298,10 +1298,10 @@
   /* group templates per activity */
   function makeGroups(){
     return [
-      {id:"a",emoji:"🌗",g:"g-wavelength",name:"The Easy Mix",when:"Today · 7:00 PM",status:"today",vibetags:["Laid-back","Chatty","Mixed ages"],mix:["wavelength","easygoer","connector","spark"],personality:"A mix of explorers and steady types — expect good conversation",filled:4,size:6,compat:"2 people with your vibe are in this group",rec:true,members:[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]]},
-      {id:"b",emoji:"🕯️",g:"g-anchor",name:"Quiet Company",when:"Friday · 6:30 PM",status:"week",vibetags:["Low-key","Calm","Small"],mix:["anchor","observer","grounding"],personality:"Steady, easy company — no pressure to perform",filled:3,size:5,compat:"1 person with your vibe is in this group",members:[["Nina","😊","anchor"],["Ray","🙂","grounding"]]},
-      {id:"c",emoji:"🔥",g:"g-spark",name:"The Lively Bunch",when:"Friday · 9:00 PM",status:"week",vibetags:["High-energy","Social","Fun"],mix:["spark","wildcard","explorer","storyteller","connector"],personality:"Chatty and upbeat — a fun, sociable crowd",filled:5,size:6,compat:"1 person with your vibe is in this group",members:[["Jules","🤩","spark"],["Ben","😁","wildcard"],["Ria","😄","explorer"],["Max","😎","storyteller"]],fillingUp:true},
-      {id:"d",emoji:"🎯",g:"g-curator",name:"The Regulars",when:"Saturday · 7:00 PM",status:"week",vibetags:["Friendly","Weekly crew"],mix:["curator","storyteller","connector","anchor","easygoer"],personality:"A weekly crew that clicked — this one's at capacity",filled:5,size:5,members:[["Ana","😊","curator"],["Marc","🙂","storyteller"],["Lia","😄","connector"],["Omar","😌","anchor"],["Pat","🙂","easygoer"]]}
+      {id:"a",emoji:"🌗",g:"g-wavelength",name:"The Easy Mix",when:"Today · 7:00 PM",status:"today",vibetags:["Laid-back","Chatty","Mixed ages"],mix:["wavelength","easygoer","connector","spark"],personality:"A mix of explorers and steady types — expect good conversation",filled:4,size:6,compat:"2 people with your vibe are in this group",rec:true,members:[["Maya","😄","connector"],["Theo","🙂","easygoer"],["Sam","😌","observer"]],interests:["Coffee","Board games"]},
+      {id:"b",emoji:"🕯️",g:"g-anchor",name:"Quiet Company",when:"Friday · 6:30 PM",status:"week",vibetags:["Low-key","Calm","Small"],mix:["anchor","observer","grounding"],personality:"Steady, easy company — no pressure to perform",filled:3,size:5,compat:"1 person with your vibe is in this group",members:[["Nina","😊","anchor"],["Ray","🙂","grounding"]],interests:["Reading","Coffee"]},
+      {id:"c",emoji:"🔥",g:"g-spark",name:"The Lively Bunch",when:"Friday · 9:00 PM",status:"week",vibetags:["High-energy","Social","Fun"],mix:["spark","wildcard","explorer","storyteller","connector"],personality:"Chatty and upbeat — a fun, sociable crowd",filled:5,size:6,compat:"1 person with your vibe is in this group",members:[["Jules","🤩","spark"],["Ben","😁","wildcard"],["Ria","😄","explorer"],["Max","😎","storyteller"]],fillingUp:true,interests:["Live music","Gaming"]},
+      {id:"d",emoji:"🎯",g:"g-curator",name:"The Regulars",when:"Saturday · 7:00 PM",status:"week",vibetags:["Friendly","Weekly crew"],mix:["curator","storyteller","connector","anchor","easygoer"],personality:"A weekly crew that clicked — this one's at capacity",filled:5,size:5,members:[["Ana","😊","curator"],["Marc","🙂","storyteller"],["Lia","😄","connector"],["Omar","😌","anchor"],["Pat","🙂","easygoer"]],interests:["Board games","Cooking"]}
     ];
   }
 
@@ -1416,7 +1416,7 @@
       ex_search:"Search activities",ex_popular:"Popular this week",ex_browse:"Browse",ex_picked:"Picked for you · matches",ex_more:"More to explore",ex_going:"going",ex_suggest:"Don't see what you're looking for?",
       gc_today:"● Today · starts in 3h",gc_filling:"⚡ Filling up · 1 spot left",gc_forming:"Forming this week",gc_joined:"✓ Joined",
       gc_mixed:"Mixed group of",gc_spots:"spots filled",of:"of",gc_see:"See group →",gc_open:"Open →",
-      mf_why:"Why this group",mf_strong:"Strong fit",mf_good:"Good fit",mf_try:"Worth a try",mf_r_kin:"Someone here shares your type — {type}",mf_r_compat:"A natural match for your type: {who}",mf_r_vibe:"The room leans {vibe} — your kind of energy",mf_r_small:"Small enough to actually connect",mf_deep:"See the full compatibility breakdown · Perch+",
+      mf_why:"Why this group",mf_strong:"Strong fit",mf_good:"Good fit",mf_try:"Worth a try",mf_r_kin:"Someone here shares your type — {type}",mf_r_compat:"A natural match for your type: {who}",mf_r_int:"You both love {what}",mf_r_vibe:"The room leans {vibe} — your kind of energy",mf_r_small:"Small enough to actually connect",mf_deep:"See the full compatibility breakdown · Perch+",
       gd_hosting:"You're hosting",gd_forming_status:"● Forming · matching people",gd_host:"you're the host",
       grp_your:"Your groups",grp_forming_for:"groups forming",grp_later:"Later this week",grp_past:"Past",grp_sorted:"Sorted by your fit",
       gd_when:"When",gd_where:"Where",gd_planb:"Plan B",gd_whos:"Who's going",gd_mixed:"A mixed group",gd_open_spot:"open",
@@ -1585,7 +1585,7 @@
       ex_search:"Rechercher des activités",ex_popular:"Populaire cette semaine",ex_browse:"Explorer",ex_picked:"Choisi pour toi · selon",ex_more:"Plus à explorer",ex_going:"y vont",ex_suggest:"Tu ne trouves pas ce que tu cherches?",
       gc_today:"● Aujourd'hui · dans 3h",gc_filling:"⚡ Se remplit · 1 place restante",gc_forming:"En formation cette semaine",gc_joined:"✓ Inscrit",
       gc_mixed:"Groupe varié de",gc_spots:"places comblées",of:"de",gc_see:"Voir le groupe →",gc_open:"Ouvrir →",
-      mf_why:"Pourquoi ce groupe",mf_strong:"Super match",mf_good:"Bon match",mf_try:"Ça vaut le coup",mf_r_kin:"Quelqu'un ici a le même type que toi — {type}",mf_r_compat:"Fait pour ton type : {who}",mf_r_vibe:"L'ambiance est plutôt {vibe} — ton genre d'énergie",mf_r_small:"Assez petit pour vraiment connecter",mf_deep:"Voir l'analyse de compatibilité complète · Perch+",
+      mf_why:"Pourquoi ce groupe",mf_strong:"Super match",mf_good:"Bon match",mf_try:"Ça vaut le coup",mf_r_kin:"Quelqu'un ici a le même type que toi — {type}",mf_r_compat:"Fait pour ton type : {who}",mf_r_int:"Vous aimez tous les deux {what}",mf_r_vibe:"L'ambiance est plutôt {vibe} — ton genre d'énergie",mf_r_small:"Assez petit pour vraiment connecter",mf_deep:"Voir l'analyse de compatibilité complète · Perch+",
       gd_hosting:"Tu organises",gd_forming_status:"● En formation · jumelage en cours",gd_host:"tu es l'hôte",
       grp_your:"Tes groupes",grp_forming_for:"groupes en formation",grp_later:"Plus tard cette semaine",grp_past:"Passé",grp_sorted:"Trié selon ton match",
       gd_when:"Quand",gd_where:"Où",gd_planb:"Plan B",gd_whos:"Qui y va",gd_mixed:"Un groupe varié",gd_open_spot:"libre",
@@ -1758,10 +1758,11 @@
     const kindred=mix.filter(k=>k===uk).length;                          // your own type, in the room
     const compatHits=[...new Set(mix.filter(k=>k!==uk&&uc.includes(k)))]; // types you naturally click with
     const revHits=[...new Set(mix.filter(k=>k!==uk&&!uc.includes(k)&&ARCH[k]&&(ARCH[k].compat||[]).includes(uk)))];
-    let score=kindred*3+compatHits.length*2+revHits.length;
+    const intHits=[...new Set((g&&g.interests||[]).filter(i=>state.interests.includes(i)))]; // interests you share
+    let score=kindred*3+compatHits.length*2+revHits.length+intHits.length*2;
     if(((g&&g.size)||6)<=5) score+=1;                                    // small groups read as a closer fit
     const tier=score>=5?"strong":(score>=2?"good":"try");
-    return {tier,score,kindred,compatHits,revHits};
+    return {tier,score,kindred,compatHits,revHits,intHits};
   }
   function fitMeta(g){
     const tier=matchFit(g).tier;
@@ -1781,7 +1782,9 @@
       const who=names.length>1?`${names[0]} ${t("and")} ${names[1]}`:names[0];
       out.push({icon:"sparkles",text:t("mf_r_compat").replace("{who}",who)});
     }
-    const tags=grpTags(g); if(tags&&tags[0]) out.push({icon:"heart",text:t("mf_r_vibe").replace("{vibe}",tags[0].toLowerCase())});
+    const ih=m.intHits||[];
+    if(ih.length){ const inames=ih.slice(0,2).map(intLabel); const what=inames.length>1?`${inames[0]} ${t("and")} ${inames[1]}`:inames[0]; out.push({icon:"heart",text:t("mf_r_int").replace("{what}",what)}); }
+    const tags=grpTags(g); if(tags&&tags[0]) out.push({icon:"compass",text:t("mf_r_vibe").replace("{vibe}",tags[0].toLowerCase())});
     if(((g&&g.size)||6)<=5) out.push({icon:"leaf",text:t("mf_r_small")});
     return out.slice(0,3);
   }
@@ -2381,7 +2384,9 @@
     // Picked for you
     const pr=$("#pickedRow");
     const mine=prof();
-    const picks=ACTIVITIES.filter(a=>a.id!=="thursdays"&&mine.loves.some(l=>l.toLowerCase().split(" ")[0]===a.name.toLowerCase().split(" ")[0])).slice(0,2);
+    const archPicks=ACTIVITIES.filter(a=>a.id!=="thursdays"&&mine.loves.some(l=>l.toLowerCase().split(" ")[0]===a.name.toLowerCase().split(" ")[0]));
+    const intPicks=ACTIVITIES.filter(a=>a.id!=="thursdays"&&(a.interests||[]).some(i=>state.interests.includes(i)));
+    const picks=[...new Map([...intPicks,...archPicks].map(a=>[a.id,a])).values()].slice(0,2);
     const visPicks=picks.filter(a=>!state.dismissedPicks.has(a.id));
     if(home && visPicks.length){
       pr.innerHTML=`<div class="sec-title">${t("ex_picked")} ${archName(state.profileKey||'easygoer')}.</div>${visPicks.map(a=>actCardHTML(a,true)).join("")}<div class="day-div" style="margin-top:4px">${t("ex_more")}</div>`;
@@ -2445,10 +2450,12 @@
   }
   function groupCardHTML(g,joined){
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'}"></span>`).join("");
+    const ih=matchFit(g).intHits||[];
+    const intChip=ih.length?`<span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.4);background:rgba(255,182,97,.1)">${svgIcon('heart')} ${esc(intLabel(ih[0]))}</span>`:"";
     return `<div class="group-card ${g.status==='today'?'today':''}" data-group="${g.id}">
       <div class="gc-statusrow">${fitPill(g)}${statusRow(g)}${joined?`<span class="gc-vibetag" style="color:var(--mint);border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.1)">${t("gc_joined")}</span>`:''}</div>
       <div class="gc-top"><div class="gc-emoji ${g.g}">${glyph(g.emoji)}</div><div><div class="gc-name">${grpName(g)}</div><div class="gc-when">${frWhen(g.when)}</div></div></div>
-      <div class="gc-vibetags">${grpTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
+      <div class="gc-vibetags">${intChip}${grpTags(g).map(v=>`<span class="gc-vibetag">${v}</span>`).join("")}</div>
       <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gc_mixed")} ${g.size}</span></div>
       <div class="gc-personality">${grpPersonality(g)}</div>
       <div class="gc-foot"><span class="gc-spots">${g.filled} ${t("of")} ${g.size} ${t("gc_spots")}</span><span class="btn-link link-sm">${joined?t("gc_open"):t("gc_see")}</span></div>
