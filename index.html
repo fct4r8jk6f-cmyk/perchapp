@@ -1483,7 +1483,7 @@
       toast_cal:"Added to your calendar 🗓️",toast_dir:"Directions sent to Maps 🧭",toast_invcopy:"Invite link copied",toast_invshare:"Invite ready to share 📤",toast_link:"Link copied",
       toast_friends:"You and {n} are now friends",toast_reqsent:"Friend request sent to {n}",toast_muted:"{n} muted",toast_removed:"Removed {n}",toast_unblocked:"{n} unblocked",toast_blocked:"{n} blocked",
       toast_photos:"Photos unlock after the group has met 📷",toast_cleared:"Notifications cleared",
-      grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",
+      grp_up:"Upcoming",grp_past_t:"Past",grp_completed:"Completed · this week",grp_met_ppl:"You met Maya, Theo and 2 others.",grp_went:"5 went",grp_reflect:"Leave a reflection →",grp_rejoin:"Find your next one →",notif_return:"A new group that matches your vibe is forming — want in?",return_toast:"Your next group is forming — tap to peek",
       grp_hist_t:"That's your history so far",grp_hist_t0:"No hangs yet",grp_hist_s:"Groups you attend will show up here.",
       fr_tab:"Friends",fr_met:"Met",rq_recv:"Received",rq_sent:"Sent",nt_act:"Activity",nt_ann:"Announcements",
       arch_yourtype:"Your type",arch_bring:"What you bring to a group",arch_loves:"Activities you tend to love",arch_desc:"People often describe you as…",arch_edge:"Your edge",arch_vibe:"You vibe well with",arch_retake:"Retake quiz",arch_take:"Take the quiz",
@@ -1652,7 +1652,7 @@
       toast_cal:"Ajouté à ton calendrier 🗓️",toast_dir:"Itinéraire envoyé à Plans 🧭",toast_invcopy:"Lien d'invitation copié",toast_invshare:"Invitation prête à partager 📤",toast_link:"Lien copié",
       toast_friends:"Toi et {n} êtes maintenant amis",toast_reqsent:"Demande d'amitié envoyée à {n}",toast_muted:"{n} en sourdine",toast_removed:"{n} retiré",toast_unblocked:"{n} débloqué",toast_blocked:"{n} bloqué",
       toast_photos:"Les photos se débloquent après la rencontre 📷",toast_cleared:"Notifications effacées",
-      grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",
+      grp_up:"À venir",grp_past_t:"Passé",grp_completed:"Terminé · cette semaine",grp_met_ppl:"Tu as rencontré Maya, Theo et 2 autres.",grp_went:"5 présents",grp_reflect:"Laisser une réflexion →",grp_rejoin:"Trouve ta prochaine →",notif_return:"Un nouveau groupe qui matche ta vibe se forme — ça te dit?",return_toast:"Ton prochain groupe se forme — tape pour voir",
       grp_hist_t:"C'est ton historique jusqu'ici",grp_hist_t0:"Pas encore de sortie",grp_hist_s:"Les groupes auxquels tu participes apparaîtront ici.",
       fr_tab:"Amis",fr_met:"Rencontres",rq_recv:"Reçues",rq_sent:"Envoyées",nt_act:"Activité",nt_ann:"Annonces",
       arch_yourtype:"Ton type",arch_bring:"Ce que tu apportes à un groupe",arch_loves:"Des activités que tu as tendance à adorer",arch_desc:"Les gens te décrivent souvent comme…",arch_edge:"Là où tu grandis",arch_vibe:"Tu accroches bien avec",arch_retake:"Refaire le quiz",arch_take:"Faire le quiz",
@@ -1866,7 +1866,7 @@
     requests:{recv:[],sent:[]},
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
-    hangLog:[], milestonesSeen:[],
+    hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false,
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -2034,10 +2034,11 @@
   const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chats",chat:"chats",friends:"friends",dm:"chats",requests:"friends",discover:"friends",friendprofile:"friends",feedback:"chats",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
   const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,host:7,hostdone:7,groups:8,groupdetail:9,moodcheck:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,discover:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
-  let history=[], chatTimers=[], backfillTimers=[], reachedExplore=false, navPopping=false;
+  let history=[], chatTimers=[], backfillTimers=[], returnTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
   // backfill timers are module-level (like chatTimers) so an in-flight setTimeout can't fire against a reset demo
   const clearBackfillTimers=()=>{backfillTimers.forEach(clearTimeout);backfillTimers=[];};
+  const clearReturnTimers=()=>{returnTimers.forEach(clearTimeout);returnTimers=[];};
 
   function goTo(id,opts={}){
     const cur=$(".screen.active");
@@ -2104,13 +2105,13 @@
     return false;
   }
   function resetDemo(){
-    clearChatTimers(); clearBackfillTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
+    clearChatTimers(); clearBackfillTimers(); clearReturnTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
     Object.assign(state,{age:24,signedIn:false,agreed:false,returning:false,currentQ:0,profileKey:null,
       chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,seedSocial:false,fbStep:0,venueNote:"",
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -2500,11 +2501,12 @@
           <div class="gc-statusrow"><span class="gc-vibetag">${t("grp_completed")}</span></div>
           <div class="gc-top"><div class="gc-emoji g-spark">🧠</div><div><div class="gc-name">${frActText("Trivia Night")}</div><div class="gc-when">Pub Saint-Laurent · Plateau</div></div></div>
           <div class="gc-personality">${t("grp_met_ppl")}</div>
-          <div class="gc-foot"><span class="gc-spots">${t("grp_went")}</span><span class="btn-link link-sm">${t("grp_reflect")}</span></div>
+          <div class="gc-foot"><span class="btn-link link-sm">${t("grp_reflect")}</span><span class="btn-link link-sm" data-rejoin="thursdays" style="color:var(--accent-text)">${t("grp_rejoin")}</span></div>
         </div>`:"";
       body.innerHTML=`${past}
         <div class="empty-state" style="margin-top:12px"><div class="es-em">${svgIcon('grid')}</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
       const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
+      const rj=$("#s-groups [data-rejoin]"); if(rj) rj.addEventListener("click",e=>{ e.stopPropagation(); const a=ACTIVITIES.find(x=>x.id===rj.getAttribute("data-rejoin")); if(a){ state.chosenActivity=a; state.groupsTab="up"; } goTo("groups"); });
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
       const gid=el.getAttribute("data-group");
@@ -3143,7 +3145,7 @@
         <div class="recap-line">${vibeLine}</div>
         ${firstAdded?`<button class="btn btn-primary" id="fbMsg" style="margin-top:18px">${t("fb_recap_msg").replace("{n}",esc(firstAdded.name.split(" ")[0]))}</button>`:""}
         <button class="btn ${firstAdded?'btn-ghost':'btn-primary'}" id="fbDone" style="margin-top:${firstAdded?'8px':'18px'}">${t("fb_done")}</button>`;
-      const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
+      const finish=()=>{ showToast(t("fb_thanks")); state.fbStep=0; state.rating={activity:0,venue:0,vibe:0}; state.venueOk=null; state.venueNote=""; scheduleReturnNudge(); setTimeout(()=>{ if($("#s-feedback").classList.contains("active")) goTo("explore"); },1500); };
       const fm=$("#fbMsg"); if(fm) fm.addEventListener("click",()=>{ state.currentDM=firstAdded.name; goTo("dm"); });
       $("#fbDone").addEventListener("click",finish);
     }
@@ -3405,6 +3407,7 @@
         return;
       }
       body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
+        ${state.returnNudge?noti("✨","rgba(165,123,255,.18)",t("notif_return"),t("notif_justnow"),true,"returnnudge"):""}
         ${offer?noti("🎟️","rgba(111,224,198,.18)",t("notif_wl_offer").replace("{g}",`<b>${esc(grpName(offer.group))}</b>`),t("notif_wl_offer_time"),true,"wlclaim"):""}
         ${rc?noti("🤝","rgba(111,224,198,.18)",`<b>${esc(state.requests.recv[0].name)}</b> ${t("notif_req")}`,t("notif_2hago"),true,"requests"):""}
         ${joined?noti("💬","rgba(255,119,160,.18)",`${t("notif_msgs")} <b>${esc(grpName(joined.group))}</b>`,t("notif_justnow"),true,"chat"):""}
@@ -3414,7 +3417,8 @@
         ${noti("✨","rgba(165,123,255,.18)",t("notif_newgroup"),t("notif_2day"),false,"groups")}`:""}`;
       $$("#notifBody [data-ngo]").forEach(el=>el.addEventListener("click",()=>{
         const go=el.getAttribute("data-ngo");
-        if(go==="wlclaim"&&offer){ openClaimSpot(offer.group,offer.activity); }
+        if(go==="returnnudge"&&state.returnNudge){ const a=ACTIVITIES.find(x=>x.id===state.returnNudge.activity); if(a){state.chosenActivity=a;state.groupsTab="up";} goTo("groups"); }
+        else if(go==="wlclaim"&&offer){ openClaimSpot(offer.group,offer.activity); }
         else if(go==="chat"&&joined){ state.chatViewGroup=joined.group.id; goTo("chat"); }
         else if(go==="groupdetail"&&joined){ state.chosenGroup=joined.group; state.chosenActivity=joined.activity||state.chosenActivity; goTo("groupdetail"); }
         else goTo(go);
@@ -3915,6 +3919,16 @@
       state.backfillOffer=null; showToast(t("wl_offer_expired"));   // copy says "still on the waitlist" — keep the entry
       if($("#s-notifications").classList.contains("active")) renderNotifs();
     }
+  }
+  /* ============ RETURN NUDGE (come back this week) — mirrors the backfill loop ============ */
+  function scheduleReturnNudge(){
+    if(state.returnSeen||!state.seedSocial) return; state.returnSeen=true;   // one-shot per session, only after a hang
+    returnTimers.push(setTimeout(fireReturnNudge,6000));
+  }
+  function fireReturnNudge(){
+    state.returnNudge={activity:"thursdays"}; state.notifsCleared=false; syncBadges();
+    showToastGo(t("return_toast"),()=>{ const a=ACTIVITIES.find(x=>x.id==="thursdays"); if(a){state.chosenActivity=a;state.groupsTab="up";} goTo("groups"); });
+    if($("#s-notifications").classList.contains("active")) renderNotifs();
   }
 
   /* ============ SHEET FUNCTIONS ============ */
