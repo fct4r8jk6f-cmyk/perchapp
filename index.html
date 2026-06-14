@@ -335,6 +335,8 @@
   .prompt-edit{margin-bottom:10px;}
   .pe-q{font-size:12px;color:var(--muted);margin-bottom:5px;}
   .pe-in{width:100%;}
+  .gv-row{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px;margin-top:12px;}
+  .gv-lab{font-size:12px;color:var(--muted);font-weight:600;}
   .glass-btn{background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.24);color:#fff;}
   .seeall-link{display:inline-block;color:rgba(255,255,255,.9);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;margin-top:20px;animation:floatUp .4s .3s ease-out both;}
 
@@ -1417,7 +1419,7 @@
       btn_start:"Start",btn_maybe:"Maybe later",q_skip:"Skip",q_back:"← Back",
       res_reading:"Reading your answers…",res_finding:"Finding the type that fits.",
       res_scan0:"Noticing how you connect",res_scan1:"Matching it to a type",res_scan2:"Lining up groups that fit",
-      res_yourtype:"Your social type",res_vibe:"You tend to vibe well with",and:"and",res_pct:"of people share your type",res_int_t:"A few things you're into?",res_int_sub:"Optional — it sharpens your matches.",res_int_count:"{n} groups match your interests",res_int_count1:"{n} group matches your interests",ps_suggest_bio:"Use this as your bio",ps_prompts:"Prompts",ps_prompts_sub:"Answer a few — it gives people a way in.",prompt_ph:"Your answer…",
+      res_yourtype:"Your social type",res_vibe:"You tend to vibe well with",and:"and",res_pct:"of people share your type",res_int_t:"A few things you're into?",res_int_sub:"Optional — it sharpens your matches.",res_int_count:"{n} groups match your interests",res_int_count1:"{n} group matches your interests",ps_suggest_bio:"Use this as your bio",ps_prompts:"Prompts",ps_prompts_sub:"Answer a few — it gives people a way in.",prompt_ph:"Your answer…",gv_label:"In a group",gv_sub:"Pick up to 3 — how you are with people.",depth_photo:"Add a photo so people recognize you",depth_prompt:"Answer a prompt — give people a way in",depth_vibe:"Add how you are in a group",
       res_seeall:"See all 12 types →",res_share:"✦ Share my type",btn_continue:"Continue",
       all_types:"All 12 types",all_types_sub:"Every type is equally welcome. Swipe through.",btn_close:"Close",copy_link:"Copy link",
       age_title:"Just one thing<br>before we continue",age_sub:"Perch is for adults. How old are you?",
@@ -1586,7 +1588,7 @@
       btn_start:"Commencer",btn_maybe:"Plus tard",q_skip:"Passer",q_back:"← Retour",
       res_reading:"On lit tes réponses…",res_finding:"On trouve le type qui te ressemble.",
       res_scan0:"On observe comment tu connectes",res_scan1:"On l'associe à un type",res_scan2:"On aligne des groupes qui fittent",
-      res_yourtype:"Ton type social",res_vibe:"Tu accroches bien avec",and:"et",res_pct:"des gens partagent ton type",res_int_t:"Quelques affaires qui t'allument?",res_int_sub:"Optionnel — ça affine tes matchs.",res_int_count:"{n} groupes matchent tes intérêts",res_int_count1:"{n} groupe matche tes intérêts",ps_suggest_bio:"Utiliser ça comme bio",ps_prompts:"Questions",ps_prompts_sub:"Réponds à quelques-unes — ça donne une porte d'entrée.",prompt_ph:"Ta réponse…",
+      res_yourtype:"Ton type social",res_vibe:"Tu accroches bien avec",and:"et",res_pct:"des gens partagent ton type",res_int_t:"Quelques affaires qui t'allument?",res_int_sub:"Optionnel — ça affine tes matchs.",res_int_count:"{n} groupes matchent tes intérêts",res_int_count1:"{n} groupe matche tes intérêts",ps_suggest_bio:"Utiliser ça comme bio",ps_prompts:"Questions",ps_prompts_sub:"Réponds à quelques-unes — ça donne une porte d'entrée.",prompt_ph:"Ta réponse…",gv_label:"En groupe",gv_sub:"Choisis-en jusqu'à 3 — comment t'es avec le monde.",depth_photo:"Ajoute une photo pour qu'on te reconnaisse",depth_prompt:"Réponds à une question — donne une porte d'entrée",depth_vibe:"Ajoute comment t'es en groupe",
       res_seeall:"Voir les 12 types →",res_share:"✦ Partager mon type",btn_continue:"Continuer",
       all_types:"Les 12 types",all_types_sub:"Chaque type est le bienvenu. Glisse pour explorer.",btn_close:"Fermer",copy_link:"Copier le lien",
       age_title:"Juste une chose<br>avant de continuer",age_sub:"Perch, c'est pour les adultes. Quel âge as-tu?",
@@ -1892,7 +1894,7 @@
     requests:{recv:[],sent:[]},
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
-    hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false, prompts:[],
+    hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false, prompts:[], groupVibe:[], depthDismissed:false,
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -1934,6 +1936,18 @@
       PROMPTS.map(p=>`<div class="prompt-edit"><div class="pe-q">${esc(promptQ(p.key))}</div><input class="pe-in" data-prompt="${p.key}" maxlength="80" value="${esc(map[p.key]||'')}" placeholder="${t('prompt_ph')}" autocomplete="off"></div>`).join("")+`</div>`;
   }
   function collectPrompts(){ const out=[]; $$("#sheetBody [data-prompt]").forEach(inp=>{ const a=inp.value.trim(); if(a) out.push({q:inp.getAttribute("data-prompt"),a}); }); return out.slice(0,3); }
+  // "In a group, I'm…" — tap-only self-expression (parallel fr table, gender-neutral phrasing)
+  const GROUPVIBE=[{key:"planner",l:"Plans the hangs"},{key:"warmup",l:"Quiet, then warms up"},{key:"down",l:"Down for anything"},{key:"listener",l:"The good listener"},{key:"spark",l:"Brings the energy"},{key:"glue",l:"The quiet glue"}];
+  const GROUPVIBE_FR={planner:"Planifie les sorties",warmup:"Discret au début, puis embarque",down:"Partant pour tout",listener:"À l'écoute",spark:"Apporte l'énergie",glue:"Le liant du groupe"};
+  const gvLabel=k=>{const g=GROUPVIBE.find(x=>x.key===k);return state.lang==="fr"&&GROUPVIBE_FR[k]?GROUPVIBE_FR[k]:(g?g.l:"");};
+  // next gentle profile-depth suggestion (optional, never blocks); null when rich enough
+  function profileDepth(){
+    if(!state.profileComplete) return null;
+    if(!state.photo) return "photo";
+    if(!(state.prompts&&state.prompts.length)) return "prompt";
+    if(!(state.groupVibe&&state.groupVibe.length)) return "vibe";
+    return null;
+  }
   /* searchable people directory — names/usernames are proper nouns (no i18n); archetype shows translated */
   const PEOPLE=[
     {name:"Élodie",username:"elodie.mtl",emoji:"😊",key:"connector",mutual:3,verified:true},
@@ -2161,7 +2175,7 @@
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -3248,6 +3262,7 @@
         <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${esc(state.bio)}</p>
         <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${esc(intLabel(i))}</span>`).join("")}</div>
         ${promptCardHTML(state.prompts)}
+        ${state.groupVibe&&state.groupVibe.length?`<div class="gv-row"><span class="gv-lab">${t("gv_label")}</span>${state.groupVibe.map(k=>`<span class="trait">${esc(gvLabel(k))}</span>`).join("")}</div>`:""}
         <button class="btn-link" id="pfEdit" style="margin-top:12px">${t("prof_edit")}</button>
       </div>
       <div class="stats">
@@ -3256,6 +3271,7 @@
         <div class="stat" id="pfShowupStat" role="button" tabindex="0" aria-label="${esc(t("stat_showup_full"))}" style="cursor:pointer"><div class="sn">${relStatLabel()}</div><div class="sl">${t("stat_showup")}</div></div>
         <div class="stat"><div class="sn">'26</div><div class="sl">${t("stat_since")}</div></div>
       </div>
+      ${(()=>{ const d=(state.profileComplete&&!state.depthDismissed)?profileDepth():null; if(!d) return ""; return `<div id="pfDepthCard" data-depth="${d}" style="border:1.5px solid rgba(165,123,255,.4);border-radius:var(--r-lg);padding:13px 15px;margin-bottom:16px;display:flex;align-items:center;gap:12px;cursor:pointer"><span class="it-ic" style="color:var(--accent-text)">${svgIcon('sparkles')}</span><div style="flex:1;font-size:13.5px;font-weight:600">${t("depth_"+d)}</div><span class="guide-x" data-depthx role="button" aria-label="Dismiss">✕</span></div>`; })()}
       ${(!state.verified&&state.profileComplete&&!state.verifyPromptDismissed)?`<div id="pfVerifyCard" style="border:1.5px solid rgba(111,224,198,.4);border-radius:var(--r-lg);padding:15px;margin-bottom:18px;display:flex;align-items:center;gap:13px">
         <div style="font-size:24px">🛡️</div>
         <div style="flex:1"><div style="font-weight:700">${t("pf_verify_t")}</div><div class="tiny" style="margin-top:2px">${t("pf_verify_s")}</div></div>
@@ -3287,6 +3303,7 @@
     const vGo=$("#pfVerifyGo"); if(vGo) vGo.addEventListener("click",e=>{ e.stopPropagation(); openVerify(); });
     const vSkip=$("#pfVerifySkip"); if(vSkip) vSkip.addEventListener("click",e=>{ e.stopPropagation(); state.verifyPromptDismissed=true; renderProfile(); });
     $("#pfEdit").addEventListener("click",openEditProfile);
+    const dCard=$("#pfDepthCard"); if(dCard) dCard.addEventListener("click",e=>{ if(e.target.closest("[data-depthx]")){ state.depthDismissed=true; renderProfile(); return; } const d=dCard.getAttribute("data-depth"); if(d==="photo") $("#photoInput").click(); else openEditProfile(); });
     $("#pfRestart").addEventListener("click",openStartOver);
     $("#ppCard").addEventListener("click",()=>openPerchPlus());
   }
@@ -3702,7 +3719,7 @@
     const DEFAULT_INTS=["Board games","Coffee","Hiking"];
     const isDefaultInts=state.interests.length===DEFAULT_INTS.length&&DEFAULT_INTS.every(i=>state.interests.includes(i));
     const seedInts=(isDefaultInts&&state.profileKey&&ARCH_INTERESTS[state.profileKey])?ARCH_INTERESTS[state.profileKey].slice(0,3):state.interests.slice();
-    const chosen={emoji:state.emoji,interests:seedInts};
+    const chosen={emoji:state.emoji,interests:seedInts,groupVibe:state.groupVibe.slice()};
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${gated?t("ps_gate_t"):t("ps_title")}</div>
       <div class="sheet-sub">${gated?t("ps_gate_s"):t("ps_sub")}</div>
@@ -3718,6 +3735,7 @@
         <div class="tiny" style="margin:-2px 0 8px">${t("ps_interests_sub")}</div>
         <div class="chips" id="psInts">${INTERESTS.map(i=>`<span class="chip ${chosen.interests.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
       ${gated?"":promptFieldsHTML(state.prompts)}
+      ${gated?"":`<div class="field"><label>${t("gv_label")}</label><div class="tiny" style="margin:-2px 0 8px">${t("gv_sub")}</div><div class="chips" id="psGV">${GROUPVIBE.map(g=>`<span class="chip ${chosen.groupVibe.includes(g.key)?'sel':''}" data-gv="${g.key}">${esc(gvLabel(g.key))}</span>`).join("")}</div></div>`}
       <button class="btn btn-primary" id="psSave" style="margin-top:8px" disabled>${t("ps_save")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     const nameEl=$("#psName"), userEl=$("#psUser"), msg=$("#psUserMsg"), saveBtn=$("#psSave");
@@ -3735,13 +3753,18 @@
       if(i>=0) chosen.interests.splice(i,1); else { if(chosen.interests.length>=5) return; chosen.interests.push(v); }
       c.classList.toggle("sel");
     }));
+    $$("#psGV [data-gv]").forEach(c=>c.addEventListener("click",()=>{
+      const v=c.getAttribute("data-gv"); const i=chosen.groupVibe.indexOf(v);
+      if(i>=0) chosen.groupVibe.splice(i,1); else { if(chosen.groupVibe.length>=3) return; chosen.groupVibe.push(v); }
+      c.classList.toggle("sel");
+    }));
     const bioSug=$("#psBioSuggest"); if(bioSug) bioSug.addEventListener("click",()=>{ const b=$("#psBio"); if(b&&!b.value.trim()) b.value=archTag(state.profileKey); });
     saveBtn.addEventListener("click",()=>{
       const n=nameEl.value.trim(); if(!n||!usernameStatus(userEl.value).ok) return;
       state.name=n; state.username=userEl.value.trim().toLowerCase(); state.emoji=chosen.emoji;
       const b=$("#psBio").value.trim(); if(b) state.bio=b;
       if(chosen.interests.length) state.interests=chosen.interests.slice();
-      if(!gated) state.prompts=collectPrompts();
+      if(!gated){ state.prompts=collectPrompts(); state.groupVibe=chosen.groupVibe.slice(); }
       state.profileComplete=true;
       closeSheet(); showToast(t("ps_saved"));
       const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-",""));
@@ -4015,6 +4038,7 @@
   function openEditProfile(){
     const el=$("#sheetBody");
     const chosenInts=state.interests.slice();
+    const chosenGV=state.groupVibe.slice();
     el.innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-title">${t("ep_title")}</div>
       <div class="photo-edit">
@@ -4037,6 +4061,7 @@
       <div class="field"><label>${t("ps_interests")}</label>
         <div class="chips" id="epInts">${INTERESTS.map(i=>`<span class="chip ${chosenInts.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
       ${promptFieldsHTML(state.prompts)}
+      <div class="field"><label>${t("gv_label")}</label><div class="tiny" style="margin:-2px 0 8px">${t("gv_sub")}</div><div class="chips" id="epGV">${GROUPVIBE.map(g=>`<span class="chip ${chosenGV.includes(g.key)?'sel':''}" data-gv="${g.key}">${esc(gvLabel(g.key))}</span>`).join("")}</div></div>
       <button class="btn btn-primary" id="epSave" style="margin-top:8px">${t("ep_save")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     const userEl=$("#epUser"), umsg=$("#epUserMsg"), saveBtn=$("#epSave");
@@ -4049,6 +4074,11 @@
       if(i>=0) chosenInts.splice(i,1); else { if(chosenInts.length>=5) return; chosenInts.push(v); }
       c.classList.toggle("sel");
     }));
+    $$("#epGV [data-gv]").forEach(c=>c.addEventListener("click",()=>{
+      const v=c.getAttribute("data-gv"); const i=chosenGV.indexOf(v);
+      if(i>=0) chosenGV.splice(i,1); else { if(chosenGV.length>=3) return; chosenGV.push(v); }
+      c.classList.toggle("sel");
+    }));
     $("#epPhoto").addEventListener("click",()=>$("#photoInput").click());
     $("#epRemPhoto").addEventListener("click",()=>{ state.photo=null; const p=$("#epPrev"); if(p){p.style.backgroundImage="";p.textContent="📷";} });
     $("#epSave").addEventListener("click",()=>{
@@ -4058,6 +4088,7 @@
       const b=$("#epBio").value.trim(); state.bio=b||state.bio;
       state.interests=chosenInts.slice();
       state.prompts=collectPrompts();
+      state.groupVibe=chosenGV.slice();
       // editing in a real name + username also counts as a completed profile
       if(state.name&&state.name!=="You"&&state.username) state.profileComplete=true;
       closeSheet(); showToast(t("ep_saved"));
