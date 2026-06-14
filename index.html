@@ -775,9 +775,9 @@
             <div class="preview-card" id="landPreview"></div>
             <div style="margin-top:auto"></div>
             <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:14px">
-              <span class="pill-static pill-cal" data-i18n="pill_ai">🛡️ Human-first moderation</span>
-              <span class="pill-static pill-cal" data-i18n="pill_names">👤 First names only</span>
-              <span class="pill-static pill-cal" data-i18n="pill_photos">🔒 Friends-only photos</span>
+              <span class="pill-static pill-cal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:5px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span data-i18n="pill_ai">Human-first moderation</span></span>
+              <span class="pill-static pill-cal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:5px"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span data-i18n="pill_names">First names only</span></span>
+              <span class="pill-static pill-cal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-right:5px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="pill_photos">Friends-only photos</span></span>
             </div>
             <button class="btn btn-primary" data-go="test-intro" style="margin-bottom:6px" data-i18n="btn_find_type">Find your type</button>
             <button class="btn btn-link" id="landSignin" data-i18n="land_signin">Already have an account? Sign in</button>
@@ -819,7 +819,7 @@
       <!-- AGE GATE -->
       <section class="screen fade" id="s-agegate">
         <div class="center-col">
-          <div class="gate-orb">🎂</div>
+          <div class="gate-orb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3M12 8v3M17 8v3"/></svg></div>
           <h1 class="display h1" style="margin-bottom:10px" data-i18n-html="age_title">Just one thing<br>before we continue</h1>
           <p class="sub" style="max-width:280px;margin-bottom:20px" data-i18n="age_sub">Perch is for adults. How old are you?</p>
           <div class="age-wheel">
@@ -873,7 +873,7 @@
       <!-- LOCATION -->
       <section class="screen fade" id="s-location">
         <div class="center-col">
-          <div class="gate-orb">📍</div>
+          <div class="gate-orb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
           <h1 class="display h1" style="margin-bottom:10px" id="locTitle" data-i18n-html="loc_title">Perch works<br>around you 📍</h1>
           <p class="sub" style="max-width:280px;margin-bottom:24px" id="locSub" data-i18n="loc_sub">Groups form at real places near you in Montreal.</p>
           <button class="btn btn-primary" id="locEnable" data-i18n="loc_enable">Enable location</button>
@@ -887,7 +887,7 @@
       <!-- HOST CONFIRMATION -->
       <section class="screen pad-nav fade" id="s-hostdone">
         <div class="center-col">
-          <div class="joined-orb" style="background:var(--grad-warm)">🎉</div>
+          <div class="joined-orb" style="background:var(--grad-warm);color:#fff"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 4v3"/><path d="M18.5 17v3"/><path d="M3.5 5.5h3"/><path d="M17 18.5h3"/></svg></div>
           <h1 class="display h1" style="margin-bottom:10px" data-i18n="hd_title">You're on 🎉</h1>
           <p class="sub" style="max-width:300px;margin-bottom:8px" data-i18n="hd_p1">We'll find the right people and your group will start forming within a day or two.</p>
           <p class="sub" style="max-width:300px;margin-bottom:24px" data-i18n="hd_p2">We handle the matching — you just pick the spot and show up first.</p>
@@ -930,14 +930,14 @@
       <section class="screen pad-nav fade" id="s-joined">
         <div style="margin-top:auto"></div>
         <div style="text-align:center">
-          <div class="joined-orb" id="joinedOrb">🌿</div>
+          <div class="joined-orb" id="joinedOrb"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg></div>
           <h1 class="display h1" style="margin-bottom:8px" data-i18n="joined_title">You're in.</h1>
           <p class="sub" id="joinedSub" style="margin-bottom:22px">See you there.</p>
         </div>
         <div id="joinedSoftAsk"></div>
-        <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab" data-i18n="joined_when">When</div><div class="it-val" id="joinedWhen">Saturday · 7:00 PM</div></div></div>
-        <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab" data-i18n="joined_where">Where</div><div class="it-val" id="joinedWhere">Pub Saint-Laurent · 4080 boul. St-Laurent</div></div></div>
-        <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab" data-i18n="joined_who">Who</div><div class="it-val" id="joinedWho">You + 4 others</div></div></div>
+        <div class="info-tile"><div class="it-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div><div><div class="it-lab" data-i18n="joined_when">When</div><div class="it-val" id="joinedWhen">Saturday · 7:00 PM</div></div></div>
+        <div class="info-tile"><div class="it-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="it-lab" data-i18n="joined_where">Where</div><div class="it-val" id="joinedWhere">Pub Saint-Laurent · 4080 boul. St-Laurent</div></div></div>
+        <div class="info-tile"><div class="it-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="it-lab" data-i18n="joined_who">Who</div><div class="it-val" id="joinedWho">You + 4 others</div></div></div>
         <div id="joinedResv"></div>
         <div class="btn-row" style="margin-top:8px">
           <button class="btn btn-soft" id="joinedCal" data-i18n="joined_cal">🗓️ Add to Calendar</button>
@@ -1344,7 +1344,7 @@
       land_how:"How it works",land_steps:"Three steps, that's it",
       land_step1:"Take a quick quiz — find your social type",land_step2:"Pick something to do — we match you with a group",land_step3:"Show up and meet people in real life",
       land_join:"Join in",land_count:"Montreal's new way<br>to meet people",land_find:"Find your people. Show up.",
-      pill_ai:"🛡️ Human-first moderation",pill_names:"👤 First names only",pill_photos:"🔒 Friends-only photos",
+      pill_ai:"Human-first moderation",pill_names:"First names only",pill_photos:"Friends-only photos",
       btn_find_type:"Find your type",land_signin:"Already have an account? Sign in",
       ti_title:"Find your<br><span class=\"grad-text\">social type</span>",ti_sub:"7 quick questions. We use it to match you with groups that fit.",
       btn_start:"Start",btn_maybe:"Maybe later",q_skip:"Skip",q_back:"← Back",
@@ -1510,7 +1510,7 @@
       land_how:"Comment ça marche",land_steps:"Trois étapes, c'est tout",
       land_step1:"Fais un court quiz — trouve ton type social",land_step2:"Choisis une activité — on te jumelle à un groupe",land_step3:"Présente-toi et rencontre du monde en vrai",
       land_join:"Embarque",land_count:"La nouvelle façon de se<br>rencontrer à Montréal",land_find:"Trouve ton monde. Présente-toi.",
-      pill_ai:"🛡️ Modération humaine d'abord",pill_names:"👤 Prénoms seulement",pill_photos:"🔒 Photos entre amis",
+      pill_ai:"Modération humaine d'abord",pill_names:"Prénoms seulement",pill_photos:"Photos entre amis",
       btn_find_type:"Trouve ton type",land_signin:"Tu as déjà un compte? Connecte-toi",
       ti_title:"Trouve ton<br><span class=\"grad-text\">type social</span>",ti_sub:"7 courtes questions. Ça nous aide à te jumeler à des groupes qui te conviennent.",
       btn_start:"Commencer",btn_maybe:"Plus tard",q_skip:"Passer",q_back:"← Retour",
@@ -1858,6 +1858,13 @@
     bold:'<path d="M6 4h8a4 4 0 0 1 0 8H6z"/><path d="M6 12h9a4 4 0 0 1 0 8H6z"/>',
     contrast:'<circle cx="12" cy="12" r="10"/><path d="M12 2a10 10 0 0 0 0 20z" fill="currentColor"/>',
     maximize:'<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>',
+    pin:'<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>',
+    ticket:'<path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v14"/>',
+    card:'<rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>',
+    cloud:'<path d="M17.5 19a4.5 4.5 0 1 0 0-9h-1.8A7 7 0 1 0 4 15.3"/>',
+    cake:'<path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"/><path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"/><path d="M2 21h20"/><path d="M7 8v3M12 8v3M17 8v3"/>',
+    check:'<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+    frown:'<circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/>',
     _dot:'<circle cx="12" cy="12" r="3.5"/>'
   };
   function svgIcon(name,extra){
@@ -2272,7 +2279,7 @@
   function populateFeed(list,feed){
     const sg=$("#suggestLink");
     if(!list.length){
-      feed.innerHTML=`<div class="empty-state"><div class="es-em">🔍</div><div class="es-t">${t("ex_empty_t")}</div><div class="es-s">${t("ex_empty_s")}</div><button class="btn btn-soft" id="esClear">${t("ex_clear")}</button><button class="btn-link" id="esSuggest">${t("ex_suggest")}</button></div>`;
+      feed.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('search')}</div><div class="es-t">${t("ex_empty_t")}</div><div class="es-s">${t("ex_empty_s")}</div><button class="btn btn-soft" id="esClear">${t("ex_clear")}</button><button class="btn-link" id="esSuggest">${t("ex_suggest")}</button></div>`;
       const ec=$("#esClear"); if(ec) ec.addEventListener("click",()=>{ $("#exSearch").value=""; state.filters={day:null,size:null}; renderExplore(); syncBadges(); });
       const sgl=$("#esSuggest"); if(sgl) sgl.addEventListener("click",openSuggest);
       if(sg) sg.style.display="none";
@@ -2363,7 +2370,7 @@
           <div class="gc-foot"><span class="gc-spots">${t("grp_went")}</span><span class="btn-link link-sm">${t("grp_reflect")}</span></div>
         </div>`:"";
       body.innerHTML=`${past}
-        <div class="empty-state" style="margin-top:12px"><div class="es-em">🫧</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
+        <div class="empty-state" style="margin-top:12px"><div class="es-em">${svgIcon('grid')}</div><div class="es-t">${t(state.seedSocial?"grp_hist_t":"grp_hist_t0")}</div><div class="es-s">${t("grp_hist_s")}</div></div>`;
       const pc=$("#s-groups [data-past]"); if(pc) pc.addEventListener("click",()=>goTo("feedback"));
     }
     $$("#groupsBody [data-group]").forEach(el=>el.addEventListener("click",()=>{
@@ -2394,7 +2401,7 @@
     const dayOf=joined && state.dayOf===g.id;
     const joinEntry=joined?state.joinedGroups.find(j=>j.group.id===g.id):null;
     const rv=joinEntry&&joinEntry.reservation;
-    const resvTileHTML=rv?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`:"";
+    const resvTileHTML=rv?`<div class="info-tile"><div class="it-ic">${svgIcon('ticket')}</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`:"";
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'};width:13px;height:13px"></span>`).join("");
     const members=g.members.map((m,i)=>{
       const arrived=dayOf && i<2;
@@ -2406,10 +2413,10 @@
     if(joined){
       if(dayOf && !state.checkedIn){
         bar=`<div class="cta-bar">
-          <div class="info-tile" style="border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.08);margin-bottom:10px"><div class="it-ic">👋</div><div style="flex:1"><div class="it-lab" style="color:var(--amber)">${t("gd_there")}</div><div class="it-val">${t("gd_tapcheck")}</div></div><button class="btn btn-soft" id="gdCheckin" style="width:auto;padding:10px 16px">${t("gd_imhere")}</button></div>
+          <div class="info-tile" style="border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.08);margin-bottom:10px"><div class="it-ic">${svgIcon('check')}</div><div style="flex:1"><div class="it-lab" style="color:var(--amber)">${t("gd_there")}</div><div class="it-val">${t("gd_tapcheck")}</div></div><button class="btn btn-soft" id="gdCheckin" style="width:auto;padding:10px 16px">${t("gd_imhere")}</button></div>
           <button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
       } else {
-        flowExtra=dayOf?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.08)"><div class="it-ic">✅</div><div><div class="it-lab" style="color:var(--mint)">${t("gd_checkedin")}</div><div class="it-val">${t("gd_groupknows")}</div></div></div>`
+        flowExtra=dayOf?`<div class="info-tile" style="border-color:rgba(111,224,198,.4);background:rgba(111,224,198,.08)"><div class="it-ic">${svgIcon('check')}</div><div><div class="it-lab" style="color:var(--mint)">${t("gd_checkedin")}</div><div class="it-val">${t("gd_groupknows")}</div></div></div>`
           :`<button class="ff" id="gdFastForward" style="margin:2px 0 10px">${t("gd_ff")}</button>`;
         bar=`<div class="cta-bar"><button class="btn btn-primary" data-go="chat">${t("gd_openchat")}</button></div>`;
       }
@@ -2419,9 +2426,9 @@
     } else if(spotsLeft===0){
       const wld=state.waitlisted.some(w=>w.group.id===g.id);
       const wlBlock=wld
-        ? `<div class="info-tile" style="border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.08)"><div class="it-ic">🕓</div><div style="flex:1"><div class="it-lab" style="color:var(--accent-text)">${t("wl_status")} · ${t("wl_pos").replace("{n}",wlPosition(g))}</div><div class="it-val">${t("wl_note")}</div><div class="tiny" style="margin-top:4px">${t("wl_priority")}</div></div></div><button class="ff" id="gdClaimSim" style="margin:2px 0 6px">${t("wl_sim")}</button><button class="btn-link" id="gdLeaveWl">${t("wl_leave")}</button>`
+        ? `<div class="info-tile" style="border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.08)"><div class="it-ic">${svgIcon('clock')}</div><div style="flex:1"><div class="it-lab" style="color:var(--accent-text)">${t("wl_status")} · ${t("wl_pos").replace("{n}",wlPosition(g))}</div><div class="it-val">${t("wl_note")}</div><div class="tiny" style="margin-top:4px">${t("wl_priority")}</div></div></div><button class="ff" id="gdClaimSim" style="margin:2px 0 6px">${t("wl_sim")}</button><button class="btn-link" id="gdLeaveWl">${t("wl_leave")}</button>`
         : `<button class="btn btn-soft" id="gdWaitlist">${t("wl_join")}</button>`;
-      flowExtra=`<div class="empty-state" style="padding:20px 0 10px"><div class="es-em">😔</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div>${wlBlock}<div class="day-div" style="margin-top:14px">${t("alt_try")}</div><div id="altGroupSlot"></div>`;
+      flowExtra=`<div class="empty-state" style="padding:20px 0 10px"><div class="es-em">${svgIcon('frown')}</div><div class="es-t">${t("gd_full_t")}</div><div class="es-s">${t("gd_full_s")}</div></div>${wlBlock}<div class="day-div" style="margin-top:14px">${t("alt_try")}</div><div id="altGroupSlot"></div>`;
     } else {
       flowExtra=`<p class="tiny" style="text-align:center;margin:4px 0 10px">${t("gd_leave_note")}</p>`;
       bar=`<div class="cta-bar"><button class="btn btn-primary" id="gdJoin">${t("gd_join")}${a.price?` · ${a.price}`:""}</button></div>`;
@@ -2430,11 +2437,11 @@
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
       <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(a.icon)}</div><div class="ah-n" style="font-size:20px">${actName(a)}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${actVenue(a).split(" · ")[0]}</span></div>`:""}
-      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
-      <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('calendar')}</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('pin')}</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
       ${resvTileHTML}
-      ${a.price?`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
-      <div class="info-tile"><div class="it-ic">🌦️</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${actPlanb(a)}</div></div></div>
+      ${a.price?`<div class="info-tile"><div class="it-ic">${svgIcon('ticket')}</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("ticket_note")}</div></div></div>`:""}
+      <div class="info-tile"><div class="it-ic">${svgIcon('cloud')}</div><div><div class="it-lab">${t("gd_planb")}</div><div class="it-val">${actPlanb(a)}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <div class="gc-mix"><div class="mixdots">${dots}</div><span style="font-size:13px;color:var(--faint)">${t("gd_mixed")}</span></div>
@@ -2503,8 +2510,8 @@
       <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
       <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(g.emoji)}</div><div class="ah-n" style="font-size:20px">${hostedName(g)}</div><div class="ah-l">${hostedWhen(g)}</div></div>
       <div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.1)">${t("gd_forming_status")}</span></div>
-      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${hostedWhen(g)}</div></div></div>
-      <div class="info-tile"><div class="it-ic">👥</div><div><div class="it-lab">${t("gd_whos")}</div><div class="it-val">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('calendar')}</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${hostedWhen(g)}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('users')}</div><div><div class="it-lab">${t("gd_whos")}</div><div class="it-val">${g.filled} ${t("of")} ${g.size} · ${t("gd_host")}</div></div></div>
       <div class="info-block"><div class="sec-title">${t("gd_whos")}</div>
         <div style="display:flex;gap:16px;flex-wrap:wrap;margin:4px 0 10px">${members}${spotsLeft>0?`<div style="text-align:center"><div class="avatar av-sm" style="margin:0 auto;background:var(--surface-2);border:1.5px dashed var(--line-2);color:var(--faint)">+${spotsLeft}</div><div style="font-size:11px;color:var(--faint);margin-top:4px">${t("gd_open_spot")}</div></div>`:''}</div>
         <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-top:8px">${t("chat_forming_sub")}.</p>
@@ -2514,7 +2521,7 @@
   }
   function openCancelHang(g){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">🚪</div>
+      <div class="sheet-ic warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
       <div class="sheet-title">${t("cz_title")}</div>
       <div class="sheet-sub">${t("cz_sub")}</div>
       <button class="btn btn-amber" id="czGo">${t("cz_go")}</button>
@@ -2580,8 +2587,8 @@
     const rv=entry&&entry.reservation;
     const rEl=$("#joinedResv");
     if(rEl){
-      rEl.innerHTML=rv?(`<div class="info-tile"><div class="it-ic">🎟️</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`
-        +(rv.ticket?`<div class="info-tile"><div class="it-ic">💳</div><div><div class="it-lab">${t("joined_pay")}</div><div class="it-val">${t("joined_pay_val").replace("{price}",rv.price)}</div></div></div>`:"")):"";
+      rEl.innerHTML=rv?(`<div class="info-tile"><div class="it-ic">${svgIcon('ticket')}</div><div><div class="it-lab">${t("joined_resv")}</div><div class="it-val">${t("joined_resv_val").replace("{code}",rv.code)}</div></div></div>`
+        +(rv.ticket?`<div class="info-tile"><div class="it-ic">${svgIcon('card')}</div><div><div class="it-lab">${t("joined_pay")}</div><div class="it-val">${t("joined_pay_val").replace("{price}",rv.price)}</div></div></div>`:"")):"";
     }
     const soft=$("#joinedSoftAsk");
     if(soft){
@@ -2653,7 +2660,7 @@
     syncBadges();
     const groups=chatList(), dms=dmList(), body=$("#chatsBody");
     if(!groups.length && !dms.length){
-      body.innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">💬</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
+      body.innerHTML=`<div class="empty-state" style="margin-top:48px"><div class="es-em">${svgIcon('message')}</div><div class="es-t">${t("chat_empty_t")}</div><div class="es-s">${t("chat_empty_s")}</div><button class="btn btn-soft" data-go="explore">${t("chat_empty_btn")}</button></div>`;
       return;
     }
     const mePfx=state.lang==="fr"?"Toi : ":"You: ";
@@ -2831,13 +2838,13 @@
     if(tab==="friends"){
       let list=state.friends.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
       if(!list.length){
-        body.innerHTML=`<div class="empty-state"><div class="es-em">🤝</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button><button class="btn-link" id="goDiscover">${t("disc_open")}</button></div>`;
+        body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('users')}</div><div class="es-t">${t("fr_empty_t")}</div><div class="es-s">${t("fr_empty_s")}</div><button class="btn btn-soft" id="goMet">${t("fr_seemet")}</button><button class="btn-link" id="goDiscover">${t("disc_open")}</button></div>`;
         const gm=$("#goMet"); if(gm) gm.addEventListener("click",()=>{ state.friendsTab="met"; renderFriends(); });
         const gd=$("#goDiscover"); if(gd) gd.addEventListener("click",()=>goTo("discover"));
       } else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",p.met?frActText(p.met):t("met_generic")))).join("");
     } else {
       let list=metPool.slice(); if(q) list=list.filter(p=>p.name.toLowerCase().includes(q));
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✨</div><div class="es-t">${t("met_empty_t")}</div><div class="es-s">${t("met_empty_s")}</div></div>`; }
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('sparkles')}</div><div class="es-t">${t("met_empty_t")}</div><div class="es-s">${t("met_empty_s")}</div></div>`; }
       else body.innerHTML=`<div class="sec-title">${t("met_sec")}</div>`+list.map(p=>{
         const isFriend=state.friends.some(f=>f.name===p.name);
         const action=isFriend?`<span class="friend-arch" style="background:var(--surface-3);color:var(--muted)">${t("fr_tab")}</span>`:`<div class="req-actions"><button class="req-yes" data-add="${p.name}">${t("fb_add")}</button><button class="req-no" data-skip="${p.name}">✕</button></div>`;
@@ -2867,11 +2874,11 @@
     const body=$("#reqBody");
     if(tab==="recv"){
       const list=state.requests.recv;
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">✉️</div><div class="es-t">${t("rq_empty_recv_t")}</div><div class="es-s">${t("rq_empty_recv_s")}</div></div>`; }
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('mail')}</div><div class="es-t">${t("rq_empty_recv_t")}</div><div class="es-s">${t("rq_empty_recv_s")}</div></div>`; }
       else body.innerHTML=list.map(p=>friendRowHTML(p,t("met_at").replace("{x}",frActText(p.met)),`<div class="req-actions"><button class="req-yes" data-acc="${p.name}">${t("rq_accept")}</button><button class="req-no" data-dec="${p.name}">${t("rq_decline")}</button></div>`)).join("");
     } else {
       const list=state.requests.sent;
-      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">📤</div><div class="es-t">${t("rq_empty_sent_t")}</div><div class="es-s">${t("rq_empty_sent_s")}</div></div>`; }
+      if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('send')}</div><div class="es-t">${t("rq_empty_sent_t")}</div><div class="es-s">${t("rq_empty_sent_s")}</div></div>`; }
       else body.innerHTML=list.map(p=>friendRowHTML(p,t("rq_sent_sub"),`<button class="req-no" data-cancel="${p.name}">${t("btn_cancel")}</button>`)).join("");
     }
     $$("#reqBody [data-acc]").forEach(el=>el.addEventListener("click",()=>{
@@ -3064,7 +3071,7 @@
   // "Start over" wipes the whole demo session — confirm before doing it
   function openStartOver(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">↩️</div>
+      <div class="sheet-ic warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg></div>
       <div class="sheet-title">${t("so_title")}</div>
       <div class="sheet-sub">${t("so_sub")}</div>
       <button class="btn btn-amber" id="soGo">${t("so_go")}</button>
@@ -3238,14 +3245,14 @@
     const tab=state.notifTab||"activity";
     $$("#notifSeg .sopt").forEach(s=>s.classList.toggle("on",s.getAttribute("data-tab")===tab));
     const body=$("#notifBody");
-    if(state.notifsCleared){ body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">${t("notif_caught_t")}</div><div class="es-s">${t("notif_caught_s")}</div></div>`; return; }
+    if(state.notifsCleared){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('bell')}</div><div class="es-t">${t("notif_caught_t")}</div><div class="es-s">${t("notif_caught_s")}</div></div>`; return; }
     const noti=(ic,bg,txt,time,unread,go)=>`<div class="notif ${unread?'unread':''}" ${go?`data-ngo="${go}" style="cursor:pointer"`:""}><div class="nf-ic" style="background:${bg}">${ic}</div><div><div class="nf-t">${txt}</div><div class="nf-time">${time}</div></div></div>`;
     if(tab==="activity"){
       const rc=state.requests.recv.length;
       const joined=state.joinedGroups[0];
       const offer=state.backfillOffer;
       if(!rc&&!joined&&!offer&&!state.seedSocial){
-        body.innerHTML=`<div class="empty-state"><div class="es-em">🔔</div><div class="es-t">${t("notif_none_t")}</div><div class="es-s">${t("notif_none_s")}</div></div>`;
+        body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('bell')}</div><div class="es-t">${t("notif_none_t")}</div><div class="es-s">${t("notif_none_s")}</div></div>`;
         return;
       }
       body.innerHTML=`<div class="day-div">${t("notif_today")}</div>
@@ -3354,7 +3361,7 @@
   function openReport(p){
     const reasons=REASONS[state.lang]||REASONS.en;
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">🚩</div>
+      <div class="sheet-ic warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg></div>
       <div class="sheet-title">${t("rep_title")} ${p.name}</div>
       <div class="sheet-sub">${t("rep_sub").replace("{n}",p.name)}</div>
       <div class="set-list">${reasons.map(r=>`<div class="set-item" data-reason="${r}"><span class="si-ic">›</span>${r}</div>`).join("")}</div>
@@ -3369,7 +3376,7 @@
   function openBlockConfirm(p){
     const blocked=state.blocked.has(p.name);
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">🚫</div>
+      <div class="sheet-ic warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg></div>
       <div class="sheet-title">${blocked?t("ma_unblock"):t("ma_block")} ${p.name}?</div>
       <div class="sheet-sub">${blocked?t("blk_sub_u").replace("{n}",p.name):t("blk_sub_b")}</div>
       <button class="btn ${blocked?'btn-primary':'btn-amber'}" id="blockGo">${blocked?t("ma_unblock"):t("ma_block")}</button>
@@ -3385,7 +3392,7 @@
   function openLeaveSheet(g){
     const act=state.chosenActivity||ACTIVITIES[0];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🚪</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></div>
       <div class="sheet-title">${t("lv_title").replace("{a}",actName(act))}</div>
       <div class="sheet-sub">${t("lv_sub")}</div>
       <button class="btn btn-amber" id="leaveGo">${t("lv_go")}</button>
@@ -3401,7 +3408,7 @@
   }
   function openSuggest(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">💡</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg></div>
       <div class="sheet-title">${t("sg_title")}</div>
       <div class="sheet-sub">${t("sg_sub")}</div>
       <div class="field"><label>${t("sg_what")}</label><input placeholder="${t("sg_what_ph")}"></div>
@@ -3426,7 +3433,7 @@
   }
   function openMoodNo(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">💛</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg></div>
       <div class="sheet-title">${t("mood_no_t")}</div>
       <div class="sheet-sub">${t("mood_no_s")}</div>
       <button class="btn btn-soft" id="mnLeave">${t("mood_no_leave")}</button>
@@ -3542,7 +3549,7 @@
     let list,title;
     if(q){ list=PEOPLE.filter(p=>p.name.toLowerCase().includes(q)||p.username.toLowerCase().includes(q)); title=t("ex_results"); }
     else { list=PEOPLE.slice().sort((a,b)=>b.mutual-a.mutual); title=t("disc_suggested"); }
-    if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">🔍</div><div class="es-t">${t("disc_empty_t")}</div><div class="es-s">${t("disc_empty_s")}</div></div>`; return; }
+    if(!list.length){ body.innerHTML=`<div class="empty-state"><div class="es-em">${svgIcon('search')}</div><div class="es-t">${t("disc_empty_t")}</div><div class="es-s">${t("disc_empty_s")}</div></div>`; return; }
     body.innerHTML=`<p class="tiny" style="margin:0 0 14px">${t("disc_intro")}</p><div class="sec-title">${title}</div>`+list.map(personRowHTML).join("");
     makeFocusable(body);
     $$("#discBody [data-discadd]").forEach(el=>el.addEventListener("click",e=>{ e.stopPropagation(); discAdd(el.getAttribute("data-discadd")); }));
@@ -3560,13 +3567,13 @@
   function openReservation(g,a,onConfirm){
     const when=frWhen((g&&g.when)||a.when);
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🎟️</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2z"/><path d="M13 5v14"/></svg></div>
       <div class="sheet-title">${t("rsv_title")}</div>
       <div class="sheet-sub">${a.price?t("rsv_sub_ticket").replace("{price}",a.price):t("rsv_sub_free")}</div>
-      <div class="info-tile"><div class="it-ic">🗓️</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${when}</div></div></div>
-      <div class="info-tile"><div class="it-ic">📍</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
-      <div class="info-tile"><div class="it-ic">👤</div><div><div class="it-lab">${t("rsv_for")}</div><div class="it-val">${t("rsv_you1")}</div></div></div>
-      ${a.price?`<div class="info-tile"><div class="it-ic">💳</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("rsv_pay_note")}</div></div></div>`:""}
+      <div class="info-tile"><div class="it-ic">${svgIcon('calendar')}</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${when}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('pin')}</div><div><div class="it-lab">${t("gd_where")}</div><div class="it-val">${actVenue(a)}</div></div></div>
+      <div class="info-tile"><div class="it-ic">${svgIcon('user')}</div><div><div class="it-lab">${t("rsv_for")}</div><div class="it-val">${t("rsv_you1")}</div></div></div>
+      ${a.price?`<div class="info-tile"><div class="it-ic">${svgIcon('card')}</div><div><div class="it-lab">${t("ticket")}</div><div class="it-val">${a.price} · ${t("rsv_pay_note")}</div></div></div>`:""}
       <button class="btn btn-primary" id="rsvGo" style="margin-top:8px">${a.price?t("rsv_go_ticket").replace("{price}",a.price):t("rsv_go")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $("#rsvGo").addEventListener("click",()=>{ closeSheet(); showToast(t("rsv_done")); if(onConfirm) onConfirm(); });
@@ -3574,7 +3581,7 @@
   }
   function openWaitlist(g,a){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🕓</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
       <div class="sheet-title">${t("wl_title")}</div>
       <div class="sheet-sub">${t("wl_sub")}</div>
       <button class="btn btn-primary" id="wlGo">${t("wl_go")}</button>
@@ -3618,7 +3625,7 @@
   // waitlist backfill: a spot opens → claim it within a window → join
   function openClaimSpot(g,a){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🎉</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L4 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L20 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/><path d="M5 4v3"/><path d="M18.5 17v3"/><path d="M3.5 5.5h3"/><path d="M17 18.5h3"/></svg></div>
       <div class="sheet-title">${t("wl_claim_t")}</div>
       <div class="sheet-sub">${t("wl_claim_s").replace("{g}",esc(grpName(g)))}</div>
       <button class="btn btn-primary" id="claimGo">${t("wl_claim_go")}</button>
@@ -3636,11 +3643,11 @@
   function openVerify(){
     const render=(step)=>{
       if(state.verified){
-        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">✅</div>
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
           <div class="sheet-title">${t("vf_badge")}</div><div class="sheet-sub">${t("vf_already")}</div>
           <button class="btn btn-ghost" id="sheetClose">${t("btn_close")}</button>`;
       } else if(step==="phone"){
-        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">🪪</div>
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/></svg></div>
           <div class="sheet-title">${t("vf_title")}</div><div class="sheet-sub">${t("vf_sub")}</div>
           <div class="field"><label>${t("vf_phone")}</label><input id="vfPhone" type="tel" placeholder="${t("vf_phone_ph")}" autocomplete="off"></div>
           <p class="tiny" style="margin:-6px 0 12px">${t("vf_why")}</p>
@@ -3650,7 +3657,7 @@
         ph.addEventListener("input",()=>{ b.disabled=ph.value.replace(/\D/g,"").length<7; });
         b.addEventListener("click",()=>render("code"));
       } else {
-        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic">💬</div>
+        $("#sheetBody").innerHTML=`<div class="sheet-handle"></div><div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
           <div class="sheet-title">${t("vf_code")}</div><div class="sheet-sub">${t("vf_sub")}</div>
           <div class="field"><input id="vfCode" inputmode="numeric" maxlength="4" placeholder="${t("vf_code_ph")}" style="text-align:center;letter-spacing:10px;font-size:22px" autocomplete="one-time-code"></div>
           <button class="btn btn-primary" id="vfGo" disabled>${t("vf_verify")}</button>
@@ -3672,7 +3679,7 @@
     const tier=relTier();
     const sub=tier==="good"?t("rel_sheet_good_s"):(tier==="building"?t("rel_sheet_building_s"):t("rel_sheet_new_s"));
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🛡️</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="sheet-title">${t("rel_sheet_t")}</div>
       <div class="sheet-sub">${sub}</div>
       <div class="info-block">
@@ -3839,7 +3846,7 @@
   function openTakeBreak(){
     const opts=[[t("brk_7"),"7d"],[t("brk_14"),"14d"],[t("brk_30"),"30d"]];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🌙</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg></div>
       <div class="sheet-title">${t("brk_title")}</div>
       <div class="sheet-sub">${t("brk_sub")}</div>
       <div class="set-list">${opts.map(o=>`<div class="set-item" data-brk="${o[1]}"><span class="si-ic">${svgIcon('clock')}</span>${o[0]}<span class="chev">›</span></div>`).join("")}</div>
@@ -3850,7 +3857,7 @@
 
   function openDeleteAccount(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic warn">🗑️</div>
+      <div class="sheet-ic warn"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg></div>
       <div class="sheet-title">${t("del_title")}</div>
       <div class="sheet-sub">${t("del_sub")}</div>
       <button class="btn btn-amber" id="delGo">${t("del_go")}</button>
@@ -3861,7 +3868,7 @@
 
   function openSupport(){
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">📧</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
       <div class="sheet-title">${t("sup_title")}</div>
       <div class="sheet-sub">${t("sup_sub")}</div>
       <div class="field"><label>${t("sup_label")}</label><textarea rows="4" id="suppMsg" placeholder="${t("sup_ph")}"></textarea></div>
@@ -3897,7 +3904,7 @@
   function openChatSafety(){
     const g=state.chosenGroup; const mems=(g&&g.members)||[];
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
-      <div class="sheet-ic">🛡️</div>
+      <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="sheet-title">${t("cs_title")}</div>
       <div class="sheet-sub">${t("cs_sub")}</div>
       <div class="set-list">
