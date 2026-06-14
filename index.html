@@ -457,6 +457,7 @@
   .mf-reason.mf-soft .ic{color:var(--accent-text);}
   .mf-count{font-size:12.5px;color:var(--accent-text);margin-top:11px;}
   .mf-deep{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;margin-top:11px;}
+  .mu-collapsed{font-style:italic;color:var(--muted)!important;background:var(--surface-2)!important;cursor:pointer;}
   .sort-note{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--faint);margin:-4px 0 12px;}
   .sort-note .ic{color:var(--c3);}
   /* post-hang recap (reflection step 3) + reliability streak */
@@ -1474,7 +1475,7 @@
       set_whomsg:"Who can message me",set_whoadd:"Who can add me",set_photo:"Profile photo",set_photo_val:"Friends only · locked",set_active:"Show active status",
       set_reminders:"Hang reminders",set_messages:"Messages",set_friendreq:"Friend requests",set_matches:"New group matches",set_updates:"Product updates",
       set_blocked:"Blocked accounts",set_break:"Take a break",set_modn:"How moderation works",set_well:"Wellbeing resources",
-      set_boundaries:"Your boundaries",rep_receipt_t:"Report received",rep_receipt_s:"Our team reviews this within 24 hours. You'll get the outcome here.",rep_ref:"Reference {code}",rep_sla:"Reviewed within 24h",rep_then_block:"Block them too",rep_outcome:"We reviewed your report and took action",bnd_title:"Your boundaries",bnd_sub:"Private to you — reports, blocks and breaks live here.",bnd_reports:"Reports",bnd_blocked:"Blocked",bnd_reviewing:"Reviewing",bnd_resolved:"Resolved",bnd_empty:"Nothing here — and that's a good thing.",
+      set_boundaries:"Your boundaries",rep_receipt_t:"Report received",rep_receipt_s:"Our team reviews this within 24 hours. You'll get the outcome here.",rep_ref:"Reference {code}",rep_sla:"Reviewed within 24h",rep_then_block:"Block them too",rep_outcome:"We reviewed your report and took action",bnd_title:"Your boundaries",bnd_sub:"Private to you — reports, blocks and breaks live here.",bnd_reports:"Reports",bnd_blocked:"Blocked",bnd_reviewing:"Reviewing",bnd_resolved:"Resolved",bnd_empty:"Nothing here — and that's a good thing.",bnd_muted:"Muted",ma_unmute:"Unmute",toast_unmuted:"{n} unmuted",mu_collapsed:"Message from a muted member · tap to view",rep_then_mute:"Mute them",
       set_help:"Help & FAQ",set_contact:"Contact us",set_terms:"Terms of Service",set_privacy_doc:"Privacy Policy",set_guidelines:"Community Guidelines",
       set_textsize:"Text size",set_bold:"Bold text",set_contrast:"High contrast",set_motion:"Reduce motion",set_targets:"Larger touch targets",
       set_delete:"Delete account",size_default:"Default",size_large:"Large",
@@ -1644,7 +1645,7 @@
       set_whomsg:"Qui peut m'écrire",set_whoadd:"Qui peut m'ajouter",set_photo:"Photo de profil",set_photo_val:"Amis seulement · verrouillé",set_active:"Afficher mon statut actif",
       set_reminders:"Rappels de sortie",set_messages:"Messages",set_friendreq:"Demandes d'amitié",set_matches:"Nouveaux groupes compatibles",set_updates:"Nouvelles du produit",
       set_blocked:"Comptes bloqués",set_break:"Prendre une pause",set_modn:"Comment fonctionne la modération",set_well:"Ressources bien-être",
-      set_boundaries:"Tes limites",rep_receipt_t:"Signalement reçu",rep_receipt_s:"Notre équipe l'examine en moins de 24 heures. Tu auras le résultat ici.",rep_ref:"Référence {code}",rep_sla:"Examiné en moins de 24 h",rep_then_block:"Le/la bloquer aussi",rep_outcome:"On a examiné ton signalement et agi",bnd_title:"Tes limites",bnd_sub:"Privé à toi — signalements, blocages et pauses sont ici.",bnd_reports:"Signalements",bnd_blocked:"Bloqués",bnd_reviewing:"En examen",bnd_resolved:"Réglé",bnd_empty:"Rien ici — et c'est tant mieux.",
+      set_boundaries:"Tes limites",rep_receipt_t:"Signalement reçu",rep_receipt_s:"Notre équipe l'examine en moins de 24 heures. Tu auras le résultat ici.",rep_ref:"Référence {code}",rep_sla:"Examiné en moins de 24 h",rep_then_block:"Le/la bloquer aussi",rep_outcome:"On a examiné ton signalement et agi",bnd_title:"Tes limites",bnd_sub:"Privé à toi — signalements, blocages et pauses sont ici.",bnd_reports:"Signalements",bnd_blocked:"Bloqués",bnd_reviewing:"En examen",bnd_resolved:"Réglé",bnd_empty:"Rien ici — et c'est tant mieux.",bnd_muted:"En sourdine",ma_unmute:"Réactiver",toast_unmuted:"{n} réactivé",mu_collapsed:"Message d'un membre en sourdine · touche pour voir",rep_then_mute:"Le/la mettre en sourdine",
       set_help:"Aide & FAQ",set_contact:"Nous écrire",set_terms:"Conditions d'utilisation",set_privacy_doc:"Politique de confidentialité",set_guidelines:"Règles de la communauté",
       set_textsize:"Taille du texte",set_bold:"Texte en gras",set_contrast:"Contraste élevé",set_motion:"Réduire les animations",set_targets:"Zones tactiles plus grandes",
       set_delete:"Supprimer le compte",size_default:"Par défaut",size_large:"Grande",
@@ -1897,7 +1898,7 @@
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
     hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false, prompts:[], groupVibe:[], depthDismissed:false,
-    reports:[],
+    reports:[], mutedMembers:new Set(), mutedGroups:{},
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -2179,7 +2180,7 @@
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],mutedMembers:new Set(),mutedGroups:{},
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -2829,7 +2830,9 @@
   function msgRowHTML(m){
     if(m.sys) return `<div class="msg sys">${m.text}</div>`;
     if(m.who==="me") return `<div class="msg-row" style="justify-content:flex-end"><div class="msg-col" style="align-items:flex-end"><div class="msg me">${m.text}</div><div class="msg-time" style="align-self:flex-end">${msgTime(m.time)}</div></div></div>`;
-    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div><div class="msg them" data-react>${m.text}</div><div class="react-row"></div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`;
+    const muted=state.mutedMembers&&state.mutedMembers.has(m.name);
+    const bubble=muted?`<div class="msg them mu-collapsed" data-mtext="${esc(m.text)}">${t("mu_collapsed")}</div>`:`<div class="msg them" data-react>${m.text}</div>`;
+    return `<div class="msg-row"><div class="mr-av ${archGrad(m.key)}" data-member="${m.name}">${m.emoji||"🙂"}</div><div class="msg-col"><div class="msg-name">${m.name}</div>${bubble}<div class="react-row"></div><div class="msg-time">${m.time?msgTime(m.time):""}</div></div></div>`;
   }
   function pushMsg(m,gid){
     gid = gid || state.chatViewGroup;
@@ -2989,6 +2992,9 @@
     });
     $$("#chatScroll [data-member]").forEach(el=>{ if(el._mw) return; el._mw=true;
       el.addEventListener("click",()=>{ const g=state.chosenGroup; const m=g&&g.members&&g.members.find(x=>x[0]===el.getAttribute("data-member")); if(m) openMemberActions({name:m[0],emoji:m[1],key:m[2]}); });
+    });
+    $$("#chatScroll .mu-collapsed").forEach(el=>{ if(el._uw) return; el._uw=true;
+      el.addEventListener("click",()=>{ el.innerHTML=el.getAttribute("data-mtext")||""; el.classList.remove("mu-collapsed"); });
     });
   }
   function showReactPop(el){
@@ -3584,7 +3590,7 @@
       <div style="display:flex;align-items:center;gap:13px;margin-bottom:18px">${avatarHTML(p,"av-sm")}<div><div style="font-size:17px;font-weight:700">${p.name} ${archBadge(p.key)}</div><div style="font-size:13px;color:var(--faint)">${isFriend?t("ma_friend"):t("ma_fromgroup")}</div></div></div>
       <div class="set-list">
         ${isFriend?`<div class="set-item" data-act="msg"><span class="si-ic">${svgIcon('message')}</span>${t("ma_msg")}<span class="chev">›</span></div>`:`<div class="set-item" data-act="add"><span class="si-ic">${svgIcon('userplus')}</span>${t("ma_add")}<span class="chev">›</span></div>`}
-        <div class="set-item" data-act="mute"><span class="si-ic">${svgIcon('belloff')}</span>${t("ma_mute")}<span class="chev">›</span></div>
+        <div class="set-item" data-act="mute"><span class="si-ic">${svgIcon('belloff')}</span>${state.mutedMembers.has(p.name)?t("ma_unmute"):t("ma_mute")}<span class="chev">›</span></div>
         <div class="set-item" data-act="report"><span class="si-ic">${svgIcon('flag')}</span>${t("ma_report")}<span class="chev">›</span></div>
         <div class="set-item danger" data-act="block"><span class="si-ic">${svgIcon('ban')}</span>${blocked?t("ma_unblock"):t("ma_block")} ${p.name}<span class="chev">›</span></div>
         ${isFriend?`<div class="set-item danger" data-act="unfriend"><span class="si-ic">${svgIcon('userminus')}</span>${t("ma_unfriend")}<span class="chev">›</span></div>`:''}
@@ -3595,7 +3601,7 @@
       const a=el.getAttribute("data-act");
       if(a==="msg"){ closeSheet(); state.currentDM=p.name; goTo("dm"); }
       else if(a==="add"){ closeSheet(); if(state.requests.recv.some(x=>x.name===p.name)) addFriend(p.name); else { state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.name)); } }
-      else if(a==="mute"){ closeSheet(); showToast(t("toast_muted").replace("{n}",p.name)); }
+      else if(a==="mute"){ closeSheet(); const mu=state.mutedMembers.has(p.name); if(mu) state.mutedMembers.delete(p.name); else state.mutedMembers.add(p.name); showToast((mu?t("toast_unmuted"):t("toast_muted")).replace("{n}",p.name)); if($("#s-chat").classList.contains("active")) enterChat(); }
       else if(a==="report"){ openReport(p); }
       else if(a==="block"){ openBlockConfirm(p); }
       else if(a==="unfriend"){ closeSheet(); state.friends=state.friends.filter(f=>f.name!==p.name); showToast(t("toast_removed").replace("{n}",p.name)); if($("#s-friends").classList.contains("active")) renderFriends(); if($("#s-friendprofile").classList.contains("active")) goBack(); }
@@ -3631,8 +3637,10 @@
       <div class="sheet-sub">${t("rep_receipt_s")}</div>
       <div class="info-tile"><div class="it-ic">${svgIcon('file')}</div><div><div class="it-lab">${t("rep_ref").replace("{code}",ref)}</div><div class="it-val">${t("rep_sla")}</div></div></div>
       <button class="btn btn-soft" id="repBlock" style="margin-top:6px">${svgIcon('ban')} ${t("rep_then_block")}</button>
+      <button class="btn btn-soft" id="repMute" style="margin-top:8px">${svgIcon('belloff')} ${t("rep_then_mute")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_close")}</button>`;
     const rb=$("#repBlock"); if(rb) rb.addEventListener("click",()=>openBlockConfirm(p));
+    const rm=$("#repMute"); if(rm) rm.addEventListener("click",()=>{ state.mutedMembers.add(p.name); closeSheet(); showToast(t("toast_muted").replace("{n}",p.name)); });
     sheetClose();
   }
   function openBlockConfirm(p){
@@ -3688,7 +3696,8 @@
       <div class="set-list" style="margin-top:16px">${opts.map(o=>`<div class="set-item" data-dur="${o[1]}"><span class="si-ic">${svgIcon('belloff')}</span>${o[0]}</div>`).join("")}</div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-dur]").forEach(el=>el.addEventListener("click",()=>{
-      const label=el.querySelector(".si-ic")?el.textContent.replace("🔕","").trim():el.getAttribute("data-dur");
+      const label=el.textContent.trim();
+      if(g) state.mutedGroups[g.id]=label;
       closeSheet(); showToast(t("mu_done")+" · "+label);
     }));
     sheetClose(); openSheet();
@@ -4139,17 +4148,22 @@
   function openBoundaries(){
     const reps=state.reports.map(r=>`<div class="set-item" style="cursor:default"><span class="si-ic">${svgIcon('file')}</span><div style="flex:1;min-width:0"><div style="font-size:14px">${esc(r.who)} · ${esc(r.reason)}</div><div class="tiny">${t("rep_ref").replace("{code}",r.id)}</div></div><span class="pill-static ${r.status==='resolved'?'pill-mint':'pill-cal'}" style="font-size:10px;flex-shrink:0">${r.status==='resolved'?t("bnd_resolved"):t("bnd_reviewing")}</span></div>`).join("");
     const blks=[...state.blocked].map(n=>`<div class="set-item" style="cursor:default"><span class="si-ic">${svgIcon('ban')}</span><div style="flex:1">${esc(n)}</div><button class="mini-btn" data-unblock="${esc(n)}">${t("ma_unblock")}</button></div>`).join("");
-    const anything=reps||blks;
+    const mutedM=[...state.mutedMembers].map(n=>`<div class="set-item" style="cursor:default"><span class="si-ic">${svgIcon('belloff')}</span><div style="flex:1">${esc(n)}</div><button class="mini-btn" data-unmutem="${esc(n)}">${t("ma_unmute")}</button></div>`).join("");
+    const mutedG=Object.keys(state.mutedGroups).map(gid=>{ const g=makeGroups().find(x=>x.id===gid); const nm=g?grpName(g):gid; return `<div class="set-item" style="cursor:default"><span class="si-ic">${svgIcon('belloff')}</span><div style="flex:1;min-width:0"><div>${esc(nm)}</div><div class="tiny">${esc(state.mutedGroups[gid])}</div></div><button class="mini-btn" data-unmuteg="${esc(gid)}">${t("ma_unmute")}</button></div>`; }).join("");
+    const anything=reps||blks||mutedM||mutedG;
     $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
       <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
       <div class="sheet-title">${t("bnd_title")}</div>
       <div class="sheet-sub">${t("bnd_sub")}</div>
       ${reps?`<div class="day-div">${t("bnd_reports")}</div><div class="set-list">${reps}</div>`:""}
       ${blks?`<div class="day-div">${t("bnd_blocked")}</div><div class="set-list">${blks}</div>`:""}
+      ${(mutedM||mutedG)?`<div class="day-div">${t("bnd_muted")}</div><div class="set-list">${mutedM}${mutedG}</div>`:""}
       ${anything?"":`<div class="empty-state" style="padding:18px 0"><div class="es-em">${svgIcon('shield')}</div><div class="es-s">${t("bnd_empty")}</div></div>`}
       <div class="set-list" style="margin-top:14px"><div class="set-item" id="bndBreak"><span class="si-ic">${svgIcon('moon')}</span>${t("set_break")}<span class="chev">›</span></div></div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:12px">${t("btn_close")}</button>`;
     $$("#sheetBody [data-unblock]").forEach(el=>el.addEventListener("click",()=>{ const n=el.getAttribute("data-unblock"); state.blocked.delete(n); showToast(t("toast_unblocked").replace("{n}",n)); openBoundaries(); }));
+    $$("#sheetBody [data-unmutem]").forEach(el=>el.addEventListener("click",()=>{ state.mutedMembers.delete(el.getAttribute("data-unmutem")); openBoundaries(); }));
+    $$("#sheetBody [data-unmuteg]").forEach(el=>el.addEventListener("click",()=>{ delete state.mutedGroups[el.getAttribute("data-unmuteg")]; openBoundaries(); }));
     const bb=$("#bndBreak"); if(bb) bb.addEventListener("click",openTakeBreak);
     sheetClose(); openSheet();
   }
