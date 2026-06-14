@@ -71,7 +71,7 @@ create table if not exists public.profiles (
   updated_at       timestamptz not null default now()
 );
 create unique index if not exists uq_profiles_username on public.profiles (lower(username));
-create trigger trg_profiles_updated before update on public.profiles
+create or replace trigger trg_profiles_updated before update on public.profiles
   for each row execute function public.set_updated_at();
 
 -- Activity templates (minimal). price IS NOT NULL => ticketed (pay-at-venue).
@@ -103,7 +103,7 @@ create table if not exists public.groups (
   updated_at    timestamptz not null default now(),
   constraint filled_within_capacity check (filled <= max_size)
 );
-create trigger trg_groups_updated before update on public.groups
+create or replace trigger trg_groups_updated before update on public.groups
   for each row execute function public.set_updated_at();
 
 -- The join ledger — what the weekly cap counts. One non-terminal membership per
@@ -132,7 +132,7 @@ create unique index if not exists uq_one_active_membership
 create index if not exists idx_memberships_account on public.group_memberships(account_id, status);
 create index if not exists idx_memberships_cap
   on public.group_memberships(account_id, join_iso_week) where status in ('active','attended');
-create trigger trg_memberships_updated before update on public.group_memberships
+create or replace trigger trg_memberships_updated before update on public.group_memberships
   for each row execute function public.set_updated_at();
 
 -- Reservation — the PCH-XXXX code shown at the venue. PAY-AT-VENUE: no card, no
