@@ -326,6 +326,15 @@
   .gchip{display:inline-block;padding:7px 13px;border-radius:999px;font-size:13px;font-weight:600;background:rgba(255,255,255,.14);color:#fff;border:1px solid rgba(255,255,255,.28);cursor:pointer;}
   .gchip.sel{background:#fff;color:#241c16;border-color:#fff;}
   .bio-suggest{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--accent-text);cursor:pointer;margin-top:7px;}
+  /* pick-a-prompt bios */
+  .prompt-list{display:flex;flex-direction:column;gap:10px;margin:14px auto 0;max-width:300px;text-align:left;}
+  .prompt-card{background:var(--surface-2);border:1px solid var(--line);border-radius:14px;padding:12px 14px;}
+  .pc-q{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--accent-text);font-weight:600;margin-bottom:4px;}
+  .pc-q .ic{width:13px;height:13px;}
+  .pc-a{font-family:'Fraunces',serif;font-size:15px;color:var(--text);line-height:1.4;}
+  .prompt-edit{margin-bottom:10px;}
+  .pe-q{font-size:12px;color:var(--muted);margin-bottom:5px;}
+  .pe-in{width:100%;}
   .glass-btn{background:rgba(255,255,255,.16);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.24);color:#fff;}
   .seeall-link{display:inline-block;color:rgba(255,255,255,.9);font-size:13px;font-weight:700;text-decoration:underline;text-underline-offset:3px;cursor:pointer;margin-top:20px;animation:floatUp .4s .3s ease-out both;}
 
@@ -1408,7 +1417,7 @@
       btn_start:"Start",btn_maybe:"Maybe later",q_skip:"Skip",q_back:"← Back",
       res_reading:"Reading your answers…",res_finding:"Finding the type that fits.",
       res_scan0:"Noticing how you connect",res_scan1:"Matching it to a type",res_scan2:"Lining up groups that fit",
-      res_yourtype:"Your social type",res_vibe:"You tend to vibe well with",and:"and",res_pct:"of people share your type",res_int_t:"A few things you're into?",res_int_sub:"Optional — it sharpens your matches.",res_int_count:"{n} groups match your interests",res_int_count1:"{n} group matches your interests",ps_suggest_bio:"Use this as your bio",
+      res_yourtype:"Your social type",res_vibe:"You tend to vibe well with",and:"and",res_pct:"of people share your type",res_int_t:"A few things you're into?",res_int_sub:"Optional — it sharpens your matches.",res_int_count:"{n} groups match your interests",res_int_count1:"{n} group matches your interests",ps_suggest_bio:"Use this as your bio",ps_prompts:"Prompts",ps_prompts_sub:"Answer a few — it gives people a way in.",prompt_ph:"Your answer…",
       res_seeall:"See all 12 types →",res_share:"✦ Share my type",btn_continue:"Continue",
       all_types:"All 12 types",all_types_sub:"Every type is equally welcome. Swipe through.",btn_close:"Close",copy_link:"Copy link",
       age_title:"Just one thing<br>before we continue",age_sub:"Perch is for adults. How old are you?",
@@ -1577,7 +1586,7 @@
       btn_start:"Commencer",btn_maybe:"Plus tard",q_skip:"Passer",q_back:"← Retour",
       res_reading:"On lit tes réponses…",res_finding:"On trouve le type qui te ressemble.",
       res_scan0:"On observe comment tu connectes",res_scan1:"On l'associe à un type",res_scan2:"On aligne des groupes qui fittent",
-      res_yourtype:"Ton type social",res_vibe:"Tu accroches bien avec",and:"et",res_pct:"des gens partagent ton type",res_int_t:"Quelques affaires qui t'allument?",res_int_sub:"Optionnel — ça affine tes matchs.",res_int_count:"{n} groupes matchent tes intérêts",res_int_count1:"{n} groupe matche tes intérêts",ps_suggest_bio:"Utiliser ça comme bio",
+      res_yourtype:"Ton type social",res_vibe:"Tu accroches bien avec",and:"et",res_pct:"des gens partagent ton type",res_int_t:"Quelques affaires qui t'allument?",res_int_sub:"Optionnel — ça affine tes matchs.",res_int_count:"{n} groupes matchent tes intérêts",res_int_count1:"{n} groupe matche tes intérêts",ps_suggest_bio:"Utiliser ça comme bio",ps_prompts:"Questions",ps_prompts_sub:"Réponds à quelques-unes — ça donne une porte d'entrée.",prompt_ph:"Ta réponse…",
       res_seeall:"Voir les 12 types →",res_share:"✦ Partager mon type",btn_continue:"Continuer",
       all_types:"Les 12 types",all_types_sub:"Chaque type est le bienvenu. Glisse pour explorer.",btn_close:"Fermer",copy_link:"Copier le lien",
       age_title:"Juste une chose<br>avant de continuer",age_sub:"Perch, c'est pour les adultes. Quel âge as-tu?",
@@ -1883,7 +1892,7 @@
     requests:{recv:[],sent:[]},
     photo:null, name:"You", username:null, profileComplete:false, verified:false, verifyPromptDismissed:false, attended:0, emoji:"🙂", bio:"Into low-key plans and genuine people ✌️", interests:["Board games","Coffee","Hiking"],
     waitlisted:[], nudgeDismissed:false, dayStatus:{}, daySimSeeded:{}, backfillOffer:null, backfillSeen:false,
-    hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false,
+    hangLog:[], milestonesSeen:[], returnNudge:null, returnSeen:false, prompts:[],
     notifsCleared:false,
     settings:{whoMessage:"friends",whoAdd:"everyone",activeStatus:true,reduceMotion:false,
       boldText:false,highContrast:false,largerTargets:false,textSize:"default",
@@ -1903,6 +1912,28 @@
   const INT_FR={"Board games":"Jeux de société","Coffee":"Café","Hiking":"Randonnée","Cooking":"Cuisine","Live music":"Musique live","Art":"Art","Reading":"Lecture","Running":"Course","Photography":"Photographie","Gaming":"Jeux vidéo","Cycling":"Vélo","Movies":"Cinéma"};
   // per-archetype interest seed — smart default for profile setup when interests are untouched
   const ARCH_INTERESTS={spark:["Live music","Coffee"],connector:["Coffee","Board games"],explorer:["Hiking","Photography"],easygoer:["Coffee","Movies"],anchor:["Reading","Coffee"],observer:["Reading","Photography"],curator:["Art","Live music"],grounding:["Cooking","Coffee"],wildcard:["Gaming","Live music"],storyteller:["Movies","Live music"],navigator:["Board games","Cycling"],wavelength:["Coffee","Movies"]};
+  // pick-a-prompt bios — questions live in PROMPTS (en) / PROMPTS_FR (fr); answers are user UGC (not translated)
+  const PROMPTS=[{key:"find",q:"You'll usually find me…"},{key:"spot",q:"My go-to spot in Montreal"},{key:"bring",q:"What I bring to a hangout"},{key:"weekend",q:"A perfect weekend is…"}];
+  const PROMPTS_FR={find:"Tu vas souvent me trouver…",spot:"Ma place de prédilection à Montréal",bring:"Ce que j'apporte à une sortie",weekend:"Une fin de semaine parfaite, c'est…"};
+  const promptQ=k=>{const p=PROMPTS.find(x=>x.key===k);return state.lang==="fr"&&PROMPTS_FR[k]?PROMPTS_FR[k]:(p?p.q:"");};
+  // a few demo people carry authored bios + prompt answers (bilingual); shown to friends only
+  const PROMPT_SEED={
+    Maya:{bio:{en:"Always up for trying the new café before anyone else.",fr:"Toujours partante pour essayer le nouveau café avant tout le monde."},prompts:[{q:"find",a:{en:"…at a corner table with a flat white and a friend.",fr:"…à une table de coin avec un latté pis un ami."}},{q:"bring",a:{en:"Introductions — I love connecting people who should know each other.",fr:"Les présentations — j'adore connecter le monde qui devrait se connaître."}}]},
+    Iris:{bio:{en:"Quietly observant, slow to warm up, worth the wait.",fr:"Discrètement observatrice, lente à se réchauffer, mais ça vaut l'attente."},prompts:[{q:"spot",a:{en:"The reading room at the Grande Bibliothèque.",fr:"La salle de lecture de la Grande Bibliothèque."}},{q:"weekend",a:{en:"A long walk, a good book, no plans.",fr:"Une longue marche, un bon livre, aucun plan."}}]}
+  };
+  const seedBio=name=>{const s=PROMPT_SEED[name];return s?(state.lang==="fr"?s.bio.fr:s.bio.en):null;};
+  const seedPrompts=name=>{const s=PROMPT_SEED[name];return s?s.prompts.map(p=>({q:p.q,a:state.lang==="fr"?p.a.fr:p.a.en})):[];};
+  function promptCardHTML(list){
+    const ans=(list||[]).filter(p=>p.a&&String(p.a).trim());
+    if(!ans.length) return "";
+    return `<div class="prompt-list">`+ans.map(p=>`<div class="prompt-card"><div class="pc-q">${svgIcon('message')} ${esc(promptQ(p.q))}</div><div class="pc-a">${esc(p.a)}</div></div>`).join("")+`</div>`;
+  }
+  function promptFieldsHTML(list){
+    const map={}; (list||[]).forEach(p=>map[p.q]=p.a);
+    return `<div class="field"><label>${t("ps_prompts")}</label><div class="tiny" style="margin:-2px 0 8px">${t("ps_prompts_sub")}</div>`+
+      PROMPTS.map(p=>`<div class="prompt-edit"><div class="pe-q">${esc(promptQ(p.key))}</div><input class="pe-in" data-prompt="${p.key}" maxlength="80" value="${esc(map[p.key]||'')}" placeholder="${t('prompt_ph')}" autocomplete="off"></div>`).join("")+`</div>`;
+  }
+  function collectPrompts(){ const out=[]; $$("#sheetBody [data-prompt]").forEach(inp=>{ const a=inp.value.trim(); if(a) out.push({q:inp.getAttribute("data-prompt"),a}); }); return out.slice(0,3); }
   /* searchable people directory — names/usernames are proper nouns (no i18n); archetype shows translated */
   const PEOPLE=[
     {name:"Élodie",username:"elodie.mtl",emoji:"😊",key:"connector",mutual:3,verified:true},
@@ -2130,7 +2161,7 @@
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
       blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
-      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,
+      waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null});
     state.answers=new Array(7).fill(null);
     state.requests={recv:[],sent:[]};
@@ -3082,7 +3113,7 @@
         <div class="sub" style="margin-top:8px">${archTag(key)}</div>
       </div>
       <div class="info-block"><div class="sec-title">${t("fp_where")}</div><div class="ib-row"><span class="star">📍</span><span>${p.met?frActText(p.met):t("met_perch")}</span></div></div>
-      ${isFriend?`<div class="info-block"><div class="sec-title">${t("fp_about").replace("{n}",p.name)}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">${t("fp_bio").replace("{d1}",desc[0]).replace("{d2}",(desc[1]||"").toLowerCase())}</p></div>`:`<p class="tiny" style="text-align:center;margin:6px 0 14px">${t("fp_locked").replace("{n}",p.name)}</p>`}
+      ${isFriend?(()=>{ const sb=seedBio(p.name), sp=seedPrompts(p.name); const bio=sb||t("fp_bio").replace("{d1}",desc[0]).replace("{d2}",(desc[1]||"").toLowerCase()); return `<div class="info-block"><div class="sec-title">${t("fp_about").replace("{n}",p.name)}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">${esc(bio)}</p>${promptCardHTML(sp)}</div>`; })():`<p class="tiny" style="text-align:center;margin:6px 0 14px">${t("fp_locked").replace("{n}",p.name)}</p>`}
       <div class="btn-row">
         ${isFriend?`<button class="btn btn-primary" id="fpMsg">${t("fp_msg")}</button>`:`<button class="btn btn-primary" id="fpAdd">${t("fp_add")}</button>`}
         <button class="btn btn-soft" id="fpMore" aria-label="More options">···</button>
@@ -3216,6 +3247,7 @@
         </div>
         <p class="sub" style="margin-top:12px;max-width:280px;margin-left:auto;margin-right:auto">${esc(state.bio)}</p>
         <div class="chips" style="justify-content:center;margin-top:12px">${state.interests.map(i=>`<span class="trait">${esc(intLabel(i))}</span>`).join("")}</div>
+        ${promptCardHTML(state.prompts)}
         <button class="btn-link" id="pfEdit" style="margin-top:12px">${t("prof_edit")}</button>
       </div>
       <div class="stats">
@@ -3685,6 +3717,7 @@
       <div class="field"><label>${t("ps_interests")}</label>
         <div class="tiny" style="margin:-2px 0 8px">${t("ps_interests_sub")}</div>
         <div class="chips" id="psInts">${INTERESTS.map(i=>`<span class="chip ${chosen.interests.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
+      ${gated?"":promptFieldsHTML(state.prompts)}
       <button class="btn btn-primary" id="psSave" style="margin-top:8px" disabled>${t("ps_save")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     const nameEl=$("#psName"), userEl=$("#psUser"), msg=$("#psUserMsg"), saveBtn=$("#psSave");
@@ -3708,6 +3741,7 @@
       state.name=n; state.username=userEl.value.trim().toLowerCase(); state.emoji=chosen.emoji;
       const b=$("#psBio").value.trim(); if(b) state.bio=b;
       if(chosen.interests.length) state.interests=chosen.interests.slice();
+      if(!gated) state.prompts=collectPrompts();
       state.profileComplete=true;
       closeSheet(); showToast(t("ps_saved"));
       const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-",""));
@@ -4002,6 +4036,7 @@
       </div>
       <div class="field"><label>${t("ps_interests")}</label>
         <div class="chips" id="epInts">${INTERESTS.map(i=>`<span class="chip ${chosenInts.includes(i)?'sel':''}" data-int="${esc(i)}">${esc(intLabel(i))}</span>`).join("")}</div></div>
+      ${promptFieldsHTML(state.prompts)}
       <button class="btn btn-primary" id="epSave" style="margin-top:8px">${t("ep_save")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     const userEl=$("#epUser"), umsg=$("#epUserMsg"), saveBtn=$("#epSave");
@@ -4022,6 +4057,7 @@
       if(uv) state.username=uv.toLowerCase();
       const b=$("#epBio").value.trim(); state.bio=b||state.bio;
       state.interests=chosenInts.slice();
+      state.prompts=collectPrompts();
       // editing in a real name + username also counts as a completed profile
       if(state.name&&state.name!=="You"&&state.username) state.profileComplete=true;
       closeSheet(); showToast(t("ep_saved"));
