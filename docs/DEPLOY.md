@@ -104,7 +104,7 @@ DNS can take minutes to a few hours to propagate. The domain is genuinely the *l
 
 ## What's next (after the smoke test is green)
 
-1. **Wire `index.html` to the live backend.** A small `<script type="module">` shim imports `backend/perch-api.js` and exposes `window.Perch`; the demo's critical-path flows (`requestJoin` → `join_group`, chat send/poll → realtime, `checkIn` → `check_in`, sign-in screen → magic link) call it when `config.js` is present, and fall back to the current simulation when it isn't. The single-file demo stays a working demo; the live path is additive.
+1. ~~**Wire `index.html` to the live backend.**~~ **Done.** A guarded `<script type="module">` bridge exposes `window.Perch`/`window.PERCH_LIVE`; the critical-path flows call it when `config.js` is present and fall back to the simulation when it isn't — sign-in (existing session + new-user magic-link), profile hydration + save, `requestJoin` → `join_group`, group chat (real history + realtime + send), `checkIn` → `check_in`. The Explore catalogue stays simulated by design (Perch Thursdays is the one real group). **To finish new-user sign-in cleanly, add custom SMTP (below) so the in-app 6-digit code works — until then, fresh sign-in uses the email magic link.**
 2. **Grow the schema** beyond the slice — waitlist/backfill, friends/DMs, Perch+ billing state, the Law 25 surface, the i18n `translations` table — each a new `supabase/migrations/000N_*.sql`, all already designed in [schema.sql](schema.sql).
 3. **Custom SMTP** (Resend free tier) so auth emails aren't rate-limited.
 4. Only once it's working: **app stores** via Capacitor (Phase C, ~$124).
