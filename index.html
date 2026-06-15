@@ -1586,7 +1586,7 @@
       /* live-backend email sign-in (only shown when the real backend is connected) */
       auth_email_t:"Sign in to Perch",auth_email_sub:"We'll email you a 6-digit code — no password needed.",auth_email_label:"Email",auth_email_ph:"you@example.com",auth_send:"Send code",auth_code_t:"Check your email",auth_code_sub:"We emailed {email} — click the sign-in link, or enter the 6-digit code below.",auth_code_ph:"123456",auth_verify:"Verify & continue",auth_resend:"Resend code",auth_sent:"Code sent — check your email",auth_err:"Couldn't sign in — try again",
       /* the live Perch Thursdays group (real backend) */
-      thurs_g_name:"This Thursday's Perch",thurs_g_personality:"A fresh mix forms each week — easygoing, curious, up for a real conversation",thurs_g_compat:"Balanced on purpose, so there's always someone to break the ice",thurs_g_tag1:"Weekly",thurs_g_tag2:"Beginner-friendly"
+      thurs_g_name:"This Thursday's Perch",thurs_g_personality:"A fresh mix forms each week — easygoing, curious, up for a real conversation",thurs_g_compat:"Balanced on purpose, so there's always someone to break the ice",thurs_g_tag1:"Weekly",thurs_g_tag2:"Beginner-friendly",chat_someone:"Someone"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1749,7 +1749,7 @@
       /* connexion par courriel (affiché seulement quand le vrai backend est branché) */
       auth_email_t:"Connexion à Perch",auth_email_sub:"On t'envoie un code à 6 chiffres — pas besoin de mot de passe.",auth_email_label:"Courriel",auth_email_ph:"toi@exemple.com",auth_send:"Envoyer le code",auth_code_t:"Regarde tes courriels",auth_code_sub:"On a écrit à {email} — clique le lien de connexion, ou entre le code à 6 chiffres ci-dessous.",auth_code_ph:"123456",auth_verify:"Vérifier et continuer",auth_resend:"Renvoyer le code",auth_sent:"Code envoyé — regarde tes courriels",auth_err:"Connexion impossible — réessaie",
       /* le vrai groupe Jeudis Perch (backend réel) */
-      thurs_g_name:"Le Perch de ce jeudi",thurs_g_personality:"Un nouveau mélange se forme chaque semaine — détendu, curieux, partant pour une vraie conversation",thurs_g_compat:"Équilibré exprès, pour qu'il y ait toujours quelqu'un pour briser la glace",thurs_g_tag1:"Hebdo",thurs_g_tag2:"Accueillant pour les débutants"
+      thurs_g_name:"Le Perch de ce jeudi",thurs_g_personality:"Un nouveau mélange se forme chaque semaine — détendu, curieux, partant pour une vraie conversation",thurs_g_compat:"Équilibré exprès, pour qu'il y ait toujours quelqu'un pour briser la glace",thurs_g_tag1:"Hebdo",thurs_g_tag2:"Accueillant pour les débutants",chat_someone:"Quelqu'un"
     }
   };
   function detectLang(){
@@ -3071,6 +3071,7 @@
     $("#pinEm").innerHTML=glyph(a.icon); $("#pinT").textContent=actName(a);
     $("#pinS").textContent=frWhen((g&&g.when)||a.when);
     $("#pinDetail").innerHTML=`<div style="font-size:13px;color:var(--muted);line-height:1.6">📍 ${actVenue(a)}<br>🗓️ ${frWhen((g&&g.when)||a.when)}<br>🌦️ ${t("gd_planb")} · ${actPlanb(a)}</div><button class="btn btn-soft" style="margin-top:12px" data-go="groupdetail">${t("chat_viewdetails")}</button>`;
+    if(window.PERCH_LIVE && g && g.live){ perchOpenLiveChat(item); return; }   // real chat for the live group
     const sc=$("#chatScroll");
     if(state.chatThreads[item.id]){
       sc.innerHTML=state.chatThreads[item.id].map(msgRowHTML).join("");
@@ -3095,6 +3096,35 @@
       const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
       chatTimers.push(setTimeout(()=>{ pushMsg({sys:true,text: fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn))},gid); },5200));
     }
+  }
+
+  // ===== Live group chat (real messages + realtime) =====
+  var perchChatUnsub=null;
+  function perchDemoMsg(m,myId){
+    if(m.kind==="system") return {sys:true,text:esc(m.body)};
+    if(m.sender_id===myId) return {who:"me",text:esc(m.body),time:""};
+    const s=m.sender||{};
+    return {who:"them",name:s.name||t("chat_someone"),emoji:s.emoji||"🙂",key:s.profile_key||"easygoer",text:esc(m.body),time:""};
+  }
+  async function perchOpenLiveChat(item){
+    const gid=item.id, sc=$("#chatScroll");
+    state.chatThreads[gid]=[]; if(sc) sc.innerHTML="";
+    let myId=null; try{ const u=await window.Perch.auth.getUser(); myId=u&&u.id; }catch(e){}
+    try{ const msgs=await window.Perch.chat.messages(gid); (msgs||[]).forEach(m=>pushMsg(perchDemoMsg(m,myId),gid)); }
+    catch(e){ console.warn("[Perch] chat load failed:",e); }
+    if(perchChatUnsub){ try{perchChatUnsub();}catch(e){} perchChatUnsub=null; }
+    try{
+      perchChatUnsub=window.Perch.chat.subscribe(gid,function(m){
+        if(state.chatViewGroup!==gid) return;
+        if(m.sender_id && m.sender_id===myId) return;   // my own — already shown optimistically
+        pushMsg(perchDemoMsg(m,myId),gid);
+      });
+    }catch(e){}
+  }
+  function perchSendChat(v,quote){
+    const gid=state.chatViewGroup;
+    pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${esc(quote)}</span>`:"")+esc(v),time:"now"},gid);
+    (async()=>{ try{ await window.Perch.chat.send(gid,v); }catch(e){ console.warn("[Perch] send failed:",e); } })();
   }
 
   // one contextual scripted reply per thread after the user's first message
@@ -3168,10 +3198,12 @@
     inp.addEventListener("input",()=>send.classList.toggle("off",!inp.value.trim()));
     const doSend=()=>{ const v=inp.value.trim(); if(!v) return;
       const quote=inp.getAttribute("data-reply");
-      pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${esc(quote)}</span>`:"")+esc(v),time:"now"});
+      const live=window.PERCH_LIVE && state.chosenGroup && state.chosenGroup.live;
+      if(live){ perchSendChat(v,quote); }
+      else pushMsg({who:"me",text:(quote?`<span style="display:block;font-size:11px;opacity:.75;border-left:2px solid rgba(255,255,255,.55);padding-left:6px;margin-bottom:4px">↩ ${esc(quote)}</span>`:"")+esc(v),time:"now"});
       const rq=$("#replyQuote"); if(rq) rq.remove(); inp.removeAttribute("data-reply"); inp.placeholder=t("chat_say");
       inp.value=""; send.classList.add("off");
-      maybeAutoReply(); };
+      if(!live) maybeAutoReply(); };
     send.addEventListener("click",doSend);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") doSend(); });
     $("#chatPlus").addEventListener("click",()=>showToast(t("toast_photos")));
