@@ -5,6 +5,7 @@
 .DS_Store
 Thumbs.db
 
-# Backend secrets — copy config.example.js -> config.js and fill in your keys.
-# (The Supabase anon key is public, but keep keys out of git by default.)
-config.js
+# config.js holds the Supabase URL + publishable (anon) key.
+# Intentionally committed: the anon key is public by design (RLS protects the
+# data), and the deployed GitHub Pages site needs it to reach the live backend.
+# NEVER put the service_role / secret key in config.js.
