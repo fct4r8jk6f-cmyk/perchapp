@@ -53,6 +53,8 @@ Build nothing. Run **one real Perch Thursday** for 5–6 strangers and see what 
 
 **Success bar before you build anything:** show-up ≥ ~80% and most people say they'd come back. If that's not happening, no backend fixes it — change the format, not the code. If it *is* happening, you have proof.
 
+> **Running this on a 9-5?** [OPERATIONS.md](OPERATIONS.md) adapts this loop for an operator who works a day job — a remote, async, ~45-min/week cadence where you arrange the event but don't attend in person (an *anchor attendee* is your eyes and ears). Note the liability flag there: not attending weakens the "you vet and attend" mitigation below — one for counsel.
+
 ---
 
 ## Phase B — Lean web-app launch (~$15, only after Phase A works)
