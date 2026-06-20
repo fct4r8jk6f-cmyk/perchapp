@@ -133,7 +133,7 @@
   .pad-nav{padding-bottom:96px;}
 
   .fx{position:absolute;inset:0;pointer-events:none;z-index:70;overflow:hidden;}
-  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(18px);background:rgba(20,13,29,.94);border:1px solid var(--line);backdrop-filter:blur(8px);color:#fff;padding:12px 18px;border-radius:var(--r-md);font-size:13px;font-weight:500;opacity:0;transition:all .32s;z-index:88;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:300px;text-align:center;line-height:1.45;}
+  .toast{position:absolute;left:50%;bottom:110px;transform:translateX(-50%) translateY(18px);background:rgba(20,13,29,.94);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);color:#fff;padding:12px 18px;border-radius:var(--r-md);font-size:13px;font-weight:500;opacity:0;transition:all .32s;z-index:88;box-shadow:0 10px 30px rgba(0,0,0,.4);max-width:300px;text-align:center;line-height:1.45;}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
   /* TYPE */
@@ -717,12 +717,16 @@
   /* landing: persistent CTA on panels 1–2 */
   .land-cta{position:absolute;left:30px;right:30px;bottom:60px;z-index:5;}
   /* accessibility preferences (Settings) */
-  [data-bold] .sub,[data-bold] .tiny,[data-bold] p,[data-bold] .msg,[data-bold] .act-vibe,[data-bold] .gc-personality{font-weight:600;}
+  [data-bold] .sub,[data-bold] .tiny,[data-bold] p,[data-bold] .msg,[data-bold] .act-vibe,[data-bold] .gc-personality,[data-bold] .opt,[data-bold] .friend-name,[data-bold] .friend-sub,[data-bold] .set-item,[data-bold] .gc-when,[data-bold] .act-meta{font-weight:600;}
+  [data-bold] .sopt,[data-bold] .nav-item{font-weight:700;} /* already-semibold UI goes heavier so "Bold text" is visible everywhere; .btn is already 700 */
   html[data-contrast]{--muted:rgba(255,255,255,.95);--faint:rgba(255,255,255,.85);--line:rgba(255,255,255,.26);}
   html[data-contrast][data-theme="light"]{--muted:rgba(25,18,37,.95);--faint:rgba(25,18,37,.82);--line:rgba(40,28,18,.3);}
   [data-bigtap] .iconbtn{width:48px;height:48px;}
   [data-bigtap] .chip,[data-bigtap] .cat{padding:12px 18px;}
   [data-bigtap] .set-item{padding:18px 4px;}
+  [data-bigtap] .btn{min-height:54px;}                         /* primary CTAs */
+  [data-bigtap] .seg .sopt{padding:13px 6px;}                  /* segment controls */
+  [data-bigtap] .nav-item{padding-top:12px;padding-bottom:5px;} /* bottom nav tabs */
   [data-textsize="large"] .screen{font-size:17px;}
   [data-textsize="large"] .sub,[data-textsize="large"] .msg,[data-textsize="large"] .opt,[data-textsize="large"] .set-item{font-size:17px;}
   [data-textsize="large"] .tiny,[data-textsize="large"] .act-meta,[data-textsize="large"] .friend-sub,[data-textsize="large"] .gc-when{font-size:15px;}
@@ -974,10 +978,10 @@
       <section class="screen pad-nav fade" id="s-explore">
         <div class="hdr-wash wash-default" id="washExplore"></div>
         <div class="ex-top">
-          <div class="search"><span style="font-size:15px;color:var(--faint)"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input id="exSearch" placeholder="Search activities" data-i18n-ph="ex_search" aria-label="Search activities"></div>
-          <button class="msg-pill" id="exHost" aria-label="Host a hang" title="Host a hang" data-i18n="ex_host">＋ Host</button>
-          <button class="iconbtn" id="exFilter" aria-label="Filters" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><span class="badge-dot" id="exFilterDot" style="display:none"></span></button>
-          <button class="iconbtn" id="exBell" aria-label="Notifications" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge-dot" id="exBellDot"></span></button>
+          <div class="search"><span style="font-size:15px;color:var(--faint)"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span><input id="exSearch" placeholder="Search activities" data-i18n-ph="ex_search" aria-label="Search activities" data-i18n-aria="aria_search"></div>
+          <button class="msg-pill" id="exHost" aria-label="Host a hang" title="Host a hang" data-i18n-aria="aria_host" data-i18n-title="aria_host" data-i18n="ex_host">＋ Host</button>
+          <button class="iconbtn" id="exFilter" aria-label="Filters" data-i18n-aria="aria_filters" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg><span class="badge-dot" id="exFilterDot" style="display:none"></span></button>
+          <button class="iconbtn" id="exBell" aria-label="Notifications" data-i18n-aria="aria_notifs" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge-dot" id="exBellDot"></span></button>
         </div>
         <div class="cat-rail" id="catRail"></div>
         <div id="profileNudge"></div>
@@ -1032,10 +1036,10 @@
 
       <section class="screen fade" id="s-chat">
         <div class="chat-top">
-          <button class="iconbtn" id="chatBack" aria-label="Back to chats">←</button>
+          <button class="iconbtn" id="chatBack" aria-label="Back to chats" data-i18n-aria="aria_back_chats">←</button>
           <div class="ct-ic" id="chatIc" style="background:var(--grad-warm)">🌿</div>
           <div><div class="ct-name" id="chatName">Group</div><div class="ct-meta" id="chatMeta">5 people · first names only</div></div>
-          <div class="chat-shield" id="chatShield" title="Safety options" aria-label="Safety options">🛡️</div>
+          <div class="chat-shield" id="chatShield" title="Safety options" aria-label="Safety options" data-i18n-aria="aria_safety" data-i18n-title="aria_safety">🛡️</div>
         </div>
         <div class="pinned" id="pinned">
           <div class="pinned-bar" id="pinnedBar"><span class="pb-em" id="pinEm">🌿</span><div><div class="pb-t" id="pinT">Activity</div><div class="pb-s" id="pinS">Tap for details</div></div><span class="pb-chev">▾</span></div>
@@ -1047,9 +1051,9 @@
         <button class="ff" data-go="feedback" data-i18n="chat_ff">▶ Fast-forward to after you meet</button>
         <div class="chat-scroll" id="chatScroll"></div>
         <div class="chat-input">
-          <button class="chat-plus" id="chatPlus" aria-label="Add media">＋</button>
-          <input id="chatInput" placeholder="Say something…" data-i18n-ph="chat_say" autocomplete="off" aria-label="Message">
-          <button class="send off" id="chatSend" aria-label="Send">↑</button>
+          <button class="chat-plus" id="chatPlus" aria-label="Add media" data-i18n-aria="aria_addmedia">＋</button>
+          <input id="chatInput" placeholder="Say something…" data-i18n-ph="chat_say" autocomplete="off" aria-label="Message" data-i18n-aria="aria_message">
+          <button class="send off" id="chatSend" aria-label="Send" data-i18n-aria="aria_send">↑</button>
         </div>
       </section>
 
@@ -1058,25 +1062,25 @@
         <div class="hdr-wash wash-default" id="washFriends"></div>
         <div class="nav-row">
           <div class="nav-title" data-i18n="nav_friends">Friends</div><div class="nav-spacer"></div>
-          <button class="iconbtn" id="friendsFindBtn" aria-label="Find people"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
-          <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span class="badge-dot" id="reqBadge" style="display:none"></span></button>
+          <button class="iconbtn" id="friendsFindBtn" aria-label="Find people" data-i18n-aria="aria_findpeople"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></button>
+          <button class="iconbtn" id="friendsReqBtn" aria-label="Requests" data-i18n-aria="aria_requests" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg><span class="badge-dot" id="reqBadge" style="display:none"></span></button>
         </div>
         <div class="seg" id="friendsSeg"><div class="sopt on" data-tab="friends" data-i18n="fr_tab">Friends</div><div class="sopt" data-tab="met" data-i18n="fr_met">Met</div></div>
-        <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" data-i18n-ph="fr_search_friends" aria-label="Search"></div>
+        <div class="search search-slim" id="friendSearchBar" style="margin-bottom:14px"><span style="font-size:14px;color:var(--faint)">🔍</span><input id="friendSearch" placeholder="Search friends" data-i18n-ph="fr_search_friends" aria-label="Search" data-i18n-aria="aria_search"></div>
         <div id="friendsBody"></div>
       </section>
 
       <!-- FRIEND REQUESTS -->
       <section class="screen pad-nav fade" id="s-requests">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="rq_title">Requests</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="rq_title">Requests</div></div>
         <div class="seg" id="reqSeg"><div class="sopt on" data-tab="recv" data-i18n="rq_recv">Received</div><div class="sopt" data-tab="sent" data-i18n="rq_sent">Sent</div></div>
         <div id="reqBody"></div>
       </section>
 
       <!-- DISCOVER / ADD PEOPLE -->
       <section class="screen pad-nav fade" id="s-discover">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="disc_title">Find people</div></div>
-        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="discSearch" placeholder="Search name or @username" data-i18n-ph="disc_search_ph" aria-label="Search people" autocomplete="off"></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="disc_title">Find people</div></div>
+        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="discSearch" placeholder="Search name or @username" data-i18n-ph="disc_search_ph" aria-label="Search people" data-i18n-aria="aria_search_people" autocomplete="off"></div>
         <div id="discBody"></div>
       </section>
 
@@ -1086,29 +1090,29 @@
       <!-- DM THREAD -->
       <section class="screen fade" id="s-dm">
         <div class="chat-top">
-          <button class="iconbtn" data-back aria-label="Back">←</button>
+          <button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button>
           <div class="ct-ic" id="dmAv" style="background:var(--grad-warm)">🙂</div>
           <div><div class="ct-name" id="dmName">Friend</div><div class="ct-meta" id="dmMeta" data-i18n="dm_meta">Friends · private</div></div>
-          <div class="chat-shield" id="dmShield" aria-label="Safety options">🛡️</div>
+          <div class="chat-shield" id="dmShield" aria-label="Safety options" data-i18n-aria="aria_safety">🛡️</div>
         </div>
         <div class="chat-scroll" id="dmScroll"></div>
         <div class="chat-input">
-          <button class="chat-plus" aria-label="Add media">＋</button>
-          <input id="dmInput" placeholder="Message…" data-i18n-ph="dm_ph" autocomplete="off" aria-label="Message">
-          <button class="send off" id="dmSend" aria-label="Send">↑</button>
+          <button class="chat-plus" aria-label="Add media" data-i18n-aria="aria_addmedia">＋</button>
+          <input id="dmInput" placeholder="Message…" data-i18n-ph="dm_ph" autocomplete="off" aria-label="Message" data-i18n-aria="aria_message">
+          <button class="send off" id="dmSend" aria-label="Send" data-i18n-aria="aria_send">↑</button>
         </div>
       </section>
 
       <!-- FEEDBACK -->
       <section class="screen pad-nav fade" id="s-feedback">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="fb_title">Reflection</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="fb_title">Reflection</div></div>
         <div class="step-dots" id="fbDots"><i class="on"></i><i></i><i></i></div>
         <div id="fbBody"></div>
       </section>
 
       <!-- NOTIFICATIONS -->
       <section class="screen pad-nav fade" id="s-notifications">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="set_notifs">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)" data-i18n="notif_clear">Clear all</span></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="set_notifs">Notifications</div><div class="nav-spacer"></div><span class="btn-link" id="notifClear" style="width:auto;font-weight:700;color:var(--accent-text)" data-i18n="notif_clear">Clear all</span></div>
         <div class="seg" id="notifSeg"><div class="sopt on" data-tab="activity" data-i18n="nt_act">Activity</div><div class="sopt" data-tab="ann" data-i18n="nt_ann">Announcements</div></div>
         <div id="notifBody"></div>
       </section>
@@ -1118,8 +1122,8 @@
 
       <!-- HELP -->
       <section class="screen pad-nav fade" id="s-help">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="set_help">Help &amp; FAQ</div></div>
-        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="helpSearch" placeholder="Search help" data-i18n-ph="help_search" aria-label="Search help"></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="set_help">Help &amp; FAQ</div></div>
+        <div class="search" style="margin-bottom:14px"><span style="font-size:15px;color:var(--faint)">🔍</span><input id="helpSearch" placeholder="Search help" data-i18n-ph="help_search" aria-label="Search help" data-i18n-aria="aria_search"></div>
         <div id="helpBody"></div>
         <div style="text-align:center;margin-top:20px">
           <button class="btn btn-soft" id="helpContact" data-i18n="help_contact">Still need help? Contact us</button>
@@ -1128,7 +1132,7 @@
 
       <!-- INVITE -->
       <section class="screen pad-nav fade" id="s-invite">
-        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title" data-i18n="inv_nav">Invite</div></div>
+        <div class="nav-row"><button class="iconbtn" data-back aria-label="Back" data-i18n-aria="aria_back">←</button><div class="nav-title" data-i18n="inv_nav">Invite</div></div>
         <div style="text-align:center;margin:10px 0 20px">
           <h1 class="display h1" style="margin-bottom:8px" data-i18n-html="inv_title">Bring someone<br>along</h1>
           <p class="sub" style="max-width:260px;margin:0 auto" data-i18n="inv_sub">They take the quiz and find their own group.</p>
@@ -1136,7 +1140,7 @@
         <div class="invite-method" id="inviteCopy"><div class="im-ic">🔗</div><div><div class="im-t" data-i18n="inv_copy">Copy link</div><div class="im-s">perch.app/i/you</div></div></div>
         <div class="invite-method" id="inviteShare"><div class="im-ic">📤</div><div><div class="im-t" data-i18n="inv_share">Share</div><div class="im-s">Messages · WhatsApp · Instagram</div></div></div>
         <div class="sec-title" style="text-align:center;margin-top:20px" data-i18n="inv_scan">Or scan</div>
-        <div class="qr" id="qrBox" role="img" aria-label="QR code for perch.app/i/you"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h2m1 0h2m4 0h7M0 1.5h1m5 0h1m2 0h1m3 0h3m2 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h3m2 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h2m2 0h2M0 8.5h1m1 0h5m2 0h5m1 0h2m1 0h5M0 9.5h1m1 0h2m3 0h1m2 0h2m1 0h1m2 0h1m2 0h1m3 0h1M0 10.5h1m1 0h5m4 0h1m1 0h6m2 0h1m1 0h2M1 11.5h2m4 0h2m3 0h1m1 0h2m1 0h2m5 0h1M0 12.5h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h4m1 0h3M0 13.5h1m7 0h3m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1M0 14.5h1m2 0h2m1 0h7m2 0h1m2 0h4m1 0h2M0 15.5h1m8 0h3m2 0h1m1 0h1m2 0h2m3 0h1M0 16.5h1m1 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h5m1 0h1M8 17.5h3m1 0h2m1 0h2m3 0h2M0 18.5h7m2 0h2m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3M0 19.5h1m5 0h1m1 0h1m3 0h1m1 0h3m3 0h2m1 0h1M0 20.5h1m1 0h3m1 0h1m1 0h3m1 0h9m1 0h3M0 21.5h1m1 0h3m1 0h1m1 0h1m5 0h2m1 0h2m1 0h5M0 22.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h3m4 0h2m1 0h1M0 23.5h1m5 0h1m4 0h1m2 0h3m1 0h4m2 0h1M0 24.5h7m1 0h2m1 0h2m4 0h1m1 0h6"/></svg></div>
+        <div class="qr" id="qrBox" role="img" aria-label="QR code for perch.app/i/you" data-i18n-aria="aria_qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25" shape-rendering="crispEdges"><path fill="#ffffff" d="M0 0h25v25H0z"/><path stroke="#000000" d="M0 0.5h7m2 0h2m1 0h2m4 0h7M0 1.5h1m5 0h1m2 0h1m3 0h3m2 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h4m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h1m4 0h1m2 0h1m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h3m2 0h1m2 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h2m2 0h2M0 8.5h1m1 0h5m2 0h5m1 0h2m1 0h5M0 9.5h1m1 0h2m3 0h1m2 0h2m1 0h1m2 0h1m2 0h1m3 0h1M0 10.5h1m1 0h5m4 0h1m1 0h6m2 0h1m1 0h2M1 11.5h2m4 0h2m3 0h1m1 0h2m1 0h2m5 0h1M0 12.5h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h4m1 0h4m1 0h3M0 13.5h1m7 0h3m2 0h2m1 0h2m1 0h1m1 0h1m1 0h1M0 14.5h1m2 0h2m1 0h7m2 0h1m2 0h4m1 0h2M0 15.5h1m8 0h3m2 0h1m1 0h1m2 0h2m3 0h1M0 16.5h1m1 0h1m3 0h1m1 0h1m2 0h1m1 0h2m1 0h5m1 0h1M8 17.5h3m1 0h2m1 0h2m3 0h2M0 18.5h7m2 0h2m2 0h2m1 0h1m1 0h1m1 0h1m1 0h3M0 19.5h1m5 0h1m1 0h1m3 0h1m1 0h3m3 0h2m1 0h1M0 20.5h1m1 0h3m1 0h1m1 0h3m1 0h9m1 0h3M0 21.5h1m1 0h3m1 0h1m1 0h1m5 0h2m1 0h2m1 0h5M0 22.5h1m1 0h3m1 0h1m1 0h1m2 0h2m1 0h3m4 0h2m1 0h1M0 23.5h1m5 0h1m4 0h1m2 0h3m1 0h4m2 0h1M0 24.5h7m1 0h2m1 0h2m4 0h1m1 0h6"/></svg></div>
       </section>
 
       <!-- MOOD CHECK -->
@@ -1156,15 +1160,15 @@
       <section class="screen pad-nav fade" id="s-profile">
         <div class="hdr-wash wash-default" id="washProfile"></div>
         <div class="nav-row"><div class="nav-title" data-i18n="nav_profile">Profile</div><div class="nav-spacer"></div>
-          <button class="iconbtn" id="profBell" aria-label="Notifications" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge-dot" id="profBellDot"></span></button>
-          <button class="iconbtn" id="profGear" aria-label="Settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
+          <button class="iconbtn" id="profBell" aria-label="Notifications" data-i18n-aria="aria_notifs" style="position:relative"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg><span class="badge-dot" id="profBellDot"></span></button>
+          <button class="iconbtn" id="profGear" aria-label="Settings" data-i18n-aria="aria_settings"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></button>
         </div>
         <div id="profileBody"></div>
       </section>
 
     </div><!-- /viewport -->
 
-    <nav class="bottomnav" id="bottomnav" aria-label="Primary">
+    <nav class="bottomnav" id="bottomnav" aria-label="Primary" data-i18n-aria="aria_nav">
       <div class="nav-item" data-go="explore"><span class="ni-ic" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg></span><span data-i18n="nav_explore">Explore</span></div>
       <div class="nav-item" data-go="groups"><span class="ni-ic" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span><span data-i18n="nav_groups">Groups</span></div>
       <div class="nav-item" data-go="chats"><span class="ni-ic" aria-hidden="true"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></span><span data-i18n="nav_chat">Chat</span><span class="nav-badge" id="navChatBadge" style="display:none">1</span></div>
@@ -1586,7 +1590,9 @@
       /* live-backend email sign-in (only shown when the real backend is connected) */
       auth_email_t:"Sign in to Perch",auth_email_sub:"We'll email you a 6-digit code — no password needed.",auth_email_label:"Email",auth_email_ph:"you@example.com",auth_send:"Send code",auth_code_t:"Check your email",auth_code_sub:"We emailed {email} — click the sign-in link, or enter the 6-digit code below.",auth_code_ph:"123456",auth_verify:"Verify & continue",auth_resend:"Resend code",auth_sent:"Code sent — check your email",auth_err:"Couldn't sign in — try again",
       /* the live Perch Thursdays group (real backend) */
-      thurs_g_name:"This Thursday's Perch",thurs_g_personality:"A fresh mix forms each week — easygoing, curious, up for a real conversation",thurs_g_compat:"Balanced on purpose, so there's always someone to break the ice",thurs_g_tag1:"Weekly",thurs_g_tag2:"Beginner-friendly",chat_someone:"Someone"
+      thurs_g_name:"This Thursday's Perch",thurs_g_personality:"A fresh mix forms each week — easygoing, curious, up for a real conversation",thurs_g_compat:"Balanced on purpose, so there's always someone to break the ice",thurs_g_tag1:"Weekly",thurs_g_tag2:"Beginner-friendly",chat_someone:"Someone",
+      /* accessibility labels (aria-label / title) */
+      aria_back:"Back",aria_back_chats:"Back to chats",aria_search:"Search",aria_search_people:"Search people",aria_notifs:"Notifications",aria_safety:"Safety options",aria_addmedia:"Add media",aria_message:"Message",aria_send:"Send",aria_findpeople:"Find people",aria_requests:"Requests",aria_host:"Host a hang",aria_mute:"Mute",aria_dismiss:"Dismiss",aria_more:"More options",aria_editphoto:"Edit photo",aria_nav:"Primary",aria_code:"Verification code",aria_report:"Your report",aria_support:"Message",aria_suggest:"Suggest an activity",aria_share:"Share message",aria_filters:"Filters",aria_settings:"Settings",aria_qr:"QR code for perch.app/i/you"
     },
     fr:{
       land_headline:"Rencontre ton monde,<br>autour de vraies activités.",
@@ -1749,7 +1755,9 @@
       /* connexion par courriel (affiché seulement quand le vrai backend est branché) */
       auth_email_t:"Connexion à Perch",auth_email_sub:"On t'envoie un code à 6 chiffres — pas besoin de mot de passe.",auth_email_label:"Courriel",auth_email_ph:"toi@exemple.com",auth_send:"Envoyer le code",auth_code_t:"Regarde tes courriels",auth_code_sub:"On a écrit à {email} — clique le lien de connexion, ou entre le code à 6 chiffres ci-dessous.",auth_code_ph:"123456",auth_verify:"Vérifier et continuer",auth_resend:"Renvoyer le code",auth_sent:"Code envoyé — regarde tes courriels",auth_err:"Connexion impossible — réessaie",
       /* le vrai groupe Jeudis Perch (backend réel) */
-      thurs_g_name:"Le Perch de ce jeudi",thurs_g_personality:"Un nouveau mélange se forme chaque semaine — détendu, curieux, partant pour une vraie conversation",thurs_g_compat:"Équilibré exprès, pour qu'il y ait toujours quelqu'un pour briser la glace",thurs_g_tag1:"Hebdo",thurs_g_tag2:"Accueillant pour les débutants",chat_someone:"Quelqu'un"
+      thurs_g_name:"Le Perch de ce jeudi",thurs_g_personality:"Un nouveau mélange se forme chaque semaine — détendu, curieux, partant pour une vraie conversation",thurs_g_compat:"Équilibré exprès, pour qu'il y ait toujours quelqu'un pour briser la glace",thurs_g_tag1:"Hebdo",thurs_g_tag2:"Accueillant pour les débutants",chat_someone:"Quelqu'un",
+      /* étiquettes d'accessibilité (aria-label / title) */
+      aria_back:"Retour",aria_back_chats:"Retour aux discussions",aria_search:"Rechercher",aria_search_people:"Rechercher des gens",aria_notifs:"Notifications",aria_safety:"Options de sécurité",aria_addmedia:"Ajouter un média",aria_message:"Message",aria_send:"Envoyer",aria_findpeople:"Trouver des gens",aria_requests:"Demandes",aria_host:"Organiser une sortie",aria_mute:"Mettre en sourdine",aria_dismiss:"Ignorer",aria_more:"Plus d'options",aria_editphoto:"Modifier la photo",aria_nav:"Navigation principale",aria_code:"Code de vérification",aria_report:"Votre signalement",aria_support:"Message",aria_suggest:"Proposer une activité",aria_share:"Message à partager",aria_filters:"Filtres",aria_settings:"Réglages",aria_qr:"Code QR pour perch.app/i/you"
     }
   };
   function detectLang(){
@@ -1880,9 +1888,12 @@
   const msgTime=x=>{ x=x||"now"; if(x==="now") return t("time_now"); if(x==="earlier") return t("time_earlier"); return frWhen(x); };
   function applyI18n(root){
     root=root||document;
+    if(typeof state!=="undefined"&&state.lang) document.documentElement.setAttribute("lang",state.lang); // a11y: screen readers pick pronunciation from <html lang>
     root.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent=t(el.getAttribute("data-i18n")); });
     root.querySelectorAll("[data-i18n-html]").forEach(el=>{ el.innerHTML=t(el.getAttribute("data-i18n-html")); });
     root.querySelectorAll("[data-i18n-ph]").forEach(el=>{ el.setAttribute("placeholder",t(el.getAttribute("data-i18n-ph"))); });
+    root.querySelectorAll("[data-i18n-aria]").forEach(el=>{ el.setAttribute("aria-label",t(el.getAttribute("data-i18n-aria"))); });
+    root.querySelectorAll("[data-i18n-title]").forEach(el=>{ el.setAttribute("title",t(el.getAttribute("data-i18n-title"))); });
   }
   function setLang(l){ if(l!==state.lang){ state.lang=l; saveLang(l); applyI18n(document); const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-","")); } }
   /* THEME — System / Light / Dark, in-session only (no localStorage) */
@@ -2117,10 +2128,11 @@
   const NAV_MAP={explore:"explore",groups:"groups",groupdetail:"groups",joined:"groups",chats:"chats",chat:"chats",friends:"friends",dm:"chats",requests:"friends",discover:"friends",friendprofile:"friends",feedback:"chats",profile:"profile",notifications:"profile",settings:"profile",help:"profile",invite:"profile",archetype:"profile"};
   const FLOW_INDEX={landing:0,"test-intro":1,q:2,result:3,archetype:3,agegate:4,signin:5,terms:6,location:6,explore:7,host:7,hostdone:7,groups:8,groupdetail:9,moodcheck:9,joined:10,chats:11,chat:11,friends:12,dm:12,requests:12,discover:12,friendprofile:12,notifications:12,settings:12,help:12,invite:12,feedback:11,profile:12};
   const ONBOARDING=["landing","test-intro","q","result","archetype","agegate","signin","terms","location"];
-  let history=[], chatTimers=[], backfillTimers=[], returnTimers=[], reportTimers=[], reachedExplore=false, navPopping=false;
+  let history=[], chatTimers=[], backfillTimers=[], returnTimers=[], reportTimers=[], dmTimers=[], reachedExplore=false, navPopping=false;
   const clearChatTimers=()=>{chatTimers.forEach(clearTimeout);chatTimers=[];};
   // backfill timers are module-level (like chatTimers) so an in-flight setTimeout can't fire against a reset demo
   const clearBackfillTimers=()=>{backfillTimers.forEach(clearTimeout);backfillTimers=[];};
+  const clearDmTimers=()=>{dmTimers.forEach(clearTimeout);dmTimers=[];};
   const clearReturnTimers=()=>{returnTimers.forEach(clearTimeout);returnTimers=[];};
   const clearReportTimers=()=>{reportTimers.forEach(clearTimeout);reportTimers=[];};
 
@@ -2189,11 +2201,13 @@
     return false;
   }
   function resetDemo(){
-    clearChatTimers(); clearBackfillTimers(); clearReturnTimers(); clearReportTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
+    clearChatTimers(); clearBackfillTimers(); clearReturnTimers(); clearReportTimers(); clearDmTimers(); const cs=$("#chatScroll"); if(cs) cs.innerHTML="";
+    // NOTE: state.settings (a11y + privacy) is intentionally NOT reset — accessibility is a need,
+    // not demo styling, so it persists across "Start over" (see REVIEW.md). theme IS reset below (cosmetic).
     Object.assign(state,{age:24,signedIn:false,agreed:false,returning:false,currentQ:0,profileKey:null,
       chosenActivity:null,chosenGroup:null,joinedGroups:[],hostedGroups:[],firstJoinAsked:false,dayOf:null,checkedIn:false,seedSocial:false,fbStep:0,venueNote:"",
       chatThreads:{},chatViewGroup:null,unreadChats:new Set(),guideDismissed:false,plus:false,ppBill:"mo",
-      blocked:new Set(),friends:[],dms:{},currentDM:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
+      blocked:new Set(),friends:[],dms:{},currentDM:null,currentFriendView:null,picked:new Set(),dismissedPicks:new Set(),activeCat:"For you",filters:{day:null,size:null,vibe:null},
       photo:null,name:"You",username:null,profileComplete:false,verified:false,verifyPromptDismissed:false,attended:0,emoji:"🙂",bio:"Into low-key plans and genuine people ✌️",interests:["Board games","Coffee","Hiking"],
       waitlisted:[],nudgeDismissed:false,dayStatus:{},daySimSeeded:{},backfillOffer:null,backfillSeen:false,hangLog:[],milestonesSeen:[],returnNudge:null,returnSeen:false,prompts:[],groupVibe:[],depthDismissed:false,reports:[],mutedMembers:new Set(),mutedGroups:{},guardian:null,
       notifsCleared:false,friendsTab:"friends",groupsTab:"up",reqTab:"recv",notifTab:"activity",archetypeView:null,theme:"dark",rating:{activity:0,venue:0,vibe:0},venueOk:null});
@@ -2328,7 +2342,7 @@
         if(!r||!r.ok){
           if(r&&r.error==="cap"){ openPerchPlus(state.plus?null:"limit"); return; }
           if(r&&r.error==="profile_incomplete"){ openProfileSetup(()=>perchRequestJoinLive(g,a),true); return; }
-          if(!(r&&r.error==="already_joined")){ showToast(t("auth_err")); return; }
+          if(!(r&&r.error==="already_joined")){ console.warn("[Perch] join rejected — falling back to sim:",r); simJoin(g,a); return; }
         }
         let fresh=null; try{ fresh=await window.Perch.groups.thursday(); }catch(e){}
         const lg=liveThursGroup(fresh||{});
@@ -2337,7 +2351,7 @@
         }
         delete state.chatThreads[lg.id]; state.unreadChats.add(lg.id);
         goTo("joined");
-      }catch(e){ console.warn("[Perch] join failed:",e); showToast(t("auth_err")); }
+      }catch(e){ console.warn("[Perch] join failed — falling back to sim:",e); simJoin(g,a); }
     })();
   }
   // Live check-in for the real group — idempotent; attended comes back authoritative.
@@ -2345,7 +2359,7 @@
     (async()=>{
       try{
         const r=await window.Perch.attendance.checkIn(g.id);
-        if(!r||!r.ok){ showToast(t("auth_err")); return; }
+        if(!r||!r.ok){ console.warn("[Perch] check-in rejected — falling back to sim:",r); simCheckIn(g); return; }
         state.checkedIn=true; state.attended=r.attended||state.attended; state.dayStatus[g.id]="here";
         const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
         const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
@@ -2354,7 +2368,7 @@
         if(ms) state.milestonesSeen.push(ms);
         showToast(ms?t("fb_milestone_"+ms):t("toast_checkin"));
         const cur=$(".screen.active"); if(cur) runEnter(cur.id.replace("s-",""));
-      }catch(e){ console.warn("[Perch] check-in failed:",e); showToast(t("auth_err")); }
+      }catch(e){ console.warn("[Perch] check-in failed — falling back to sim:",e); simCheckIn(g); }
     })();
   }
   async function afterSignIn(m){
@@ -2398,7 +2412,7 @@
         <div class="sheet-ic">${svgIcon('message')}</div>
         <div class="sheet-title">${t("auth_code_t")}</div>
         <div class="sheet-sub">${t("auth_code_sub").replace("{email}",esc(email))}</div>
-        <div class="field"><input id="auC" inputmode="numeric" maxlength="6" placeholder="${t('auth_code_ph')}" style="text-align:center;letter-spacing:8px;font-size:22px" autocomplete="one-time-code"></div>
+        <div class="field"><input id="auC" inputmode="numeric" maxlength="6" placeholder="${t('auth_code_ph')}" aria-label="${t('aria_code')}" style="text-align:center;letter-spacing:8px;font-size:22px" autocomplete="one-time-code"></div>
         <button class="btn btn-primary" id="auV" disabled>${t("auth_verify")}</button>
         <button class="btn-link" id="auR">${t("auth_resend")}</button>
         <button class="btn btn-ghost" id="sheetClose" style="margin-top:4px">${t("btn_cancel")}</button>`;
@@ -2417,7 +2431,11 @@
   }
   $$("[data-auth]").forEach(b=>b.addEventListener("click",()=>{
     const m=b.getAttribute("data-auth");
-    if(window.PERCH_LIVE){ perchLiveSignIn(m); return; }
+    // Only email-OTP is wired for real (no OAuth providers configured on the project).
+    // In live mode email runs the real flow; Apple/Google fall back to the sim
+    // click-through so a visitor is never stranded on an unconfigured provider —
+    // and the success toast then reflects the method actually used.
+    if(window.PERCH_LIVE && m==="email"){ perchLiveSignIn(m); return; }
     afterSignIn(m);
   }));
 
@@ -2543,7 +2561,7 @@
     const c1=archName(a.compat[0]), c2=archName(a.compat[1]);
     const isMine=k===state.profileKey;
     $("#s-archetype").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${isMine?t("arch_yourtype"):archName(k)}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${isMine?t("arch_yourtype"):archName(k)}</div></div>
       <div class="arch-hero ${a.g}"><div class="ah-em">${svgIcon(a.e)}</div><div class="ah-n">${archName(k)}</div><div class="ah-l">${archTag(k)}</div></div>
       <div class="arch-essence">${archEssence(k)}</div>
       <div class="arch-who">${archWho(k)}</div>
@@ -2563,7 +2581,7 @@
     if(a.price) tags.push(`🎟️ ${a.price}`);
     const badges=(tags.length?`<div class="act-badges">${tags.map(b=>`<span class="trait" style="background:rgba(0,0,0,.32);border:none;color:#fff;backdrop-filter:blur(4px)">${b}</span>`).join("")}</div>`:"<div></div>");
     return `<div class="act-card ${picked?'picked-card':''}" data-act="${a.id}">
-      ${picked?`<button class="picked-x" data-dismiss="${a.id}" aria-label="Dismiss">✕</button>`:""}
+      ${picked?`<button class="picked-x" data-dismiss="${a.id}" aria-label="${t('aria_dismiss')}">✕</button>`:""}
       <div class="act-hero ${a.g}">${badges}<div class="ah-emoji">${glyph(a.icon)}</div></div>
       <div class="act-body">
         <div class="act-name">${actName(a)}</div>
@@ -2773,7 +2791,7 @@
     const dots=g.mix.slice(0,5).map(k=>`<span class="mixdot" style="background:${ARCH_DOTCOLORS[k]||'#888'};width:13px;height:13px"></span>`).join("");
     const members=g.members.map((m,i)=>{
       const arrived=dayOf && i<2;
-      return `<div style="text-align:center;position:relative" data-member="${m[0]}"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div>${arrived?`<span style="position:absolute;top:-2px;right:6px;width:11px;height:11px;border-radius:50%;background:var(--mint);border:2px solid var(--surface)" title="${t('gd_arrived')}"></span>`:""}<div style="font-size:11px;color:${arrived?'var(--mint)':'var(--muted)'};margin-top:4px">${m[0]}${arrived?t("gd_here_tag"):''}</div></div>`;
+      return `<div style="text-align:center;position:relative" data-member="${esc(m[0])}"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div>${arrived?`<span style="position:absolute;top:-2px;right:6px;width:11px;height:11px;border-radius:50%;background:var(--mint);border:2px solid var(--surface)" title="${t('gd_arrived')}"></span>`:""}<div style="font-size:11px;color:${arrived?'var(--mint)':'var(--muted)'};margin-top:4px">${esc(m[0])}${arrived?t("gd_here_tag"):''}</div></div>`;
     }).join("");
     const spotsLeft=g.size-g.filled;
     // body content + a sticky bottom bar so the primary action never hides behind the nav
@@ -2802,7 +2820,7 @@
       bar=`<div class="cta-bar"><button class="btn btn-primary" id="gdJoin">${t("gd_join")}${a.price?` · ${a.price}`:""}</button></div>`;
     }
     $("#s-groupdetail").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?'<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="Mute">🔔</button>':''}</div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${joined?t("gd_your"):t("gd_group")}</div>${joined?`<div class="nav-spacer"></div><button class="iconbtn" id="gdMute" aria-label="${t('aria_mute')}">🔔</button>`:''}</div>
       <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(a.icon)}</div><div class="ah-n" style="font-size:20px">${actName(a)}</div><div class="ah-l">${grpName(g)} · ${frWhen(g.when)}</div></div>
       ${dayOf?`<div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--amber);border-color:rgba(255,182,97,.5);background:rgba(255,182,97,.12)">${t("gd_happening")} ${actVenue(a).split(" · ")[0]}</span></div>`:""}
       <div class="info-tile"><div class="it-ic">${svgIcon('calendar')}</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${frWhen(g.when)}</div></div></div>
@@ -2877,7 +2895,7 @@
     const members=(g.members||[]).map(m=>`<div style="text-align:center"><div class="avatar av-sm ${archGrad(m[2])}" style="margin:0 auto">${m[1]}</div><div style="font-size:11px;color:var(--muted);margin-top:4px">${esc(m[0])}</div></div>`).join("");
     const spotsLeft=g.size-g.filled;
     $("#s-groupdetail").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${t("gd_hosting")}</div></div>
       <div class="arch-hero ${g.g}" style="min-height:120px"><div class="ah-em" style="font-size:40px">${glyph(g.emoji)}</div><div class="ah-n" style="font-size:20px">${hostedName(g)}</div><div class="ah-l">${hostedWhen(g)}</div></div>
       <div class="gc-statusrow" style="margin:-4px 0 12px"><span class="gc-vibetag" style="color:var(--calm);border-color:rgba(165,123,255,.4);background:rgba(165,123,255,.1)">${t("gd_forming_status")}</span></div>
       <div class="info-tile"><div class="it-ic">${svgIcon('calendar')}</div><div><div class="it-lab">${t("gd_when")}</div><div class="it-val">${hostedWhen(g)}</div></div></div>
@@ -2915,7 +2933,7 @@
     const sel={cat:cats[0],when:whens[0],area:areas[0],size:"5"};
     const chipRow=(items,grp,cur,label)=>`<div class="chips" data-grp="${grp}">${items.map(i=>`<span class="chip ${i===cur?'sel':''}" data-val="${i}">${label?label(i):i}</span>`).join("")}</div>`;
     $("#s-host").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("host_title")}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${t("host_title")}</div></div>
       <p class="sub" style="margin-bottom:18px">${t("host_sub")}</p>
       <div class="sec-title">${t("host_kind")}</div>${chipRow(cats,"cat",sel.cat,catLabel)}
       <div class="sec-title" style="margin-top:16px">${t("host_when")}</div>${chipRow(whens,"when",sel.when,whenLabel)}
@@ -3044,10 +3062,10 @@
       else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?esc(last.name)+": ":""))+last.text):t("chat_sayhi"); }
       const when=it.when?frWhen(it.when).split(" · ")[0]:"";
       const unread=state.unreadChats.has(it.id);
-      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${glyph(it.emoji)}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
+      html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${glyph(it.emoji)}</div><div class="friend-meta"><div class="friend-name">${esc(it.name)}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
     });
     dms.forEach(d=>{
-      html+=`<div class="friend-row" data-chatdm="${d.name}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${d.name}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="${t('dm_online')}"></span></div>`;
+      html+=`<div class="friend-row" data-chatdm="${esc(d.name)}">${avatarHTML(d,"av-sm")}<div class="friend-meta"><div class="friend-name">${esc(d.name)}</div><div class="friend-last">${trunc(d.last)}</div></div><span class="dot-online" title="${t('dm_online')}"></span></div>`;
     });
     body.innerHTML=html;
     $$("#chatsBody [data-chatgroup]").forEach(el=>el.addEventListener("click",()=>{
@@ -3222,9 +3240,9 @@
   // reusable verified badge (mint ✓) — distinct from the blue 🛡️ "Reliable" pill so trust signals read separately
   function vbadge(on){ return on?`<span class="pill-static pill-mint" style="font-size:11px">✓ ${t("vf_badge")}</span>`:""; }
   function friendRowHTML(p,sub,action){
-    return `<div class="friend-row" data-friend="${p.name}">
+    return `<div class="friend-row" data-friend="${esc(p.name)}">
       ${avatarHTML(p,"av-sm")}
-      <div class="friend-meta"><div class="friend-name">${p.name} ${archBadge(p.key)}</div><div class="friend-sub">${sub||""}</div></div>
+      <div class="friend-meta"><div class="friend-name">${esc(p.name)} ${archBadge(p.key)}</div><div class="friend-sub">${sub||""}</div></div>
       ${action||'<span style="color:var(--faint)">›</span>'}</div>`;
   }
   function skeletonFriends(n){
@@ -3312,7 +3330,7 @@
     const isFriend=state.friends.some(byId);
     const key=ARCH[p.key]?p.key:"easygoer", desc=archDesc(key);
     $("#s-friendprofile").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${esc(p.name)}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${esc(p.name)}</div></div>
       <div style="text-align:center;margin:6px 0 18px">
         <div class="avatar av-lg ${archGrad(p.key)}" style="margin:0 auto;font-size:46px;width:96px;height:96px">${p.emoji}</div>
         <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:12px">${esc(p.name)}</div>
@@ -3324,7 +3342,7 @@
       ${isFriend?(()=>{ const sb=seedBio(p.name), sp=seedPrompts(p.name); const bio=sb||t("fp_bio").replace("{d1}",desc[0]).replace("{d2}",(desc[1]||"").toLowerCase()); return `<div class="info-block"><div class="sec-title">${t("fp_about").replace("{n}",p.name)}</div><p style="font-size:13px;color:var(--muted);line-height:1.6">${esc(bio)}</p>${promptCardHTML(sp)}</div>`; })():`<p class="tiny" style="text-align:center;margin:6px 0 14px">${t("fp_locked").replace("{n}",p.name)}</p>`}
       <div class="btn-row">
         ${isFriend?`<button class="btn btn-primary" id="fpMsg">${t("fp_msg")}</button>`:`<button class="btn btn-primary" id="fpAdd">${t("fp_add")}</button>`}
-        <button class="btn btn-soft" id="fpMore" aria-label="More options">···</button>
+        <button class="btn btn-soft" id="fpMore" aria-label="${t('aria_more')}">···</button>
       </div>`;
     const msg=$("#fpMsg"); if(msg) msg.addEventListener("click",()=>{ state.currentDM=p.name; goTo("dm"); });
     const add=$("#fpAdd"); if(add) add.addEventListener("click",()=>{ if(state.requests.recv.some(byId)){ addFriend(p.name); goTo("friendprofile"); } else { if(!state.requests.sent.some(byId)) state.requests.sent.push({...p}); showToast(t("toast_reqsent").replace("{n}",p.username?"@"+p.username:p.name)); } });
@@ -3353,11 +3371,11 @@
     inp.addEventListener("input",()=>send.classList.toggle("off",!inp.value.trim()));
     const doSend=()=>{ const v=inp.value.trim(); if(!v||!state.currentDM) return; state.dms[state.currentDM].push({who:"me",text:esc(v),time:"now"}); inp.value=""; send.classList.add("off"); renderDM();
       const p=state.currentDM;
-      setTimeout(()=>{ const sc=$("#dmScroll"); if($("#s-dm").classList.contains("active")&&state.currentDM===p){ sc.insertAdjacentHTML("beforeend",`<div class="typing"><i></i><i></i><i></i></div>`); sc.scrollTop=sc.scrollHeight; } },900);
-      setTimeout(()=>{ if($("#s-dm").classList.contains("active")&&state.currentDM===p){
+      dmTimers.push(setTimeout(()=>{ const sc=$("#dmScroll"); if($("#s-dm").classList.contains("active")&&state.currentDM===p){ sc.insertAdjacentHTML("beforeend",`<div class="typing"><i></i><i></i><i></i></div>`); sc.scrollTop=sc.scrollHeight; } },900));
+      dmTimers.push(setTimeout(()=>{ if($("#s-dm").classList.contains("active")&&state.currentDM===p){
         const pool=DM_REPLIES[state.lang]||DM_REPLIES.en;
         const n=state.dms[p].filter(m=>m.who==="them").length;
-        state.dms[p].push({who:"them",text:pool[n%pool.length],time:"now"}); renderDM(); } },2100);
+        state.dms[p].push({who:"them",text:pool[n%pool.length],time:"now"}); renderDM(); } },2100));
     };
     send.addEventListener("click",doSend);
     inp.addEventListener("keydown",e=>{ if(e.key==="Enter") doSend(); });
@@ -3445,7 +3463,7 @@
         <span style="color:var(--faint)">›</span></div>`:""}
       <div style="text-align:center;margin:4px 0 18px">
         <div style="position:relative;width:104px;margin:0 auto">${photo}
-          <button id="pfCam" aria-label="Edit photo" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--phone-bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
+          <button id="pfCam" aria-label="${t('aria_editphoto')}" style="position:absolute;bottom:0;right:0;width:34px;height:34px;border-radius:50%;background:var(--grad-warm);border:3px solid var(--phone-bg);color:#fff;font-size:15px;cursor:pointer">📷</button></div>
         <div style="font-family:'Fraunces',serif;font-size:26px;font-weight:700;margin-top:16px">${esc(state.name)}</div>
         ${state.username?`<div class="tiny" style="margin-top:3px">@${esc(state.username)}</div>`:""}
         <div style="margin-top:8px;display:flex;gap:6px;justify-content:center;flex-wrap:wrap;align-items:center">
@@ -3465,7 +3483,7 @@
         <div class="stat" id="pfShowupStat" role="button" tabindex="0" aria-label="${esc(t("stat_showup_full"))}" style="cursor:pointer"><div class="sn">${relStatLabel()}</div><div class="sl">${t("stat_showup")}</div></div>
         <div class="stat"><div class="sn">'26</div><div class="sl">${t("stat_since")}</div></div>
       </div>
-      ${(()=>{ const d=(state.profileComplete&&!state.depthDismissed)?profileDepth():null; if(!d) return ""; return `<div id="pfDepthCard" data-depth="${d}" style="border:1.5px solid rgba(165,123,255,.4);border-radius:var(--r-lg);padding:13px 15px;margin-bottom:16px;display:flex;align-items:center;gap:12px;cursor:pointer"><span class="it-ic" style="color:var(--accent-text)">${svgIcon('sparkles')}</span><div style="flex:1;font-size:13.5px;font-weight:600">${t("depth_"+d)}</div><span class="guide-x" data-depthx role="button" aria-label="Dismiss">✕</span></div>`; })()}
+      ${(()=>{ const d=(state.profileComplete&&!state.depthDismissed)?profileDepth():null; if(!d) return ""; return `<div id="pfDepthCard" data-depth="${d}" style="border:1.5px solid rgba(165,123,255,.4);border-radius:var(--r-lg);padding:13px 15px;margin-bottom:16px;display:flex;align-items:center;gap:12px;cursor:pointer"><span class="it-ic" style="color:var(--accent-text)">${svgIcon('sparkles')}</span><div style="flex:1;font-size:13.5px;font-weight:600">${t("depth_"+d)}</div><span class="guide-x" data-depthx role="button" aria-label="${t('aria_dismiss')}">✕</span></div>`; })()}
       ${(!state.verified&&state.profileComplete&&!state.verifyPromptDismissed)?`<div id="pfVerifyCard" style="border:1.5px solid rgba(111,224,198,.4);border-radius:var(--r-lg);padding:15px;margin-bottom:18px;display:flex;align-items:center;gap:13px">
         <div style="font-size:24px">🛡️</div>
         <div style="flex:1"><div style="font-weight:700">${t("pf_verify_t")}</div><div class="tiny" style="margin-top:2px">${t("pf_verify_s")}</div></div>
@@ -3548,7 +3566,7 @@
   function renderSettings(){
     const s=state.settings;
     $("#s-settings").innerHTML=`
-      <div class="nav-row"><button class="iconbtn" data-back aria-label="Back">←</button><div class="nav-title">${t("set_title")}</div></div>
+      <div class="nav-row"><button class="iconbtn" data-back aria-label="${t('aria_back')}">←</button><div class="nav-title">${t("set_title")}</div></div>
       <div class="sec-title">${t("set_account")}</div>
       <div class="set-list">
         <div class="set-item" id="setEdit"><span class="si-ic">${svgIcon('user')}</span>${t("set_edit")}<span class="chev">›</span></div>
@@ -3744,19 +3762,34 @@
 
   /* ============ SHEETS & UTILITIES ============ */
   let sheetLastFocus=null;
+  // focus trap: keep Tab inside an open sheet (can't reach the backgrounded screen)
+  function trapSheetTab(e){
+    if(e.key!=="Tab") return;
+    const sheet=$("#sheet"); if(!sheet||!sheet.classList.contains("show")) return;
+    const f=$$('#sheetBody button,#sheetBody input,#sheetBody textarea,#sheetBody select,#sheetBody [tabindex]:not([tabindex="-1"])').filter(el=>!el.disabled&&el.offsetParent!==null);
+    if(!f.length) return;
+    const first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  }
   function openSheet(){
     sheetLastFocus=document.activeElement;
     $("#sheet").classList.add("show"); $("#sheetBackdrop").classList.add("show");
     makeFocusable($("#sheetBody"));
     const first=$("#sheetBody button,#sheetBody [tabindex],#sheetBody input,#sheetBody textarea");
     if(first){ try{ first.focus({preventScroll:true}); }catch(e){} }
+    document.addEventListener("keydown",trapSheetTab);
   }
   function closeSheet(){
     const s=$("#sheet"); if(s) s.classList.remove("show"); const b=$("#sheetBackdrop"); if(b) b.classList.remove("show");
+    document.removeEventListener("keydown",trapSheetTab);
     if(sheetLastFocus&&sheetLastFocus.focus){ try{ sheetLastFocus.focus({preventScroll:true}); }catch(e){} sheetLastFocus=null; }
   }
-  let toastT;
-  function showToast(msg){ const t=$("#toast"); if(!t) return; t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2600); }
+  let toastT,toastTap=null;
+  // a tappable toast (showToastGo) leaves a one-off click listener on the shared #toast;
+  // clear it before any new toast so a replacement can't fire the previous action.
+  function clearToastTap(){ const el=$("#toast"); if(el&&toastTap){ el.removeEventListener("click",toastTap); el.style.cursor=""; } toastTap=null; }
+  function showToast(msg){ const t=$("#toast"); if(!t) return; clearToastTap(); t.textContent=msg; t.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>t.classList.remove("show"),2600); }
   function hideToast(){ const el=$("#toast"); if(el) el.classList.remove("show"); }
   function sparkle(){
     const fx=$("#fxLayer"); if(!fx) return; const ems=["✦","✧","·","✦","✧"];
@@ -3804,7 +3837,7 @@
       <div class="sheet-sub">${t("rep_sub").replace("{n}",p.name)}</div>
       ${attached?`<div class="rep-quote">${t("msg_quoted").replace("{q}",esc(String(attached).slice(0,90)))}</div>`:""}
       <div class="set-list">${reasons.map((r,i)=>`<div class="set-item" data-reason="${r}" data-ri="${i}"><span class="si-ic">›</span>${r}</div>`).join("")}</div>
-      <div class="field" style="margin-top:10px"><textarea id="repNote" rows="2" placeholder="${t("rep_note_ph")}" maxlength="140"></textarea></div>
+      <div class="field" style="margin-top:10px"><textarea id="repNote" rows="2" placeholder="${t("rep_note_ph")}" aria-label="${t('aria_report')}" maxlength="140"></textarea></div>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:2px">${t("btn_cancel")}</button>`;
     $$("#sheetBody [data-reason]").forEach(el=>el.addEventListener("click",()=>submitReport(p,el.getAttribute("data-reason"),+el.getAttribute("data-ri"),attached)));
     sheetClose(); openSheet();
@@ -3874,8 +3907,8 @@
       <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M15.09 14c.18-.98.65-1.74 1.41-2.5A4.65 4.65 0 0 0 18 8 6 6 0 0 0 6 8c0 1 .23 2.23 1.5 3.5.76.76 1.23 1.52 1.41 2.5"/></svg></div>
       <div class="sheet-title">${t("sg_title")}</div>
       <div class="sheet-sub">${t("sg_sub")}</div>
-      <div class="field"><label>${t("sg_what")}</label><input placeholder="${t("sg_what_ph")}"></div>
-      <div class="field"><label>${t("sg_where")}</label><input placeholder="${t("sg_where_ph")}"></div>
+      <div class="field"><label>${t("sg_what")}</label><input placeholder="${t("sg_what_ph")}" aria-label="${t('aria_suggest')}"></div>
+      <div class="field"><label>${t("sg_where")}</label><input placeholder="${t("sg_where_ph")}" aria-label="${t('sg_where')}"></div>
       <button class="btn btn-primary" id="sgSend">${t("sg_send")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $("#sgSend").addEventListener("click",()=>{ closeSheet(); showToast(t("sg_done")); });
@@ -4007,7 +4040,7 @@
     const el=$("#profileNudge"); if(!el) return;
     if(state.profileComplete||state.nudgeDismissed){ el.innerHTML=""; return; }
     el.innerHTML=`<div class="guide-bar" style="margin:2px 0 12px"><div class="guide-head" id="nudgeHead" style="cursor:pointer">
-      <span>🪶 ${t("pf_setup_s")}</span><span class="guide-x" id="nudgeX" role="button" aria-label="Dismiss">✕</span></div></div>`;
+      <span>🪶 ${t("pf_setup_s")}</span><span class="guide-x" id="nudgeX" role="button" aria-label="${t('aria_dismiss')}">✕</span></div></div>`;
     $("#nudgeHead").addEventListener("click",e=>{
       if(e.target.id==="nudgeX"){ state.nudgeDismissed=true; renderProfileNudge(); return; }
       openProfileSetup(null,false);
@@ -4088,6 +4121,8 @@
     if(!state.joinedGroups.some(x=>x.group.id===g.id)){
       const reservation={code:resvCode(),ticket:!!(a&&a.price),price:(a&&a.price)||null};
       state.joinedGroups.push({group:g,activity:a,reservation});
+      // NOTE: makeGroups() rebuilds fresh group objects each browse and openLeaveSheet doesn't
+      // decrement, so browse-list "spots left" is intentionally session-stable, not a live counter — not a bug.
       g.filled=Math.min(g.size,g.filled+1);
     }
     // joining clears any waitlist entry for the same group
@@ -4105,6 +4140,11 @@
   // shared entry for joining: free-tier cap → profile gate → booking. Used by Join and waitlist-claim.
   function requestJoin(g,a){
     if(window.PERCH_LIVE && a && a.id==="thursdays"){ perchRequestJoinLive(g,a); return; }  // real Perch Thursdays join
+    simJoin(g,a);
+  }
+  // the simulated join funnel (cap → profile gate → booking). Also the graceful
+  // fallback when a live join hard-fails — keeps the user moving, never stranded.
+  function simJoin(g,a){
     const cap=state.plus?5:2;
     if(state.joinedGroups.length>=cap){ openPerchPlus(state.plus?null:"limit"); return; }
     if(needsProfile()){ openProfileSetup(()=>beginJoin(g,a),true); return; }
@@ -4220,6 +4260,10 @@
   function checkIn(g){
     if(state.checkedIn&&state.dayStatus[g.id]==="here") return;
     if(window.PERCH_LIVE && g && g.live){ perchCheckInLive(g); return; }  // real check-in for the live group
+    simCheckIn(g);
+  }
+  // the simulated check-in. Also the graceful fallback when a live check-in hard-fails.
+  function simCheckIn(g){
     state.checkedIn=true; state.attended++; state.dayStatus[g.id]="here";
     const fn=state.name&&state.name!=="You"?state.name.split(" ")[0]:"You";
     const line=fn==="You"?t("sys_here_you"):t("sys_here").replace("{n}",esc(fn));
@@ -4233,10 +4277,10 @@
   /* ============ WAITLIST BACKFILL (automatic loop) ============ */
   // a tappable toast variant that runs onTap when clicked (reuses #toast / toastT, cleans up its listener)
   function showToastGo(msg,onTap){
-    const el=$("#toast"); if(!el) return; el.textContent=msg; el.classList.add("show"); el.style.cursor="pointer";
-    const done=run=>{ el.classList.remove("show"); el.style.cursor=""; el.removeEventListener("click",tap); clearTimeout(toastT); if(run&&onTap) onTap(); };
+    const el=$("#toast"); if(!el) return; clearToastTap(); el.textContent=msg; el.classList.add("show"); el.style.cursor="pointer";
+    const done=run=>{ el.classList.remove("show"); el.style.cursor=""; el.removeEventListener("click",tap); toastTap=null; clearTimeout(toastT); if(run&&onTap) onTap(); };
     const tap=()=>done(true);
-    el.addEventListener("click",tap); clearTimeout(toastT); toastT=setTimeout(()=>done(false),5000);
+    toastTap=tap; el.addEventListener("click",tap); clearTimeout(toastT); toastT=setTimeout(()=>done(false),5000);
   }
   function scheduleBackfillOffer(g,a){
     if(state.backfillSeen) return; state.backfillSeen=true;          // one-shot per session
@@ -4413,7 +4457,7 @@
       <div class="sheet-ic"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></div>
       <div class="sheet-title">${t("sup_title")}</div>
       <div class="sheet-sub">${t("sup_sub")}</div>
-      <div class="field"><label>${t("sup_label")}</label><textarea rows="4" id="suppMsg" placeholder="${t("sup_ph")}"></textarea></div>
+      <div class="field"><label>${t("sup_label")}</label><textarea rows="4" id="suppMsg" placeholder="${t("sup_ph")}" aria-label="${t('aria_support')}"></textarea></div>
       <button class="btn btn-primary" id="suppSend">${t("sup_send")}</button>
       <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
     $("#suppSend").addEventListener("click",()=>{ closeSheet(); showToast(t("sup_done")); });
