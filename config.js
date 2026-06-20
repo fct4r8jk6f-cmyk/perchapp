@@ -1,9 +1,11 @@
 // ============================================================================
-// Perch backend config  (your real keys — this file is gitignored)
+// Perch backend config  (your real keys — intentionally committed; see below)
 // ----------------------------------------------------------------------------
 // Filled in from your Supabase project "fct4r8jk6f-cmyk's Project" (org: Perch).
-// The publishable key is safe in a browser — Row-Level Security protects data.
-// Never put the service_role / secret key here.
+// This file IS committed on purpose: the deployed site needs it to reach the
+// live backend, and the publishable (anon) key is safe in a browser — Row-Level
+// Security protects the data, not the key. NEVER put the service_role / secret
+// key here (it bypasses RLS) — that one must never be committed or shipped.
 // ============================================================================
 window.PERCH_CONFIG = {
   url: "https://grrpqltvjwkemxncccxh.supabase.co",
