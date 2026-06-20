@@ -3041,7 +3041,7 @@
     groups.forEach(it=>{
       let preview;
       if(it.forming) preview=t("chat_forming_sub");
-      else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?last.name+": ":""))+last.text):t("chat_sayhi"); }
+      else { const th=state.chatThreads[it.id]; const last=th&&th.filter(m=>!m.sys).slice(-1)[0]; preview=last?((last.who==="me"?mePfx:(last.name?esc(last.name)+": ":""))+last.text):t("chat_sayhi"); }
       const when=it.when?frWhen(it.when).split(" · ")[0]:"";
       const unread=state.unreadChats.has(it.id);
       html+=`<div class="friend-row" data-chatgroup="${it.id}"><div class="avatar av-sm ${it.grad}">${glyph(it.emoji)}</div><div class="friend-meta"><div class="friend-name">${it.name}</div><div class="friend-last">${trunc(preview)}</div></div>${unread?'<span class="unread-dot"></span>':''}<span class="tiny" style="color:var(--faint);white-space:nowrap;margin-left:8px">${when}</span></div>`;
