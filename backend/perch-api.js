@@ -45,13 +45,16 @@ export function createPerch(config) {
     // Magic-link / OTP sign-in. The email contains a link back to redirectTo
     // (defaults to wherever the app is open); supabase-js auto-detects the
     // session on return. shouldCreateUser lets new emails register.
-    async signInWithEmail(email, redirectTo) {
+    async signInWithEmail(email, captchaToken, redirectTo) {
       return unwrap(
         await sb.auth.signInWithOtp({
           email,
           options: {
             shouldCreateUser: true,
             emailRedirectTo: redirectTo || (typeof window !== "undefined" ? window.location.href : undefined),
+            // Only sent when the Turnstile widget produced a token. Required once
+            // CAPTCHA is enabled in Supabase Auth; harmless (ignored) when it isn't.
+            ...(captchaToken ? { captchaToken } : {}),
           },
         })
       );

@@ -2382,28 +2382,50 @@
     }
     setTimeout(()=>goTo("terms"),360);
   }
+  // Cloudflare Turnstile (CAPTCHA) loader — only used in live mode when a site key
+  // is configured. Loads the API once; resolves when window.turnstile is ready.
+  let _tsPromise=null;
+  function ensureTurnstile(){
+    if(window.turnstile) return Promise.resolve();
+    if(_tsPromise) return _tsPromise;
+    _tsPromise=new Promise((res,rej)=>{
+      const s=document.createElement("script");
+      s.src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+      s.async=true; s.defer=true; s.onload=()=>res(); s.onerror=()=>rej(new Error("turnstile load failed"));
+      document.head.appendChild(s);
+    });
+    return _tsPromise;
+  }
   // Live mode (config.js present): real email-OTP sign-in via the Perch backend.
   // Sim mode: this is never called — the demo stays click-through.
   async function perchLiveSignIn(method){
     var P=window.Perch;
+    const skey=(window.PERCH_CONFIG&&window.PERCH_CONFIG.turnstileSiteKey)||"";  // CAPTCHA site key (if configured)
+    let captchaToken="";
     try{ const u=await P.auth.getUser(); if(u){ afterSignIn(method); return; } }catch(e){}  // existing session → straight in
     let email="";
     function emailStep(){
+      captchaToken="";
       $("#sheetBody").innerHTML=`<div class="sheet-handle"></div>
         <div class="sheet-ic">${svgIcon('message')}</div>
         <div class="sheet-title">${t("auth_email_t")}</div>
         <div class="sheet-sub">${t("auth_email_sub")}</div>
-        <div class="field"><label>${t("auth_email_label")}</label><input id="auE" type="email" inputmode="email" placeholder="${t('auth_email_ph')}" autocomplete="email"></div>
+        <div class="field"><label>${t("auth_email_label")}</label><input id="auE" type="email" inputmode="email" placeholder="${t('auth_email_ph')}" autocomplete="email" value="${esc(email||"")}"></div>
+        ${skey?`<div id="auCaptcha" style="margin:0 0 12px;min-height:65px;display:flex;justify-content:center"></div>`:""}
         <button class="btn btn-primary" id="auSend" disabled>${t("auth_send")}</button>
         <button class="btn btn-ghost" id="sheetClose" style="margin-top:8px">${t("btn_cancel")}</button>`;
       const inp=$("#auE"), btn=$("#auSend");
-      inp.addEventListener("input",()=>{ btn.disabled=!/.+@.+\..+/.test(inp.value.trim()); });
+      const okEmail=()=>/.+@.+\..+/.test(inp.value.trim());
+      const refresh=()=>{ btn.disabled=!(okEmail() && (!skey || !!captchaToken)); };
+      inp.addEventListener("input",refresh); refresh();
+      // render the CAPTCHA widget (live mode + key only); Send stays disabled until it returns a token
+      if(skey) ensureTurnstile().then(()=>{ try{ window.turnstile.render("#auCaptcha",{sitekey:skey,callback:tok=>{captchaToken=tok;refresh();},"expired-callback":()=>{captchaToken="";refresh();},"error-callback":()=>{captchaToken="";refresh();}}); }catch(e){ console.warn("[Perch] turnstile render failed:",e); } });
       btn.addEventListener("click",async ()=>{
         email=inp.value.trim(); btn.disabled=true;
         // persist onboarding context so a magic-link redirect can resume where we left off
         try{ localStorage.setItem("perch_pending", JSON.stringify({returning:!!state.returning, profileKey:state.profileKey||null})); }catch(e){}
-        try{ await P.auth.signInWithEmail(email); showToast(t("auth_sent")); codeStep(); }
-        catch(err){ btn.disabled=false; showToast(t("auth_err")); }
+        try{ await P.auth.signInWithEmail(email, captchaToken||undefined); showToast(t("auth_sent")); codeStep(); }
+        catch(err){ btn.disabled=false; captchaToken=""; try{ window.turnstile&&window.turnstile.reset("#auCaptcha"); }catch(e){} refresh(); showToast(t("auth_err")); }
       });
       sheetClose();
     }
@@ -2424,7 +2446,7 @@
         try{ await P.auth.verifyEmailCode(email,c.value.trim()); closeSheet(); afterSignIn(method); }
         catch(err){ btn.disabled=false; showToast(t("auth_err")); }
       });
-      $("#auR").addEventListener("click",async ()=>{ try{ await P.auth.signInWithEmail(email); showToast(t("auth_sent")); }catch(e){} });
+      $("#auR").addEventListener("click",async ()=>{ if(skey){ emailStep(); return; } try{ await P.auth.signInWithEmail(email); showToast(t("auth_sent")); }catch(e){} });  // captcha tokens are single-use → re-show the email step for a fresh one
       sheetClose();
     }
     emailStep(); openSheet();

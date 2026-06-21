@@ -10,4 +10,8 @@
 window.PERCH_CONFIG = {
   url: "https://grrpqltvjwkemxncccxh.supabase.co",
   anonKey: "sb_publishable_aNr3DBVPQWfA3jr-PdfO8Q_1FA_Sr_w",
+  // Cloudflare Turnstile site key (PUBLIC — safe in the browser). Pairs with the
+  // SECRET key stored only in Supabase Auth settings (never here). When set, the
+  // email sign-in sheet renders the Turnstile widget and passes its token.
+  turnstileSiteKey: "0x4AAAAAADoyKH9xfuaULWeF",
 };
