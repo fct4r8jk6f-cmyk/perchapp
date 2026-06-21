@@ -18,6 +18,7 @@ The demo (`index.html`) fakes its backend. This runbook stands up the **thin-sli
 |---|---|
 | [`supabase/migrations/0001_init.sql`](../supabase/migrations/0001_init.sql) | The thin-slice schema + Row-Level Security + cap/join/check-in functions + a seeded Thursday group. One paste. |
 | [`supabase/migrations/0002_harden_profile_name.sql`](../supabase/migrations/0002_harden_profile_name.sql) | Defence-in-depth: blocks angle brackets in profile names at the data layer. Idempotent — apply after 0001 (and on the already-live DB). |
+| [`supabase/migrations/0003_rate_limits.sql`](../supabase/migrations/0003_rate_limits.sql) | Per-account rate limiting on chat sends / join / check-in / username lookups. Idempotent. See [HARDENING.md](HARDENING.md) for the full abuse/DoS picture (CAPTCHA, WAF, alerts). |
 | [`backend/perch-api.js`](../backend/perch-api.js) | The live data layer (auth, profile, group, chat+realtime, join, check-in). No build step. |
 | [`backend/test.html`](../backend/test.html) | A smoke-test page that exercises the whole path so you can **prove the backend works before wiring it into the app**. |
 | [`config.example.js`](../config.example.js) | Template for your Supabase URL + anon key. Copy to `config.js` (gitignored). |
@@ -36,6 +37,7 @@ The demo (`index.html`) fakes its backend. This runbook stands up the **thin-sli
 2. Open [`supabase/migrations/0001_init.sql`](../supabase/migrations/0001_init.sql), copy the **entire** file, paste, click **Run**.
 3. You should see "Success." It creates all tables, security policies, functions, and seeds one forming Thursday group. Re-running is safe.
 4. Open [`supabase/migrations/0002_harden_profile_name.sql`](../supabase/migrations/0002_harden_profile_name.sql) in a new query, paste, **Run**. (Already-live project? Just run this one to apply the hardening.) Re-running is safe.
+5. Open [`supabase/migrations/0003_rate_limits.sql`](../supabase/migrations/0003_rate_limits.sql) in a new query, paste, **Run** — adds per-account rate limiting. Then see [HARDENING.md](HARDENING.md) for the console/edge steps (CAPTCHA, Cloudflare WAF, alerts) that `0003` alone can't cover. Re-running is safe.
 
 *(Optional, if you use the Supabase CLI later: `supabase db push` applies the same file. The CLI isn't required.)*
 
