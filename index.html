@@ -4694,6 +4694,13 @@
   for(let i=0;i<60;i++){ cfg=window.PERCH_CONFIG; if(cfg) break; await new Promise(r=>setTimeout(r,25)); }
   if(!cfg||!cfg.url||!cfg.anonKey||/YOUR-/.test(String(cfg.url)+String(cfg.anonKey))) return;  // no real keys → stay simulated
   try{
+    // Reachability probe: a stored-session read never touches the network, so verify the
+    // backend actually answers before enabling live mode. Any HTTP response counts as
+    // reachable; only network-level failure (DNS/timeout — e.g. a paused project) falls
+    // back, keeping the demo pure-simulation instead of erroring per flow.
+    const probe=new AbortController(); const probeTimer=setTimeout(()=>probe.abort(),4000);
+    await fetch(String(cfg.url).replace(/\/$/,"")+"/auth/v1/health",{headers:{apikey:cfg.anonKey},signal:probe.signal});
+    clearTimeout(probeTimer);
     const { createPerch } = await import("./backend/perch-api.js");
     const perch = createPerch(cfg);
     window.Perch = perch; window.PERCH_LIVE = true;
