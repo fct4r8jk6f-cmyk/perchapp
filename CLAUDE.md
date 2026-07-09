@@ -52,3 +52,16 @@ Full en / fr-CA coverage, including legal docs. Every user-visible string must e
 - **Day-of coordination** (`coordPanelHTML`) only renders on event day (`state.dayOf===g.id`); status lives in `state.dayStatus[gid]`, "here" routes through the shared `checkIn(g)` (don't duplicate check-in), and `seedDaySim`/`state.daySimSeeded` posts simulated peers once.
 - **Legal text** uses the `LEGAL` placeholder constants (`[Legal Entity Name, Inc.]` etc.) and is flagged in-app as pending attorney review — keep the placeholders, don't invent a real entity.
 - 18+ age gate: the age stepper floors at 18, and 18+ is disclosed before the quiz.
+
+## Related repos (siblings under fct4r8jk6f-cmyk)
+- **pixelboreal** (public): a faceless bilingual web-studio portfolio site that
+  features this demo as work sample #1 — https://fct4r8jk6f-cmyk.github.io/pixelboreal/.
+  Keep this repo's live-demo link and feature bullets (screen count, i18n,
+  accessibility, backend) in sync with what the portfolio site claims about it.
+  Ops/business docs for the studio live locally at
+  `C:\Users\nicho\Documents\pixelboreal\` (not in this repo).
+- **what-if-binder** (public): the studio's other featured work sample, a
+  bilingual (EN + fr-CA) family-emergency binder app —
+  https://fct4r8jk6f-cmyk.github.io/what-if-binder/. No code relationship to
+  Perch; listed here so a session in this repo knows what else the portfolio
+  is showing alongside it.
