@@ -2,6 +2,17 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Status: PARKED (since 2026-09-28): portfolio piece, no new build work
+
+Perch is a work sample for the pixelboreal studio site, not an active venture.
+**Don't add features, screens, docs, or backend work.** Keep the demo working;
+fix real bugs and security issues only. The live Supabase backend may well be
+paused (free projects pause after a week of inactivity). The app already
+falls back to the simulation when it can't reach it, so don't spend time
+reviving it. If the owner ever wants to test Perch for real, the only valid next
+step is `docs/BOOTSTRAP.md` Phase A: one in-person Perch Thursday, no code.
+This is a public repo, so no personal names, emails or local paths in any file.
+
 ## What this is
 
 An interactive product demo for **Perch** — a small-group friend-making app. Everything is simulated: no backend, no real accounts, no payments. `docs/PLAN.md` is the product source of truth (thesis, risks, MVP cut); the demo expresses that plan, so check it before changing product behavior. (All planning/design/legal docs live in `docs/`; only `README.md` and this file sit at the repo root.)
@@ -58,8 +69,8 @@ Full en / fr-CA coverage, including legal docs. Every user-visible string must e
   features this demo as work sample #1 — https://fct4r8jk6f-cmyk.github.io/pixelboreal/.
   Keep this repo's live-demo link and feature bullets (screen count, i18n,
   accessibility, backend) in sync with what the portfolio site claims about it.
-  Ops/business docs for the studio live locally at
-  `C:\Users\nicho\Documents\pixelboreal\` (not in this repo).
+  Ops/business docs for the studio live on the owner's machine (not in this
+  repo).
 - **what-if-binder** (public): the studio's other featured work sample, a
   bilingual (EN + fr-CA) family-emergency binder app —
   https://fct4r8jk6f-cmyk.github.io/what-if-binder/. No code relationship to
